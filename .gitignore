@@ -1,13 +1,8 @@
 # use template
-/config
-/*.sln 
-/*.slnx
 /obj
 .idea
-.vscode/
 .DS_Store
 bin
-.vs/
 PublishedFileId.txt
 Folder.DotSettings.user
 *.sh
@@ -432,8 +427,5 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
-# gitnexus 和 claude 的个人配置文件（不应提交）
-.gitnexus
-.claude
-AGENTS.md
-CLAUDE.md
+# Claude Code
+.claude/
