@@ -78,10 +78,10 @@
 			<DeployPath>$(RimWorldDir)/RimWorldMac.app/Mods/$(ModFolderName)/</DeployPath>
 		</PropertyGroup>
 		<MakeDir Directories="$(DeployPath)" />
-		<Exec Command="rsync -a --delete --checksum &quot;$(ProjectDir)About/&quot; &quot;$(DeployPath)About/&quot;" />
-		<Exec Command="rsync -a --delete --checksum &quot;$(ProjectDir)Languages/&quot; &quot;$(DeployPath)Languages/&quot;" />
-		<Exec Command="rsync -a --delete --checksum &quot;$(ProjectDir)Textures/&quot; &quot;$(DeployPath)Textures/&quot;" />
-		<Exec Command="rsync -a --delete --checksum &quot;$(ProjectDir)$(GameVersion)/&quot; &quot;$(DeployPath)$(GameVersion)/&quot;" />
+		<Exec Command="rsync -a --delete --checksum --ignore-missing-non-dirs &quot;$(ProjectDir)About/&quot; &quot;$(DeployPath)About/&quot;" />
+		<Exec Command="rsync -a --delete --checksum --ignore-missing-non-dirs &quot;$(ProjectDir)Languages/&quot; &quot;$(DeployPath)Languages/&quot;" />
+		<Exec Command="rsync -a --delete --checksum --ignore-missing-non-dirs &quot;$(ProjectDir)Textures/&quot; &quot;$(DeployPath)Textures/&quot;" />
+		<Exec Command="rsync -a --delete --checksum --ignore-missing-non-dirs &quot;$(ProjectDir)$(GameVersion)/&quot; &quot;$(DeployPath)$(GameVersion)/&quot;" />
 		<Message Text="--- macOS deployment finished successfully ---" Importance="high" />
 	</Target>
 
