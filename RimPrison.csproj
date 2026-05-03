@@ -1,0 +1,88 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<!-- 配置变量 -->
+		<GameVersion Condition=" '$(GameVersion)' == '' ">1.6</GameVersion>
+		<DefineConstants>$(DefineConstants);V$(GameVersion.Replace('.', '_'))</DefineConstants>
+
+		<RimWorldDir Condition=" '$(RimWorldDir)' == '' ">$(RIMWORLD_DIR)</RimWorldDir>
+
+		<ModFolderName>RimPrison</ModFolderName>
+
+		<!-- 編程配置項 -->
+		<RootNamespace>RimPrison</RootNamespace>
+		<LangVersion>latest</LangVersion>
+
+		<!-- 編譯配置項 -->
+		<OutputType>Library</OutputType>
+		<TargetFramework>net48</TargetFramework>
+		<Platforms>AnyCPU;x64</Platforms>
+		<PlatformTarget>x64</PlatformTarget>
+		<AssemblyName>RimPrison</AssemblyName>
+
+		<!-- 編譯項優化 -->
+		<UseSharedCompilation>false</UseSharedCompilation>
+		<UseHostCompilerIfAvailable>false</UseHostCompilerIfAvailable>
+		<Deterministic>false</Deterministic>
+
+		<!-- 輸出文件夾 -->
+		<OutputPath>$(GameVersion)/Assemblies</OutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+		<!-- 雜項配置 -->
+		<ProvideCommandLineArgs>false</ProvideCommandLineArgs>
+		<LongPathsEnabled>true</LongPathsEnabled>
+		<DisableImplicitFrameworkReferences>false</DisableImplicitFrameworkReferences>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- NuGet包引用 -->
+		<PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.4633" PrivateAssets="All" />
+		<PackageReference Include="Lib.Harmony.Ref" Version="2.*" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="5.3.0" PrivateAssets="All" />
+
+		<!-- 程序集引用 -->
+		<Reference Include="System.Net.Http">
+			<Private>False</Private>
+		</Reference>
+
+		<!-- 排除文件 -->
+		<Compile Remove="backup\**" />
+		<Compile Remove="Backups\**" />
+		<Compile Remove="**\*.backup.cs" />
+	</ItemGroup>
+
+	<!-- 編譯後自動部署 -->
+	<Target Name="DeployToModsFolder" AfterTargets="Build" Condition=" '$(BuildingWithScript)' != 'true' AND '$(RimWorldDir)' != '' ">
+		<CallTarget Targets="WinDeploy" Condition=" '$(OS)' == 'Windows_NT' " />
+		<CallTarget Targets="MacDeploy" Condition=" '$(OS)' != 'Windows_NT' " />
+	</Target>
+
+	<!-- Deploy to RimWorld client (Windows) -->
+	<Target Name="WinDeploy">
+		<PropertyGroup>
+			<WinModPath>$(RimWorldDir)\Mods\$(ModFolderName)\</WinModPath>
+		</PropertyGroup>
+		<Message Text="Copying to $(WinModPath)" Importance="high" />
+		<MakeDir Directories="$(WinModPath)" />
+		<Exec Command="robocopy &quot;$(ProjectDir)About&quot; &quot;$(WinModPath)About&quot; /MIR" IgnoreExitCode="true" />
+		<Exec Command="robocopy &quot;$(ProjectDir)Languages&quot; &quot;$(WinModPath)Languages&quot; /MIR" IgnoreExitCode="true" />
+		<Exec Command="robocopy &quot;$(ProjectDir)Textures&quot; &quot;$(WinModPath)Textures&quot; /MIR" IgnoreExitCode="true" />
+		<Exec Command="robocopy &quot;$(ProjectDir)$(GameVersion)&quot; &quot;$(WinModPath)$(GameVersion)&quot; /MIR" IgnoreExitCode="true" />
+		<Message Text="--- Windows deployment finished successfully ---" Importance="high" />
+	</Target>
+
+	<!-- Deploy to RimWorld client (macOS) -->
+	<Target Name="MacDeploy">
+		<PropertyGroup>
+			<DeployPath>$(RimWorldDir)/RimWorldMac.app/Mods/$(ModFolderName)/</DeployPath>
+		</PropertyGroup>
+		<MakeDir Directories="$(DeployPath)" />
+		<Exec Command="rsync -a --delete --checksum &quot;$(ProjectDir)About/&quot; &quot;$(DeployPath)About/&quot;" />
+		<Exec Command="rsync -a --delete --checksum &quot;$(ProjectDir)Languages/&quot; &quot;$(DeployPath)Languages/&quot;" />
+		<Exec Command="rsync -a --delete --checksum &quot;$(ProjectDir)Textures/&quot; &quot;$(DeployPath)Textures/&quot;" />
+		<Exec Command="rsync -a --delete --checksum &quot;$(ProjectDir)$(GameVersion)/&quot; &quot;$(DeployPath)$(GameVersion)/&quot;" />
+		<Message Text="--- macOS deployment finished successfully ---" Importance="high" />
+	</Target>
+
+</Project>

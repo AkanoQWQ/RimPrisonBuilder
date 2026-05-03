@@ -1,0 +1,14 @@
+<Project>
+	<PropertyGroup>
+		<!-- 移動obj文件夾至Source下 -->
+		<BaseIntermediateOutputPath>Source\obj\</BaseIntermediateOutputPath>
+		<MSBuildProjectExtensionsPath>$(BaseIntermediateOutputPath)</MSBuildProjectExtensionsPath>
+	</PropertyGroup>
+
+	<!-- 默認不將引用程序集複製到本地 -->
+	<ItemDefinitionGroup>
+		<Reference>
+			<Private>False</Private>
+		</Reference>
+	</ItemDefinitionGroup>
+</Project>
