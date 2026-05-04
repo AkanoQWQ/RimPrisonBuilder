@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
+  <!-- "允许劳动" 囚犯交互选项 -->
+  <PrisonerInteractionModeDef>
+    <defName>RimPrison_AllowLabor</defName>
+    <label>Allow labor</label>
+    <listOrder>5</listOrder>
+    <isNonExclusiveInteraction>true</isNonExclusiveInteraction>
+  </PrisonerInteractionModeDef>
+
+  <!-- 注入囚犯劳动 ThinkTree -->
+  <ThinkTreeDef>
+    <defName>RimPrison_PrisonerLabor</defName>
+    <insertTag>Humanlike_PostDuty</insertTag>
+    <insertPriority>80</insertPriority>
+    <thinkRoot Class="RimPrison.Core.ThinkNodes.ThinkNode_ConditionalPrisonerLabor">
+      <subNodes>
+        <li Class="ThinkNode_PrioritySorter">
+          <subNodes>
+            <li Class="JobGiver_Work" />
+          </subNodes>
+        </li>
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+
 </Defs>
