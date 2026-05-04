@@ -19,6 +19,12 @@
         <li Class="ThinkNode_PrioritySorter">
           <subNodes>
             <li Class="JobGiver_Work" />
+            <li Class="ThinkNode_Priority_GetJoy">
+              <subNodes>
+                <li Class="JobGiver_GetJoy" />
+                <li Class="JobGiver_GetJoyInBed" />
+              </subNodes>
+            </li>
           </subNodes>
         </li>
       </subNodes>
