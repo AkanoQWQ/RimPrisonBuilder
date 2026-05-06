@@ -18,6 +18,7 @@
       <subNodes>
         <li Class="ThinkNode_PrioritySorter">
           <subNodes>
+            <li Class="JobGiver_GetRest" />
             <li Class="JobGiver_Work" />
             <li Class="ThinkNode_Priority_GetJoy">
               <subNodes>
