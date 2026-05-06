@@ -1,35 +1,29 @@
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
 using RimWorld;
 using Verse;
+using Verse.AI;
 using RimPrison.Core;
 
 namespace RimPrison.HarmonyPatches
 {
-    // IL transpiler that replaces pawn.Faction checks in WorkGiver scanning paths
-    // Replace original Thing.get_Faction()
-    // with PrisonLaborUtility.GetWorkFaction(pawn)
-    // which reports Faction.OfPlayer for prisoners
-    // Inspired by PrisonLabor
+    // Replace pawn.Faction getter in work scanning paths with GetWorkFaction,
+    // which returns Faction.OfPlayer for labor-enabled prisoners.
+    // Inspired by PrisonLabor.
     [HarmonyPatch]
-    public static class Patch_WorkGiverFaction
+    public static class Patch_FactionInjection
     {
-        // Cache the replacement method once
         private static readonly MethodInfo s_getWorkFaction =
             typeof(PrisonLaborUtility).GetMethod(nameof(PrisonLaborUtility.GetWorkFaction));
+
         private static readonly MethodInfo s_getFaction =
             AccessTools.PropertyGetter(typeof(Thing), nameof(Thing.Faction));
 
-        // Use reflection to discover all WorkGiver_Scanner subclasses
-        // and find their overrides of five key methods
-        // where pawn.Faction is typically checked during work scanning.
-        // Only methods declared directly on the subclass (not inherited)
-        // are collected — base virtual methods don't contain Faction checks.
         public static IEnumerable<MethodBase> TargetMethods()
         {
+            // All WorkGiver_Scanner subclass overrides of key scanning methods
             foreach (var type in typeof(WorkGiver_Scanner).Assembly.GetTypes())
             {
                 if (!type.IsClass || type.IsAbstract || !type.IsSubclassOf(typeof(WorkGiver_Scanner)))
@@ -48,19 +42,26 @@ namespace RimPrison.HarmonyPatches
                 }
             }
 
-            // Construction-related methods that have their own Faction checks
+            // Construction methods where JobOnThing is defined on an abstract parent
             yield return AccessTools.Method(typeof(WorkGiver_ConstructFinishFrames), nameof(WorkGiver_ConstructFinishFrames.JobOnThing));
             yield return AccessTools.Method(typeof(WorkGiver_ConstructDeliverResourcesToFrames), nameof(WorkGiver_ConstructDeliverResourcesToFrames.JobOnThing));
             yield return AccessTools.Method(typeof(WorkGiver_ConstructDeliverResourcesToBlueprints), nameof(WorkGiver_ConstructDeliverResourcesToBlueprints.JobOnThing));
+
+            // Static utility functions called from work scanning paths
+            yield return AccessTools.Method(typeof(RepairUtility), nameof(RepairUtility.PawnCanRepairEver));
+            yield return AccessTools.Method(typeof(RepairUtility), nameof(RepairUtility.PawnCanRepairNow));
+            yield return AccessTools.Method(typeof(HaulAIUtility), nameof(HaulAIUtility.HaulToStorageJob));
         }
 
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, MethodBase method)
         {
+            var pawnLdarg = method.IsStatic ? OpCodes.Ldarg_0 : OpCodes.Ldarg_1;
+
             var codes = new List<CodeInstruction>(instructions);
             for (int i = 0; i < codes.Count; i++)
             {
                 if (i > 0
-                    && codes[i - 1].opcode == OpCodes.Ldarg_1
+                    && codes[i - 1].opcode == pawnLdarg
                     && codes[i].opcode == OpCodes.Callvirt
                     && codes[i].OperandIs(s_getFaction))
                 {
