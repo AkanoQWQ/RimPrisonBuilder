@@ -23,8 +23,8 @@ namespace RimPrison.HarmonyPatches
         private static readonly MethodInfo s_getFaction =
             AccessTools.PropertyGetter(typeof(Thing), nameof(Thing.Faction));
 
-        // Use reflection to discover all WorkGiver_Scanner subclasses 
-        // and find their overrides of four key methods 
+        // Use reflection to discover all WorkGiver_Scanner subclasses
+        // and find their overrides of five key methods
         // where pawn.Faction is typically checked during work scanning.
         // Only methods declared directly on the subclass (not inherited)
         // are collected — base virtual methods don't contain Faction checks.
@@ -40,7 +40,8 @@ namespace RimPrison.HarmonyPatches
                     if (method.Name == "PotentialWorkThingsGlobal" ||
                         method.Name == "HasJobOnThing" ||
                         method.Name == "ShouldSkip" ||
-                        method.Name == "JobOnThing")
+                        method.Name == "JobOnThing" ||
+                        method.Name == "JobOnCell")
                     {
                         yield return method;
                     }
