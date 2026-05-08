@@ -28,7 +28,7 @@ namespace RimPrison.HarmonyPatches
 
             var pawn = Traverse.Create(__instance).Field("pawn").GetValue<Pawn>();
             if (pawn != null && pawn.IsLaborEnabled())
-                resultingThing.SetForbidden(false);
+                resultingThing.SetForbidden(false, warnOnFail: false);
         }
     }
 }
