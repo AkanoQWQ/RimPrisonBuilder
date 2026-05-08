@@ -33,4 +33,12 @@
     </thinkRoot>
   </ThinkTreeDef>
 
+  <!-- 囚犯管理 -->
+  <MainButtonDef>
+    <defName>RimPrison_Prisoners</defName>
+    <label>Prisoners</label>
+    <tabWindowClass>RimPrison.MainTabWindow_Prisoners</tabWindowClass>
+    <order>45</order>
+  </MainButtonDef>
+
 </Defs>
