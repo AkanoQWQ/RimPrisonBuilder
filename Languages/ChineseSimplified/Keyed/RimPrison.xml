@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
+  <RimPrison.WorkCouponName>粮票名称</RimPrison.WorkCouponName>
+  <RimPrison.SetPrice>设置价格</RimPrison.SetPrice>
+  <RimPrison.SetPriceDesc>设置囚犯购买物品所需的粮票数量</RimPrison.SetPriceDesc>
+  <RimPrison.SetPriceDialogTitle>设置 {0} 价格</RimPrison.SetPriceDialogTitle>
+  <RimPrison.ShopStock>库存: {0}/{1}</RimPrison.ShopStock>
+  <RimPrison.PricePerItem>每件物品价格</RimPrison.PricePerItem>
+  <RimPrison.ConfirmPrice>确认</RimPrison.ConfirmPrice>
 </LanguageData>

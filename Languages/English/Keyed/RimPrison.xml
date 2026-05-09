@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  
+  <RimPrison.WorkCouponName>Work coupon name</RimPrison.WorkCouponName>
+  <RimPrison.SetPrice>Set price</RimPrison.SetPrice>
+  <RimPrison.SetPriceDesc>Set how many work coupons prisoners need to buy an item</RimPrison.SetPriceDesc>
+  <RimPrison.SetPriceDialogTitle>Set {0} price</RimPrison.SetPriceDialogTitle>
+  <RimPrison.ShopStock>Stock: {0}/{1}</RimPrison.ShopStock>
+  <RimPrison.PricePerItem>Price per item</RimPrison.PricePerItem>
+  <RimPrison.ConfirmPrice>Confirm</RimPrison.ConfirmPrice>
 </LanguageData>
