@@ -2,7 +2,7 @@
 
 ## Long-term plan
 
-1. **Rename the mod!** — We have a name collision! I want to pay homage to "Prison Architect" but can't use the exact name — need a clever variation that nods to it while staying legally distinct.
+1. **Rename the mod!** — We have a name collision! I want to pay homage to "Prison Architect" but can't use the exact name — need a clever variation that nods to it while staying legally distinct.("Rimworld was originally a mod for Prison Architect, which wasn't then even at 1.0 release, itself."  WHAT? I DONT KNOW THAT)
 
 2. **Fix the 10-job loop bug** — The "colonist fails to carry, job rebuilds, loops 10 times" error still happens occasionally. Needs root-cause investigation and proper fix.
 
