@@ -10,12 +10,11 @@ namespace RimPrison.HarmonyPatches
     [HarmonyPatch(typeof(Pawn_TimetableTracker), "get_CurrentAssignment")]
     public static class Patch_TimetableFix
     {
-        static void Postfix(Pawn_TimetableTracker __instance, ref TimeAssignmentDef __result)
+        static void Postfix(Pawn_TimetableTracker __instance, Pawn ___pawn, ref TimeAssignmentDef __result)
         {
-            var pawn = Traverse.Create(__instance).Field("pawn").GetValue<Pawn>();
-            if (pawn != null && pawn.IsLaborEnabled())
+            if (___pawn != null && ___pawn.IsLaborEnabled())
             {
-                __result = __instance.times[GenLocalDate.HourOfDay(pawn)];
+                __result = __instance.times[GenLocalDate.HourOfDay(___pawn)];
             }
         }
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-  <!-- "允许劳动" 囚犯交互选项 -->
+  <!-- Prisoner interaction mode: allow labor -->
   <PrisonerInteractionModeDef>
     <defName>RimPrison_AllowLabor</defName>
     <label>Allow labor</label>
@@ -9,7 +9,7 @@
     <isNonExclusiveInteraction>true</isNonExclusiveInteraction>
   </PrisonerInteractionModeDef>
 
-  <!-- 注入囚犯劳动 ThinkTree -->
+  <!-- Inject prisoner labor ThinkTree -->
   <ThinkTreeDef>
     <defName>RimPrison_PrisonerLabor</defName>
     <insertTag>Humanlike_PostDuty</insertTag>
@@ -20,6 +20,7 @@
           <subNodes>
             <li Class="JobGiver_GetRest" />
             <li Class="JobGiver_GetFood" />
+            <li Class="RimPrison.Core.JobGiver_CouponShopBuy" />
             <li Class="JobGiver_Work" />
             <li Class="ThinkNode_Priority_GetJoy">
               <subNodes>
@@ -33,12 +34,42 @@
     </thinkRoot>
   </ThinkTreeDef>
 
-  <!-- 囚犯管理 -->
+  <!-- Prisoner management tab -->
   <MainButtonDef>
     <defName>RimPrison_Prisoners</defName>
     <label>Prisoners</label>
     <tabWindowClass>RimPrison.MainTabWindow_Prisoners</tabWindowClass>
     <order>45</order>
   </MainButtonDef>
+
+  <!-- WorkGiver: colonists deliver items to coupon shop -->
+  <WorkGiverDef>
+    <defName>RimPrison_CouponShopStore</defName>
+    <label>stock coupon shop</label>
+    <gerund>stocking coupon shop</gerund>
+    <giverClass>RimPrison.Core.WorkGiver_CouponShopStore</giverClass>
+    <priorityInType>10</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <verb>stock</verb>
+    <workType>Hauling</workType>
+  </WorkGiverDef>
+
+  <!-- Job: colonist delivers item to coupon shop -->
+  <JobDef>
+    <defName>RimPrison_TakeToCouponShop</defName>
+    <driverClass>RimPrison.Core.JobDriver_TakeToCouponShop</driverClass>
+    <reportString>taking TargetA to TargetB.</reportString>
+    <suspendable>false</suspendable>
+  </JobDef>
+
+  <!-- Job: prisoner buys item from coupon shop -->
+  <JobDef>
+    <defName>RimPrison_BuyFromCouponShop</defName>
+    <driverClass>RimPrison.Core.JobDriver_BuyFromCouponShop</driverClass>
+    <reportString>buying from TargetA.</reportString>
+    <suspendable>false</suspendable>
+  </JobDef>
 
 </Defs>

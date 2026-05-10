@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- [UNREVIEWED] -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>RimPrison_CouponShop</defName>
+    <label>Coupon shop</label>
+    <description>A shop where prisoners can spend work coupons to buy items.</description>
+    <thingClass>RimPrison.Core.Building_CouponShop</thingClass>
+    <designationCategory>Furniture</designationCategory>
+    <useHitPoints>true</useHitPoints>
+    <hasInteractionCell>true</hasInteractionCell>
+    <size>(1,1)</size>
+    <altitudeLayer>FloorEmplacement</altitudeLayer>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Building/CouponShop/CouponShop</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <inspectorTabs>
+      <li>ITab_Storage</li>
+    </inspectorTabs>
+    <comps>
+      <li Class="RimPrison.Core.CompProperties_CouponShop">
+        <defaultPrice>1</defaultPrice>
+        <capacity>5</capacity>
+      </li>
+    </comps>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costList>
+      <WoodLog>50</WoodLog>
+    </costList>
+    <constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Mass>5</Mass>
+      <Beauty>0</Beauty>
+      <Cleanliness>0</Cleanliness>
+      <Flammability>1</Flammability>
+      <WorkToBuild>300</WorkToBuild>
+    </statBases>
+  </ThingDef>
+
+</Defs>

@@ -21,13 +21,11 @@ namespace RimPrison.HarmonyPatches
             }
         }
 
-        static void Postfix(Pawn_CarryTracker __instance, Thing resultingThing)
+        static void Postfix(Pawn_CarryTracker __instance, Pawn ___pawn, Thing resultingThing)
         {
             if (resultingThing == null)
                 return;
-
-            var pawn = Traverse.Create(__instance).Field("pawn").GetValue<Pawn>();
-            if (pawn != null && pawn.IsLaborEnabled())
+            if (___pawn != null && ___pawn.IsLaborEnabled())
                 resultingThing.SetForbidden(false, warnOnFail: false);
         }
     }

@@ -8,6 +8,7 @@ using RimPrison.Core;
 
 namespace RimPrison
 {
+    // [UNREVIEWED] main table UI, not carefully reviewed yet
     public class MainTabWindow_Prisoners : MainTabWindow
     {
         private PawnTable scheduleTable;
@@ -16,9 +17,12 @@ namespace RimPrison
 
         private const float TimeSelectorHeight = 65f;
         private const float TableGap = 0f;
+        private const float CouponColumnWidth = 80f;
+        private const float CouponColumnGap = 8f;
 
         protected override float Margin => 6f;
 
+        // [OPTIMIZE] PawnList may have unnecessary cost?
         private List<Pawn> PawnList =>
             Find.CurrentMap.mapPawns.PrisonersOfColony
                 .Where(p => p.IsLaborEnabled()).ToList();
@@ -32,7 +36,7 @@ namespace RimPrison
 
                 float minW = Mathf.Max(PawnTableDefOf.Restrict.minWidth,
                     PawnTableDefOf.Work.minWidth);
-                float w = Mathf.Max(scheduleTable.Size.x, workTable.Size.x, minW);
+                float w = Mathf.Max(scheduleTable.Size.x + CouponColumnWidth, workTable.Size.x, minW);
                 float h = Mathf.Max(scheduleTable.Size.y, 100f)
                     + Mathf.Max(workTable.Size.y, 100f)
                     + TableGap;
@@ -69,6 +73,9 @@ namespace RimPrison
             TimeAssignmentSelector.DrawTimeAssignmentSelectorGrid(
                 new Rect(rect.x, rect.y, 191f, TimeSelectorHeight));
 
+            // Coupon column: right of schedule table
+            DrawCouponColumn(rect);
+
             // Bottom: work priorities
             float workY = rect.y + scheduleTable.Size.y + TableGap;
             workTable.SetDirty();
@@ -80,6 +87,37 @@ namespace RimPrison
                 sizeInitialized = true;
                 SetInitialSizeAndPosition();
             }
+        }
+
+        private void DrawCouponColumn(Rect rect)
+        {
+            var pawns = scheduleTable.PawnsListForReading;
+            if (pawns.Count == 0)
+            {
+                return;
+            }
+            string label = RimPrisonMod.Settings.WorkCouponName;
+            float headerHeight = scheduleTable.HeaderHeight;
+            float rowAreaHeight = scheduleTable.Size.y - headerHeight;
+            float rowHeight = rowAreaHeight / pawns.Count;
+
+            float colX = rect.x + scheduleTable.Size.x + CouponColumnGap;
+            Rect headerRect = new Rect(colX, rect.y, CouponColumnWidth, headerHeight);
+            Text.Font = GameFont.Tiny;
+            Text.Anchor = TextAnchor.MiddleLeft;
+            Widgets.Label(headerRect, label);
+
+            for (int i = 0; i < pawns.Count; i++)
+            {
+                var comp = pawns[i].TryGetComp<CompWorkTracker>();
+                int count = comp?.earnedCoupons ?? 0;
+                Rect rowRect = new Rect(colX, rect.y + headerHeight + i * rowHeight,
+                    CouponColumnWidth, rowHeight);
+                Widgets.Label(rowRect, count.ToString());
+            }
+
+            Text.Anchor = TextAnchor.UpperLeft;
+            Text.Font = GameFont.Small;
         }
 
         private void RebuildTables()
