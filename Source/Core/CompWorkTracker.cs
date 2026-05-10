@@ -1,4 +1,5 @@
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace RimPrison.Core
@@ -16,9 +17,18 @@ namespace RimPrison.Core
         public int earnedCoupons;
         private int workTickCounter;
 
-        private const int TicksPerCoupon = GenDate.TicksPerHour;
-
         public CompProperties_WorkTracker Props => (CompProperties_WorkTracker)props;
+
+        private int TicksPerCoupon
+        {
+            get
+            {
+                float rate = RimPrisonMod.Settings.CouponsPerHour;
+                if (rate <= 0f) rate = 1f;
+                int tpc = Mathf.RoundToInt(GenDate.TicksPerHour / rate);
+                return tpc < 1 ? 1 : tpc;
+            }
+        }
 
         public void Notify_WorkTick()
         {

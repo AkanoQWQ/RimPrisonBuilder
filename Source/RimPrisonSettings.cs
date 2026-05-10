@@ -6,11 +6,13 @@ namespace RimPrison
     public class RimPrisonSettings : ModSettings
     {
         public string WorkCouponName = "WorkCoupon";
+        public float CouponsPerHour = 1f;
 
         public override void ExposeData()
         {
             base.ExposeData();
             Scribe_Values.Look(ref WorkCouponName, "WorkCouponName", "WorkCoupon");
+            Scribe_Values.Look(ref CouponsPerHour, "CouponsPerHour", 1f);
         }
 
         public void DoSettingsWindowContents(Rect inRect)
@@ -20,6 +22,11 @@ namespace RimPrison
 
             listing.Label("RimPrison.WorkCouponName".Translate());
             WorkCouponName = listing.TextEntry(WorkCouponName);
+
+            listing.Gap(12f);
+
+            listing.Label("RimPrison.CouponsPerHour".Translate(CouponsPerHour.ToString("F1")));
+            CouponsPerHour = listing.Slider(CouponsPerHour, 0.1f, 10f);
 
             listing.End();
         }
