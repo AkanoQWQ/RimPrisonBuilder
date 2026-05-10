@@ -7,4 +7,6 @@
   <RimPrison.ShopStock>库存: {0}/{1}</RimPrison.ShopStock>
   <RimPrison.PricePerItem>每件物品价格</RimPrison.PricePerItem>
   <RimPrison.ConfirmPrice>确认</RimPrison.ConfirmPrice>
+  <RimPrison.ScheduleTab>日程</RimPrison.ScheduleTab>
+  <RimPrison.WorkTab>工作</RimPrison.WorkTab>
 </LanguageData>

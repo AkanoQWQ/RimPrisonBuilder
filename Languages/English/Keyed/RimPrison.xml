@@ -7,4 +7,6 @@
   <RimPrison.ShopStock>Stock: {0}/{1}</RimPrison.ShopStock>
   <RimPrison.PricePerItem>Price per item</RimPrison.PricePerItem>
   <RimPrison.ConfirmPrice>Confirm</RimPrison.ConfirmPrice>
+  <RimPrison.ScheduleTab>Schedule</RimPrison.ScheduleTab>
+  <RimPrison.WorkTab>Work</RimPrison.WorkTab>
 </LanguageData>
