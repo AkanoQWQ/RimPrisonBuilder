@@ -4,7 +4,7 @@
   <Operation Class="PatchOperationAdd">
     <xpath>/Defs/ThingDef[@Name="BasePawn"]/comps</xpath>
     <value>
-      <li Class="RimPrison.Core.CompProperties_WorkTracker" />
+      <li Class="RimPrison.PrisonLabor.CompProperties_WorkTracker" />
     </value>
   </Operation>
 </Patch>

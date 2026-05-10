@@ -1,0 +1,77 @@
+using System.Collections.Generic;
+using System.Reflection;
+using System.Reflection.Emit;
+using HarmonyLib;
+using RimWorld;
+using Verse;
+using Verse.AI;
+using RimPrison.PrisonLabor;
+
+namespace RimPrison.Patches
+{
+    // Replace pawn.Faction getter in work scanning paths with GetWorkFaction,
+    // which returns Faction.OfPlayer for labor-enabled prisoners.
+    // Inspired by PrisonLabor.
+    [HarmonyPatch]
+    public static class Patch_FactionInjection
+    {
+        private static readonly MethodInfo s_getWorkFaction =
+            typeof(PrisonLaborUtility).GetMethod(nameof(PrisonLaborUtility.GetWorkFaction));
+
+        private static readonly MethodInfo s_getFaction =
+            AccessTools.PropertyGetter(typeof(Thing), nameof(Thing.Faction));
+
+        public static IEnumerable<MethodBase> TargetMethods()
+        {
+            // All WorkGiver_Scanner subclass overrides of key scanning methods
+            foreach (var type in typeof(WorkGiver_Scanner).Assembly.GetTypes())
+            {
+                if (!type.IsClass || type.IsAbstract || !type.IsSubclassOf(typeof(WorkGiver_Scanner)))
+                    continue;
+
+                foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+                {
+                    if (method.Name == "PotentialWorkThingsGlobal" ||
+                        method.Name == "HasJobOnThing" ||
+                        method.Name == "ShouldSkip" ||
+                        method.Name == "JobOnThing" ||
+                        method.Name == "JobOnCell")
+                    {
+                        yield return method;
+                    }
+                }
+            }
+
+            // Construction methods where JobOnThing is defined on an abstract parent
+            yield return AccessTools.Method(typeof(WorkGiver_ConstructFinishFrames), nameof(WorkGiver_ConstructFinishFrames.JobOnThing));
+            yield return AccessTools.Method(typeof(WorkGiver_ConstructDeliverResourcesToFrames), nameof(WorkGiver_ConstructDeliverResourcesToFrames.JobOnThing));
+            yield return AccessTools.Method(typeof(WorkGiver_ConstructDeliverResourcesToBlueprints), nameof(WorkGiver_ConstructDeliverResourcesToBlueprints.JobOnThing));
+
+            // Static utility functions called from work scanning paths
+            yield return AccessTools.Method(typeof(RepairUtility), nameof(RepairUtility.PawnCanRepairEver));
+            yield return AccessTools.Method(typeof(RepairUtility), nameof(RepairUtility.PawnCanRepairNow));
+            yield return AccessTools.Method(typeof(HaulAIUtility), nameof(HaulAIUtility.HaulToStorageJob));
+        }
+
+        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, MethodBase method)
+        {
+            var pawnLdarg = method.IsStatic ? OpCodes.Ldarg_0 : OpCodes.Ldarg_1;
+
+            var codes = new List<CodeInstruction>(instructions);
+            for (int i = 0; i < codes.Count; i++)
+            {
+                if (i > 0
+                    && codes[i - 1].opcode == pawnLdarg
+                    && codes[i].opcode == OpCodes.Callvirt
+                    && codes[i].OperandIs(s_getFaction))
+                {
+                    yield return new CodeInstruction(OpCodes.Call, s_getWorkFaction);
+                }
+                else
+                {
+                    yield return codes[i];
+                }
+            }
+        }
+    }
+}
