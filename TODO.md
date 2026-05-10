@@ -23,3 +23,5 @@
 ## Short-term plan
 
 1. Add prisoner outfit/drug management UI, then enable `OptimizeApparel` and `SatisfyChemicalNeed` in the prisoner ThinkTree.
+
+2. Add group configuration of prisoner.(Jobs, time management...)
