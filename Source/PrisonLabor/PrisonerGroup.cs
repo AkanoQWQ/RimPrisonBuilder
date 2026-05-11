@@ -14,6 +14,7 @@ namespace RimPrisonBuilder.PrisonLabor
         public List<TimeAssignmentDef> times;
         public ApparelPolicy apparelPolicy;
         public DrugPolicy drugPolicy;
+        public FoodPolicy foodRestriction;
 
         // IRenameable
         public string RenamableLabel { get => name; set => name = value; }
@@ -96,6 +97,7 @@ namespace RimPrisonBuilder.PrisonLabor
             Scribe_Collections.Look(ref times, "times", LookMode.Def);
             Scribe_References.Look(ref apparelPolicy, "apparelPolicy");
             Scribe_References.Look(ref drugPolicy, "drugPolicy");
+            Scribe_References.Look(ref foodRestriction, "foodRestriction");
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 if (workPriorities == null)

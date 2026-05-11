@@ -564,9 +564,37 @@ namespace RimPrisonBuilder.UI
                     Find.WindowStack.Add(new Dialog_ManageDrugPolicies(group.drugPolicy));
                 }
 
-                // --- Food column (placeholder) ---
-                RPR_UiStyle.DrawMutedLabel(new Rect(col2X + 4f, y + 6f, colAreaW - 8f, 20f),
-                    "RimPrisonBuilder.TodoNoLogic".Translate());
+                // --- Food column ---
+                Rect foodRect = new Rect(col2X, y + 2f, dropdownW, PolicyRowHeight - 4f);
+                string foodLabel = group.foodRestriction != null
+                    ? group.foodRestriction.label
+                    : "RimPrisonBuilder.None".Translate();
+                if (Widgets.ButtonText(foodRect, foodLabel))
+                {
+                    List<FloatMenuOption> options = new List<FloatMenuOption>();
+                    options.Add(new FloatMenuOption("RimPrisonBuilder.None".Translate(), delegate
+                    {
+                        group.foodRestriction = null;
+                        groupManager.SyncFoodRestriction(group);
+                    }));
+                    foreach (var policy in Current.Game.foodRestrictionDatabase.AllFoodRestrictions)
+                    {
+                        var captured = policy;
+                        options.Add(new FloatMenuOption(policy.label, delegate
+                        {
+                            group.foodRestriction = captured;
+                            groupManager.SyncFoodRestriction(group);
+                        }));
+                    }
+                    Find.WindowStack.Add(new FloatMenu(options));
+                }
+
+                Rect foodManageRect = new Rect(col2X + dropdownW + innerGap, y + 2f,
+                    manageBtnW, PolicyRowHeight - 4f);
+                if (Widgets.ButtonText(foodManageRect, "RimPrisonBuilder.Manage".Translate()))
+                {
+                    Find.WindowStack.Add(new Dialog_ManageFoodPolicies(group.foodRestriction));
+                }
             }
 
             Widgets.EndScrollView();

@@ -69,6 +69,8 @@ namespace RimPrisonBuilder.PrisonLabor
                 pawn.outfits.CurrentApparelPolicy = group.apparelPolicy;
             if (group.drugPolicy != null && pawn.drugs != null)
                 pawn.drugs.CurrentPolicy = group.drugPolicy;
+            if (group.foodRestriction != null && pawn.foodRestriction != null)
+                pawn.foodRestriction.CurrentFoodPolicy = group.foodRestriction;
         }
 
         // Sync a single work priority from group to all members.
@@ -160,6 +162,18 @@ namespace RimPrisonBuilder.PrisonLabor
                 Pawn pawn = FindPawnById(map, group.pawnThingIds[i]);
                 if (pawn?.drugs != null && group.drugPolicy != null)
                     pawn.drugs.CurrentPolicy = group.drugPolicy;
+            }
+        }
+
+        public void SyncFoodRestriction(PrisonerGroup group)
+        {
+            Map map = this.map;
+            if (map == null) return;
+            for (int i = group.pawnThingIds.Count - 1; i >= 0; i--)
+            {
+                Pawn pawn = FindPawnById(map, group.pawnThingIds[i]);
+                if (pawn?.foodRestriction != null && group.foodRestriction != null)
+                    pawn.foodRestriction.CurrentFoodPolicy = group.foodRestriction;
             }
         }
 
