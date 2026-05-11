@@ -29,20 +29,4 @@
   <RimPrisonBuilder.DrugTab>Drug</RimPrisonBuilder.DrugTab>
   <RimPrisonBuilder.None>None</RimPrisonBuilder.None>
   <RimPrisonBuilder.Manage>Manage...</RimPrisonBuilder.Manage>
-  <RimPrisonBuilder.ReformValue>Reform: {0}%</RimPrisonBuilder.ReformValue>
-  <RimPrisonBuilder.ReformRate>{0}{1}%/day</RimPrisonBuilder.ReformRate>
-  <RimPrisonBuilder.RateBreakdownIdle>No data yet, waiting for first sampling period...</RimPrisonBuilder.RateBreakdownIdle>
-  <RimPrisonBuilder.RateJuvenileSkip>Work conditions: skipped (juvenile)</RimPrisonBuilder.RateJuvenileSkip>
-  <RimPrisonBuilder.RateWorkHours>Work hours: {0}h (past 24h)</RimPrisonBuilder.RateWorkHours>
-  <RimPrisonBuilder.RatePositive>Positive</RimPrisonBuilder.RatePositive>
-  <RimPrisonBuilder.RateSrcFood>Food</RimPrisonBuilder.RateSrcFood>
-  <RimPrisonBuilder.RateSrcRec>Recreation</RimPrisonBuilder.RateSrcRec>
-  <RimPrisonBuilder.RateSrcWork>Work (2h~10h)</RimPrisonBuilder.RateSrcWork>
-  <RimPrisonBuilder.RateSrcWorkIdle>Idle (&lt;2h)</RimPrisonBuilder.RateSrcWorkIdle>
-  <RimPrisonBuilder.RateSrcWorkOverwork>Overwork (&gt;12h)</RimPrisonBuilder.RateSrcWorkOverwork>
-  <RimPrisonBuilder.RateUnit>day</RimPrisonBuilder.RateUnit>
-  <RimPrisonBuilder.RateCapMult>Soft cap: {0}%/day × {1} = {2}%/day</RimPrisonBuilder.RateCapMult>
-  <RimPrisonBuilder.RateCapOnly>Soft cap: {0}%/day</RimPrisonBuilder.RateCapOnly>
-  <RimPrisonBuilder.RateNegative>Negative</RimPrisonBuilder.RateNegative>
-  <RimPrisonBuilder.RateDaily>Daily rate: {0}%/day</RimPrisonBuilder.RateDaily>
 </LanguageData>
