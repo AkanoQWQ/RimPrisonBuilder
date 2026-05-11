@@ -35,7 +35,10 @@ namespace RimPrisonBuilder.CouponShop
             this.FailOn(() => Item == null || Item.Destroyed);
             this.FailOn(() => !Shop.Accepts(Item));
             this.FailOn(() => !Shop.HasSpace);
-            this.FailOn(() => pawn.carryTracker.AvailableStackSpace(Item.def) == 0);
+            // AvailableStackSpace check removed: for stackCount=1 items,
+            // SplitOff returns the same reference into carryTracker, so
+            // AvailableStackSpace(Item.def) becomes 0 after pickup → job
+            // fails → 10-job cascade. StartCarry already checks count<=0.
 
             // Goto item and pickup item
             yield return Toils_Goto.GotoThing(ItemInd, PathEndMode.ClosestTouch);
