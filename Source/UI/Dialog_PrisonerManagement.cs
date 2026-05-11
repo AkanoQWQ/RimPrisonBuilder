@@ -80,8 +80,12 @@ namespace RimPrisonBuilder.UI
                 DrawScheduleTab(contentRect);
             else if (curTab == 1)
                 DrawWorkTab(contentRect);
-            else
+            else if (curTab == 2)
                 DrawPrisonerManageTab(contentRect);
+            else if (curTab == 3)
+                DrawOutfitTab(contentRect);
+            else
+                DrawDrugTab(contentRect);
         }
 
         // ======== Schedule tab (group-level) ========
@@ -405,6 +409,153 @@ namespace RimPrisonBuilder.UI
             Find.WindowStack.Add(new FloatMenu(options));
         }
 
+        // ======== Outfit tab (group-level) ========
+
+        private const float PolicyRowHeight = 30f;
+        private const float PolicyLabelWidth = 160f;
+        private const float PolicyDropdownWidth = 200f;
+        private const float PolicyManageBtnWidth = 80f;
+
+        private void DrawOutfitTab(Rect rect)
+        {
+            if (groupManager == null)
+            {
+                groupManager = Find.CurrentMap.GetComponent<PrisonerGroupManager>();
+                if (groupManager == null) return;
+            }
+
+            var groups = groupManager.groups;
+            if (groups.Count == 0)
+            {
+                Text.Anchor = TextAnchor.MiddleCenter;
+                Widgets.Label(rect, "RimPrisonBuilder.NoGroups".Translate());
+                Text.Anchor = TextAnchor.UpperLeft;
+                return;
+            }
+
+            float viewHeight = groups.Count * PolicyRowHeight;
+            Rect viewRect = new Rect(0f, 0f, rect.width - 16f, viewHeight);
+            Vector2 scrollPos = Vector2.zero;
+            Widgets.BeginScrollView(rect, ref scrollPos, viewRect);
+
+            for (int g = 0; g < groups.Count; g++)
+            {
+                var group = groups[g];
+                float y = g * PolicyRowHeight;
+
+                Rect labelRect = new Rect(0f, y + 4f, PolicyLabelWidth, PolicyRowHeight);
+                Widgets.Label(labelRect, group.name);
+
+                // Dropdown button
+                Rect dropdownRect = new Rect(PolicyLabelWidth, y + 2f,
+                    PolicyDropdownWidth, PolicyRowHeight - 4f);
+                string currentLabel = group.apparelPolicy != null
+                    ? group.apparelPolicy.label
+                    : "RimPrisonBuilder.None".Translate();
+                if (Widgets.ButtonText(dropdownRect, currentLabel))
+                {
+                    List<FloatMenuOption> options = new List<FloatMenuOption>();
+                    options.Add(new FloatMenuOption("RimPrisonBuilder.None".Translate(), delegate
+                    {
+                        group.apparelPolicy = null;
+                        groupManager.SyncOutfitPolicy(group);
+                    }));
+                    foreach (var policy in Current.Game.outfitDatabase.AllOutfits)
+                    {
+                        var captured = policy;
+                        options.Add(new FloatMenuOption(policy.label, delegate
+                        {
+                            group.apparelPolicy = captured;
+                            groupManager.SyncOutfitPolicy(group);
+                        }));
+                    }
+                    Find.WindowStack.Add(new FloatMenu(options));
+                }
+
+                // Manage button
+                Rect manageRect = new Rect(PolicyLabelWidth + PolicyDropdownWidth + 8f,
+                    y + 2f, PolicyManageBtnWidth, PolicyRowHeight - 4f);
+                if (Widgets.ButtonText(manageRect, "RimPrisonBuilder.Manage".Translate()))
+                {
+                    Find.WindowStack.Add(new Dialog_ManageApparelPolicies(
+                        group.apparelPolicy));
+                }
+            }
+
+            Widgets.EndScrollView();
+        }
+
+        // ======== Drug tab (group-level) ========
+
+        private void DrawDrugTab(Rect rect)
+        {
+            if (groupManager == null)
+            {
+                groupManager = Find.CurrentMap.GetComponent<PrisonerGroupManager>();
+                if (groupManager == null) return;
+            }
+
+            var groups = groupManager.groups;
+            if (groups.Count == 0)
+            {
+                Text.Anchor = TextAnchor.MiddleCenter;
+                Widgets.Label(rect, "RimPrisonBuilder.NoGroups".Translate());
+                Text.Anchor = TextAnchor.UpperLeft;
+                return;
+            }
+
+            float viewHeight = groups.Count * PolicyRowHeight;
+            Rect viewRect = new Rect(0f, 0f, rect.width - 16f, viewHeight);
+            Vector2 scrollPos = Vector2.zero;
+            Widgets.BeginScrollView(rect, ref scrollPos, viewRect);
+
+            for (int g = 0; g < groups.Count; g++)
+            {
+                var group = groups[g];
+                float y = g * PolicyRowHeight;
+
+                Rect labelRect = new Rect(0f, y + 4f, PolicyLabelWidth, PolicyRowHeight);
+                Widgets.Label(labelRect, group.name);
+
+                // Dropdown button
+                Rect dropdownRect = new Rect(PolicyLabelWidth, y + 2f,
+                    PolicyDropdownWidth, PolicyRowHeight - 4f);
+                string currentLabel = group.drugPolicy != null
+                    ? group.drugPolicy.label
+                    : "RimPrisonBuilder.None".Translate();
+                if (Widgets.ButtonText(dropdownRect, currentLabel))
+                {
+                    List<FloatMenuOption> options = new List<FloatMenuOption>();
+                    options.Add(new FloatMenuOption("RimPrisonBuilder.None".Translate(), delegate
+                    {
+                        group.drugPolicy = null;
+                        groupManager.SyncDrugPolicy(group);
+                    }));
+                    foreach (var policy in Current.Game.drugPolicyDatabase.AllPolicies)
+                    {
+                        var captured = policy;
+                        options.Add(new FloatMenuOption(policy.label, delegate
+                        {
+                            group.drugPolicy = captured;
+                            groupManager.SyncDrugPolicy(group);
+                        }));
+                    }
+                    Find.WindowStack.Add(new FloatMenu(options));
+                }
+
+                // Manage button
+                Rect manageRect = new Rect(PolicyLabelWidth + PolicyDropdownWidth + 8f,
+                    y + 2f, PolicyManageBtnWidth, PolicyRowHeight - 4f);
+                if (Widgets.ButtonText(manageRect, "RimPrisonBuilder.Manage".Translate()))
+                {
+                    Find.WindowStack.Add(new Dialog_ManageDrugPolicies(
+                        group.drugPolicy));
+                }
+            }
+
+            Widgets.EndScrollView();
+        }
+
         // ======== Helpers ========
 
         private static List<WorkTypeDef> GetFilteredWorkTypes()
@@ -429,7 +580,11 @@ namespace RimPrisonBuilder.UI
                 new TabRecord("RimPrisonBuilder.WorkTab".Translate(),
                     delegate { curTab = 1; }, () => curTab == 1),
                 new TabRecord("RimPrisonBuilder.PrisonerManageTab".Translate(),
-                    delegate { curTab = 2; }, () => curTab == 2)
+                    delegate { curTab = 2; }, () => curTab == 2),
+                new TabRecord("RimPrisonBuilder.OutfitTab".Translate(),
+                    delegate { curTab = 3; }, () => curTab == 3),
+                new TabRecord("RimPrisonBuilder.DrugTab".Translate(),
+                    delegate { curTab = 4; }, () => curTab == 4)
             };
         }
     }

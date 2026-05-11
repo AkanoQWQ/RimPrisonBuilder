@@ -16,10 +16,17 @@
     <insertPriority>80</insertPriority>
     <thinkRoot Class="RimPrisonBuilder.PrisonLabor.ThinkNodes.ThinkNode_ConditionalPrisonerLabor">
       <subNodes>
+        <!--
+          Note: vanilla checks apparel2.IsInAnyStorage()
+          lothes must be in a storage zone 
+        -->
+        <li Class="JobGiver_OptimizeApparel" />
         <li Class="ThinkNode_PrioritySorter">
           <subNodes>
             <li Class="JobGiver_GetRest" />
             <li Class="JobGiver_GetFood" />
+            <li Class="JobGiver_SatisfyChemicalNeed" />
+            <li Class="JobGiver_TakeDrugsForDrugPolicy" />
             <li Class="RimPrisonBuilder.PrisonLabor.JobGiver_CouponShopBuy" />
             <li Class="JobGiver_Work" />
             <li Class="ThinkNode_Priority_GetJoy">

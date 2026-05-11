@@ -1,3 +1,4 @@
+using RimWorld;
 using Verse;
 using Verse.AI;
 
@@ -9,7 +10,18 @@ namespace RimPrisonBuilder.PrisonLabor.ThinkNodes
     {
         protected override bool Satisfied(Pawn pawn)
         {
-            return pawn.IsLaborEnabled();
+            if (!pawn.IsLaborEnabled())
+                return false;
+
+            // Prisoners don't have outfit/drug trackers by default.
+            // Initialize them here so vanilla JobGiver_OptimizeApparel
+            // and JobGiver_SatisfyChemicalNeed can work.
+            if (pawn.outfits == null)
+                pawn.outfits = new Pawn_OutfitTracker(pawn);
+            if (pawn.drugs == null)
+                pawn.drugs = new Pawn_DrugPolicyTracker(pawn);
+
+            return true;
         }
     }
 }

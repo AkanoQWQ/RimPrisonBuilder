@@ -12,6 +12,8 @@ namespace RimPrisonBuilder.PrisonLabor
         public List<int> pawnThingIds = new List<int>();
         public DefMap<WorkTypeDef, int> workPriorities;
         public List<TimeAssignmentDef> times;
+        public ApparelPolicy apparelPolicy;
+        public DrugPolicy drugPolicy;
 
         // IRenameable
         public string RenamableLabel { get => name; set => name = value; }
@@ -92,6 +94,8 @@ namespace RimPrisonBuilder.PrisonLabor
             Scribe_Collections.Look(ref pawnThingIds, "pawnThingIds", LookMode.Value);
             Scribe_Deep.Look(ref workPriorities, "workPriorities");
             Scribe_Collections.Look(ref times, "times", LookMode.Def);
+            Scribe_References.Look(ref apparelPolicy, "apparelPolicy");
+            Scribe_References.Look(ref drugPolicy, "drugPolicy");
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 if (workPriorities == null)

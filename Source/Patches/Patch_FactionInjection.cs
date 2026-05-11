@@ -51,6 +51,9 @@ namespace RimPrisonBuilder.Patches
             yield return AccessTools.Method(typeof(RepairUtility), nameof(RepairUtility.PawnCanRepairEver));
             yield return AccessTools.Method(typeof(RepairUtility), nameof(RepairUtility.PawnCanRepairNow));
             yield return AccessTools.Method(typeof(HaulAIUtility), nameof(HaulAIUtility.HaulToStorageJob));
+
+            // JobGiver_OptimizeApparel checks pawn.Faction != Faction.OfPlayer
+            yield return AccessTools.Method(typeof(JobGiver_OptimizeApparel), "TryGiveJob");
         }
 
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, MethodBase method)

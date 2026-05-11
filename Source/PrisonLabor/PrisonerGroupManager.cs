@@ -64,6 +64,11 @@ namespace RimPrisonBuilder.PrisonLabor
             {
                 pawn.timetable.SetAssignment(h, group.GetAssignment(h));
             }
+
+            if (group.apparelPolicy != null && pawn.outfits != null)
+                pawn.outfits.CurrentApparelPolicy = group.apparelPolicy;
+            if (group.drugPolicy != null && pawn.drugs != null)
+                pawn.drugs.CurrentPolicy = group.drugPolicy;
         }
 
         // Sync a single work priority from group to all members.
@@ -132,6 +137,30 @@ namespace RimPrisonBuilder.PrisonLabor
                     return pawn;
             }
             return null;
+        }
+
+        public void SyncOutfitPolicy(PrisonerGroup group)
+        {
+            Map map = this.map;
+            if (map == null) return;
+            for (int i = group.pawnThingIds.Count - 1; i >= 0; i--)
+            {
+                Pawn pawn = FindPawnById(map, group.pawnThingIds[i]);
+                if (pawn?.outfits != null && group.apparelPolicy != null)
+                    pawn.outfits.CurrentApparelPolicy = group.apparelPolicy;
+            }
+        }
+
+        public void SyncDrugPolicy(PrisonerGroup group)
+        {
+            Map map = this.map;
+            if (map == null) return;
+            for (int i = group.pawnThingIds.Count - 1; i >= 0; i--)
+            {
+                Pawn pawn = FindPawnById(map, group.pawnThingIds[i]);
+                if (pawn?.drugs != null && group.drugPolicy != null)
+                    pawn.drugs.CurrentPolicy = group.drugPolicy;
+            }
         }
 
         public override void ExposeData()
