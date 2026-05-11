@@ -25,4 +25,8 @@
   <RimPrisonBuilder.GrantCouponsDesc>请输入要发放的{0}数量：</RimPrisonBuilder.GrantCouponsDesc>
   <RimPrisonBuilder.ConfirmGrant>确认发放</RimPrisonBuilder.ConfirmGrant>
   <RimPrisonBuilder.DailyAllowance>每日低保（粮票/天，0=关闭）</RimPrisonBuilder.DailyAllowance>
+  <RimPrisonBuilder.OutfitTab>服装</RimPrisonBuilder.OutfitTab>
+  <RimPrisonBuilder.DrugTab>成瘾品</RimPrisonBuilder.DrugTab>
+  <RimPrisonBuilder.None>无</RimPrisonBuilder.None>
+  <RimPrisonBuilder.Manage>管理...</RimPrisonBuilder.Manage>
 </LanguageData>

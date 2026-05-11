@@ -25,4 +25,8 @@
   <RimPrisonBuilder.GrantCouponsDesc>Enter the amount of {0} to grant:</RimPrisonBuilder.GrantCouponsDesc>
   <RimPrisonBuilder.ConfirmGrant>Confirm</RimPrisonBuilder.ConfirmGrant>
   <RimPrisonBuilder.DailyAllowance>Daily allowance (coupons per day, 0=off)</RimPrisonBuilder.DailyAllowance>
+  <RimPrisonBuilder.OutfitTab>Outfit</RimPrisonBuilder.OutfitTab>
+  <RimPrisonBuilder.DrugTab>Drug</RimPrisonBuilder.DrugTab>
+  <RimPrisonBuilder.None>None</RimPrisonBuilder.None>
+  <RimPrisonBuilder.Manage>Manage...</RimPrisonBuilder.Manage>
 </LanguageData>
