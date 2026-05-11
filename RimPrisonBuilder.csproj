@@ -53,7 +53,7 @@
 	</ItemGroup>
 
 	<!-- 編譯後自動部署 -->
-	<Target Name="DeployToModsFolder" AfterTargets="Build" Condition=" '$(BuildingWithScript)' != 'true' AND '$(RimWorldDir)' != '' ">
+	<Target Name="DeployToModsFolder" AfterTargets="Build" Condition="'false'" >
 		<CallTarget Targets="WinDeploy" Condition=" '$(OS)' == 'Windows_NT' " />
 		<CallTarget Targets="MacDeploy" Condition=" '$(OS)' != 'Windows_NT' " />
 	</Target>
