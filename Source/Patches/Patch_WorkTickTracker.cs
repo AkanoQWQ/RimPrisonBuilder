@@ -31,6 +31,11 @@ namespace RimPrisonBuilder.Patches
             {
                 comp.Notify_WorkTick();
             }
+            var reformComp = pawn.TryGetComp<CompReformTracker>();
+            if (reformComp != null)
+            {
+                reformComp.Notify_WorkTick();
+            }
         }
     }
 }

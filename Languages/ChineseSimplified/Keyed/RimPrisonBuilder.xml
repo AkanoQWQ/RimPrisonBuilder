@@ -29,4 +29,20 @@
   <RimPrisonBuilder.DrugTab>成瘾品</RimPrisonBuilder.DrugTab>
   <RimPrisonBuilder.None>无</RimPrisonBuilder.None>
   <RimPrisonBuilder.Manage>管理...</RimPrisonBuilder.Manage>
+  <RimPrisonBuilder.ReformValue>改造值: {0}%</RimPrisonBuilder.ReformValue>
+  <RimPrisonBuilder.ReformRate>{0}{1}%/天</RimPrisonBuilder.ReformRate>
+  <RimPrisonBuilder.RateBreakdownIdle>尚无数据，等待第一个检测周期...</RimPrisonBuilder.RateBreakdownIdle>
+  <RimPrisonBuilder.RateJuvenileSkip>工作条件: 已跳过（儿童）</RimPrisonBuilder.RateJuvenileSkip>
+  <RimPrisonBuilder.RateWorkHours>工作小时: {0}h（过去24h）</RimPrisonBuilder.RateWorkHours>
+  <RimPrisonBuilder.RatePositive>正面</RimPrisonBuilder.RatePositive>
+  <RimPrisonBuilder.RateSrcFood>食物</RimPrisonBuilder.RateSrcFood>
+  <RimPrisonBuilder.RateSrcRec>娱乐</RimPrisonBuilder.RateSrcRec>
+  <RimPrisonBuilder.RateSrcWork>工作(2h~10h)</RimPrisonBuilder.RateSrcWork>
+  <RimPrisonBuilder.RateSrcWorkIdle>怠工(&lt;2h)</RimPrisonBuilder.RateSrcWorkIdle>
+  <RimPrisonBuilder.RateSrcWorkOverwork>过度劳动(&gt;12h)</RimPrisonBuilder.RateSrcWorkOverwork>
+  <RimPrisonBuilder.RateUnit>天</RimPrisonBuilder.RateUnit>
+  <RimPrisonBuilder.RateCapMult>软上限: {0}%/天 × {1} = {2}%/天</RimPrisonBuilder.RateCapMult>
+  <RimPrisonBuilder.RateCapOnly>软上限: {0}%/天</RimPrisonBuilder.RateCapOnly>
+  <RimPrisonBuilder.RateNegative>负面</RimPrisonBuilder.RateNegative>
+  <RimPrisonBuilder.RateDaily>日变化率: {0}%/天</RimPrisonBuilder.RateDaily>
 </LanguageData>

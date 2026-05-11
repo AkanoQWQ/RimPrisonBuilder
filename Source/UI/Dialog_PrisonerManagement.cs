@@ -366,6 +366,33 @@ namespace RimPrisonBuilder.UI
             {
                 Find.WindowStack.Add(new Dialog_GrantCoupons(pawn));
             }
+
+            // Reform value and rate
+            float reformStartX = grantRect.xMax + gap * 3;
+            var reformComp = pawn.GetReformTracker();
+            float reformVal = reformComp?.reformValue ?? 0f;
+            float rate = reformComp?.currentDailyRate ?? 0f;
+
+            Rect reformRect = new Rect(reformStartX, rect.y, 140f, rect.height);
+            Text.Anchor = TextAnchor.MiddleLeft;
+            Widgets.Label(reformRect, "RimPrisonBuilder.ReformValue".Translate(reformVal.ToString("F1")));
+            Text.Anchor = TextAnchor.UpperLeft;
+
+            Rect rateRect = new Rect(reformStartX + 140f + gap, rect.y, 120f, rect.height);
+            string sign = rate > 0f ? "+" : "";
+            Text.Anchor = TextAnchor.MiddleLeft;
+            if (rate > 0.01f)
+                GUI.color = Color.green;
+            else if (rate < -0.01f)
+                GUI.color = Color.red;
+            Widgets.Label(rateRect, "RimPrisonBuilder.ReformRate".Translate(sign, rate.ToString("F1")));
+            GUI.color = Color.white;
+            Text.Anchor = TextAnchor.UpperLeft;
+
+            // Tooltip showing rate breakdown
+            if (reformComp != null)
+                TooltipHandler.TipRegion(rateRect, () => reformComp.GetRateBreakdown(),
+                    pawn.thingIDNumber ^ 0x6A82719C);
         }
 
         private void DrawGroupButton(Rect rect, Pawn pawn)

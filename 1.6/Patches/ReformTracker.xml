@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- Attach CompReformTracker to all humanlike pawns -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[@Name="BasePawn"]/comps</xpath>
+    <value>
+      <li Class="RimPrisonBuilder.PrisonLabor.CompProperties_ReformTracker" />
+    </value>
+  </Operation>
+</Patch>

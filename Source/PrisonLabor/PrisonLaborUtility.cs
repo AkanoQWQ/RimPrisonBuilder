@@ -17,6 +17,16 @@ namespace RimPrisonBuilder.PrisonLabor
             return pawn.guest.IsInteractionEnabled(RP_DefOf.RimPrisonBuilder_AllowLabor);
         }
 
+        public static CompReformTracker GetReformTracker(this Pawn pawn)
+        {
+            return pawn.TryGetComp<CompReformTracker>();
+        }
+
+        public static float GetReformValue(this Pawn pawn)
+        {
+            return pawn.TryGetComp<CompReformTracker>()?.reformValue ?? 0f;
+        }
+
         // Return Faction.OfPlayer for prisoners so WorkGiver scanning treats them as colonists.
         // Used by IL weaving, inspired by PrisonLabor
         public static Faction GetWorkFaction(Pawn pawn)
