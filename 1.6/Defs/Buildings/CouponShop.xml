@@ -2,10 +2,10 @@
 <Defs>
 <!-- [UNREVIEWED] -->
   <ThingDef ParentName="BuildingBase">
-    <defName>RimPrison_CouponShop</defName>
+    <defName>RimPrisonBuilder_CouponShop</defName>
     <label>Coupon shop</label>
     <description>A shop where prisoners can spend work coupons to buy items.</description>
-    <thingClass>RimPrison.CouponShop.Building_CouponShop</thingClass>
+    <thingClass>RimPrisonBuilder.CouponShop.Building_CouponShop</thingClass>
     <designationCategory>Furniture</designationCategory>
     <useHitPoints>true</useHitPoints>
     <hasInteractionCell>true</hasInteractionCell>
@@ -22,7 +22,7 @@
       <li>ITab_Storage</li>
     </inspectorTabs>
     <comps>
-      <li Class="RimPrison.CouponShop.CompProperties_CouponShop">
+      <li Class="RimPrisonBuilder.CouponShop.CompProperties_CouponShop">
         <defaultPrice>1</defaultPrice>
         <capacity>5</capacity>
       </li>

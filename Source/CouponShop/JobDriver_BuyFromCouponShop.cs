@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using RimPrison.DefOfs;
-using RimPrison.PrisonLabor;
+using RimPrisonBuilder.DefOfs;
+using RimPrisonBuilder.PrisonLabor;
 using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace RimPrison.CouponShop
+namespace RimPrisonBuilder.CouponShop
 {
     public class JobDriver_BuyFromCouponShop : JobDriver
     {

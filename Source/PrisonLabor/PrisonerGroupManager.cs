@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using RimWorld;
 using Verse;
 
-namespace RimPrison.PrisonLabor
+namespace RimPrisonBuilder.PrisonLabor
 {
     // Inherited from MapComponent, it will auto-load with map
     public class PrisonerGroupManager : MapComponent
@@ -97,7 +97,7 @@ namespace RimPrison.PrisonLabor
             if (blockedPawnNames.Count > 0)
             {
                 Messages.Message(
-                    "RimPrison.WorkPriorityBlocked".Translate(
+                    "RimPrisonBuilder.WorkPriorityBlocked".Translate(
                         blockedPawnNames.ToCommaList(useAnd: true), wt.labelShort),
                     MessageTypeDefOf.CautionInput, historical: false);
             }

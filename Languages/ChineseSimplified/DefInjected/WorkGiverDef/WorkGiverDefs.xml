@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <RimPrison_CouponShopStore.label>为粮票商店补货</RimPrison_CouponShopStore.label>
-  <RimPrison_CouponShopStore.gerund>正在为粮票商店补货</RimPrison_CouponShopStore.gerund>
-  <RimPrison_CouponShopStore.verb>补货</RimPrison_CouponShopStore.verb>
+  <RimPrisonBuilder_CouponShopStore.label>为粮票商店补货</RimPrisonBuilder_CouponShopStore.label>
+  <RimPrisonBuilder_CouponShopStore.gerund>正在为粮票商店补货</RimPrisonBuilder_CouponShopStore.gerund>
+  <RimPrisonBuilder_CouponShopStore.verb>补货</RimPrisonBuilder_CouponShopStore.verb>
 </LanguageData>

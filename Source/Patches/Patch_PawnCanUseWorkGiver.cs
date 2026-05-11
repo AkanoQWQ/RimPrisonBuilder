@@ -1,9 +1,9 @@
 using HarmonyLib;
 using RimWorld;
 using Verse;
-using RimPrison.PrisonLabor;
+using RimPrisonBuilder.PrisonLabor;
 
-namespace RimPrison.Patches
+namespace RimPrisonBuilder.Patches
 {
     // Allows prisoners with labor enabled to pass JobGiver_Work.PawnCanUseWorkGiver.
     [HarmonyPatch(typeof(JobGiver_Work), "PawnCanUseWorkGiver")]

@@ -4,9 +4,9 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
-using RimPrison.PrisonLabor;
+using RimPrisonBuilder.PrisonLabor;
 
-namespace RimPrison.UI
+namespace RimPrisonBuilder.UI
 {
     // [UNREVIEWED] Haven't reviewed carefully
     public class Dialog_PrisonerManagement : Window
@@ -98,7 +98,7 @@ namespace RimPrison.UI
             if (groups.Count == 0)
             {
                 Text.Anchor = TextAnchor.MiddleCenter;
-                Widgets.Label(rect, "RimPrison.NoGroups".Translate());
+                Widgets.Label(rect, "RimPrisonBuilder.NoGroups".Translate());
                 Text.Anchor = TextAnchor.UpperLeft;
                 return;
             }
@@ -197,7 +197,7 @@ namespace RimPrison.UI
             if (groups.Count == 0)
             {
                 Text.Anchor = TextAnchor.MiddleCenter;
-                Widgets.Label(rect, "RimPrison.NoGroups".Translate());
+                Widgets.Label(rect, "RimPrisonBuilder.NoGroups".Translate());
                 Text.Anchor = TextAnchor.UpperLeft;
                 return;
             }
@@ -314,7 +314,7 @@ namespace RimPrison.UI
             if (pawns.Count == 0)
             {
                 Text.Anchor = TextAnchor.MiddleCenter;
-                Widgets.Label(rect, "RimPrison.NoLaborPrisoners".Translate());
+                Widgets.Label(rect, "RimPrisonBuilder.NoLaborPrisoners".Translate());
                 Text.Anchor = TextAnchor.UpperLeft;
                 return;
             }
@@ -352,13 +352,13 @@ namespace RimPrison.UI
             int coupons = comp?.earnedCoupons ?? 0;
             float couponX = rect.x + nameWidth + GroupButtonWidth + gap * 2;
             Rect couponRect = new Rect(couponX, rect.y, 200f, rect.height);
-            Widgets.Label(couponRect, RimPrisonMod.Settings.WorkCouponName + ": " + coupons);
+            Widgets.Label(couponRect, RimPrisonBuilderMod.Settings.WorkCouponName + ": " + coupons);
 
             // Grant button
             float grantBtnW = 60f;
             Rect grantRect = new Rect(couponX + 200f + gap, rect.y + 2f,
                 grantBtnW, rect.height - 4f);
-            if (Widgets.ButtonText(grantRect, "RimPrison.GrantCoupons".Translate()))
+            if (Widgets.ButtonText(grantRect, "RimPrisonBuilder.GrantCoupons".Translate()))
             {
                 Find.WindowStack.Add(new Dialog_GrantCoupons(pawn));
             }
@@ -372,14 +372,14 @@ namespace RimPrison.UI
             var currentGroup = groupManager?.GetGroupFor(pawn);
             string label = currentGroup != null
                 ? currentGroup.name
-                : "RimPrison.NoGroup".Translate();
+                : "RimPrisonBuilder.NoGroup".Translate();
 
             if (!Widgets.ButtonText(rect, label))
                 return;
 
             List<FloatMenuOption> options = new List<FloatMenuOption>();
 
-            options.Add(new FloatMenuOption("RimPrison.NoGroup".Translate(), delegate
+            options.Add(new FloatMenuOption("RimPrisonBuilder.NoGroup".Translate(), delegate
             {
                 groupManager?.RemoveFromAllGroups(pawn);
             }));
@@ -396,7 +396,7 @@ namespace RimPrison.UI
                 }
             }
 
-            options.Add(new FloatMenuOption("RimPrison.ManageGroups".Translate(), delegate
+            options.Add(new FloatMenuOption("RimPrisonBuilder.ManageGroups".Translate(), delegate
             {
                 if (groupManager != null)
                     Find.WindowStack.Add(new Dialog_ManagePrisonerGroups(groupManager));
@@ -424,11 +424,11 @@ namespace RimPrison.UI
         {
             tabs = new List<TabRecord>
             {
-                new TabRecord("RimPrison.ScheduleTab".Translate(),
+                new TabRecord("RimPrisonBuilder.ScheduleTab".Translate(),
                     delegate { curTab = 0; }, () => curTab == 0),
-                new TabRecord("RimPrison.WorkTab".Translate(),
+                new TabRecord("RimPrisonBuilder.WorkTab".Translate(),
                     delegate { curTab = 1; }, () => curTab == 1),
-                new TabRecord("RimPrison.PrisonerManageTab".Translate(),
+                new TabRecord("RimPrisonBuilder.PrisonerManageTab".Translate(),
                     delegate { curTab = 2; }, () => curTab == 2)
             };
         }

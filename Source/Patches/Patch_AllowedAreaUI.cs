@@ -2,9 +2,9 @@ using HarmonyLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
-using RimPrison.PrisonLabor;
+using RimPrisonBuilder.PrisonLabor;
 
-namespace RimPrison.Patches
+namespace RimPrisonBuilder.Patches
 {
     // Draw the allowed area selector for labor-enabled prisoners.
     [HarmonyPatch(typeof(PawnColumnWorker_AllowedArea), "DoCell")]

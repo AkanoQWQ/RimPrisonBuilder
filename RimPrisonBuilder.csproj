@@ -7,10 +7,10 @@
 
 		<RimWorldDir Condition=" '$(RimWorldDir)' == '' ">$(RIMWORLD_DIR)</RimWorldDir>
 
-		<ModFolderName>RimPrison</ModFolderName>
+		<ModFolderName>RimPrisonBuilder</ModFolderName>
 
 		<!-- 編程配置項 -->
-		<RootNamespace>RimPrison</RootNamespace>
+		<RootNamespace>RimPrisonBuilder</RootNamespace>
 		<LangVersion>latest</LangVersion>
 
 		<!-- 編譯配置項 -->
@@ -18,7 +18,7 @@
 		<TargetFramework>net48</TargetFramework>
 		<Platforms>AnyCPU;x64</Platforms>
 		<PlatformTarget>x64</PlatformTarget>
-		<AssemblyName>RimPrison</AssemblyName>
+		<AssemblyName>RimPrisonBuilder</AssemblyName>
 
 		<!-- 編譯項優化 -->
 		<UseSharedCompilation>false</UseSharedCompilation>

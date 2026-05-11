@@ -1,9 +1,9 @@
 using HarmonyLib;
 using RimWorld;
 using Verse;
-using RimPrison.PrisonLabor;
+using RimPrisonBuilder.PrisonLabor;
 
-namespace RimPrison.Patches
+namespace RimPrisonBuilder.Patches
 {
     // Labor-enabled prisoners should respect allowed area restrictions.
     [HarmonyPatch(typeof(ForbidUtility), "IsForbidden", typeof(IntVec3), typeof(Pawn))]

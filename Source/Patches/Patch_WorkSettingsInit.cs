@@ -1,9 +1,9 @@
 using HarmonyLib;
 using RimWorld;
 using Verse;
-using RimPrison.PrisonLabor;
+using RimPrisonBuilder.PrisonLabor;
 
-namespace RimPrison.Patches
+namespace RimPrisonBuilder.Patches
 {
     // When the "Allow labor" checkbox is toggled, ensure workSettings are initialized.
     [HarmonyPatch(typeof(Pawn_GuestTracker), nameof(Pawn_GuestTracker.ToggleNonExclusiveInteraction))]

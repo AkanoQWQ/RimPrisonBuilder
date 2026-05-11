@@ -1,9 +1,9 @@
 using HarmonyLib;
 using RimWorld;
 using Verse;
-using RimPrison.PrisonLabor;
+using RimPrisonBuilder.PrisonLabor;
 
-namespace RimPrison.Patches
+namespace RimPrisonBuilder.Patches
 {
     // Reassign blueprint result to player faction when built by a prisoner.
     [HarmonyPatch(typeof(Blueprint), "TryReplaceWithSolidThing")]

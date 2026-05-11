@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <RimPrisonBuilder.WorkCouponName>Work coupon name</RimPrisonBuilder.WorkCouponName>
+  <RimPrisonBuilder.SetPrice>Set price</RimPrisonBuilder.SetPrice>
+  <RimPrisonBuilder.SetPriceDesc>Set how many work coupons prisoners need to buy an item</RimPrisonBuilder.SetPriceDesc>
+  <RimPrisonBuilder.SetPriceDialogTitle>Set {0} price</RimPrisonBuilder.SetPriceDialogTitle>
+  <RimPrisonBuilder.ShopStock>Stock: {0}/{1}</RimPrisonBuilder.ShopStock>
+  <RimPrisonBuilder.PricePerItem>Price per item</RimPrisonBuilder.PricePerItem>
+  <RimPrisonBuilder.ConfirmPrice>Confirm</RimPrisonBuilder.ConfirmPrice>
+  <RimPrisonBuilder.ScheduleTab>Schedule</RimPrisonBuilder.ScheduleTab>
+  <RimPrisonBuilder.WorkTab>Work</RimPrisonBuilder.WorkTab>
+  <RimPrisonBuilder.PrisonerManageTab>Prisoners</RimPrisonBuilder.PrisonerManageTab>
+  <RimPrisonBuilder.NoGroup>Ungrouped</RimPrisonBuilder.NoGroup>
+  <RimPrisonBuilder.ManageGroups>Manage groups...</RimPrisonBuilder.ManageGroups>
+  <RimPrisonBuilder.ManagePrisonerGroups>Manage Prisoner Groups</RimPrisonBuilder.ManagePrisonerGroups>
+  <RimPrisonBuilder.NewGroup>New group</RimPrisonBuilder.NewGroup>
+  <RimPrisonBuilder.DefaultGroupName>Group</RimPrisonBuilder.DefaultGroupName>
+  <RimPrisonBuilder.DeleteGroupConfirm>Delete group {0}? All prisoners will be removed from this group.</RimPrisonBuilder.DeleteGroupConfirm>
+  <RimPrisonBuilder.NoLaborPrisoners>No labor-enabled prisoners.</RimPrisonBuilder.NoLaborPrisoners>
+  <RimPrisonBuilder.NoGroups>No prisoner groups. Create groups and assign prisoners in the "Prisoners" tab first.</RimPrisonBuilder.NoGroups>
+  <RimPrisonBuilder.WorkPriorityBlocked>{0} cannot be set to {1}. The prisoner is incapable of this work type.</RimPrisonBuilder.WorkPriorityBlocked>
+  <RimPrisonBuilder.CouponsPerHour>Coupons per hour: {0}</RimPrisonBuilder.CouponsPerHour>
+  <RimPrisonBuilder.GrantCoupons>Grant</RimPrisonBuilder.GrantCoupons>
+  <RimPrisonBuilder.GrantCouponsTitle>Grant coupons to {0}</RimPrisonBuilder.GrantCouponsTitle>
+  <RimPrisonBuilder.GrantCouponsDesc>Enter the amount of {0} to grant:</RimPrisonBuilder.GrantCouponsDesc>
+  <RimPrisonBuilder.ConfirmGrant>Confirm</RimPrisonBuilder.ConfirmGrant>
+</LanguageData>

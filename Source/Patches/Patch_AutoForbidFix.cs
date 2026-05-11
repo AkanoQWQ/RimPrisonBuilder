@@ -3,9 +3,9 @@ using System.Reflection;
 using HarmonyLib;
 using RimWorld;
 using Verse;
-using RimPrison.PrisonLabor;
+using RimPrisonBuilder.PrisonLabor;
 
-namespace RimPrison.Patches
+namespace RimPrisonBuilder.Patches
 {
     // Prevent auto-forbid when a labor-enabled prisoner drops items.
     // Vanilla forbids items dropped by hostile factions as anti-theft.

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <RimPrisonBuilder.WorkCouponName>粮票名称</RimPrisonBuilder.WorkCouponName>
+  <RimPrisonBuilder.SetPrice>设置价格</RimPrisonBuilder.SetPrice>
+  <RimPrisonBuilder.SetPriceDesc>设置囚犯购买物品所需的粮票数量</RimPrisonBuilder.SetPriceDesc>
+  <RimPrisonBuilder.SetPriceDialogTitle>设置 {0} 价格</RimPrisonBuilder.SetPriceDialogTitle>
+  <RimPrisonBuilder.ShopStock>库存: {0}/{1}</RimPrisonBuilder.ShopStock>
+  <RimPrisonBuilder.PricePerItem>每件物品价格</RimPrisonBuilder.PricePerItem>
+  <RimPrisonBuilder.ConfirmPrice>确认</RimPrisonBuilder.ConfirmPrice>
+  <RimPrisonBuilder.ScheduleTab>日程</RimPrisonBuilder.ScheduleTab>
+  <RimPrisonBuilder.WorkTab>工作</RimPrisonBuilder.WorkTab>
+  <RimPrisonBuilder.PrisonerManageTab>囚犯管理</RimPrisonBuilder.PrisonerManageTab>
+  <RimPrisonBuilder.NoGroup>未分组</RimPrisonBuilder.NoGroup>
+  <RimPrisonBuilder.ManageGroups>管理囚犯分组...</RimPrisonBuilder.ManageGroups>
+  <RimPrisonBuilder.ManagePrisonerGroups>管理囚犯分组</RimPrisonBuilder.ManagePrisonerGroups>
+  <RimPrisonBuilder.NewGroup>新建分组</RimPrisonBuilder.NewGroup>
+  <RimPrisonBuilder.DefaultGroupName>囚犯分组</RimPrisonBuilder.DefaultGroupName>
+  <RimPrisonBuilder.DeleteGroupConfirm>确定删除分组 {0}？所有囚犯将移出此分组。</RimPrisonBuilder.DeleteGroupConfirm>
+  <RimPrisonBuilder.NoLaborPrisoners>没有启用劳动的囚犯。</RimPrisonBuilder.NoLaborPrisoners>
+  <RimPrisonBuilder.NoGroups>没有囚犯分组。请先在"囚犯管理"标签页中创建分组并分配囚犯。</RimPrisonBuilder.NoGroups>
+  <RimPrisonBuilder.WorkPriorityBlocked>{0}无法被设置为{1}。该囚犯不具备此工作能力。</RimPrisonBuilder.WorkPriorityBlocked>
+  <RimPrisonBuilder.CouponsPerHour>每小时获得粮票数量: {0}</RimPrisonBuilder.CouponsPerHour>
+  <RimPrisonBuilder.GrantCoupons>发放</RimPrisonBuilder.GrantCoupons>
+  <RimPrisonBuilder.GrantCouponsTitle>发放粮票给 {0}</RimPrisonBuilder.GrantCouponsTitle>
+  <RimPrisonBuilder.GrantCouponsDesc>请输入要发放的{0}数量：</RimPrisonBuilder.GrantCouponsDesc>
+  <RimPrisonBuilder.ConfirmGrant>确认发放</RimPrisonBuilder.ConfirmGrant>
+</LanguageData>

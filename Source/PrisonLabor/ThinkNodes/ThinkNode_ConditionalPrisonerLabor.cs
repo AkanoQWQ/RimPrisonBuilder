@@ -1,7 +1,7 @@
 using Verse;
 using Verse.AI;
 
-namespace RimPrison.PrisonLabor.ThinkNodes
+namespace RimPrisonBuilder.PrisonLabor.ThinkNodes
 {
     // ThinkTree condition node
     // For prisoner, only activated when "Allow labor"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <RimPrison_TakeToCouponShop.reportString>taking TargetA to TargetB.</RimPrison_TakeToCouponShop.reportString>
-  <RimPrison_BuyFromCouponShop.reportString>buying from TargetA.</RimPrison_BuyFromCouponShop.reportString>
+  <RimPrisonBuilder_TakeToCouponShop.reportString>taking TargetA to TargetB.</RimPrisonBuilder_TakeToCouponShop.reportString>
+  <RimPrisonBuilder_BuyFromCouponShop.reportString>buying from TargetA.</RimPrisonBuilder_BuyFromCouponShop.reportString>
 </LanguageData>

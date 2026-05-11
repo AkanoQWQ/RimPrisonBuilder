@@ -1,9 +1,9 @@
 using HarmonyLib;
 using RimWorld;
 using Verse;
-using RimPrison.PrisonLabor;
+using RimPrisonBuilder.PrisonLabor;
 
-namespace RimPrison.Patches
+namespace RimPrisonBuilder.Patches
 {
     // The vanilla getter forces Anything for all prisoners
     // Let labor-enabled prisoners use their actual timetable instead.

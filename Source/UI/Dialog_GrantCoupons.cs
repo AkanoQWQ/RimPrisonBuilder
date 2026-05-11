@@ -1,9 +1,9 @@
 using UnityEngine;
 using Verse;
 using RimWorld;
-using RimPrison.PrisonLabor;
+using RimPrisonBuilder.PrisonLabor;
 
-namespace RimPrison.UI
+namespace RimPrisonBuilder.UI
 {
     // [UNREVIEWED] Haven't reviewed carefully
     public class Dialog_GrantCoupons : Window
@@ -20,7 +20,7 @@ namespace RimPrison.UI
             forcePause = true;
             closeOnClickedOutside = true;
             absorbInputAroundWindow = true;
-            optionalTitle = "RimPrison.GrantCouponsTitle".Translate(pawn.LabelShortCap);
+            optionalTitle = "RimPrisonBuilder.GrantCouponsTitle".Translate(pawn.LabelShortCap);
         }
 
         public override Vector2 InitialSize => new Vector2(320f, 240f);
@@ -30,7 +30,7 @@ namespace RimPrison.UI
             float y = inRect.y + 8f;
 
             Widgets.Label(new Rect(inRect.x, y, inRect.width, 30f),
-                "RimPrison.GrantCouponsDesc".Translate(RimPrisonMod.Settings.WorkCouponName));
+                "RimPrisonBuilder.GrantCouponsDesc".Translate(RimPrisonBuilderMod.Settings.WorkCouponName));
             y += 35f;
 
             // Number input
@@ -52,7 +52,7 @@ namespace RimPrison.UI
 
             // Confirm button
             Rect btnRect = new Rect(inRect.x + 40f, y, inRect.width - 80f, 35f);
-            if (Widgets.ButtonText(btnRect, "RimPrison.ConfirmGrant".Translate())
+            if (Widgets.ButtonText(btnRect, "RimPrisonBuilder.ConfirmGrant".Translate())
                 || (Event.current.type == EventType.KeyDown
                     && Event.current.keyCode == KeyCode.Return))
             {

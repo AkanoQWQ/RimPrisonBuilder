@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <RimPrison_CouponShop.label>粮票商店</RimPrison_CouponShop.label>
-  <RimPrison_CouponShop.description>囚犯可以花费粮票购买物品的商店。</RimPrison_CouponShop.description>
+  <RimPrisonBuilder_CouponShop.label>粮票商店</RimPrisonBuilder_CouponShop.label>
+  <RimPrisonBuilder_CouponShop.description>囚犯可以花费粮票购买物品的商店。</RimPrisonBuilder_CouponShop.description>
 </LanguageData>

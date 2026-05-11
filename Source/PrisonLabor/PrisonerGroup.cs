@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using RimWorld;
 using Verse;
 
-namespace RimPrison.PrisonLabor
+namespace RimPrisonBuilder.PrisonLabor
 {
     // [NOTE] I don't think AI wrote elegant code for PrisonerGroup and .Manager
     // Maybe reconstruct in the future, only for code cleanliness obsession

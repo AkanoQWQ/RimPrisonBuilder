@@ -1,9 +1,9 @@
 using UnityEngine;
 using Verse;
 
-namespace RimPrison
+namespace RimPrisonBuilder
 {
-    public class RimPrisonSettings : ModSettings
+    public class RimPrisonBuilderSettings : ModSettings
     {
         public string WorkCouponName = "WorkCoupon";
         public float CouponsPerHour = 1f;
@@ -20,12 +20,12 @@ namespace RimPrison
             Listing_Standard listing = new Listing_Standard();
             listing.Begin(inRect);
 
-            listing.Label("RimPrison.WorkCouponName".Translate());
+            listing.Label("RimPrisonBuilder.WorkCouponName".Translate());
             WorkCouponName = listing.TextEntry(WorkCouponName);
 
             listing.Gap(12f);
 
-            listing.Label("RimPrison.CouponsPerHour".Translate(CouponsPerHour.ToString("F1")));
+            listing.Label("RimPrisonBuilder.CouponsPerHour".Translate(CouponsPerHour.ToString("F1")));
             CouponsPerHour = listing.Slider(CouponsPerHour, 0.1f, 10f);
 
             listing.End();

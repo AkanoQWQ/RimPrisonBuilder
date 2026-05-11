@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using RimPrison.CouponShop;
-using RimPrison.DefOfs;
+using RimPrisonBuilder.CouponShop;
+using RimPrisonBuilder.DefOfs;
 using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.AI;
 
-namespace RimPrison.PrisonLabor
+namespace RimPrisonBuilder.PrisonLabor
 {
     public class WorkGiver_CouponShopStore : WorkGiver_Scanner
     {
@@ -89,7 +89,7 @@ namespace RimPrison.PrisonLabor
             {
                 return null;
             }
-            Job job = JobMaker.MakeJob(RP_JobDefOf.RimPrison_TakeToCouponShop, t, shop);
+            Job job = JobMaker.MakeJob(RP_JobDefOf.RimPrisonBuilder_TakeToCouponShop, t, shop);
             job.count = Mathf.Min(shopSpace, canCarry, t.stackCount);
             job.haulOpportunisticDuplicates = false;
             job.haulMode = HaulMode.ToCellNonStorage;
