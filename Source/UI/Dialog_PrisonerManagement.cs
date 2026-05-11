@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
@@ -31,8 +32,9 @@ namespace RimPrisonBuilder.UI
         private const float WorkColPadding = 8f;
         private const float SchedLabelWidth = 120f;
         private const float SchedSelectorHeight = 65f;
-        private const float PrisonerRowHeight = 28f;
+        private const float PrisonerRowHeight = 48f;
         private const float GroupButtonWidth = 140f;
+        private const float PortraitSize = 40f;
 
         private List<Pawn> PawnList =>
             Find.CurrentMap.mapPawns.PrisonersOfColony
@@ -83,9 +85,11 @@ namespace RimPrisonBuilder.UI
             else if (curTab == 2)
                 DrawPrisonerManageTab(contentRect);
             else if (curTab == 3)
-                DrawOutfitTab(contentRect);
+                DrawPoliciesTab(contentRect);
+            else if (curTab == 4)
+                DrawOverviewTab(contentRect);
             else
-                DrawDrugTab(contentRect);
+                DrawSettingsTab(contentRect);
         }
 
         // ======== Schedule tab (group-level) ========
@@ -342,26 +346,50 @@ namespace RimPrisonBuilder.UI
 
         private void DrawPrisonerRow(Rect rect, Pawn pawn)
         {
-            float nameWidth = 200f;
             float gap = 8f;
+            float midY = rect.y + (rect.height - PortraitSize) / 2f;
 
-            Rect nameRect = new Rect(rect.x, rect.y, nameWidth, rect.height);
-            Widgets.Label(nameRect, pawn.LabelShortCap);
+            // Portrait
+            Rect portraitRect = new Rect(rect.x + 4f, midY, PortraitSize, PortraitSize);
+            var portrait = PortraitsCache.Get(pawn, new Vector2(PortraitSize, PortraitSize), Rot4.South);
+            GUI.DrawTexture(portraitRect, portrait);
 
-            Rect groupRect = new Rect(rect.x + nameWidth + gap, rect.y + 2f,
-                GroupButtonWidth, rect.height - 4f);
+            // Name next to portrait
+            float nameX = portraitRect.xMax + 8f;
+            float nameWidth = 160f;
+            float nameY = rect.y + 4f;
+            Widgets.Label(new Rect(nameX, nameY, nameWidth, 20f), pawn.LabelShortCap);
+
+            // Age / life stage below name
+            Text.Font = GameFont.Tiny;
+            string stageLabel;
+            if (pawn.DevelopmentalStage.Baby())
+                stageLabel = "Baby";
+            else if (pawn.DevelopmentalStage.Child())
+                stageLabel = "Child";
+            else
+                stageLabel = "Adult";
+            Widgets.Label(new Rect(nameX, nameY + 20f, nameWidth, 16f),
+                pawn.ageTracker.AgeBiologicalYears + " · " + stageLabel);
+            Text.Font = GameFont.Small;
+
+            // Group button
+            float groupX = nameX + nameWidth + gap;
+            Rect groupRect = new Rect(groupX, rect.y + (rect.height - 28f) / 2f,
+                GroupButtonWidth, 28f);
             DrawGroupButton(groupRect, pawn);
 
+            // Coupon count
             var comp = pawn.TryGetComp<CompWorkTracker>();
             int coupons = comp?.earnedCoupons ?? 0;
-            float couponX = rect.x + nameWidth + GroupButtonWidth + gap * 2;
-            Rect couponRect = new Rect(couponX, rect.y, 200f, rect.height);
+            float couponX = groupX + GroupButtonWidth + gap;
+            Rect couponRect = new Rect(couponX, rect.y + (rect.height - 22f) / 2f, 200f, 22f);
             Widgets.Label(couponRect, RimPrisonBuilderMod.Settings.WorkCouponName + ": " + coupons);
 
             // Grant button
             float grantBtnW = 60f;
-            Rect grantRect = new Rect(couponX + 200f + gap, rect.y + 2f,
-                grantBtnW, rect.height - 4f);
+            Rect grantRect = new Rect(couponX + 200f + gap, rect.y + (rect.height - 28f) / 2f,
+                grantBtnW, 28f);
             if (Widgets.ButtonText(grantRect, "RimPrisonBuilder.GrantCoupons".Translate()))
             {
                 Find.WindowStack.Add(new Dialog_GrantCoupons(pawn));
@@ -409,14 +437,12 @@ namespace RimPrisonBuilder.UI
             Find.WindowStack.Add(new FloatMenu(options));
         }
 
-        // ======== Outfit tab (group-level) ========
+        // ======== Policies tab (outfit + drug, group-level) ========
 
         private const float PolicyRowHeight = 30f;
         private const float PolicyLabelWidth = 160f;
-        private const float PolicyDropdownWidth = 200f;
-        private const float PolicyManageBtnWidth = 80f;
 
-        private void DrawOutfitTab(Rect rect)
+        private void DrawPoliciesTab(Rect rect)
         {
             if (groupManager == null)
             {
@@ -433,26 +459,53 @@ namespace RimPrisonBuilder.UI
                 return;
             }
 
-            float viewHeight = groups.Count * PolicyRowHeight;
-            Rect viewRect = new Rect(0f, 0f, rect.width - 16f, viewHeight);
+            float manageBtnW = 44f;
+            float innerGap = 4f;       // between dropdown and its manage button
+            float colSpacing = 16f;    // between column pairs
+            float headerH = 24f;
+
+            // Three equal columns with spacing between them
+            float colAreaW = (rect.width - PolicyLabelWidth - 16f - colSpacing * 2f) / 3f;
+            float dropdownW = colAreaW - manageBtnW - innerGap;
+            // pairW = dropdownW + innerGap + manageBtnW = colAreaW exactly
+
+            float col0X = PolicyLabelWidth;
+            float col1X = PolicyLabelWidth + colAreaW + colSpacing;
+            float col2X = PolicyLabelWidth + (colAreaW + colSpacing) * 2f;
+
+            // Column headers
+            float headerY = rect.y;
+            Text.Font = GameFont.Small;
+            Text.Anchor = TextAnchor.MiddleCenter;
+            Widgets.Label(new Rect(col0X, headerY, colAreaW, headerH),
+                "RimPrisonBuilder.ApparelManagement".Translate());
+            Widgets.Label(new Rect(col1X, headerY, colAreaW, headerH),
+                "RimPrisonBuilder.DrugManagement".Translate());
+            Widgets.Label(new Rect(col2X, headerY, colAreaW, headerH),
+                "RimPrisonBuilder.FoodManagement".Translate());
+            Text.Anchor = TextAnchor.UpperLeft;
+            Text.Font = GameFont.Small;
+
+            float contentY = headerY + headerH + 4f;
+            float viewHeight = groups.Count * PolicyRowHeight + contentY;
+            Rect viewRect = new Rect(0f, 0f, rect.width - 16f, Math.Max(viewHeight, rect.height));
             Vector2 scrollPos = Vector2.zero;
             Widgets.BeginScrollView(rect, ref scrollPos, viewRect);
 
             for (int g = 0; g < groups.Count; g++)
             {
                 var group = groups[g];
-                float y = g * PolicyRowHeight;
+                float y = contentY + g * PolicyRowHeight;
 
                 Rect labelRect = new Rect(0f, y + 4f, PolicyLabelWidth, PolicyRowHeight);
                 Widgets.Label(labelRect, group.name);
 
-                // Dropdown button
-                Rect dropdownRect = new Rect(PolicyLabelWidth, y + 2f,
-                    PolicyDropdownWidth, PolicyRowHeight - 4f);
-                string currentLabel = group.apparelPolicy != null
+                // --- Outfit column ---
+                Rect outfitRect = new Rect(col0X, y + 2f, dropdownW, PolicyRowHeight - 4f);
+                string outfitLabel = group.apparelPolicy != null
                     ? group.apparelPolicy.label
                     : "RimPrisonBuilder.None".Translate();
-                if (Widgets.ButtonText(dropdownRect, currentLabel))
+                if (Widgets.ButtonText(outfitRect, outfitLabel))
                 {
                     List<FloatMenuOption> options = new List<FloatMenuOption>();
                     options.Add(new FloatMenuOption("RimPrisonBuilder.None".Translate(), delegate
@@ -472,58 +525,19 @@ namespace RimPrisonBuilder.UI
                     Find.WindowStack.Add(new FloatMenu(options));
                 }
 
-                // Manage button
-                Rect manageRect = new Rect(PolicyLabelWidth + PolicyDropdownWidth + 8f,
-                    y + 2f, PolicyManageBtnWidth, PolicyRowHeight - 4f);
-                if (Widgets.ButtonText(manageRect, "RimPrisonBuilder.Manage".Translate()))
+                Rect outfitManageRect = new Rect(col0X + dropdownW + innerGap, y + 2f,
+                    manageBtnW, PolicyRowHeight - 4f);
+                if (Widgets.ButtonText(outfitManageRect, "RimPrisonBuilder.Manage".Translate()))
                 {
-                    Find.WindowStack.Add(new Dialog_ManageApparelPolicies(
-                        group.apparelPolicy));
+                    Find.WindowStack.Add(new Dialog_ManageApparelPolicies(group.apparelPolicy));
                 }
-            }
 
-            Widgets.EndScrollView();
-        }
-
-        // ======== Drug tab (group-level) ========
-
-        private void DrawDrugTab(Rect rect)
-        {
-            if (groupManager == null)
-            {
-                groupManager = Find.CurrentMap.GetComponent<PrisonerGroupManager>();
-                if (groupManager == null) return;
-            }
-
-            var groups = groupManager.groups;
-            if (groups.Count == 0)
-            {
-                Text.Anchor = TextAnchor.MiddleCenter;
-                Widgets.Label(rect, "RimPrisonBuilder.NoGroups".Translate());
-                Text.Anchor = TextAnchor.UpperLeft;
-                return;
-            }
-
-            float viewHeight = groups.Count * PolicyRowHeight;
-            Rect viewRect = new Rect(0f, 0f, rect.width - 16f, viewHeight);
-            Vector2 scrollPos = Vector2.zero;
-            Widgets.BeginScrollView(rect, ref scrollPos, viewRect);
-
-            for (int g = 0; g < groups.Count; g++)
-            {
-                var group = groups[g];
-                float y = g * PolicyRowHeight;
-
-                Rect labelRect = new Rect(0f, y + 4f, PolicyLabelWidth, PolicyRowHeight);
-                Widgets.Label(labelRect, group.name);
-
-                // Dropdown button
-                Rect dropdownRect = new Rect(PolicyLabelWidth, y + 2f,
-                    PolicyDropdownWidth, PolicyRowHeight - 4f);
-                string currentLabel = group.drugPolicy != null
+                // --- Drug column ---
+                Rect drugRect = new Rect(col1X, y + 2f, dropdownW, PolicyRowHeight - 4f);
+                string drugLabel = group.drugPolicy != null
                     ? group.drugPolicy.label
                     : "RimPrisonBuilder.None".Translate();
-                if (Widgets.ButtonText(dropdownRect, currentLabel))
+                if (Widgets.ButtonText(drugRect, drugLabel))
                 {
                     List<FloatMenuOption> options = new List<FloatMenuOption>();
                     options.Add(new FloatMenuOption("RimPrisonBuilder.None".Translate(), delegate
@@ -543,17 +557,151 @@ namespace RimPrisonBuilder.UI
                     Find.WindowStack.Add(new FloatMenu(options));
                 }
 
-                // Manage button
-                Rect manageRect = new Rect(PolicyLabelWidth + PolicyDropdownWidth + 8f,
-                    y + 2f, PolicyManageBtnWidth, PolicyRowHeight - 4f);
-                if (Widgets.ButtonText(manageRect, "RimPrisonBuilder.Manage".Translate()))
+                Rect drugManageRect = new Rect(col1X + dropdownW + innerGap, y + 2f,
+                    manageBtnW, PolicyRowHeight - 4f);
+                if (Widgets.ButtonText(drugManageRect, "RimPrisonBuilder.Manage".Translate()))
                 {
-                    Find.WindowStack.Add(new Dialog_ManageDrugPolicies(
-                        group.drugPolicy));
+                    Find.WindowStack.Add(new Dialog_ManageDrugPolicies(group.drugPolicy));
                 }
+
+                // --- Food column (placeholder) ---
+                RPR_UiStyle.DrawMutedLabel(new Rect(col2X + 4f, y + 6f, colAreaW - 8f, 20f),
+                    "RimPrisonBuilder.TodoNoLogic".Translate());
             }
 
             Widgets.EndScrollView();
+        }
+
+        // ======== Overview tab ========
+
+        private void DrawOverviewTab(Rect rect)
+        {
+            if (groupManager == null)
+            {
+                groupManager = Find.CurrentMap.GetComponent<PrisonerGroupManager>();
+                if (groupManager == null) return;
+            }
+
+            var map = Find.CurrentMap;
+            var prisoners = map.mapPawns.PrisonersOfColony;
+            int adultCount = 0, childCount = 0, babyCount = 0;
+            foreach (var p in prisoners)
+            {
+                if (!p.IsLaborEnabled()) continue;
+                if (p.DevelopmentalStage.Baby()) babyCount++;
+                else if (p.DevelopmentalStage.Child()) childCount++;
+                else adultCount++;
+            }
+            int total = adultCount + childCount + babyCount;
+
+            float colW = (rect.width - 24f) / 2f;
+            float rowH = 180f;
+            float gap = 12f;
+
+            // Population card
+            Rect popRect = new Rect(rect.x, rect.y, colW, rowH);
+            RPR_UiStyle.DrawSubPanel(popRect);
+            var popInner = popRect.ContractedBy(10f);
+            RPR_UiStyle.DrawSectionTitle(new Rect(popInner.x, popInner.y, popInner.width, 22f), "RimPrisonBuilder.Population".Translate());
+            Text.Font = GameFont.Medium;
+            Text.Anchor = TextAnchor.MiddleCenter;
+            Widgets.Label(new Rect(popInner.x, popInner.y + 28f, popInner.width, 36f), total.ToString());
+            Text.Font = GameFont.Small;
+            Text.Anchor = TextAnchor.UpperLeft;
+            Widgets.Label(new Rect(popInner.x, popInner.y + 70f, popInner.width, 22f), "RimPrisonBuilder.AdultCount".Translate(adultCount.ToString()));
+            Widgets.Label(new Rect(popInner.x, popInner.y + 96f, popInner.width, 22f), "RimPrisonBuilder.ChildCount".Translate(childCount.ToString()));
+            Widgets.Label(new Rect(popInner.x, popInner.y + 122f, popInner.width, 22f), "RimPrisonBuilder.BabyCount".Translate(babyCount.ToString()));
+
+            // Suppression placeholder
+            Rect suppRect = new Rect(rect.x + colW + gap, rect.y, colW, rowH);
+            RPR_UiStyle.DrawSubPanel(suppRect);
+            var suppInner = suppRect.ContractedBy(10f);
+            RPR_UiStyle.DrawSectionTitle(new Rect(suppInner.x, suppInner.y, suppInner.width, 22f), "RimPrisonBuilder.Suppression".Translate());
+            // [TODO] NO LOGIC — suppression formula and snapshot not implemented yet
+            Text.Font = GameFont.Small;
+            Text.Anchor = TextAnchor.MiddleCenter;
+            RPR_UiStyle.DrawMutedLabel(new Rect(suppInner.x, suppInner.y + 40f, suppInner.width, 80f), "RimPrisonBuilder.SuppressionPlaceholder".Translate());
+            Text.Anchor = TextAnchor.UpperLeft;
+            Text.Font = GameFont.Small;
+
+            // Activity log — full width below the top row
+            float secondRowY = rect.y + rowH + gap;
+            float secondRowH = rect.height - rowH - gap;
+            Rect logRect = new Rect(rect.x, secondRowY, rect.width, secondRowH);
+            RPR_UiStyle.DrawSubPanel(logRect);
+            var logInner = logRect.ContractedBy(10f);
+            RPR_UiStyle.DrawSectionTitle(new Rect(logInner.x, logInner.y, logInner.width, 22f), "RimPrisonBuilder.ActivityLog".Translate());
+            RPR_UiStyle.DrawMutedLabel(new Rect(logInner.x, logInner.y + 32f, logInner.width, 60f), "RimPrisonBuilder.ActivityLogPlaceholder".Translate());
+        }
+
+        // ======== Settings tab ========
+
+        private void DrawSettingsTab(Rect rect)
+        {
+            // [TODO] NO LOGIC — most settings not implemented yet
+            RPR_UiStyle.DrawSubPanel(rect);
+            var inner = rect.ContractedBy(12f);
+            RPR_UiStyle.DrawSectionTitle(new Rect(inner.x, inner.y, inner.width, 24f), "RimPrisonBuilder.Settings".Translate());
+
+            float y = inner.y + 32f;
+            float colW = (inner.width - 12f) / 2f;
+
+            // Left column — currency name (wired up to our settings)
+            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrisonBuilder.CurrencyName".Translate());
+            string currencyBuf = RimPrisonBuilderMod.Settings.WorkCouponName;
+            currencyBuf = Widgets.TextField(new Rect(inner.x + 144f, y, 120f, 24f), currencyBuf);
+            if (currencyBuf != RimPrisonBuilderMod.Settings.WorkCouponName)
+            {
+                RimPrisonBuilderMod.Settings.WorkCouponName = currencyBuf;
+                RimPrisonBuilderMod.Settings.Write();
+            }
+
+            y += 30f;
+            // [TODO] NO LOGIC — ransom price
+            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrisonBuilder.RansomPrice".Translate());
+            RPR_UiStyle.DrawMutedLabel(new Rect(inner.x + 144f, y, 200f, 24f), "RimPrisonBuilder.TodoNoLogic".Translate());
+
+            y += 30f;
+            // [TODO] NO LOGIC — payroll delivery mode
+            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrisonBuilder.PayrollMode".Translate());
+            RPR_UiStyle.DrawMutedLabel(new Rect(inner.x + 144f, y, 200f, 24f), "RimPrisonBuilder.TodoNoLogic".Translate());
+
+            y += 30f;
+            // Daily allowance (already implemented)
+            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrisonBuilder.DailyAllowance".Translate());
+            string buf = RimPrisonBuilderMod.Settings.DailyAllowance.ToString();
+            buf = Widgets.TextField(new Rect(inner.x + 144f, y, 60f, 24f), buf);
+            if (int.TryParse(buf, out int val) && val >= 0 && val <= 9999 && val != RimPrisonBuilderMod.Settings.DailyAllowance)
+            {
+                RimPrisonBuilderMod.Settings.DailyAllowance = val;
+                RimPrisonBuilderMod.Settings.Write();
+            }
+
+            y += 36f;
+            // [TODO] NO LOGIC — debt harvest config
+            RPR_UiStyle.DrawSectionTitle(new Rect(inner.x, y, inner.width, 24f), "RimPrisonBuilder.DebtHarvest".Translate());
+            y += 28f;
+            RPR_UiStyle.DrawMutedLabel(new Rect(inner.x, y, inner.width, 20f), "RimPrisonBuilder.TodoNoLogic".Translate());
+
+            // Right column — global status summary
+            float rightCol = inner.x + colW + 12f;
+            float rightY = inner.y + 32f;
+            RPR_UiStyle.DrawSectionTitle(new Rect(rightCol, rightY, colW, 24f), "RimPrisonBuilder.GlobalStatus".Translate());
+
+            var map = Find.CurrentMap;
+            var prisoners = map.mapPawns.PrisonersOfColony;
+            int labCount = 0;
+            foreach (var p in prisoners)
+            {
+                if (p.IsLaborEnabled()) labCount++;
+            }
+
+            rightY += 28f;
+            Widgets.Label(new Rect(rightCol, rightY, colW, 22f), "RimPrisonBuilder.TotalPrisoners".Translate(prisoners.Count.ToString()));
+            rightY += 24f;
+            Widgets.Label(new Rect(rightCol, rightY, colW, 22f), "RimPrisonBuilder.LaborEnabledCount".Translate(labCount.ToString()));
+            rightY += 24f;
+            Widgets.Label(new Rect(rightCol, rightY, colW, 22f), "RimPrisonBuilder.GroupCount".Translate(groupManager.groups.Count.ToString()));
         }
 
         // ======== Helpers ========
@@ -581,10 +729,12 @@ namespace RimPrisonBuilder.UI
                     delegate { curTab = 1; }, () => curTab == 1),
                 new TabRecord("RimPrisonBuilder.PrisonerManageTab".Translate(),
                     delegate { curTab = 2; }, () => curTab == 2),
-                new TabRecord("RimPrisonBuilder.OutfitTab".Translate(),
+                new TabRecord("RimPrisonBuilder.PoliciesTab".Translate(),
                     delegate { curTab = 3; }, () => curTab == 3),
-                new TabRecord("RimPrisonBuilder.DrugTab".Translate(),
-                    delegate { curTab = 4; }, () => curTab == 4)
+                new TabRecord("RimPrisonBuilder.OverviewTab".Translate(),
+                    delegate { curTab = 4; }, () => curTab == 4),
+                new TabRecord("RimPrisonBuilder.SettingsTab".Translate(),
+                    delegate { curTab = 5; }, () => curTab == 5)
             };
         }
     }

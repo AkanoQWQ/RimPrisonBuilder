@@ -27,6 +27,36 @@
   <RimPrisonBuilder.DailyAllowance>每日低保（粮票/天，0=关闭）</RimPrisonBuilder.DailyAllowance>
   <RimPrisonBuilder.OutfitTab>服装</RimPrisonBuilder.OutfitTab>
   <RimPrisonBuilder.DrugTab>成瘾品</RimPrisonBuilder.DrugTab>
+  <RimPrisonBuilder.PoliciesTab>策略</RimPrisonBuilder.PoliciesTab>
+  <RimPrisonBuilder.ApparelManagement>服装管理</RimPrisonBuilder.ApparelManagement>
+  <RimPrisonBuilder.DrugManagement>成瘾品管理</RimPrisonBuilder.DrugManagement>
   <RimPrisonBuilder.None>无</RimPrisonBuilder.None>
   <RimPrisonBuilder.Manage>管理...</RimPrisonBuilder.Manage>
+  <!-- Overview tab -->
+  <RimPrisonBuilder.OverviewTab>总览</RimPrisonBuilder.OverviewTab>
+  <RimPrisonBuilder.Population>囚犯人数</RimPrisonBuilder.Population>
+  <RimPrisonBuilder.AdultCount>成人: {0}</RimPrisonBuilder.AdultCount>
+  <RimPrisonBuilder.ChildCount>儿童: {0}</RimPrisonBuilder.ChildCount>
+  <RimPrisonBuilder.BabyCount>婴儿: {0}</RimPrisonBuilder.BabyCount>
+  <RimPrisonBuilder.Suppression>压制度</RimPrisonBuilder.Suppression>
+  <RimPrisonBuilder.SuppressionPlaceholder>压制度系统尚未实现。\n将显示压制度弧形图、越狱风险等。</RimPrisonBuilder.SuppressionPlaceholder>
+  <RimPrisonBuilder.SchedulePreview>日程预览（第一组）</RimPrisonBuilder.SchedulePreview>
+  <RimPrisonBuilder.ActivityLog>活动日志</RimPrisonBuilder.ActivityLog>
+  <RimPrisonBuilder.ActivityLogPlaceholder>活动日志尚未实现。\n将显示囚犯近期事件记录。</RimPrisonBuilder.ActivityLogPlaceholder>
+  <!-- Food tab -->
+  <RimPrisonBuilder.FoodTab>食物</RimPrisonBuilder.FoodTab>
+  <RimPrisonBuilder.FoodManagement>食物管理</RimPrisonBuilder.FoodManagement>
+  <RimPrisonBuilder.FoodPlaceholder>食物管理系统尚未实现。\n将允许配置四档餐标（福利/婴儿/标准/精致），每档可设置食物白名单和价格。</RimPrisonBuilder.FoodPlaceholder>
+  <!-- Settings tab -->
+  <RimPrisonBuilder.SettingsTab>设置</RimPrisonBuilder.SettingsTab>
+  <RimPrisonBuilder.Settings>设置</RimPrisonBuilder.Settings>
+  <RimPrisonBuilder.CurrencyName>货币名称</RimPrisonBuilder.CurrencyName>
+  <RimPrisonBuilder.RansomPrice>赎身价格</RimPrisonBuilder.RansomPrice>
+  <RimPrisonBuilder.PayrollMode>工资发放模式</RimPrisonBuilder.PayrollMode>
+  <RimPrisonBuilder.DebtHarvest>器官抵债</RimPrisonBuilder.DebtHarvest>
+  <RimPrisonBuilder.GlobalStatus>全局状态</RimPrisonBuilder.GlobalStatus>
+  <RimPrisonBuilder.TotalPrisoners>囚犯总数: {0}</RimPrisonBuilder.TotalPrisoners>
+  <RimPrisonBuilder.LaborEnabledCount>劳动启用: {0}</RimPrisonBuilder.LaborEnabledCount>
+  <RimPrisonBuilder.GroupCount>分组数量: {0}</RimPrisonBuilder.GroupCount>
+  <RimPrisonBuilder.TodoNoLogic>[TODO] 尚未实现</RimPrisonBuilder.TodoNoLogic>
 </LanguageData>

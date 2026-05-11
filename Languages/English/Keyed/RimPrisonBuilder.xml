@@ -27,6 +27,36 @@
   <RimPrisonBuilder.DailyAllowance>Daily allowance (coupons per day, 0=off)</RimPrisonBuilder.DailyAllowance>
   <RimPrisonBuilder.OutfitTab>Outfit</RimPrisonBuilder.OutfitTab>
   <RimPrisonBuilder.DrugTab>Drug</RimPrisonBuilder.DrugTab>
+  <RimPrisonBuilder.PoliciesTab>Policies</RimPrisonBuilder.PoliciesTab>
+  <RimPrisonBuilder.ApparelManagement>Clothing</RimPrisonBuilder.ApparelManagement>
+  <RimPrisonBuilder.DrugManagement>Drugs</RimPrisonBuilder.DrugManagement>
   <RimPrisonBuilder.None>None</RimPrisonBuilder.None>
   <RimPrisonBuilder.Manage>Manage...</RimPrisonBuilder.Manage>
+  <!-- Overview tab -->
+  <RimPrisonBuilder.OverviewTab>Overview</RimPrisonBuilder.OverviewTab>
+  <RimPrisonBuilder.Population>Population</RimPrisonBuilder.Population>
+  <RimPrisonBuilder.AdultCount>Adult: {0}</RimPrisonBuilder.AdultCount>
+  <RimPrisonBuilder.ChildCount>Child: {0}</RimPrisonBuilder.ChildCount>
+  <RimPrisonBuilder.BabyCount>Baby: {0}</RimPrisonBuilder.BabyCount>
+  <RimPrisonBuilder.Suppression>Suppression</RimPrisonBuilder.Suppression>
+  <RimPrisonBuilder.SuppressionPlaceholder>Suppression system not yet implemented.\nWill show suppression arc chart, break risk, etc.</RimPrisonBuilder.SuppressionPlaceholder>
+  <RimPrisonBuilder.SchedulePreview>Schedule Preview (Group 1)</RimPrisonBuilder.SchedulePreview>
+  <RimPrisonBuilder.ActivityLog>Activity Log</RimPrisonBuilder.ActivityLog>
+  <RimPrisonBuilder.ActivityLogPlaceholder>Activity log not yet implemented.\nWill show recent prisoner events here.</RimPrisonBuilder.ActivityLogPlaceholder>
+  <!-- Food tab -->
+  <RimPrisonBuilder.FoodTab>Food</RimPrisonBuilder.FoodTab>
+  <RimPrisonBuilder.FoodManagement>Food Management</RimPrisonBuilder.FoodManagement>
+  <RimPrisonBuilder.FoodPlaceholder>Food management not yet implemented.\nWill allow configuring 4 meal tiers (Welfare/Baby/Standard/Fine) with per-tier food whitelist and pricing.</RimPrisonBuilder.FoodPlaceholder>
+  <!-- Settings tab -->
+  <RimPrisonBuilder.SettingsTab>Settings</RimPrisonBuilder.SettingsTab>
+  <RimPrisonBuilder.Settings>Settings</RimPrisonBuilder.Settings>
+  <RimPrisonBuilder.CurrencyName>Currency Name</RimPrisonBuilder.CurrencyName>
+  <RimPrisonBuilder.RansomPrice>Ransom Price</RimPrisonBuilder.RansomPrice>
+  <RimPrisonBuilder.PayrollMode>Payroll Mode</RimPrisonBuilder.PayrollMode>
+  <RimPrisonBuilder.DebtHarvest>Debt Harvest</RimPrisonBuilder.DebtHarvest>
+  <RimPrisonBuilder.GlobalStatus>Global Status</RimPrisonBuilder.GlobalStatus>
+  <RimPrisonBuilder.TotalPrisoners>Total prisoners: {0}</RimPrisonBuilder.TotalPrisoners>
+  <RimPrisonBuilder.LaborEnabledCount>Labor enabled: {0}</RimPrisonBuilder.LaborEnabledCount>
+  <RimPrisonBuilder.GroupCount>Groups: {0}</RimPrisonBuilder.GroupCount>
+  <RimPrisonBuilder.TodoNoLogic>[TODO] Not implemented yet</RimPrisonBuilder.TodoNoLogic>
 </LanguageData>
