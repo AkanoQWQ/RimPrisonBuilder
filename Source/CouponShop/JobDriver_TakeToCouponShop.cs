@@ -31,18 +31,25 @@ namespace RimPrisonBuilder.CouponShop
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            this.FailOnDespawnedOrNull(ItemInd);
             this.FailOnDespawnedOrNull(ShopInd);
+            this.FailOn(() => Item == null || Item.Destroyed);
             this.FailOn(() => !Shop.Accepts(Item));
             this.FailOn(() => !Shop.HasSpace);
             this.FailOn(() => pawn.carryTracker.AvailableStackSpace(Item.def) == 0);
 
             // Goto item and pickup item
-            // IMPORTANT: Use custom StartCarry to fix 10-job bug here
-            // This avoid FailOnSomeonePhysicallyInteracting of Toils_Haul.StartCarryThing
-            // Which leads to infinite job-loop
-            // [TODO] Completely fix 10-job bug (Still appears sometimes)
             yield return Toils_Goto.GotoThing(ItemInd, PathEndMode.ClosestTouch);
+            // Use custom StartCarry instead of Toils_Haul.StartCarryThing
+            // 10-job bug root cause:
+            //   FailOnDespawnedOrNull triggers when SplitOff takes the ENTIRE stack
+            //   (count == stackCount), because the returned Thing enters carryTracker
+            //   and becomes Despawned from the map grid. This causes the job to
+            //   fail, pawn drops the item, and TryFindAndStartJob creates the same
+            //   job again — looping 10x until TryStartErrorRecoverJob intervenes.
+            // Fix:
+            //   Replace FailOnDespawnedOrNull with Destroyed check above. An item
+            //   in carryTracker is Despawned but NOT Destroyed, so the job
+            //   survives the pickup-to-deposit transition.
             yield return StartCarry(ItemInd);
             // Goto shop interaction cell
             yield return Toils_Goto.GotoCell(ShopInd, PathEndMode.InteractionCell);
