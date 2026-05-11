@@ -20,7 +20,7 @@
           Note: vanilla checks apparel2.IsInAnyStorage()
           lothes must be in a storage zone 
         -->
-        <li Class="JobGiver_OptimizeApparel" />
+        <li Class="RimPrison.PrisonLabor.JobGiver_Prisoner_OptimizeApparel" />
         <li Class="ThinkNode_PrioritySorter">
           <subNodes>
             <li Class="JobGiver_GetRest" />

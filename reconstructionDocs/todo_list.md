@@ -31,7 +31,6 @@
 🔴 婴儿保育路由 — 婴儿喂食/安置/穿衣 Job 路由到囚犯保育员
 ✅ 日程覆写 — 通过 ApplyGroupSettings 直接写 timetable，无需 Patch
 🟡 工作类型解锁 — 囚犯年龄/背景不能禁用工作类型
-🔴 PrisonerDied 心情 — 制度相关心情注入
 
 ## 3. 数据模型 (ThingComp / GameComponent)
 
@@ -72,7 +71,6 @@
 🔴 每日发放 — 自动/狱卒发放，先抵债再入账
 🔴 每日费用 — 食物 8 + 床位 4/威慑 + 放风 3/高压
 🔴 赎身系统 — 余额达标→自动发信→接受扣钱释放 / 拒绝两次施加绝望
-🔴 器官扺债 — 自动/手动，token 部位匹配，抵债 100 + 发奖励
 ✅ 粮票系统 — CouponShop 体系（已有且独立）
 ✅ 粮票发放 — `Dialog_GrantCoupons` + `GameComponent_DailyAllowance`
 
@@ -87,28 +85,26 @@
 🔴 越狱阈值 — 压制度 < 阈值(30/35/20) → 允许
 🔴 炮塔威胁判断 — 精神崩溃/越狱/低压制度 → 炮塔对囚犯视为威胁
 
-## 8. 意识形态
-
-## 9. 逮捕 / 入监
+## 8. 逮捕 / 入监
 
 🔴 批量逮捕设计器 — 框选逮捕
 🔴 逮捕 JobDriver — 成人→押到 prison cell / 婴儿→押到婴儿床
 🔴 商队囚犯入监 — 押送→监狱区域→完成登记
 🔴 入监心情 — 殖民者看到新囚犯的心情
 
-## 10. 门禁
+## 9. 门禁
 
 🔴 9 分组权限 — 殖民者/狱卒/奴隶/囚犯/商队/访客/敌队/儿童/机械体
 🔴 门控 Gizmo — 右击门设置权限
 🔴 门信息面板 — 显示当前门的权限摘要
 
-## 11. UI
+## 10. UI
 
 ✅ 主窗口框架 — `Dialog_PrisonerManagement`，6 tab（日程/工作/囚犯管理/策略/总览/设置）
 ✅ UI 配色常量 — `RPR_UiStyle.cs`，颜色常量 + DrawPanel/DrawSubPanel 等
 🟡 总览页 — 人口统计(真实) + 压制度(占位) + 活动日志(占位)
 ✅ 囚犯管理页 — per-pawn 卡片：头像+年龄·阶段+分组+粮票+发放按钮
-🟡 工作安排页 — 组级工作矩阵
+🟡 工作安排页 — 组级工作矩阵，缺少单个工作的工资设置
 ✅ 食物管理页 — 用原版 FoodPolicy 替代，集成到策略页
 ✅ 成瘾品页 — 用原版 DrugPolicy，集成到策略页
 ✅ 服装管理页 — 用原版 ApparelPolicy，集成到策略页
@@ -119,7 +115,7 @@
 ✅ FloatMenu 下拉 — 分组选择、策略选择均用 FloatMenu
 🔴 窗口布局工具 — 列宽/列数自适应计算
 
-## 12. XML Def
+## 11. XML Def
 
 ✅ ThinkTreeDef（劳动）
 ✅ PrisonerInteractionModeDef — AllowLabor
@@ -137,7 +133,7 @@
 🔴 WorkTypeDef — RPR_Guardianship
 🔴 AreaDef — Area_PrisonReset
 
-## 13. 扩展 API
+## 12. 扩展 API
 
 🔴 接口定义 — 8 个扩展接口（WorkEligibility/WorkEfficiency/LaborJob/BabyFood/BabySpecialFood/FoodEffect/Mood/Precept）
 🔴 注册/注销 — Register/Unregister 模式
@@ -147,15 +143,17 @@
 🔴 RimPrisonFinanceApi
 🔴 RimPrisonStateApi
 
-## 14.非首个发布版内容的内容
+## 13.非首个发布版内容的内容
 
 🗑️ Meme 支持 — `RPR_PrisonMeme`，需要 XML + DefOf
 🗑️ 制度 Precept — 3 个 Precept（高压/威慑/平等）
 🗑️ 典狱长 Precept — `RPR_WardenSystem_Enabled`
 🗑️ 文化同步 — 从 Ideology 读取→覆盖配置
 🗑️ 囚犯心情 ThoughtWorker — 7 个 ThoughtWorker + 1 个 ThoughtSituational
+🗑️ 器官扺债 — 自动/手动，token 部位匹配，抵债 100 + 发奖励 （加入拓展包内）
+🗑️ PrisonerDied 心情 — 制度相关心情注入
 
-## 15.与新机制不符，删掉的内容
+## 14.与新机制不符，删掉的内容
 
 🗑️ 进食扣费 — 需要 Patch `Thing.Ingested`，囚犯吃东西自动扣余额（我们使用商店购物机制，不需要自动扣费）
 
