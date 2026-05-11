@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <RimPrisonBuilder_CouponShopStore.label>stock coupon shop</RimPrisonBuilder_CouponShopStore.label>
-  <RimPrisonBuilder_CouponShopStore.gerund>stocking coupon shop</RimPrisonBuilder_CouponShopStore.gerund>
-  <RimPrisonBuilder_CouponShopStore.verb>stock</RimPrisonBuilder_CouponShopStore.verb>
+  <RimPrison_CouponShopStore.label>stock coupon shop</RimPrison_CouponShopStore.label>
+  <RimPrison_CouponShopStore.gerund>stocking coupon shop</RimPrison_CouponShopStore.gerund>
+  <RimPrison_CouponShopStore.verb>stock</RimPrison_CouponShopStore.verb>
 </LanguageData>

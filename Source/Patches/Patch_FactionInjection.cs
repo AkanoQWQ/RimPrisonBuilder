@@ -5,9 +5,9 @@ using HarmonyLib;
 using RimWorld;
 using Verse;
 using Verse.AI;
-using RimPrisonBuilder.PrisonLabor;
+using RimPrison.PrisonLabor;
 
-namespace RimPrisonBuilder.Patches
+namespace RimPrison.Patches
 {
     // Replace pawn.Faction getter in work scanning paths with GetWorkFaction,
     // which returns Faction.OfPlayer for labor-enabled prisoners.

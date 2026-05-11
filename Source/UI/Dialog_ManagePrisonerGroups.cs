@@ -1,9 +1,9 @@
 using System;
-using RimPrisonBuilder.PrisonLabor;
+using RimPrison.PrisonLabor;
 using UnityEngine;
 using Verse;
 
-namespace RimPrisonBuilder.UI
+namespace RimPrison.UI
 {
     // [UNREVIEWED] Haven't reviewed carefully
     public class Dialog_ManagePrisonerGroups : Window
@@ -18,7 +18,7 @@ namespace RimPrisonBuilder.UI
             forcePause = true;
             closeOnClickedOutside = true;
             absorbInputAroundWindow = true;
-            optionalTitle = "RimPrisonBuilder.ManagePrisonerGroups".Translate();
+            optionalTitle = "RimPrison.ManagePrisonerGroups".Translate();
         }
 
         public override Vector2 InitialSize => new Vector2(500f, 400f);
@@ -36,9 +36,9 @@ namespace RimPrisonBuilder.UI
                 listing.Gap(4f);
             }
 
-            if (listing.ButtonText("RimPrisonBuilder.NewGroup".Translate()))
+            if (listing.ButtonText("RimPrison.NewGroup".Translate()))
             {
-                string name = "RimPrisonBuilder.DefaultGroupName".Translate() + " " + (manager.groups.Count + 1);
+                string name = "RimPrison.DefaultGroupName".Translate() + " " + (manager.groups.Count + 1);
                 manager.groups.Add(new PrisonerGroup(name));
             }
 
@@ -69,7 +69,7 @@ namespace RimPrisonBuilder.UI
             if (Widgets.ButtonImage(deleteRect, TexButton.Delete))
             {
                 Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(
-                    "RimPrisonBuilder.DeleteGroupConfirm".Translate(group.name),
+                    "RimPrison.DeleteGroupConfirm".Translate(group.name),
                     delegate
                     {
                         // Move all pawns in this group out before removing

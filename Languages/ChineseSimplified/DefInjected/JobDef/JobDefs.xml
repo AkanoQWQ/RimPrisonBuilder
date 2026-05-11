@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <RimPrisonBuilder_TakeToCouponShop.reportString>正在将 TargetA 搬运到 TargetB。</RimPrisonBuilder_TakeToCouponShop.reportString>
-  <RimPrisonBuilder_BuyFromCouponShop.reportString>正在从 TargetA 购买物品。</RimPrisonBuilder_BuyFromCouponShop.reportString>
+  <RimPrison_TakeToCouponShop.reportString>正在将 TargetA 搬运到 TargetB。</RimPrison_TakeToCouponShop.reportString>
+  <RimPrison_BuyFromCouponShop.reportString>正在从 TargetA 购买物品。</RimPrison_BuyFromCouponShop.reportString>
 </LanguageData>

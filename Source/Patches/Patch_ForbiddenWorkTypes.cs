@@ -2,7 +2,7 @@ using HarmonyLib;
 using RimWorld;
 using Verse;
 
-namespace RimPrisonBuilder.Patches
+namespace RimPrison.Patches
 {
     // Prisoners should never do Warden or Hunting work.
     [HarmonyPatch(typeof(Pawn_WorkSettings), nameof(Pawn_WorkSettings.SetPriority))]

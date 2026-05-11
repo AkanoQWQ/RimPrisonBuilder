@@ -1,10 +1,10 @@
 using HarmonyLib;
-using RimPrisonBuilder.PrisonLabor;
+using RimPrison.PrisonLabor;
 using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace RimPrisonBuilder.Patches
+namespace RimPrison.Patches
 {
     [HarmonyPatch(typeof(JobDriver), nameof(JobDriver.DriverTick))]
     public static class Patch_WorkTickTracker

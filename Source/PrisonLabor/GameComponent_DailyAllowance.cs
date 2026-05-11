@@ -1,7 +1,7 @@
 using RimWorld;
 using Verse;
 
-namespace RimPrisonBuilder.PrisonLabor
+namespace RimPrison.PrisonLabor
 {
     // Grants daily coupon allowance to all prisoners at midnight (hour 0).
     // Uses day-boundary detection so it fires at most once per in-game day.
@@ -16,7 +16,7 @@ namespace RimPrisonBuilder.PrisonLabor
         {
             base.GameComponentTick();
 
-            int allowance = RimPrisonBuilderMod.Settings.DailyAllowance;
+            int allowance = RimPrisonMod.Settings.DailyAllowance;
             if (allowance <= 0) return;
 
             int currentDay = Find.TickManager.TicksGame / GenDate.TicksPerDay;

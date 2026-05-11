@@ -3,7 +3,7 @@
 
   <!-- Prisoner interaction mode: allow labor -->
   <PrisonerInteractionModeDef>
-    <defName>RimPrisonBuilder_AllowLabor</defName>
+    <defName>RimPrison_AllowLabor</defName>
     <label>Allow labor</label>
     <listOrder>5</listOrder>
     <isNonExclusiveInteraction>true</isNonExclusiveInteraction>
@@ -11,10 +11,10 @@
 
   <!-- Inject prisoner labor ThinkTree -->
   <ThinkTreeDef>
-    <defName>RimPrisonBuilder_PrisonerLabor</defName>
+    <defName>RimPrison_PrisonerLabor</defName>
     <insertTag>Humanlike_PostDuty</insertTag>
     <insertPriority>80</insertPriority>
-    <thinkRoot Class="RimPrisonBuilder.PrisonLabor.ThinkNodes.ThinkNode_ConditionalPrisonerLabor">
+    <thinkRoot Class="RimPrison.PrisonLabor.ThinkNodes.ThinkNode_ConditionalPrisonerLabor">
       <subNodes>
         <!--
           Note: vanilla checks apparel2.IsInAnyStorage()
@@ -27,7 +27,7 @@
             <li Class="JobGiver_GetFood" />
             <li Class="JobGiver_SatisfyChemicalNeed" />
             <li Class="JobGiver_TakeDrugsForDrugPolicy" />
-            <li Class="RimPrisonBuilder.PrisonLabor.JobGiver_CouponShopBuy" />
+            <li Class="RimPrison.PrisonLabor.JobGiver_CouponShopBuy" />
             <li Class="JobGiver_Work" />
             <li Class="ThinkNode_Priority_GetJoy">
               <subNodes>
@@ -43,18 +43,18 @@
 
   <!-- Prisoner management tab -->
   <MainButtonDef>
-    <defName>RimPrisonBuilder_Prisoners</defName>
+    <defName>RimPrison_Prisoners</defName>
     <label>Prisoners</label>
-    <tabWindowClass>RimPrisonBuilder.UI.MainTabWindow_Prisoners</tabWindowClass>
+    <tabWindowClass>RimPrison.UI.MainTabWindow_Prisoners</tabWindowClass>
     <order>45</order>
   </MainButtonDef>
 
   <!-- WorkGiver: colonists deliver items to coupon shop -->
   <WorkGiverDef>
-    <defName>RimPrisonBuilder_CouponShopStore</defName>
+    <defName>RimPrison_CouponShopStore</defName>
     <label>stock coupon shop</label>
     <gerund>stocking coupon shop</gerund>
-    <giverClass>RimPrisonBuilder.PrisonLabor.WorkGiver_CouponShopStore</giverClass>
+    <giverClass>RimPrison.PrisonLabor.WorkGiver_CouponShopStore</giverClass>
     <priorityInType>10</priorityInType>
     <requiredCapacities>
       <li>Manipulation</li>
@@ -65,16 +65,16 @@
 
   <!-- Job: colonist delivers item to coupon shop -->
   <JobDef>
-    <defName>RimPrisonBuilder_TakeToCouponShop</defName>
-    <driverClass>RimPrisonBuilder.CouponShop.JobDriver_TakeToCouponShop</driverClass>
+    <defName>RimPrison_TakeToCouponShop</defName>
+    <driverClass>RimPrison.CouponShop.JobDriver_TakeToCouponShop</driverClass>
     <reportString>taking TargetA to TargetB.</reportString>
     <suspendable>false</suspendable>
   </JobDef>
 
   <!-- Job: prisoner buys item from coupon shop -->
   <JobDef>
-    <defName>RimPrisonBuilder_BuyFromCouponShop</defName>
-    <driverClass>RimPrisonBuilder.CouponShop.JobDriver_BuyFromCouponShop</driverClass>
+    <defName>RimPrison_BuyFromCouponShop</defName>
+    <driverClass>RimPrison.CouponShop.JobDriver_BuyFromCouponShop</driverClass>
     <reportString>buying from TargetA.</reportString>
     <suspendable>false</suspendable>
   </JobDef>

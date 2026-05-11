@@ -5,9 +5,9 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
-using RimPrisonBuilder.PrisonLabor;
+using RimPrison.PrisonLabor;
 
-namespace RimPrisonBuilder.UI
+namespace RimPrison.UI
 {
     // [UNREVIEWED] Haven't reviewed carefully
     public class Dialog_PrisonerManagement : Window
@@ -106,7 +106,7 @@ namespace RimPrisonBuilder.UI
             if (groups.Count == 0)
             {
                 Text.Anchor = TextAnchor.MiddleCenter;
-                Widgets.Label(rect, "RimPrisonBuilder.NoGroups".Translate());
+                Widgets.Label(rect, "RimPrison.NoGroups".Translate());
                 Text.Anchor = TextAnchor.UpperLeft;
                 return;
             }
@@ -205,7 +205,7 @@ namespace RimPrisonBuilder.UI
             if (groups.Count == 0)
             {
                 Text.Anchor = TextAnchor.MiddleCenter;
-                Widgets.Label(rect, "RimPrisonBuilder.NoGroups".Translate());
+                Widgets.Label(rect, "RimPrison.NoGroups".Translate());
                 Text.Anchor = TextAnchor.UpperLeft;
                 return;
             }
@@ -322,7 +322,7 @@ namespace RimPrisonBuilder.UI
             if (pawns.Count == 0)
             {
                 Text.Anchor = TextAnchor.MiddleCenter;
-                Widgets.Label(rect, "RimPrisonBuilder.NoLaborPrisoners".Translate());
+                Widgets.Label(rect, "RimPrison.NoLaborPrisoners".Translate());
                 Text.Anchor = TextAnchor.UpperLeft;
                 return;
             }
@@ -384,13 +384,13 @@ namespace RimPrisonBuilder.UI
             int coupons = comp?.earnedCoupons ?? 0;
             float couponX = groupX + GroupButtonWidth + gap;
             Rect couponRect = new Rect(couponX, rect.y + (rect.height - 22f) / 2f, 200f, 22f);
-            Widgets.Label(couponRect, RimPrisonBuilderMod.Settings.WorkCouponName + ": " + coupons);
+            Widgets.Label(couponRect, RimPrisonMod.Settings.WorkCouponName + ": " + coupons);
 
             // Grant button
             float grantBtnW = 60f;
             Rect grantRect = new Rect(couponX + 200f + gap, rect.y + (rect.height - 28f) / 2f,
                 grantBtnW, 28f);
-            if (Widgets.ButtonText(grantRect, "RimPrisonBuilder.GrantCoupons".Translate()))
+            if (Widgets.ButtonText(grantRect, "RimPrison.GrantCoupons".Translate()))
             {
                 Find.WindowStack.Add(new Dialog_GrantCoupons(pawn));
             }
@@ -404,14 +404,14 @@ namespace RimPrisonBuilder.UI
             var currentGroup = groupManager?.GetGroupFor(pawn);
             string label = currentGroup != null
                 ? currentGroup.name
-                : "RimPrisonBuilder.NoGroup".Translate();
+                : "RimPrison.NoGroup".Translate();
 
             if (!Widgets.ButtonText(rect, label))
                 return;
 
             List<FloatMenuOption> options = new List<FloatMenuOption>();
 
-            options.Add(new FloatMenuOption("RimPrisonBuilder.NoGroup".Translate(), delegate
+            options.Add(new FloatMenuOption("RimPrison.NoGroup".Translate(), delegate
             {
                 groupManager?.RemoveFromAllGroups(pawn);
             }));
@@ -428,7 +428,7 @@ namespace RimPrisonBuilder.UI
                 }
             }
 
-            options.Add(new FloatMenuOption("RimPrisonBuilder.ManageGroups".Translate(), delegate
+            options.Add(new FloatMenuOption("RimPrison.ManageGroups".Translate(), delegate
             {
                 if (groupManager != null)
                     Find.WindowStack.Add(new Dialog_ManagePrisonerGroups(groupManager));
@@ -454,7 +454,7 @@ namespace RimPrisonBuilder.UI
             if (groups.Count == 0)
             {
                 Text.Anchor = TextAnchor.MiddleCenter;
-                Widgets.Label(rect, "RimPrisonBuilder.NoGroups".Translate());
+                Widgets.Label(rect, "RimPrison.NoGroups".Translate());
                 Text.Anchor = TextAnchor.UpperLeft;
                 return;
             }
@@ -478,11 +478,11 @@ namespace RimPrisonBuilder.UI
             Text.Font = GameFont.Small;
             Text.Anchor = TextAnchor.MiddleCenter;
             Widgets.Label(new Rect(col0X, headerY, colAreaW, headerH),
-                "RimPrisonBuilder.ApparelManagement".Translate());
+                "RimPrison.ApparelManagement".Translate());
             Widgets.Label(new Rect(col1X, headerY, colAreaW, headerH),
-                "RimPrisonBuilder.DrugManagement".Translate());
+                "RimPrison.DrugManagement".Translate());
             Widgets.Label(new Rect(col2X, headerY, colAreaW, headerH),
-                "RimPrisonBuilder.FoodManagement".Translate());
+                "RimPrison.FoodManagement".Translate());
             Text.Anchor = TextAnchor.UpperLeft;
             Text.Font = GameFont.Small;
 
@@ -504,11 +504,11 @@ namespace RimPrisonBuilder.UI
                 Rect outfitRect = new Rect(col0X, y + 2f, dropdownW, PolicyRowHeight - 4f);
                 string outfitLabel = group.apparelPolicy != null
                     ? group.apparelPolicy.label
-                    : "RimPrisonBuilder.None".Translate();
+                    : "RimPrison.None".Translate();
                 if (Widgets.ButtonText(outfitRect, outfitLabel))
                 {
                     List<FloatMenuOption> options = new List<FloatMenuOption>();
-                    options.Add(new FloatMenuOption("RimPrisonBuilder.None".Translate(), delegate
+                    options.Add(new FloatMenuOption("RimPrison.None".Translate(), delegate
                     {
                         group.apparelPolicy = null;
                         groupManager.SyncOutfitPolicy(group);
@@ -527,7 +527,7 @@ namespace RimPrisonBuilder.UI
 
                 Rect outfitManageRect = new Rect(col0X + dropdownW + innerGap, y + 2f,
                     manageBtnW, PolicyRowHeight - 4f);
-                if (Widgets.ButtonText(outfitManageRect, "RimPrisonBuilder.Manage".Translate()))
+                if (Widgets.ButtonText(outfitManageRect, "RimPrison.Manage".Translate()))
                 {
                     Find.WindowStack.Add(new Dialog_ManageApparelPolicies(group.apparelPolicy));
                 }
@@ -536,11 +536,11 @@ namespace RimPrisonBuilder.UI
                 Rect drugRect = new Rect(col1X, y + 2f, dropdownW, PolicyRowHeight - 4f);
                 string drugLabel = group.drugPolicy != null
                     ? group.drugPolicy.label
-                    : "RimPrisonBuilder.None".Translate();
+                    : "RimPrison.None".Translate();
                 if (Widgets.ButtonText(drugRect, drugLabel))
                 {
                     List<FloatMenuOption> options = new List<FloatMenuOption>();
-                    options.Add(new FloatMenuOption("RimPrisonBuilder.None".Translate(), delegate
+                    options.Add(new FloatMenuOption("RimPrison.None".Translate(), delegate
                     {
                         group.drugPolicy = null;
                         groupManager.SyncDrugPolicy(group);
@@ -559,7 +559,7 @@ namespace RimPrisonBuilder.UI
 
                 Rect drugManageRect = new Rect(col1X + dropdownW + innerGap, y + 2f,
                     manageBtnW, PolicyRowHeight - 4f);
-                if (Widgets.ButtonText(drugManageRect, "RimPrisonBuilder.Manage".Translate()))
+                if (Widgets.ButtonText(drugManageRect, "RimPrison.Manage".Translate()))
                 {
                     Find.WindowStack.Add(new Dialog_ManageDrugPolicies(group.drugPolicy));
                 }
@@ -568,11 +568,11 @@ namespace RimPrisonBuilder.UI
                 Rect foodRect = new Rect(col2X, y + 2f, dropdownW, PolicyRowHeight - 4f);
                 string foodLabel = group.foodRestriction != null
                     ? group.foodRestriction.label
-                    : "RimPrisonBuilder.None".Translate();
+                    : "RimPrison.None".Translate();
                 if (Widgets.ButtonText(foodRect, foodLabel))
                 {
                     List<FloatMenuOption> options = new List<FloatMenuOption>();
-                    options.Add(new FloatMenuOption("RimPrisonBuilder.None".Translate(), delegate
+                    options.Add(new FloatMenuOption("RimPrison.None".Translate(), delegate
                     {
                         group.foodRestriction = null;
                         groupManager.SyncFoodRestriction(group);
@@ -591,7 +591,7 @@ namespace RimPrisonBuilder.UI
 
                 Rect foodManageRect = new Rect(col2X + dropdownW + innerGap, y + 2f,
                     manageBtnW, PolicyRowHeight - 4f);
-                if (Widgets.ButtonText(foodManageRect, "RimPrisonBuilder.Manage".Translate()))
+                if (Widgets.ButtonText(foodManageRect, "RimPrison.Manage".Translate()))
                 {
                     Find.WindowStack.Add(new Dialog_ManageFoodPolicies(group.foodRestriction));
                 }
@@ -630,25 +630,25 @@ namespace RimPrisonBuilder.UI
             Rect popRect = new Rect(rect.x, rect.y, colW, rowH);
             RPR_UiStyle.DrawSubPanel(popRect);
             var popInner = popRect.ContractedBy(10f);
-            RPR_UiStyle.DrawSectionTitle(new Rect(popInner.x, popInner.y, popInner.width, 22f), "RimPrisonBuilder.Population".Translate());
+            RPR_UiStyle.DrawSectionTitle(new Rect(popInner.x, popInner.y, popInner.width, 22f), "RimPrison.Population".Translate());
             Text.Font = GameFont.Medium;
             Text.Anchor = TextAnchor.MiddleCenter;
             Widgets.Label(new Rect(popInner.x, popInner.y + 28f, popInner.width, 36f), total.ToString());
             Text.Font = GameFont.Small;
             Text.Anchor = TextAnchor.UpperLeft;
-            Widgets.Label(new Rect(popInner.x, popInner.y + 70f, popInner.width, 22f), "RimPrisonBuilder.AdultCount".Translate(adultCount.ToString()));
-            Widgets.Label(new Rect(popInner.x, popInner.y + 96f, popInner.width, 22f), "RimPrisonBuilder.ChildCount".Translate(childCount.ToString()));
-            Widgets.Label(new Rect(popInner.x, popInner.y + 122f, popInner.width, 22f), "RimPrisonBuilder.BabyCount".Translate(babyCount.ToString()));
+            Widgets.Label(new Rect(popInner.x, popInner.y + 70f, popInner.width, 22f), "RimPrison.AdultCount".Translate(adultCount.ToString()));
+            Widgets.Label(new Rect(popInner.x, popInner.y + 96f, popInner.width, 22f), "RimPrison.ChildCount".Translate(childCount.ToString()));
+            Widgets.Label(new Rect(popInner.x, popInner.y + 122f, popInner.width, 22f), "RimPrison.BabyCount".Translate(babyCount.ToString()));
 
             // Suppression placeholder
             Rect suppRect = new Rect(rect.x + colW + gap, rect.y, colW, rowH);
             RPR_UiStyle.DrawSubPanel(suppRect);
             var suppInner = suppRect.ContractedBy(10f);
-            RPR_UiStyle.DrawSectionTitle(new Rect(suppInner.x, suppInner.y, suppInner.width, 22f), "RimPrisonBuilder.Suppression".Translate());
+            RPR_UiStyle.DrawSectionTitle(new Rect(suppInner.x, suppInner.y, suppInner.width, 22f), "RimPrison.Suppression".Translate());
             // [TODO] NO LOGIC — suppression formula and snapshot not implemented yet
             Text.Font = GameFont.Small;
             Text.Anchor = TextAnchor.MiddleCenter;
-            RPR_UiStyle.DrawMutedLabel(new Rect(suppInner.x, suppInner.y + 40f, suppInner.width, 80f), "RimPrisonBuilder.SuppressionPlaceholder".Translate());
+            RPR_UiStyle.DrawMutedLabel(new Rect(suppInner.x, suppInner.y + 40f, suppInner.width, 80f), "RimPrison.SuppressionPlaceholder".Translate());
             Text.Anchor = TextAnchor.UpperLeft;
             Text.Font = GameFont.Small;
 
@@ -658,8 +658,8 @@ namespace RimPrisonBuilder.UI
             Rect logRect = new Rect(rect.x, secondRowY, rect.width, secondRowH);
             RPR_UiStyle.DrawSubPanel(logRect);
             var logInner = logRect.ContractedBy(10f);
-            RPR_UiStyle.DrawSectionTitle(new Rect(logInner.x, logInner.y, logInner.width, 22f), "RimPrisonBuilder.ActivityLog".Translate());
-            RPR_UiStyle.DrawMutedLabel(new Rect(logInner.x, logInner.y + 32f, logInner.width, 60f), "RimPrisonBuilder.ActivityLogPlaceholder".Translate());
+            RPR_UiStyle.DrawSectionTitle(new Rect(logInner.x, logInner.y, logInner.width, 22f), "RimPrison.ActivityLog".Translate());
+            RPR_UiStyle.DrawMutedLabel(new Rect(logInner.x, logInner.y + 32f, logInner.width, 60f), "RimPrison.ActivityLogPlaceholder".Translate());
         }
 
         // ======== Settings tab ========
@@ -669,52 +669,52 @@ namespace RimPrisonBuilder.UI
             // [TODO] NO LOGIC — most settings not implemented yet
             RPR_UiStyle.DrawSubPanel(rect);
             var inner = rect.ContractedBy(12f);
-            RPR_UiStyle.DrawSectionTitle(new Rect(inner.x, inner.y, inner.width, 24f), "RimPrisonBuilder.Settings".Translate());
+            RPR_UiStyle.DrawSectionTitle(new Rect(inner.x, inner.y, inner.width, 24f), "RimPrison.Settings".Translate());
 
             float y = inner.y + 32f;
             float colW = (inner.width - 12f) / 2f;
 
             // Left column — currency name (wired up to our settings)
-            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrisonBuilder.CurrencyName".Translate());
-            string currencyBuf = RimPrisonBuilderMod.Settings.WorkCouponName;
+            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrison.CurrencyName".Translate());
+            string currencyBuf = RimPrisonMod.Settings.WorkCouponName;
             currencyBuf = Widgets.TextField(new Rect(inner.x + 144f, y, 120f, 24f), currencyBuf);
-            if (currencyBuf != RimPrisonBuilderMod.Settings.WorkCouponName)
+            if (currencyBuf != RimPrisonMod.Settings.WorkCouponName)
             {
-                RimPrisonBuilderMod.Settings.WorkCouponName = currencyBuf;
-                RimPrisonBuilderMod.Settings.Write();
+                RimPrisonMod.Settings.WorkCouponName = currencyBuf;
+                RimPrisonMod.Settings.Write();
             }
 
             y += 30f;
             // [TODO] NO LOGIC — ransom price
-            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrisonBuilder.RansomPrice".Translate());
-            RPR_UiStyle.DrawMutedLabel(new Rect(inner.x + 144f, y, 200f, 24f), "RimPrisonBuilder.TodoNoLogic".Translate());
+            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrison.RansomPrice".Translate());
+            RPR_UiStyle.DrawMutedLabel(new Rect(inner.x + 144f, y, 200f, 24f), "RimPrison.TodoNoLogic".Translate());
 
             y += 30f;
             // [TODO] NO LOGIC — payroll delivery mode
-            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrisonBuilder.PayrollMode".Translate());
-            RPR_UiStyle.DrawMutedLabel(new Rect(inner.x + 144f, y, 200f, 24f), "RimPrisonBuilder.TodoNoLogic".Translate());
+            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrison.PayrollMode".Translate());
+            RPR_UiStyle.DrawMutedLabel(new Rect(inner.x + 144f, y, 200f, 24f), "RimPrison.TodoNoLogic".Translate());
 
             y += 30f;
             // Daily allowance (already implemented)
-            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrisonBuilder.DailyAllowance".Translate());
-            string buf = RimPrisonBuilderMod.Settings.DailyAllowance.ToString();
+            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrison.DailyAllowance".Translate());
+            string buf = RimPrisonMod.Settings.DailyAllowance.ToString();
             buf = Widgets.TextField(new Rect(inner.x + 144f, y, 60f, 24f), buf);
-            if (int.TryParse(buf, out int val) && val >= 0 && val <= 9999 && val != RimPrisonBuilderMod.Settings.DailyAllowance)
+            if (int.TryParse(buf, out int val) && val >= 0 && val <= 9999 && val != RimPrisonMod.Settings.DailyAllowance)
             {
-                RimPrisonBuilderMod.Settings.DailyAllowance = val;
-                RimPrisonBuilderMod.Settings.Write();
+                RimPrisonMod.Settings.DailyAllowance = val;
+                RimPrisonMod.Settings.Write();
             }
 
             y += 36f;
             // [TODO] NO LOGIC — debt harvest config
-            RPR_UiStyle.DrawSectionTitle(new Rect(inner.x, y, inner.width, 24f), "RimPrisonBuilder.DebtHarvest".Translate());
+            RPR_UiStyle.DrawSectionTitle(new Rect(inner.x, y, inner.width, 24f), "RimPrison.DebtHarvest".Translate());
             y += 28f;
-            RPR_UiStyle.DrawMutedLabel(new Rect(inner.x, y, inner.width, 20f), "RimPrisonBuilder.TodoNoLogic".Translate());
+            RPR_UiStyle.DrawMutedLabel(new Rect(inner.x, y, inner.width, 20f), "RimPrison.TodoNoLogic".Translate());
 
             // Right column — global status summary
             float rightCol = inner.x + colW + 12f;
             float rightY = inner.y + 32f;
-            RPR_UiStyle.DrawSectionTitle(new Rect(rightCol, rightY, colW, 24f), "RimPrisonBuilder.GlobalStatus".Translate());
+            RPR_UiStyle.DrawSectionTitle(new Rect(rightCol, rightY, colW, 24f), "RimPrison.GlobalStatus".Translate());
 
             var map = Find.CurrentMap;
             var prisoners = map.mapPawns.PrisonersOfColony;
@@ -725,11 +725,11 @@ namespace RimPrisonBuilder.UI
             }
 
             rightY += 28f;
-            Widgets.Label(new Rect(rightCol, rightY, colW, 22f), "RimPrisonBuilder.TotalPrisoners".Translate(prisoners.Count.ToString()));
+            Widgets.Label(new Rect(rightCol, rightY, colW, 22f), "RimPrison.TotalPrisoners".Translate(prisoners.Count.ToString()));
             rightY += 24f;
-            Widgets.Label(new Rect(rightCol, rightY, colW, 22f), "RimPrisonBuilder.LaborEnabledCount".Translate(labCount.ToString()));
+            Widgets.Label(new Rect(rightCol, rightY, colW, 22f), "RimPrison.LaborEnabledCount".Translate(labCount.ToString()));
             rightY += 24f;
-            Widgets.Label(new Rect(rightCol, rightY, colW, 22f), "RimPrisonBuilder.GroupCount".Translate(groupManager.groups.Count.ToString()));
+            Widgets.Label(new Rect(rightCol, rightY, colW, 22f), "RimPrison.GroupCount".Translate(groupManager.groups.Count.ToString()));
         }
 
         // ======== Helpers ========
@@ -751,17 +751,17 @@ namespace RimPrisonBuilder.UI
         {
             tabs = new List<TabRecord>
             {
-                new TabRecord("RimPrisonBuilder.ScheduleTab".Translate(),
+                new TabRecord("RimPrison.ScheduleTab".Translate(),
                     delegate { curTab = 0; }, () => curTab == 0),
-                new TabRecord("RimPrisonBuilder.WorkTab".Translate(),
+                new TabRecord("RimPrison.WorkTab".Translate(),
                     delegate { curTab = 1; }, () => curTab == 1),
-                new TabRecord("RimPrisonBuilder.PrisonerManageTab".Translate(),
+                new TabRecord("RimPrison.PrisonerManageTab".Translate(),
                     delegate { curTab = 2; }, () => curTab == 2),
-                new TabRecord("RimPrisonBuilder.PoliciesTab".Translate(),
+                new TabRecord("RimPrison.PoliciesTab".Translate(),
                     delegate { curTab = 3; }, () => curTab == 3),
-                new TabRecord("RimPrisonBuilder.OverviewTab".Translate(),
+                new TabRecord("RimPrison.OverviewTab".Translate(),
                     delegate { curTab = 4; }, () => curTab == 4),
-                new TabRecord("RimPrisonBuilder.SettingsTab".Translate(),
+                new TabRecord("RimPrison.SettingsTab".Translate(),
                     delegate { curTab = 5; }, () => curTab == 5)
             };
         }

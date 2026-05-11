@@ -1,7 +1,7 @@
 using UnityEngine;
 using Verse;
 
-namespace RimPrisonBuilder.UI
+namespace RimPrison.UI
 {
     // [UNREVIEWED] Haven't reviewed carefully
     public static class RPR_UiStyle

@@ -1,9 +1,9 @@
 using HarmonyLib;
 using RimWorld;
 using Verse;
-using RimPrisonBuilder.PrisonLabor;
+using RimPrison.PrisonLabor;
 
-namespace RimPrisonBuilder.Patches
+namespace RimPrison.Patches
 {
     // Vanilla GetCurrentRespectedRestriction only enforces food restrictions when
     // the pawn is Faction.OfPlayer OR the getter (feeder) is Faction.OfPlayer.

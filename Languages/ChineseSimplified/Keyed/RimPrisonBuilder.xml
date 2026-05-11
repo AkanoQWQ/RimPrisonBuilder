@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <RimPrisonBuilder.WorkCouponName>粮票名称</RimPrisonBuilder.WorkCouponName>
-  <RimPrisonBuilder.SetPrice>设置价格</RimPrisonBuilder.SetPrice>
-  <RimPrisonBuilder.SetPriceDesc>设置囚犯购买物品所需的粮票数量</RimPrisonBuilder.SetPriceDesc>
-  <RimPrisonBuilder.SetPriceDialogTitle>设置 {0} 价格</RimPrisonBuilder.SetPriceDialogTitle>
-  <RimPrisonBuilder.ShopStock>库存: {0}/{1}</RimPrisonBuilder.ShopStock>
-  <RimPrisonBuilder.PricePerItem>每件物品价格</RimPrisonBuilder.PricePerItem>
-  <RimPrisonBuilder.ConfirmPrice>确认</RimPrisonBuilder.ConfirmPrice>
-  <RimPrisonBuilder.ScheduleTab>日程</RimPrisonBuilder.ScheduleTab>
-  <RimPrisonBuilder.WorkTab>工作</RimPrisonBuilder.WorkTab>
-  <RimPrisonBuilder.PrisonerManageTab>囚犯管理</RimPrisonBuilder.PrisonerManageTab>
-  <RimPrisonBuilder.NoGroup>未分组</RimPrisonBuilder.NoGroup>
-  <RimPrisonBuilder.ManageGroups>管理囚犯分组...</RimPrisonBuilder.ManageGroups>
-  <RimPrisonBuilder.ManagePrisonerGroups>管理囚犯分组</RimPrisonBuilder.ManagePrisonerGroups>
-  <RimPrisonBuilder.NewGroup>新建分组</RimPrisonBuilder.NewGroup>
-  <RimPrisonBuilder.DefaultGroupName>囚犯分组</RimPrisonBuilder.DefaultGroupName>
-  <RimPrisonBuilder.DeleteGroupConfirm>确定删除分组 {0}？所有囚犯将移出此分组。</RimPrisonBuilder.DeleteGroupConfirm>
-  <RimPrisonBuilder.NoLaborPrisoners>没有启用劳动的囚犯。</RimPrisonBuilder.NoLaborPrisoners>
-  <RimPrisonBuilder.NoGroups>没有囚犯分组。请先在"囚犯管理"标签页中创建分组并分配囚犯。</RimPrisonBuilder.NoGroups>
-  <RimPrisonBuilder.WorkPriorityBlocked>{0}无法被设置为{1}。该囚犯不具备此工作能力。</RimPrisonBuilder.WorkPriorityBlocked>
-  <RimPrisonBuilder.CouponsPerHour>每小时获得粮票数量: {0}</RimPrisonBuilder.CouponsPerHour>
-  <RimPrisonBuilder.GrantCoupons>发放</RimPrisonBuilder.GrantCoupons>
-  <RimPrisonBuilder.GrantCouponsTitle>发放粮票给 {0}</RimPrisonBuilder.GrantCouponsTitle>
-  <RimPrisonBuilder.GrantCouponsDesc>请输入要发放的{0}数量：</RimPrisonBuilder.GrantCouponsDesc>
-  <RimPrisonBuilder.ConfirmGrant>确认发放</RimPrisonBuilder.ConfirmGrant>
-  <RimPrisonBuilder.DailyAllowance>每日低保（粮票/天，0=关闭）</RimPrisonBuilder.DailyAllowance>
-  <RimPrisonBuilder.OutfitTab>服装</RimPrisonBuilder.OutfitTab>
-  <RimPrisonBuilder.DrugTab>成瘾品</RimPrisonBuilder.DrugTab>
-  <RimPrisonBuilder.PoliciesTab>策略</RimPrisonBuilder.PoliciesTab>
-  <RimPrisonBuilder.ApparelManagement>服装管理</RimPrisonBuilder.ApparelManagement>
-  <RimPrisonBuilder.DrugManagement>成瘾品管理</RimPrisonBuilder.DrugManagement>
-  <RimPrisonBuilder.None>无</RimPrisonBuilder.None>
-  <RimPrisonBuilder.Manage>管理...</RimPrisonBuilder.Manage>
+  <RimPrison.WorkCouponName>粮票名称</RimPrison.WorkCouponName>
+  <RimPrison.SetPrice>设置价格</RimPrison.SetPrice>
+  <RimPrison.SetPriceDesc>设置囚犯购买物品所需的粮票数量</RimPrison.SetPriceDesc>
+  <RimPrison.SetPriceDialogTitle>设置 {0} 价格</RimPrison.SetPriceDialogTitle>
+  <RimPrison.ShopStock>库存: {0}/{1}</RimPrison.ShopStock>
+  <RimPrison.PricePerItem>每件物品价格</RimPrison.PricePerItem>
+  <RimPrison.ConfirmPrice>确认</RimPrison.ConfirmPrice>
+  <RimPrison.ScheduleTab>日程</RimPrison.ScheduleTab>
+  <RimPrison.WorkTab>工作</RimPrison.WorkTab>
+  <RimPrison.PrisonerManageTab>囚犯管理</RimPrison.PrisonerManageTab>
+  <RimPrison.NoGroup>未分组</RimPrison.NoGroup>
+  <RimPrison.ManageGroups>管理囚犯分组...</RimPrison.ManageGroups>
+  <RimPrison.ManagePrisonerGroups>管理囚犯分组</RimPrison.ManagePrisonerGroups>
+  <RimPrison.NewGroup>新建分组</RimPrison.NewGroup>
+  <RimPrison.DefaultGroupName>囚犯分组</RimPrison.DefaultGroupName>
+  <RimPrison.DeleteGroupConfirm>确定删除分组 {0}？所有囚犯将移出此分组。</RimPrison.DeleteGroupConfirm>
+  <RimPrison.NoLaborPrisoners>没有启用劳动的囚犯。</RimPrison.NoLaborPrisoners>
+  <RimPrison.NoGroups>没有囚犯分组。请先在"囚犯管理"标签页中创建分组并分配囚犯。</RimPrison.NoGroups>
+  <RimPrison.WorkPriorityBlocked>{0}无法被设置为{1}。该囚犯不具备此工作能力。</RimPrison.WorkPriorityBlocked>
+  <RimPrison.CouponsPerHour>每小时获得粮票数量: {0}</RimPrison.CouponsPerHour>
+  <RimPrison.GrantCoupons>发放</RimPrison.GrantCoupons>
+  <RimPrison.GrantCouponsTitle>发放粮票给 {0}</RimPrison.GrantCouponsTitle>
+  <RimPrison.GrantCouponsDesc>请输入要发放的{0}数量：</RimPrison.GrantCouponsDesc>
+  <RimPrison.ConfirmGrant>确认发放</RimPrison.ConfirmGrant>
+  <RimPrison.DailyAllowance>每日低保（粮票/天，0=关闭）</RimPrison.DailyAllowance>
+  <RimPrison.OutfitTab>服装</RimPrison.OutfitTab>
+  <RimPrison.DrugTab>成瘾品</RimPrison.DrugTab>
+  <RimPrison.PoliciesTab>策略</RimPrison.PoliciesTab>
+  <RimPrison.ApparelManagement>服装管理</RimPrison.ApparelManagement>
+  <RimPrison.DrugManagement>成瘾品管理</RimPrison.DrugManagement>
+  <RimPrison.None>无</RimPrison.None>
+  <RimPrison.Manage>管理...</RimPrison.Manage>
   <!-- Overview tab -->
-  <RimPrisonBuilder.OverviewTab>总览</RimPrisonBuilder.OverviewTab>
-  <RimPrisonBuilder.Population>囚犯人数</RimPrisonBuilder.Population>
-  <RimPrisonBuilder.AdultCount>成人: {0}</RimPrisonBuilder.AdultCount>
-  <RimPrisonBuilder.ChildCount>儿童: {0}</RimPrisonBuilder.ChildCount>
-  <RimPrisonBuilder.BabyCount>婴儿: {0}</RimPrisonBuilder.BabyCount>
-  <RimPrisonBuilder.Suppression>压制度</RimPrisonBuilder.Suppression>
-  <RimPrisonBuilder.SuppressionPlaceholder>压制度系统尚未实现。\n将显示压制度弧形图、越狱风险等。</RimPrisonBuilder.SuppressionPlaceholder>
-  <RimPrisonBuilder.SchedulePreview>日程预览（第一组）</RimPrisonBuilder.SchedulePreview>
-  <RimPrisonBuilder.ActivityLog>活动日志</RimPrisonBuilder.ActivityLog>
-  <RimPrisonBuilder.ActivityLogPlaceholder>活动日志尚未实现。\n将显示囚犯近期事件记录。</RimPrisonBuilder.ActivityLogPlaceholder>
+  <RimPrison.OverviewTab>总览</RimPrison.OverviewTab>
+  <RimPrison.Population>囚犯人数</RimPrison.Population>
+  <RimPrison.AdultCount>成人: {0}</RimPrison.AdultCount>
+  <RimPrison.ChildCount>儿童: {0}</RimPrison.ChildCount>
+  <RimPrison.BabyCount>婴儿: {0}</RimPrison.BabyCount>
+  <RimPrison.Suppression>压制度</RimPrison.Suppression>
+  <RimPrison.SuppressionPlaceholder>压制度系统尚未实现。\n将显示压制度弧形图、越狱风险等。</RimPrison.SuppressionPlaceholder>
+  <RimPrison.SchedulePreview>日程预览（第一组）</RimPrison.SchedulePreview>
+  <RimPrison.ActivityLog>活动日志</RimPrison.ActivityLog>
+  <RimPrison.ActivityLogPlaceholder>活动日志尚未实现。\n将显示囚犯近期事件记录。</RimPrison.ActivityLogPlaceholder>
   <!-- Food tab -->
-  <RimPrisonBuilder.FoodTab>食物</RimPrisonBuilder.FoodTab>
-  <RimPrisonBuilder.FoodManagement>食物管理</RimPrisonBuilder.FoodManagement>
-  <RimPrisonBuilder.FoodPlaceholder>食物管理系统尚未实现。\n将允许配置四档餐标（福利/婴儿/标准/精致），每档可设置食物白名单和价格。</RimPrisonBuilder.FoodPlaceholder>
+  <RimPrison.FoodTab>食物</RimPrison.FoodTab>
+  <RimPrison.FoodManagement>食物管理</RimPrison.FoodManagement>
+  <RimPrison.FoodPlaceholder>食物管理系统尚未实现。\n将允许配置四档餐标（福利/婴儿/标准/精致），每档可设置食物白名单和价格。</RimPrison.FoodPlaceholder>
   <!-- Settings tab -->
-  <RimPrisonBuilder.SettingsTab>设置</RimPrisonBuilder.SettingsTab>
-  <RimPrisonBuilder.Settings>设置</RimPrisonBuilder.Settings>
-  <RimPrisonBuilder.CurrencyName>货币名称</RimPrisonBuilder.CurrencyName>
-  <RimPrisonBuilder.RansomPrice>赎身价格</RimPrisonBuilder.RansomPrice>
-  <RimPrisonBuilder.PayrollMode>工资发放模式</RimPrisonBuilder.PayrollMode>
-  <RimPrisonBuilder.DebtHarvest>器官抵债</RimPrisonBuilder.DebtHarvest>
-  <RimPrisonBuilder.GlobalStatus>全局状态</RimPrisonBuilder.GlobalStatus>
-  <RimPrisonBuilder.TotalPrisoners>囚犯总数: {0}</RimPrisonBuilder.TotalPrisoners>
-  <RimPrisonBuilder.LaborEnabledCount>劳动启用: {0}</RimPrisonBuilder.LaborEnabledCount>
-  <RimPrisonBuilder.GroupCount>分组数量: {0}</RimPrisonBuilder.GroupCount>
-  <RimPrisonBuilder.TodoNoLogic>[TODO] 尚未实现</RimPrisonBuilder.TodoNoLogic>
+  <RimPrison.SettingsTab>设置</RimPrison.SettingsTab>
+  <RimPrison.Settings>设置</RimPrison.Settings>
+  <RimPrison.CurrencyName>货币名称</RimPrison.CurrencyName>
+  <RimPrison.RansomPrice>赎身价格</RimPrison.RansomPrice>
+  <RimPrison.PayrollMode>工资发放模式</RimPrison.PayrollMode>
+  <RimPrison.DebtHarvest>器官抵债</RimPrison.DebtHarvest>
+  <RimPrison.GlobalStatus>全局状态</RimPrison.GlobalStatus>
+  <RimPrison.TotalPrisoners>囚犯总数: {0}</RimPrison.TotalPrisoners>
+  <RimPrison.LaborEnabledCount>劳动启用: {0}</RimPrison.LaborEnabledCount>
+  <RimPrison.GroupCount>分组数量: {0}</RimPrison.GroupCount>
+  <RimPrison.TodoNoLogic>[TODO] 尚未实现</RimPrison.TodoNoLogic>
 </LanguageData>

@@ -2,7 +2,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RimPrisonBuilder.PrisonLabor
+namespace RimPrison.PrisonLabor
 {
     public class CompProperties_WorkTracker : CompProperties
     {
@@ -23,7 +23,7 @@ namespace RimPrisonBuilder.PrisonLabor
         {
             get
             {
-                float rate = RimPrisonBuilderMod.Settings.CouponsPerHour;
+                float rate = RimPrisonMod.Settings.CouponsPerHour;
                 if (rate <= 0f) rate = 1f;
                 int tpc = Mathf.RoundToInt(GenDate.TicksPerHour / rate);
                 return tpc < 1 ? 1 : tpc;

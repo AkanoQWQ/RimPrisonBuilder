@@ -1,8 +1,8 @@
-using RimPrisonBuilder.DefOfs;
+using RimPrison.DefOfs;
 using RimWorld;
 using Verse;
 
-namespace RimPrisonBuilder.PrisonLabor
+namespace RimPrison.PrisonLabor
 {
     public static class PrisonLaborUtility
     {
@@ -14,7 +14,7 @@ namespace RimPrisonBuilder.PrisonLabor
             if (pawn.guest == null)
                 return false;
 
-            return pawn.guest.IsInteractionEnabled(RP_DefOf.RimPrisonBuilder_AllowLabor);
+            return pawn.guest.IsInteractionEnabled(RP_DefOf.RimPrison_AllowLabor);
         }
 
         // Return Faction.OfPlayer for prisoners so WorkGiver scanning treats them as colonists.

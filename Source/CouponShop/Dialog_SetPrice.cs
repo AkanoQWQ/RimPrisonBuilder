@@ -1,7 +1,7 @@
 using UnityEngine;
 using Verse;
 
-namespace RimPrisonBuilder.CouponShop
+namespace RimPrison.CouponShop
 {
     // [UNREVIEWED] This is the UI of SetPrice of couponshop
     // Have't reviewed it now.
@@ -28,16 +28,16 @@ namespace RimPrisonBuilder.CouponShop
 
             Text.Font = GameFont.Medium;
             Widgets.Label(new Rect(10f, y, w, 30f),
-                "RimPrisonBuilder.SetPriceDialogTitle".Translate(RimPrisonBuilderMod.Settings.WorkCouponName));
+                "RimPrison.SetPriceDialogTitle".Translate(RimPrisonMod.Settings.WorkCouponName));
             y += 38f;
 
             Text.Font = GameFont.Small;
             Widgets.Label(new Rect(10f, y, 120f, 28f),
-                "RimPrisonBuilder.PricePerItem".Translate());
+                "RimPrison.PricePerItem".Translate());
             priceBuffer = Widgets.TextField(new Rect(130f, y, 80f, 28f), priceBuffer);
             y += 36f;
 
-            if (Widgets.ButtonText(new Rect(10f, y, 120f, 32f), "RimPrisonBuilder.ConfirmPrice".Translate()))
+            if (Widgets.ButtonText(new Rect(10f, y, 120f, 32f), "RimPrison.ConfirmPrice".Translate()))
             {
                 if (int.TryParse(priceBuffer, out int price) && price >= 0)
                 {

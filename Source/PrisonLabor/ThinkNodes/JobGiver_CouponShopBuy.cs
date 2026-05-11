@@ -1,10 +1,10 @@
-using RimPrisonBuilder.CouponShop;
-using RimPrisonBuilder.DefOfs;
+using RimPrison.CouponShop;
+using RimPrison.DefOfs;
 using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace RimPrisonBuilder.PrisonLabor
+namespace RimPrison.PrisonLabor
 {
     public class JobGiver_CouponShopBuy : ThinkNode_JobGiver
     {
@@ -78,7 +78,7 @@ namespace RimPrisonBuilder.PrisonLabor
                 return null;
             }
 
-            Job job = JobMaker.MakeJob(RP_JobDefOf.RimPrisonBuilder_BuyFromCouponShop, bestShop);
+            Job job = JobMaker.MakeJob(RP_JobDefOf.RimPrison_BuyFromCouponShop, bestShop);
             return job;
         }
     }

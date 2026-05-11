@@ -2,7 +2,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RimPrisonBuilder.UI
+namespace RimPrison.UI
 {
     public class MainTabWindow_Prisoners : MainTabWindow
     {

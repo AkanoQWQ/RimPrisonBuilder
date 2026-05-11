@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <RimPrisonBuilder.WorkCouponName>Work coupon name</RimPrisonBuilder.WorkCouponName>
-  <RimPrisonBuilder.SetPrice>Set price</RimPrisonBuilder.SetPrice>
-  <RimPrisonBuilder.SetPriceDesc>Set how many work coupons prisoners need to buy an item</RimPrisonBuilder.SetPriceDesc>
-  <RimPrisonBuilder.SetPriceDialogTitle>Set {0} price</RimPrisonBuilder.SetPriceDialogTitle>
-  <RimPrisonBuilder.ShopStock>Stock: {0}/{1}</RimPrisonBuilder.ShopStock>
-  <RimPrisonBuilder.PricePerItem>Price per item</RimPrisonBuilder.PricePerItem>
-  <RimPrisonBuilder.ConfirmPrice>Confirm</RimPrisonBuilder.ConfirmPrice>
-  <RimPrisonBuilder.ScheduleTab>Schedule</RimPrisonBuilder.ScheduleTab>
-  <RimPrisonBuilder.WorkTab>Work</RimPrisonBuilder.WorkTab>
-  <RimPrisonBuilder.PrisonerManageTab>Prisoners</RimPrisonBuilder.PrisonerManageTab>
-  <RimPrisonBuilder.NoGroup>Ungrouped</RimPrisonBuilder.NoGroup>
-  <RimPrisonBuilder.ManageGroups>Manage groups...</RimPrisonBuilder.ManageGroups>
-  <RimPrisonBuilder.ManagePrisonerGroups>Manage Prisoner Groups</RimPrisonBuilder.ManagePrisonerGroups>
-  <RimPrisonBuilder.NewGroup>New group</RimPrisonBuilder.NewGroup>
-  <RimPrisonBuilder.DefaultGroupName>Group</RimPrisonBuilder.DefaultGroupName>
-  <RimPrisonBuilder.DeleteGroupConfirm>Delete group {0}? All prisoners will be removed from this group.</RimPrisonBuilder.DeleteGroupConfirm>
-  <RimPrisonBuilder.NoLaborPrisoners>No labor-enabled prisoners.</RimPrisonBuilder.NoLaborPrisoners>
-  <RimPrisonBuilder.NoGroups>No prisoner groups. Create groups and assign prisoners in the "Prisoners" tab first.</RimPrisonBuilder.NoGroups>
-  <RimPrisonBuilder.WorkPriorityBlocked>{0} cannot be set to {1}. The prisoner is incapable of this work type.</RimPrisonBuilder.WorkPriorityBlocked>
-  <RimPrisonBuilder.CouponsPerHour>Coupons per hour: {0}</RimPrisonBuilder.CouponsPerHour>
-  <RimPrisonBuilder.GrantCoupons>Grant</RimPrisonBuilder.GrantCoupons>
-  <RimPrisonBuilder.GrantCouponsTitle>Grant coupons to {0}</RimPrisonBuilder.GrantCouponsTitle>
-  <RimPrisonBuilder.GrantCouponsDesc>Enter the amount of {0} to grant:</RimPrisonBuilder.GrantCouponsDesc>
-  <RimPrisonBuilder.ConfirmGrant>Confirm</RimPrisonBuilder.ConfirmGrant>
-  <RimPrisonBuilder.DailyAllowance>Daily allowance (coupons per day, 0=off)</RimPrisonBuilder.DailyAllowance>
-  <RimPrisonBuilder.OutfitTab>Outfit</RimPrisonBuilder.OutfitTab>
-  <RimPrisonBuilder.DrugTab>Drug</RimPrisonBuilder.DrugTab>
-  <RimPrisonBuilder.PoliciesTab>Policies</RimPrisonBuilder.PoliciesTab>
-  <RimPrisonBuilder.ApparelManagement>Clothing</RimPrisonBuilder.ApparelManagement>
-  <RimPrisonBuilder.DrugManagement>Drugs</RimPrisonBuilder.DrugManagement>
-  <RimPrisonBuilder.None>None</RimPrisonBuilder.None>
-  <RimPrisonBuilder.Manage>Manage...</RimPrisonBuilder.Manage>
+  <RimPrison.WorkCouponName>Work coupon name</RimPrison.WorkCouponName>
+  <RimPrison.SetPrice>Set price</RimPrison.SetPrice>
+  <RimPrison.SetPriceDesc>Set how many work coupons prisoners need to buy an item</RimPrison.SetPriceDesc>
+  <RimPrison.SetPriceDialogTitle>Set {0} price</RimPrison.SetPriceDialogTitle>
+  <RimPrison.ShopStock>Stock: {0}/{1}</RimPrison.ShopStock>
+  <RimPrison.PricePerItem>Price per item</RimPrison.PricePerItem>
+  <RimPrison.ConfirmPrice>Confirm</RimPrison.ConfirmPrice>
+  <RimPrison.ScheduleTab>Schedule</RimPrison.ScheduleTab>
+  <RimPrison.WorkTab>Work</RimPrison.WorkTab>
+  <RimPrison.PrisonerManageTab>Prisoners</RimPrison.PrisonerManageTab>
+  <RimPrison.NoGroup>Ungrouped</RimPrison.NoGroup>
+  <RimPrison.ManageGroups>Manage groups...</RimPrison.ManageGroups>
+  <RimPrison.ManagePrisonerGroups>Manage Prisoner Groups</RimPrison.ManagePrisonerGroups>
+  <RimPrison.NewGroup>New group</RimPrison.NewGroup>
+  <RimPrison.DefaultGroupName>Group</RimPrison.DefaultGroupName>
+  <RimPrison.DeleteGroupConfirm>Delete group {0}? All prisoners will be removed from this group.</RimPrison.DeleteGroupConfirm>
+  <RimPrison.NoLaborPrisoners>No labor-enabled prisoners.</RimPrison.NoLaborPrisoners>
+  <RimPrison.NoGroups>No prisoner groups. Create groups and assign prisoners in the "Prisoners" tab first.</RimPrison.NoGroups>
+  <RimPrison.WorkPriorityBlocked>{0} cannot be set to {1}. The prisoner is incapable of this work type.</RimPrison.WorkPriorityBlocked>
+  <RimPrison.CouponsPerHour>Coupons per hour: {0}</RimPrison.CouponsPerHour>
+  <RimPrison.GrantCoupons>Grant</RimPrison.GrantCoupons>
+  <RimPrison.GrantCouponsTitle>Grant coupons to {0}</RimPrison.GrantCouponsTitle>
+  <RimPrison.GrantCouponsDesc>Enter the amount of {0} to grant:</RimPrison.GrantCouponsDesc>
+  <RimPrison.ConfirmGrant>Confirm</RimPrison.ConfirmGrant>
+  <RimPrison.DailyAllowance>Daily allowance (coupons per day, 0=off)</RimPrison.DailyAllowance>
+  <RimPrison.OutfitTab>Outfit</RimPrison.OutfitTab>
+  <RimPrison.DrugTab>Drug</RimPrison.DrugTab>
+  <RimPrison.PoliciesTab>Policies</RimPrison.PoliciesTab>
+  <RimPrison.ApparelManagement>Clothing</RimPrison.ApparelManagement>
+  <RimPrison.DrugManagement>Drugs</RimPrison.DrugManagement>
+  <RimPrison.None>None</RimPrison.None>
+  <RimPrison.Manage>Manage...</RimPrison.Manage>
   <!-- Overview tab -->
-  <RimPrisonBuilder.OverviewTab>Overview</RimPrisonBuilder.OverviewTab>
-  <RimPrisonBuilder.Population>Population</RimPrisonBuilder.Population>
-  <RimPrisonBuilder.AdultCount>Adult: {0}</RimPrisonBuilder.AdultCount>
-  <RimPrisonBuilder.ChildCount>Child: {0}</RimPrisonBuilder.ChildCount>
-  <RimPrisonBuilder.BabyCount>Baby: {0}</RimPrisonBuilder.BabyCount>
-  <RimPrisonBuilder.Suppression>Suppression</RimPrisonBuilder.Suppression>
-  <RimPrisonBuilder.SuppressionPlaceholder>Suppression system not yet implemented.\nWill show suppression arc chart, break risk, etc.</RimPrisonBuilder.SuppressionPlaceholder>
-  <RimPrisonBuilder.SchedulePreview>Schedule Preview (Group 1)</RimPrisonBuilder.SchedulePreview>
-  <RimPrisonBuilder.ActivityLog>Activity Log</RimPrisonBuilder.ActivityLog>
-  <RimPrisonBuilder.ActivityLogPlaceholder>Activity log not yet implemented.\nWill show recent prisoner events here.</RimPrisonBuilder.ActivityLogPlaceholder>
+  <RimPrison.OverviewTab>Overview</RimPrison.OverviewTab>
+  <RimPrison.Population>Population</RimPrison.Population>
+  <RimPrison.AdultCount>Adult: {0}</RimPrison.AdultCount>
+  <RimPrison.ChildCount>Child: {0}</RimPrison.ChildCount>
+  <RimPrison.BabyCount>Baby: {0}</RimPrison.BabyCount>
+  <RimPrison.Suppression>Suppression</RimPrison.Suppression>
+  <RimPrison.SuppressionPlaceholder>Suppression system not yet implemented.\nWill show suppression arc chart, break risk, etc.</RimPrison.SuppressionPlaceholder>
+  <RimPrison.SchedulePreview>Schedule Preview (Group 1)</RimPrison.SchedulePreview>
+  <RimPrison.ActivityLog>Activity Log</RimPrison.ActivityLog>
+  <RimPrison.ActivityLogPlaceholder>Activity log not yet implemented.\nWill show recent prisoner events here.</RimPrison.ActivityLogPlaceholder>
   <!-- Food tab -->
-  <RimPrisonBuilder.FoodTab>Food</RimPrisonBuilder.FoodTab>
-  <RimPrisonBuilder.FoodManagement>Food Management</RimPrisonBuilder.FoodManagement>
-  <RimPrisonBuilder.FoodPlaceholder>Food management not yet implemented.\nWill allow configuring 4 meal tiers (Welfare/Baby/Standard/Fine) with per-tier food whitelist and pricing.</RimPrisonBuilder.FoodPlaceholder>
+  <RimPrison.FoodTab>Food</RimPrison.FoodTab>
+  <RimPrison.FoodManagement>Food Management</RimPrison.FoodManagement>
+  <RimPrison.FoodPlaceholder>Food management not yet implemented.\nWill allow configuring 4 meal tiers (Welfare/Baby/Standard/Fine) with per-tier food whitelist and pricing.</RimPrison.FoodPlaceholder>
   <!-- Settings tab -->
-  <RimPrisonBuilder.SettingsTab>Settings</RimPrisonBuilder.SettingsTab>
-  <RimPrisonBuilder.Settings>Settings</RimPrisonBuilder.Settings>
-  <RimPrisonBuilder.CurrencyName>Currency Name</RimPrisonBuilder.CurrencyName>
-  <RimPrisonBuilder.RansomPrice>Ransom Price</RimPrisonBuilder.RansomPrice>
-  <RimPrisonBuilder.PayrollMode>Payroll Mode</RimPrisonBuilder.PayrollMode>
-  <RimPrisonBuilder.DebtHarvest>Debt Harvest</RimPrisonBuilder.DebtHarvest>
-  <RimPrisonBuilder.GlobalStatus>Global Status</RimPrisonBuilder.GlobalStatus>
-  <RimPrisonBuilder.TotalPrisoners>Total prisoners: {0}</RimPrisonBuilder.TotalPrisoners>
-  <RimPrisonBuilder.LaborEnabledCount>Labor enabled: {0}</RimPrisonBuilder.LaborEnabledCount>
-  <RimPrisonBuilder.GroupCount>Groups: {0}</RimPrisonBuilder.GroupCount>
-  <RimPrisonBuilder.TodoNoLogic>[TODO] Not implemented yet</RimPrisonBuilder.TodoNoLogic>
+  <RimPrison.SettingsTab>Settings</RimPrison.SettingsTab>
+  <RimPrison.Settings>Settings</RimPrison.Settings>
+  <RimPrison.CurrencyName>Currency Name</RimPrison.CurrencyName>
+  <RimPrison.RansomPrice>Ransom Price</RimPrison.RansomPrice>
+  <RimPrison.PayrollMode>Payroll Mode</RimPrison.PayrollMode>
+  <RimPrison.DebtHarvest>Debt Harvest</RimPrison.DebtHarvest>
+  <RimPrison.GlobalStatus>Global Status</RimPrison.GlobalStatus>
+  <RimPrison.TotalPrisoners>Total prisoners: {0}</RimPrison.TotalPrisoners>
+  <RimPrison.LaborEnabledCount>Labor enabled: {0}</RimPrison.LaborEnabledCount>
+  <RimPrison.GroupCount>Groups: {0}</RimPrison.GroupCount>
+  <RimPrison.TodoNoLogic>[TODO] Not implemented yet</RimPrison.TodoNoLogic>
 </LanguageData>

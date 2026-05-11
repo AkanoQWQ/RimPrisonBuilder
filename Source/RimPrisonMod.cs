@@ -2,18 +2,18 @@ using UnityEngine;
 using Verse;
 using HarmonyLib;
 
-namespace RimPrisonBuilder
+namespace RimPrison
 {
-    public class RimPrisonBuilderMod : Mod
+    public class RimPrisonMod : Mod
     {
-        public static RimPrisonBuilderSettings Settings;
+        public static RimPrisonSettings Settings;
 
-        public RimPrisonBuilderMod(ModContentPack content) : base(content)
+        public RimPrisonMod(ModContentPack content) : base(content)
         {
-            Settings = GetSettings<RimPrisonBuilderSettings>();
-            var harmony = new Harmony("akano.rimprisonbuilder");
+            Settings = GetSettings<RimPrisonSettings>();
+            var harmony = new Harmony("akano.rimprison");
             harmony.PatchAll();
-            Log.Message("Hello Rimworld from RimPrisonBuilder!");
+            Log.Message("Hello Rimworld from RimPrison!");
         }
 
         public override void DoSettingsWindowContents(Rect inRect)
@@ -24,7 +24,7 @@ namespace RimPrisonBuilder
 
         public override string SettingsCategory()
         {
-            return "RimPrisonBuilder";
+            return "RimPrison";
         }
 
         public override void WriteSettings()

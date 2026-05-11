@@ -1,7 +1,7 @@
 using RimWorld;
 using Verse;
 
-namespace RimPrisonBuilder.CouponShop
+namespace RimPrison.CouponShop
 {
     public class CompProperties_CouponShop : CompProperties
     {

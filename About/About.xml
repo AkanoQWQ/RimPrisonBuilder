@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<packageId>akano.rimprisonbuilder</packageId>
-	<name>Rim Prison Builder</name>
-	<author>Akano</author>
+	<packageId>akano.rimprison</packageId>
+	<name>Rim Prison</name>
+	<author>乐织终,Akano</author>
 	<supportedVersions>
 		<li>1.6</li>
 	</supportedVersions>
 	<modVersion>1.0.0</modVersion>
-	<url>https://github.com/AkanoQWQ/RimPrisonBuilder</url>
+	<url>https://github.com/AkanoQWQ/RimPrison</url>
 	
 	<description>
-		Rim Prison Builder MOD.
+		Rim Prison MOD.
 	</description>
 	
 	<modDependencies>

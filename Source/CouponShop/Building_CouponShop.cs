@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using RimWorld;
 using Verse;
 
-namespace RimPrisonBuilder.CouponShop
+namespace RimPrison.CouponShop
 {
     public class Building_CouponShop : Building, IStoreSettingsParent
     {
@@ -70,9 +70,9 @@ namespace RimPrisonBuilder.CouponShop
                 {
                     str += comp.storedItemDef.LabelCap + " ";
                 }
-                str += "RimPrisonBuilder.ShopStock".Translate(comp.stockCount, comp.Capacity);
+                str += "RimPrison.ShopStock".Translate(comp.stockCount, comp.Capacity);
                 str += "\n";
-                str += "RimPrisonBuilder.PricePerItem".Translate() + ": " + comp.pricePerItem;
+                str += "RimPrison.PricePerItem".Translate() + ": " + comp.pricePerItem;
             }
             return str;
         }
@@ -85,8 +85,8 @@ namespace RimPrisonBuilder.CouponShop
             }
             yield return new Command_Action
             {
-                defaultLabel = "RimPrisonBuilder.SetPrice".Translate(),
-                defaultDesc = "RimPrisonBuilder.SetPriceDesc".Translate(),
+                defaultLabel = "RimPrison.SetPrice".Translate(),
+                defaultDesc = "RimPrison.SetPriceDesc".Translate(),
                 icon = TexCommand.DesirePower,
                 action = delegate
                 {
