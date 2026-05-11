@@ -24,7 +24,7 @@
     <comps>
       <li Class="RimPrisonBuilder.CouponShop.CompProperties_CouponShop">
         <defaultPrice>1</defaultPrice>
-        <capacity>5</capacity>
+        <capacity>20</capacity>
       </li>
     </comps>
     <stuffCategories>

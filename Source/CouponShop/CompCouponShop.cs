@@ -6,7 +6,7 @@ namespace RimPrisonBuilder.CouponShop
     public class CompProperties_CouponShop : CompProperties
     {
         public int defaultPrice = 1;
-        public int capacity = 5;
+        public int capacity = 20;
 
         public CompProperties_CouponShop()
         {

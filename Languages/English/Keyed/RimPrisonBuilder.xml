@@ -24,4 +24,5 @@
   <RimPrisonBuilder.GrantCouponsTitle>Grant coupons to {0}</RimPrisonBuilder.GrantCouponsTitle>
   <RimPrisonBuilder.GrantCouponsDesc>Enter the amount of {0} to grant:</RimPrisonBuilder.GrantCouponsDesc>
   <RimPrisonBuilder.ConfirmGrant>Confirm</RimPrisonBuilder.ConfirmGrant>
+  <RimPrisonBuilder.DailyAllowance>Daily allowance (coupons per day, 0=off)</RimPrisonBuilder.DailyAllowance>
 </LanguageData>
