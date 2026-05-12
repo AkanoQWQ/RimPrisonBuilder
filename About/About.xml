@@ -10,7 +10,19 @@
 	<url>https://github.com/AkanoQWQ/RimPrison</url>
 	
 	<description>
-		Rim Prison MOD.
+RimPrison provides a complete prisoner management system for your colony.
+Main features:
+Simple door access management
+Prisoner schedules, labor, recreation, meals, wages, and debt system
+Food and apparel whitelists with batch management
+Prison suppression system, mental breaks, prison breaks, and turret deterrence rules
+
+RimPrison 为你的殖民地提供一套完整的囚犯管理系统。
+主要功能：
+简易门禁管理
+囚犯时间表、劳动、娱乐、饮食、工资与欠债系统
+食物、服装白名单与批量管理
+监狱压制度系统、精神崩溃、越狱与炮塔威慑规则
 	</description>
 	
 	<modDependencies>
@@ -26,5 +38,6 @@
 	</loadAfter>
 	
 	<incompatibleWith>
+		<li>lezhizhong.bianyuanjianyu</li>
 	</incompatibleWith>
 </ModMetaData>
