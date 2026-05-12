@@ -35,6 +35,8 @@ namespace RimPrison.Patches
     }
 
     // Add door access gizmo — always visible so users can configure before enabling.
+    // Uses vanilla Command_Toggle style (same as light switch / hold open / forbid).
+    // Icon: TexCommand.HoldOpen (vanilla door icon). Replace with custom icon if desired.
     [HarmonyPatch(typeof(Building_Door), nameof(Building_Door.GetGizmos))]
     internal static class Patch_DoorAccess_Gizmo
     {
@@ -43,7 +45,20 @@ namespace RimPrison.Patches
             var comp = __instance.GetComp<Comp_DoorAccess>();
             if (comp == null) return;
 
-            var list = new List<Gizmo>(__result) { new Gizmo_DoorAccess(comp) };
+            var toggle = new Command_Toggle
+            {
+                defaultLabel = "RimPrison.DoorAccess".Translate(),
+                defaultDesc = "RimPrison.DoorAccessDesc".Translate(),
+                icon = TexCommand.HoldOpen,
+                isActive = () => comp.allowPrisoners,
+                toggleAction = () =>
+                {
+                    comp.allowPrisoners = !comp.allowPrisoners;
+                    (comp.parent as Building_Door)?.Map?.reachability?.ClearCache();
+                }
+            };
+
+            var list = new List<Gizmo>(__result) { toggle };
             __result = list;
         }
     }

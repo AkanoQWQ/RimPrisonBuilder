@@ -52,7 +52,7 @@ namespace RimPrison.UI
 
             // Confirm button
             Rect btnRect = new Rect(inRect.x + 40f, y, inRect.width - 80f, 35f);
-            if (Widgets.ButtonText(btnRect, "RimPrison.ConfirmGrant".Translate())
+            if (RPR_UiStyle.DrawColoredButton(btnRect, "RimPrison.ConfirmGrant".Translate())
                 || (Event.current.type == EventType.KeyDown
                     && Event.current.keyCode == KeyCode.Return))
             {

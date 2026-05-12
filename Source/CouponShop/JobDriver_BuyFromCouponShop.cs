@@ -27,7 +27,7 @@ namespace RimPrison.CouponShop
             this.FailOn(() =>
             {
                 var tracker = pawn.TryGetComp<CompWorkTracker>();
-                return tracker == null || tracker.earnedCoupons < Shop.PricePerItem;
+                return tracker == null || tracker.earnedCoupons + RimPrisonMod.Settings.MaxDebt < Shop.PricePerItem;
             });
 
             // Goto shop,buy item,brief wait
@@ -46,7 +46,7 @@ namespace RimPrison.CouponShop
                 // These guards mirror the FailOn conditions above and should never trigger.
                 // Kept as a defensive safety net.
                 if (comp == null || tracker == null || comp.stockCount <= 0
-                    || tracker.earnedCoupons < comp.pricePerItem)
+                    || tracker.earnedCoupons + RimPrisonMod.Settings.MaxDebt < comp.pricePerItem)
                 {
                     return;
                 }
@@ -70,6 +70,9 @@ namespace RimPrison.CouponShop
                     {
                         comp.storedItemDef = null;
                     }
+                    // Log purchase
+                    pawn.Map?.GetComponent<GameComponent_ActivityLog>()?.Log(pawn,
+                        "RimPrison.LogBuyItem".Translate(itemDef.label, comp.pricePerItem.ToString()));
                 }
             };
             toil.defaultCompleteMode = ToilCompleteMode.Instant;

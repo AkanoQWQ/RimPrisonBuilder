@@ -14,6 +14,32 @@ namespace RimPrison.UI
         public static readonly Color TextMuted = new Color(0.72f, 0.74f, 0.76f, 1f);
         public static readonly Color SelectionColor = new Color(0.28f, 0.38f, 0.46f, 0.58f);
 
+        // Flat silver button style
+        private static readonly Color BtnNormalBg = new Color(0.55f, 0.58f, 0.62f, 1f);
+        private static readonly Color BtnHoverBg = new Color(0.65f, 0.68f, 0.72f, 1f);
+        private static readonly Color BtnBorder = new Color(0.4f, 0.43f, 0.47f, 1f);
+        private static readonly Color BtnTextColor = new Color(0.08f, 0.08f, 0.1f, 1f);
+
+        public static bool DrawColoredButton(Rect rect, string label)
+        {
+            bool mouseOver = Mouse.IsOver(rect);
+            Widgets.DrawBoxSolid(rect, mouseOver ? BtnHoverBg : BtnNormalBg);
+            // 1px border
+            Widgets.DrawBoxSolid(new Rect(rect.x, rect.y, rect.width, 1f), BtnBorder);
+            Widgets.DrawBoxSolid(new Rect(rect.x, rect.yMax - 1f, rect.width, 1f), BtnBorder);
+            Widgets.DrawBoxSolid(new Rect(rect.x, rect.y, 1f, rect.height), BtnBorder);
+            Widgets.DrawBoxSolid(new Rect(rect.xMax - 1f, rect.y, 1f, rect.height), BtnBorder);
+
+            var oldColor = GUI.color;
+            GUI.color = BtnTextColor;
+            Text.Anchor = TextAnchor.MiddleCenter;
+            Widgets.Label(rect, label);
+            Text.Anchor = TextAnchor.UpperLeft;
+            GUI.color = oldColor;
+
+            return Widgets.ButtonInvisible(rect);
+        }
+
         public static void DrawPanel(Rect rect)
         {
             Widgets.DrawBoxSolid(rect, PanelBg);

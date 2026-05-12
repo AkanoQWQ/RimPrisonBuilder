@@ -24,7 +24,7 @@
   <RimPrison.GrantCouponsTitle>Grant coupons to {0}</RimPrison.GrantCouponsTitle>
   <RimPrison.GrantCouponsDesc>Enter the amount of {0} to grant:</RimPrison.GrantCouponsDesc>
   <RimPrison.ConfirmGrant>Confirm</RimPrison.ConfirmGrant>
-  <RimPrison.DailyAllowance>Daily allowance (coupons per day, 0=off)</RimPrison.DailyAllowance>
+  <RimPrison.DailyAllowance>Daily coupon allowance</RimPrison.DailyAllowance>
   <RimPrison.OutfitTab>Outfit</RimPrison.OutfitTab>
   <RimPrison.DrugTab>Drug</RimPrison.DrugTab>
   <RimPrison.PoliciesTab>Policies</RimPrison.PoliciesTab>
@@ -67,11 +67,20 @@
   <RimPrison.GroupCount>Groups: {0}</RimPrison.GroupCount>
   <!-- Door Access -->
   <RimPrison.DoorAccess>Door Access</RimPrison.DoorAccess>
+  <RimPrison.DoorAccessDesc>Allow or block prisoners from passing through this door.</RimPrison.DoorAccessDesc>
+  <RimPrison.MaxDebt>Max debt</RimPrison.MaxDebt>
+  <RimPrison.MaxDebtDesc>Maximum credit allowed for prisoner purchases. 0 = no credit.</RimPrison.MaxDebtDesc>
   <RimPrison.PrisonArea>Prison Area</RimPrison.PrisonArea>
   <RimPrison.CreatePrisonArea>Create prison area</RimPrison.CreatePrisonArea>
+  <RimPrison.ExpandPrisonArea>Expand prison area</RimPrison.ExpandPrisonArea>
+  <RimPrison.ExpandPrisonAreaDesc>Designate cells to add to the prison area.</RimPrison.ExpandPrisonAreaDesc>
+  <RimPrison.ClearPrisonArea>Clear prison area</RimPrison.ClearPrisonArea>
+  <RimPrison.ClearPrisonAreaDesc>Designate cells to remove from the prison area.</RimPrison.ClearPrisonAreaDesc>
+  <RimPrison.NoPrisonArea>No prison area created yet</RimPrison.NoPrisonArea>
   <!-- Activity Log -->
   <RimPrison.ActivityLog>Activity Log</RimPrison.ActivityLog>
   <RimPrison.ActivityLogEmpty>No activity yet.</RimPrison.ActivityLogEmpty>
   <RimPrison.LogAssignedToGroup>Assigned to group {0}</RimPrison.LogAssignedToGroup>
   <RimPrison.LogOutfitChanged>Outfit policy changed</RimPrison.LogOutfitChanged>
+  <RimPrison.LogBuyItem>Bought {0} for {1} coupons</RimPrison.LogBuyItem>
 </LanguageData>

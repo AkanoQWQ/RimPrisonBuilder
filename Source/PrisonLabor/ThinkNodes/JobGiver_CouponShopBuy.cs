@@ -15,7 +15,8 @@ namespace RimPrison.PrisonLabor
                 return 0f;
             }
             var tracker = pawn.TryGetComp<CompWorkTracker>();
-            if (tracker == null || tracker.earnedCoupons <= 0)
+            int maxDebt = RimPrisonMod.Settings.MaxDebt;
+            if (tracker == null || tracker.earnedCoupons <= -maxDebt)
             {
                 return 0f;
             }
@@ -30,7 +31,8 @@ namespace RimPrison.PrisonLabor
             }
 
             var tracker = pawn.TryGetComp<CompWorkTracker>();
-            if (tracker == null || tracker.earnedCoupons <= 0)
+            int maxDebt = RimPrisonMod.Settings.MaxDebt;
+            if (tracker == null || tracker.earnedCoupons <= -maxDebt)
             {
                 return null;
             }
@@ -51,8 +53,8 @@ namespace RimPrison.PrisonLabor
                 {
                     continue;
                 }
-                // Can't afford QWQ
-                if (tracker.earnedCoupons < shop.PricePerItem)
+                // Can't afford (even with max debt QWQ zhizhi)
+                if (tracker.earnedCoupons + maxDebt < shop.PricePerItem)
                 {
                     continue;
                 }

@@ -376,7 +376,7 @@ namespace RimPrison.UI
             float grantBtnW = 60f;
             Rect grantRect = new Rect(couponX + 200f + gap, rect.y + (rect.height - 28f) / 2f,
                 grantBtnW, 28f);
-            if (Widgets.ButtonText(grantRect, "RimPrison.GrantCoupons".Translate()))
+            if (RPR_UiStyle.DrawColoredButton(grantRect, "RimPrison.GrantCoupons".Translate()))
             {
                 Find.WindowStack.Add(new Dialog_GrantCoupons(pawn));
             }
@@ -392,7 +392,7 @@ namespace RimPrison.UI
                 ? currentGroup.name
                 : "RimPrison.NoGroup".Translate();
 
-            if (!Widgets.ButtonText(rect, label))
+            if (!RPR_UiStyle.DrawColoredButton(rect, label))
                 return;
 
             List<FloatMenuOption> options = new List<FloatMenuOption>();
@@ -491,7 +491,7 @@ namespace RimPrison.UI
                 string outfitLabel = group.apparelPolicy != null
                     ? group.apparelPolicy.label
                     : "RimPrison.None".Translate();
-                if (Widgets.ButtonText(outfitRect, outfitLabel))
+                if (RPR_UiStyle.DrawColoredButton(outfitRect, outfitLabel))
                 {
                     List<FloatMenuOption> options = new List<FloatMenuOption>();
                     options.Add(new FloatMenuOption("RimPrison.None".Translate(), delegate
@@ -513,7 +513,7 @@ namespace RimPrison.UI
 
                 Rect outfitManageRect = new Rect(col0X + dropdownW + innerGap, y + 2f,
                     manageBtnW, PolicyRowHeight - 4f);
-                if (Widgets.ButtonText(outfitManageRect, "RimPrison.Manage".Translate()))
+                if (RPR_UiStyle.DrawColoredButton(outfitManageRect, "RimPrison.Manage".Translate()))
                 {
                     Find.WindowStack.Add(new Dialog_ManageApparelPolicies(group.apparelPolicy));
                 }
@@ -523,7 +523,7 @@ namespace RimPrison.UI
                 string drugLabel = group.drugPolicy != null
                     ? group.drugPolicy.label
                     : "RimPrison.None".Translate();
-                if (Widgets.ButtonText(drugRect, drugLabel))
+                if (RPR_UiStyle.DrawColoredButton(drugRect, drugLabel))
                 {
                     List<FloatMenuOption> options = new List<FloatMenuOption>();
                     options.Add(new FloatMenuOption("RimPrison.None".Translate(), delegate
@@ -545,7 +545,7 @@ namespace RimPrison.UI
 
                 Rect drugManageRect = new Rect(col1X + dropdownW + innerGap, y + 2f,
                     manageBtnW, PolicyRowHeight - 4f);
-                if (Widgets.ButtonText(drugManageRect, "RimPrison.Manage".Translate()))
+                if (RPR_UiStyle.DrawColoredButton(drugManageRect, "RimPrison.Manage".Translate()))
                 {
                     Find.WindowStack.Add(new Dialog_ManageDrugPolicies(group.drugPolicy));
                 }
@@ -555,7 +555,7 @@ namespace RimPrison.UI
                 string foodLabel = group.foodRestriction != null
                     ? group.foodRestriction.label
                     : "RimPrison.None".Translate();
-                if (Widgets.ButtonText(foodRect, foodLabel))
+                if (RPR_UiStyle.DrawColoredButton(foodRect, foodLabel))
                 {
                     List<FloatMenuOption> options = new List<FloatMenuOption>();
                     options.Add(new FloatMenuOption("RimPrison.None".Translate(), delegate
@@ -577,7 +577,7 @@ namespace RimPrison.UI
 
                 Rect foodManageRect = new Rect(col2X + dropdownW + innerGap, y + 2f,
                     manageBtnW, PolicyRowHeight - 4f);
-                if (Widgets.ButtonText(foodManageRect, "RimPrison.Manage".Translate()))
+                if (RPR_UiStyle.DrawColoredButton(foodManageRect, "RimPrison.Manage".Translate()))
                 {
                     Find.WindowStack.Add(new Dialog_ManageFoodPolicies(group.foodRestriction));
                 }
@@ -609,7 +609,7 @@ namespace RimPrison.UI
             int total = adultCount + childCount + babyCount;
 
             float colW = (rect.width - 24f) / 2f;
-            float rowH = 180f;
+            float rowH = 210f;
             float gap = 12f;
 
             // Population card
@@ -647,7 +647,9 @@ namespace RimPrison.UI
 
             // Factor contributions on the right
             float factorX = ringX + ringSize + 16f;
-            float factorW = suppInner.xMax - factorX;
+            float factorColW = (suppInner.xMax - factorX) * 0.55f;
+            float statusX = factorX + factorColW + 8f;
+            float statusW = suppInner.xMax - statusX;
             Text.Font = GameFont.Tiny;
             float factorY = suppInner.y + 28f;
             int turrets = SuppressionCalculator.CountTurretsInPrisonArea(map);
@@ -675,25 +677,25 @@ namespace RimPrison.UI
             float regimeF = 0f;
             float diffF = (1f - diffVal) * 8f;
 
-            DrawFactorLine(factorX, ref factorY, factorW, "RimPrison.SuppFactorBase", 50f);
-            DrawFactorLine(factorX, ref factorY, factorW, "RimPrison.SuppFactorTurrets", turretF);
-            DrawFactorLine(factorX, ref factorY, factorW, "RimPrison.SuppFactorColonists", guardF);
-            DrawFactorLine(factorX, ref factorY, factorW, "RimPrison.SuppFactorPrisoners", prisonerF);
-            DrawFactorLine(factorX, ref factorY, factorW, "RimPrison.SuppFactorMood", moodF);
-            DrawFactorLine(factorX, ref factorY, factorW, "RimPrison.SuppFactorHealth", healthF);
-            DrawFactorLine(factorX, ref factorY, factorW, "RimPrison.SuppFactorRegime", regimeF);
-            DrawFactorLine(factorX, ref factorY, factorW, "RimPrison.SuppFactorDifficulty", diffF);
+            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorBase", 50f);
+            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorTurrets", turretF);
+            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorColonists", guardF);
+            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorPrisoners", prisonerF);
+            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorMood", moodF);
+            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorHealth", healthF);
+            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorRegime", regimeF);
+            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorDifficulty", diffF);
 
-            factorY += 6f;
-            // Break status
+            // Break status on the right side of factors
+            float statusY = suppInner.y + 28f;
             bool breakAllowed = colonySupp < 50f;
             bool pbAllowed = colonySupp < 30f;
             GUI.color = breakAllowed ? new Color(0.8f, 0.3f, 0.3f) : new Color(0.3f, 0.8f, 0.3f);
-            Widgets.Label(new Rect(factorX, factorY, factorW, 16f),
+            Widgets.Label(new Rect(statusX, statusY, statusW, 20f),
                 breakAllowed ? "RimPrison.SuppBreakAllowed".Translate() : "RimPrison.SuppBreakBlocked".Translate());
-            factorY += 16f;
+            statusY += 20f;
             GUI.color = pbAllowed ? new Color(0.8f, 0.3f, 0.3f) : new Color(0.3f, 0.8f, 0.3f);
-            Widgets.Label(new Rect(factorX, factorY, factorW, 16f),
+            Widgets.Label(new Rect(statusX, statusY, statusW, 20f),
                 pbAllowed ? "RimPrison.SuppPrisonBreakAllowed".Translate() : "RimPrison.SuppPrisonBreakBlocked".Translate());
             GUI.color = Color.white;
             Text.Font = GameFont.Small;
@@ -758,6 +760,18 @@ namespace RimPrison.UI
             }
 
             y += 30f;
+            // Max debt — how far into debt prisoners can go for purchases
+            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrison.MaxDebt".Translate());
+            string debtBuf = RimPrisonMod.Settings.MaxDebtBuffer;
+            debtBuf = Widgets.TextField(new Rect(inner.x + 144f, y, 80f, 24f), debtBuf);
+            if (int.TryParse(debtBuf, out int d) && d >= 0 && d <= 99999 && d != RimPrisonMod.Settings.MaxDebt)
+            {
+                RimPrisonMod.Settings.MaxDebt = d;
+                RimPrisonMod.Settings.MaxDebtBuffer = debtBuf;
+                RimPrisonMod.Settings.Write();
+            }
+
+            y += 30f;
             // Daily allowance (already implemented)
             Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrison.DailyAllowance".Translate());
             string buf = RimPrisonMod.Settings.DailyAllowance.ToString();
@@ -792,9 +806,9 @@ namespace RimPrison.UI
         private static void DrawFactorLine(float x, ref float y, float width, string labelKey, float value)
         {
             string sign = value >= 0f ? "+" : "";
-            string text = labelKey.Translate(sign + value.ToString("F1") + "%");
-            Widgets.Label(new Rect(x, y, width, 16f), text);
-            y += 16f;
+            string text = labelKey.Translate(sign + value.ToString("F1"));
+            Widgets.Label(new Rect(x, y, width / 2f, 20f), text);
+            y += 20f;
         }
 
         // ======== Helpers ========

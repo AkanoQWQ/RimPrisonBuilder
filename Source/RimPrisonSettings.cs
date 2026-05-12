@@ -10,6 +10,8 @@ namespace RimPrison
         public int DailyAllowance = 0;
         public bool DoorAccessEnabled;
         public bool RestrictColonistWorkInPrisonArea;
+        public int MaxDebt = 200;
+        public string MaxDebtBuffer = "200";
 
         public override void ExposeData()
         {
@@ -19,6 +21,7 @@ namespace RimPrison
             Scribe_Values.Look(ref DailyAllowance, "DailyAllowance", 0);
             Scribe_Values.Look(ref DoorAccessEnabled, "DoorAccessEnabled");
             Scribe_Values.Look(ref RestrictColonistWorkInPrisonArea, "RestrictColonistWorkInPrisonArea");
+            Scribe_Values.Look(ref MaxDebt, "MaxDebt", 200);
         }
 
         public void DoSettingsWindowContents(Rect inRect)
@@ -49,6 +52,13 @@ namespace RimPrison
             listing.Gap(12f);
 
             listing.CheckboxLabeled("RimPrison.RestrictColonistWorkInPrisonArea".Translate(), ref RestrictColonistWorkInPrisonArea);
+
+            listing.Gap(12f);
+
+            listing.Label("RimPrison.MaxDebt".Translate());
+            MaxDebtBuffer = listing.TextEntry(MaxDebtBuffer);
+            if (int.TryParse(MaxDebtBuffer, out int d) && d >= 0 && d <= 99999)
+                MaxDebt = d;
 
             listing.End();
         }

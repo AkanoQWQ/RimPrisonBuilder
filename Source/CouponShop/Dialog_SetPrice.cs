@@ -1,3 +1,4 @@
+using RimPrison.UI;
 using UnityEngine;
 using Verse;
 
@@ -37,7 +38,7 @@ namespace RimPrison.CouponShop
             priceBuffer = Widgets.TextField(new Rect(130f, y, 80f, 28f), priceBuffer);
             y += 36f;
 
-            if (Widgets.ButtonText(new Rect(10f, y, 120f, 32f), "RimPrison.ConfirmPrice".Translate()))
+            if (RPR_UiStyle.DrawColoredButton(new Rect(10f, y, 120f, 32f), "RimPrison.ConfirmPrice".Translate()))
             {
                 if (int.TryParse(priceBuffer, out int price) && price >= 0)
                 {
@@ -46,7 +47,7 @@ namespace RimPrison.CouponShop
                 }
             }
 
-            if (Widgets.ButtonText(new Rect(140f, y, 120f, 32f), "CancelButton".Translate()))
+            if (RPR_UiStyle.DrawColoredButton(new Rect(140f, y, 120f, 32f), "CancelButton".Translate()))
             {
                 Close();
             }

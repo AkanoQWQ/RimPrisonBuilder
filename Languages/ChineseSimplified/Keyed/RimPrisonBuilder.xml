@@ -24,7 +24,7 @@
   <RimPrison.GrantCouponsTitle>发放粮票给 {0}</RimPrison.GrantCouponsTitle>
   <RimPrison.GrantCouponsDesc>请输入要发放的{0}数量：</RimPrison.GrantCouponsDesc>
   <RimPrison.ConfirmGrant>确认发放</RimPrison.ConfirmGrant>
-  <RimPrison.DailyAllowance>每日低保（粮票/天，0=关闭）</RimPrison.DailyAllowance>
+  <RimPrison.DailyAllowance>每日粮票低保</RimPrison.DailyAllowance>
   <RimPrison.OutfitTab>服装</RimPrison.OutfitTab>
   <RimPrison.DrugTab>成瘾品</RimPrison.DrugTab>
   <RimPrison.PoliciesTab>策略</RimPrison.PoliciesTab>
@@ -67,11 +67,20 @@
   <RimPrison.GroupCount>分组数量: {0}</RimPrison.GroupCount>
   <!-- Door Access -->
   <RimPrison.DoorAccess>门禁</RimPrison.DoorAccess>
+  <RimPrison.DoorAccessDesc>允许或禁止囚犯通过此门。启用后，囚犯只能通过标记为"允许"的门。</RimPrison.DoorAccessDesc>
+  <RimPrison.MaxDebt>最大负债</RimPrison.MaxDebt>
+  <RimPrison.MaxDebtDesc>囚犯可透支购买的最大额度。0=禁止透支。</RimPrison.MaxDebtDesc>
   <RimPrison.PrisonArea>监狱区域</RimPrison.PrisonArea>
   <RimPrison.CreatePrisonArea>创建监狱区域</RimPrison.CreatePrisonArea>
+  <RimPrison.ExpandPrisonArea>扩展监狱区域</RimPrison.ExpandPrisonArea>
+  <RimPrison.ExpandPrisonAreaDesc>划定要加入监狱区域的格子。</RimPrison.ExpandPrisonAreaDesc>
+  <RimPrison.ClearPrisonArea>清除监狱区域</RimPrison.ClearPrisonArea>
+  <RimPrison.ClearPrisonAreaDesc>划定要从监狱区域移除的格子。</RimPrison.ClearPrisonAreaDesc>
+  <RimPrison.NoPrisonArea>请先创建监狱区域</RimPrison.NoPrisonArea>
   <!-- Activity Log -->
   <RimPrison.ActivityLog>活动日志</RimPrison.ActivityLog>
   <RimPrison.ActivityLogEmpty>暂无活动记录。</RimPrison.ActivityLogEmpty>
   <RimPrison.LogAssignedToGroup>被分配到分组 {0}</RimPrison.LogAssignedToGroup>
   <RimPrison.LogOutfitChanged>服装策略已变更</RimPrison.LogOutfitChanged>
+  <RimPrison.LogBuyItem>购买了 {0}，花费 {1} 粮票</RimPrison.LogBuyItem>
 </LanguageData>

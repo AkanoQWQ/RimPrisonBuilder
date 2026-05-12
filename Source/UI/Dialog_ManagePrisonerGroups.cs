@@ -36,7 +36,8 @@ namespace RimPrison.UI
                 listing.Gap(4f);
             }
 
-            if (listing.ButtonText("RimPrison.NewGroup".Translate()))
+            Rect newGroupRect = listing.GetRect(30f);
+            if (RPR_UiStyle.DrawColoredButton(newGroupRect, "RimPrison.NewGroup".Translate()))
             {
                 string name = "RimPrison.DefaultGroupName".Translate() + " " + (manager.groups.Count + 1);
                 manager.groups.Add(new PrisonerGroup(name));

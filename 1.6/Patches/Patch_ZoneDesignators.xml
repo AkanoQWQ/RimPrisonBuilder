@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- Add PrisonArea expand/clear designators to the Zone architect category -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/DesignationCategoryDef[defName="Zone"]/specialDesignatorClasses</xpath>
+    <value>
+      <li>RimPrison.PrisonArea.Designator_AreaPrisonExpand</li>
+      <li>RimPrison.PrisonArea.Designator_AreaPrisonClear</li>
+    </value>
+  </Operation>
+</Patch>
