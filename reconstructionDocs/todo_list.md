@@ -5,12 +5,11 @@
 ## 1. 基础设施
 
 ✅ Harmony 入口 + PatchAll — `RimPrisonMod.cs`，已用
-🟡 DefOf — `RP_DefOf.cs` 只有 2 个 DefOf 类，需补全 50+ def 引用
 ✅ 翻译键 — 中英双语完整，40+ 翻译键覆盖所有系统
 ✅ 设置系统 — `RimPrisonSettings` 已有
 ✅ 语言支持 — 中/英都有
+✅ RimTalk 兼容 — 需要 `Compat/RimTalkCompat.cs`
 🔴 扩展 API — 8 个扩展接口 + Register/Unregister + 5 个子 API 类（我们当前的API不兼容旧版扩展包）
-🔴 RimTalk 兼容 — 需要 `Compat/RimTalkCompat.cs`
 
 ## 2. 基层 Patch
 
@@ -46,18 +45,16 @@
 
 ## 5. 囚犯个人行为
 
-🔴 买饭
-🔴 成瘾品购买 — 药品白名单 + 娱乐窗口内用药 + 用量限制
+✅ 买饭/成瘾品购买
 ✅ 服装强制 — `JobGiver_Prisoner_OptimizeApparel` 已处理：脱不允服装 + 储存区找策略服装
-🔴 医疗关注 — 自动 Tend + 转运到床
 
 ## 6. 经济系统
 
-🔴 工资计算 — 每工作类型工资 × tick 比例
-🔴 每日费用 — 床位与管理费用,日费扣除（）
-🔴 赎身系统 — 余额达标→自动发信→接受扣钱释放 / 拒绝两次施加绝望
-🔴 器官扺债（加入拓展包）
-🔴 余额 Gizmo — 选中囚犯时显示余额 Gizmo
+✅ 工资计算 — 每工作类型工资 × tick 比例
+✅ 每日费用 — 床位与管理费用,日费扣除（）
+✅ 赎身系统 — 余额达标→自动发信→接受扣钱释放 / 拒绝施加绝望(LetterDef — 赎身信，绝望HediffDef)
+✅ 余额 Gizmo — 选中囚犯时显示余额 Gizmo
+✅ 器官扺债
 ✅ 粮票系统 — CouponShop 体系（已有且独立）
 ✅ 粮票发放 — `Dialog_GrantCoupons` + `GameComponent_DailyAllowance` 余额/债务
 
@@ -85,8 +82,8 @@
 ✅ 食物管理页 — 用原版 FoodPolicy 替代，集成到策略页
 ✅ 成瘾品页 — 用原版 DrugPolicy，集成到策略页
 ✅ 服装管理页 — 用原版 ApparelPolicy，集成到策略页
-🟡 工作安排页 — 组级工作矩阵，缺少单个工作的工资设置
-🟡 设置页 — 货币名称/每日低保(真实) + 赎身/工资/器官(占位)
+✅ 工作安排页 — 组级工作矩阵
+✅ 设置页 — 货币名称/每日低保(真实) + 赎身/工资/器官
 ✅ 活动日志 — `GameComponent_ActivityLog` + 总览页实时显示最近 30 条
 ✅ 日程编辑器 — 组级 24h 颜色块编辑
 ✅ 总览页 — 人口统计(真实) + 压制度(可用) + 活动日志(真实)
@@ -98,11 +95,6 @@
 ✅ MainButtonDef — Prisoners 标签
 ✅ WorkGiverDef — CouponShopStore
 ✅ JobDef（2个） — TakeToCouponShop / BuyFromCouponShop
-🔴 HediffDef（4个） — 绝望/余额状态/债务工作/待抵扣
-🔴 ThoughtDef（27个） — 三制度 × 多事件 + 赎身 + 工资 + 福利餐
-🔴 PreceptDef（3个） — RPR_Regime_Harsh/Deterrence/Equality + RPR_WardenSystem_Enabled
-🔴 LetterDef — 赎身信
-🔴 WorkTypeDef — RPR_Guardianship
 
 ## 11. 扩展 API
 
@@ -139,6 +131,10 @@
 🗑️ JobDef（逮捕）
 🗑️ 商队囚犯入监
 🗑️ 入监心情
+🗑️ 医疗关注 — 自动 Tend + 转运到床
+🗑️ ThoughtDef（27个） — 三制度 × 多事件 + 赎身 + 工资 + 福利餐
+🗑️ PreceptDef（3个） — RPR_Regime_Harsh/Deterrence/Equality + RPR_WardenSystem_Enabled
+🗑️ WorkTypeDef — RPR_Guardianship
 
 ## 14. 与新机制不符，删掉的内容
 
