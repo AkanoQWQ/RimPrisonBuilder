@@ -102,4 +102,30 @@ Accept and release the prisoner?</RimPrison.RansomLetterText>
   <RimPrison.LogAssignedToGroup>Assigned to group {0}</RimPrison.LogAssignedToGroup>
   <RimPrison.LogOutfitChanged>Outfit policy changed</RimPrison.LogOutfitChanged>
   <RimPrison.LogBuyItem>Bought {0} for {1} coupons</RimPrison.LogBuyItem>
+  <RimPrison.HelpTab>Help</RimPrison.HelpTab>
+  <RimPrison.HelpTitle>RimPrison Help</RimPrison.HelpTitle>
+  <RimPrison.HelpContent>
+0. Prisoner UI Panel
+The tab bar can be dragged. The bottom-right corner of the UI panel can be resized.
+
+1. Schedule Tab
+Manage the schedule of your prisoner groups — same as vanilla schedule management.
+
+2. Work Tab
+Set work priorities per group — disable/prioritize, same logic as vanilla. The number below each work type is its hourly wage. Click the header box to set the hourly wage for that work type.
+
+3. Prisoner Management Tab
+Assign prisoners to groups (all settings are per-group), check their balance, and manually grant coupons. More prisoner info and panels will be added in the future.
+
+4. Policies Tab
+Manage apparel, drug, and food policies for prisoners. Prisoners strictly follow your policies. They will not buy forbidden drugs or food.
+
+5. Overview Tab
+Colony status and activity log. Suppression depends on prison management and treatment of prisoners. High suppression prevents prison breaks and mental breakdowns.
+
+6. Settings Tab
+Currency name, Max debt (prisoners cannot owe more than this), Daily allowance (coupons granted daily), Daily fee (bed and management fee — yes, you can exploit prisoners too...), Ransom amount (when a prisoner reaches this balance, they will request release — but the final decision is yours...), Debt harvest threshold (when debt exceeds this value, organs are automatically harvested. Set very high to disable.)
+
+7. Other
+In RimTalk, use {{ pawn.balance }} on a pawn object to get their current coupon balance.</RimPrison.HelpContent>
 </LanguageData>

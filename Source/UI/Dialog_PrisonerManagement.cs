@@ -883,7 +883,10 @@ namespace RimPrison.UI
                 new TabRecord("RimPrison.OverviewTab".Translate(),
                     delegate { curTab = 4; }, () => curTab == 4),
                 new TabRecord("RimPrison.SettingsTab".Translate(),
-                    delegate { curTab = 5; }, () => curTab == 5)
+                    delegate { curTab = 5; }, () => curTab == 5),
+                new TabRecord("RimPrison.HelpTab".Translate(),
+                    delegate { Find.WindowStack.Add(new Dialog_RimPrisonHelp()); },
+                    () => false)
             };
         }
     }
