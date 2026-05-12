@@ -9,7 +9,7 @@
 ✅ 翻译键 — 中英双语完整，40+ 翻译键覆盖所有系统
 ✅ 设置系统 — `RimPrisonSettings` 已有
 ✅ 语言支持 — 中/英都有
-✅ 扩展 API — 8 个扩展接口 + Register/Unregister + 5 个子 API 类
+🔴 扩展 API — 8 个扩展接口 + Register/Unregister + 5 个子 API 类（我们当前的API不兼容旧版扩展包）
 🔴 RimTalk 兼容 — 需要 `Compat/RimTalkCompat.cs`
 
 ## 2. 基层 Patch
@@ -29,17 +29,14 @@
 ✅ 日程覆写 — 通过 ApplyGroupSettings 直接写 timetable，无需 Patch
 ✅ 门禁 — `Patch_DoorAccess.cs`，PawnCanOpen 检查 Comp_DoorAccess
 ✅ 压制度→越狱/崩溃 — `Patch_SuppressionBreakThresholds.cs`
-🔴 婴儿保育路由 — 婴儿喂食/安置/穿衣 Job 路由到囚犯保育员
 
 ## 3. 数据模型 (ThingComp / GameComponent)
 
-🔴 囚犯核心数据 — `CompPrisonerPolicy`：balance, debt, laborEnabled, workPriorities, payroll
 ✅ 工作 tick 追踪 — `CompWorkTracker`
-🟡 日程数据 — `PrisonerGroup.times` 组级 24h
+✅ 日程数据 — `PrisonerGroup.times` 组级 24h
 ✅ 门禁配置 — `Comp_DoorAccess`，单一 `allowPrisoners` bool
 ✅ 压制度快照 — `GameComponent_Suppression`，每 2000 tick 重算
 ✅ 活动日志 — `GameComponent_ActivityLog`，500 条环形缓冲
-🔴 每日结算 — `GameComponent_DailyCycle`，发薪 + 日费扣除（依赖 CompPrisonerPolicy）
 ✅ 监狱区域 — `Area_Prison`（手动创建，无自动创建）
 ✅ 服装/成瘾品/食物策略 — `PrisonerGroup` 已集成原版 Policy + 策略页 UI
 
@@ -52,20 +49,17 @@
 🔴 买饭
 🔴 成瘾品购买 — 药品白名单 + 娱乐窗口内用药 + 用量限制
 ✅ 服装强制 — `JobGiver_Prisoner_OptimizeApparel` 已处理：脱不允服装 + 储存区找策略服装
-🔴 婴儿喂食 — 保育员喂食 + 乳房/奶瓶/特殊食物 + 安置 + 穿衣
-🔴 婴儿床管理 — 自动分配/收回监狱婴儿床
 🔴 医疗关注 — 自动 Tend + 转运到床
-🔴 紧急需求恢复 — 食物<5%强制进食 / 休息<5%强制睡觉
-🔴 互动锁 — 防止多个殖民者同时处理同一囚犯
 
 ## 6. 经济系统
 
-🔴 余额/债务 — `CompPrisonerPolicy` 存储，`ChargeBalanceOrAddDebt`
-🔴 工资计算 — 每工作类型工资率 × tick 比例
-🔴 每日费用 — 食物 8 + 床位 4/威慑 + 放风 3/高压
+🔴 工资计算 — 每工作类型工资 × tick 比例
+🔴 每日费用 — 床位与管理费用,日费扣除（）
 🔴 赎身系统 — 余额达标→自动发信→接受扣钱释放 / 拒绝两次施加绝望
+🔴 器官扺债（加入拓展包）
+🔴 余额 Gizmo — 选中囚犯时显示余额 Gizmo
 ✅ 粮票系统 — CouponShop 体系（已有且独立）
-✅ 粮票发放 — `Dialog_GrantCoupons` + `GameComponent_DailyAllowance`
+✅ 粮票发放 — `Dialog_GrantCoupons` + `GameComponent_DailyAllowance` 余额/债务
 
 ## 7. 监狱制度系统
 
@@ -81,7 +75,6 @@
 ## 8. 门禁
 
 ✅ 门控 Gizmo — 选中门时显示 Gizmo，单一允许/禁止按钮
-🔴 门信息面板 — 显示当前门的权限摘要
 
 ## 9. UI
 
@@ -95,8 +88,7 @@
 🟡 工作安排页 — 组级工作矩阵，缺少单个工作的工资设置
 🟡 设置页 — 货币名称/每日低保(真实) + 赎身/工资/器官(占位)
 ✅ 活动日志 — `GameComponent_ActivityLog` + 总览页实时显示最近 30 条
-🟡 日程编辑器 — 组级 24h 颜色块编辑，无拖拽/动画
-🔴 余额 Gizmo — 选中囚犯时显示余额 Gizmo
+✅ 日程编辑器 — 组级 24h 颜色块编辑
 ✅ 总览页 — 人口统计(真实) + 压制度(可用) + 活动日志(真实)
 
 ## 10. XML Def
@@ -122,7 +114,13 @@
 ✅ RimPrisonFinanceApi
 ✅ RimPrisonStateApi
 
-## 12. 非首个发布版内容
+## 12.其它
+
+🔴 婴儿喂食 — 保育员喂食 + 乳房/奶瓶/特殊食物 + 安置 + 穿衣
+🔴 婴儿床管理 — 自动分配/收回监狱婴儿床
+🔴 婴儿保育路由 — 婴儿喂食/安置/穿衣 Job 路由到囚犯保育员
+
+## 13. 非首个发布版内容
 
 🗑️ Meme 支持
 🗑️ MemeDef — RPR_PrisonMeme
@@ -130,7 +128,6 @@
 🗑️ 典狱长 Precept
 🗑️ 文化同步
 🗑️ 囚犯心情 ThoughtWorker（7 个）
-🗑️ 器官扺债（加入拓展包）
 🗑️ PrisonerDied 心情
 🗑️ 工作类型解锁
 🗑️ 每日发放（先抵债再入账——首发版即时入账）
@@ -143,18 +140,9 @@
 🗑️ 商队囚犯入监
 🗑️ 入监心情
 
-## 13. 与新机制不符，删掉的内容
+## 14. 与新机制不符，删掉的内容
 
 🗑️ 进食扣费（我们使用商店购物机制，不需要自动扣费）
-
----
-
-## 推荐开发顺序
-
-1. **Phase 1 — 地基 ✅**：Def / 基础设施 / UI 配色常量 / 重命名 RimPrison / 扩展 API
-2. **Phase 2 — 核心 Patch ✅**：食物限制 / 物品解禁 / 门禁 / 压制度 / 日程覆写
-3. **Phase 3 — 经济**：`CompPrisonerPolicy`（余额/债务/工资）→ 每日结算 → 赎身
-4. **Phase 4 — UI 收尾**：设置页完善 / 余额 Gizmo / 门信息面板 / DefOf 补齐
-5. **Phase 5 — XML Def**：HediffDef / ThoughtDef / LetterDef / WorkTypeDef
-6. **Phase 6 — 囚犯行为**：买饭 / 成瘾品购买 / 医疗关注 / 互动锁
-7. **Phase 7 — API + Compat**：RimTalk 兼容
+🗑️ 囚犯核心数据 — `CompPrisonerPolicy`：balance, debt, laborEnabled, workPriorities, payroll（我们已经有很多数据了，不是很清楚AI列的什么）
+🗑️ 紧急需求恢复 — 食物<5%强制进食 / 休息<5%强制睡觉（原版没有这种保底吗？我们发现需要了再加）
+🗑️ 互动锁 — 防止多个殖民者同时处理同一囚犯（需要再加，目前没发现相关bug）
