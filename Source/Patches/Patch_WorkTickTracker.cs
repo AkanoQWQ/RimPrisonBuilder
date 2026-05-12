@@ -12,25 +12,19 @@ namespace RimPrison.Patches
         private static void Postfix(JobDriver __instance)
         {
             Pawn pawn = __instance.pawn;
-            if (pawn == null)
-            {
-                return;
-            }
-            if (!PrisonLaborUtility.IsLaborEnabled(pawn))
-            {
-                return;
-            }
+            if (pawn == null) return;
+            if (!PrisonLaborUtility.IsLaborEnabled(pawn)) return;
+
             // Filter job like "Rest/GetFood"
             // Of course you can't get paid for eating!
-            if (pawn.CurJob?.workGiverDef == null)
-            {
-                return;
-            }
+            var workGiverDef = pawn.CurJob?.workGiverDef;
+            if (workGiverDef == null) return;
+
             var comp = pawn.TryGetComp<CompWorkTracker>();
-            if (comp != null)
-            {
-                comp.Notify_WorkTick();
-            }
+            if (comp == null) return;
+
+            string wtName = workGiverDef.workType?.defName;
+            comp.Notify_WorkTick(wtName);
         }
     }
 }

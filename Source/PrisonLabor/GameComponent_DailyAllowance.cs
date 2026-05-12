@@ -3,9 +3,7 @@ using Verse;
 
 namespace RimPrison.PrisonLabor
 {
-    // Grants daily coupon allowance to all prisoners at midnight (hour 0).
-    // Uses day-boundary detection so it fires at most once per in-game day.
-    // [OPTIMIZE] check every tick, not elegant
+    // Grants daily coupon allowance and deducts daily fee at midnight (hour 0).
     public class GameComponent_DailyAllowance : GameComponent
     {
         private int lastGrantDay = -1;
@@ -17,7 +15,8 @@ namespace RimPrison.PrisonLabor
             base.GameComponentTick();
 
             int allowance = RimPrisonMod.Settings.DailyAllowance;
-            if (allowance <= 0) return;
+            int fee = RimPrisonMod.Settings.DailyFee;
+            if (allowance <= 0 && fee <= 0) return;
 
             int currentDay = Find.TickManager.TicksGame / GenDate.TicksPerDay;
             if (currentDay <= lastGrantDay) return;
@@ -26,10 +25,9 @@ namespace RimPrison.PrisonLabor
             foreach (Pawn pawn in PawnsFinder.AllMaps_PrisonersOfColony)
             {
                 var comp = pawn.TryGetComp<CompWorkTracker>();
-                if (comp != null)
-                {
-                    comp.earnedCoupons += allowance;
-                }
+                if (comp == null) continue;
+                comp.earnedCoupons += allowance;
+                comp.earnedCoupons -= fee;
             }
         }
 

@@ -211,8 +211,8 @@ namespace RimPrison.UI
             }
 
             float rowHeaderW = 140f;
-            float colWidth = 64f;
-            float headerH = 42f;
+            float colWidth = 68f;
+            float headerH = 54f;
             float rowH = 28f;
             float canvasW = Math.Max(rect.width - 16f, rowHeaderW + workTypes.Count * colWidth);
             float canvasH = Math.Max(rect.height, headerH + groups.Count * rowH);
@@ -226,10 +226,22 @@ namespace RimPrison.UI
                 Widgets.DrawBoxSolid(hdr, new Color(0.16f, 0.16f, 0.18f, 0.92f));
                 Text.Font = GameFont.Tiny;
                 Text.Anchor = TextAnchor.MiddleCenter;
-                Widgets.Label(new Rect(hdr.x, hdr.y + 2f, hdr.width, 20f),
-                    workTypes[w].labelShort.CapitalizeFirst());
-                Widgets.DrawBoxSolid(new Rect(hdr.x + 6f, hdr.y + 22f, hdr.width - 12f, 1f),
+                var wt = workTypes[w];
+                Widgets.Label(new Rect(hdr.x, hdr.y + 2f, hdr.width, 18f),
+                    wt.labelShort.CapitalizeFirst());
+                Widgets.DrawBoxSolid(new Rect(hdr.x + 6f, hdr.y + 21f, hdr.width - 12f, 1f),
                     new Color(1f, 1f, 1f, 0.12f));
+                // Wage display below separator
+                float wage = RimPrisonMod.Settings.GetWorkTypeWage(wt.defName);
+                GUI.color = new Color(0.72f, 0.78f, 0.7f, 0.9f);
+                Widgets.Label(new Rect(hdr.x, hdr.y + 24f, hdr.width, 18f),
+                    wage.ToString("F1"));
+                GUI.color = Color.white;
+                // Click header to edit wage
+                if (Widgets.ButtonInvisible(hdr))
+                {
+                    Find.WindowStack.Add(new Dialog_SetWage(wt));
+                }
                 Text.Font = GameFont.Small;
                 Text.Anchor = TextAnchor.UpperLeft;
             }
@@ -762,12 +774,11 @@ namespace RimPrison.UI
             y += 30f;
             // Max debt — how far into debt prisoners can go for purchases
             Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrison.MaxDebt".Translate());
-            string debtBuf = RimPrisonMod.Settings.MaxDebtBuffer;
+            string debtBuf = RimPrisonMod.Settings.MaxDebt.ToString();
             debtBuf = Widgets.TextField(new Rect(inner.x + 144f, y, 80f, 24f), debtBuf);
             if (int.TryParse(debtBuf, out int d) && d >= 0 && d <= 99999 && d != RimPrisonMod.Settings.MaxDebt)
             {
                 RimPrisonMod.Settings.MaxDebt = d;
-                RimPrisonMod.Settings.MaxDebtBuffer = debtBuf;
                 RimPrisonMod.Settings.Write();
             }
 
@@ -779,6 +790,39 @@ namespace RimPrison.UI
             if (int.TryParse(buf, out int val) && val >= 0 && val <= 9999 && val != RimPrisonMod.Settings.DailyAllowance)
             {
                 RimPrisonMod.Settings.DailyAllowance = val;
+                RimPrisonMod.Settings.Write();
+            }
+
+            y += 30f;
+            // Daily fee — 床位和管理费
+            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrison.DailyFee".Translate());
+            string feeBuf = RimPrisonMod.Settings.DailyFee.ToString();
+            feeBuf = Widgets.TextField(new Rect(inner.x + 144f, y, 60f, 24f), feeBuf);
+            if (int.TryParse(feeBuf, out int fee) && fee >= 0 && fee <= 9999 && fee != RimPrisonMod.Settings.DailyFee)
+            {
+                RimPrisonMod.Settings.DailyFee = fee;
+                RimPrisonMod.Settings.Write();
+            }
+
+            y += 30f;
+            // Ransom amount
+            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrison.RansomAmount".Translate());
+            string ransomBuf = RimPrisonMod.Settings.RansomAmount.ToString();
+            ransomBuf = Widgets.TextField(new Rect(inner.x + 144f, y, 80f, 24f), ransomBuf);
+            if (int.TryParse(ransomBuf, out int r) && r >= 0 && r <= 99999 && r != RimPrisonMod.Settings.RansomAmount)
+            {
+                RimPrisonMod.Settings.RansomAmount = r;
+                RimPrisonMod.Settings.Write();
+            }
+
+            y += 30f;
+            // Debt harvest threshold
+            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrison.DebtHarvestThreshold".Translate());
+            string harvestBuf = RimPrisonMod.Settings.DebtHarvestThreshold.ToString();
+            harvestBuf = Widgets.TextField(new Rect(inner.x + 144f, y, 80f, 24f), harvestBuf);
+            if (int.TryParse(harvestBuf, out int hv) && hv >= 0 && hv <= 99999 && hv != RimPrisonMod.Settings.DebtHarvestThreshold)
+            {
+                RimPrisonMod.Settings.DebtHarvestThreshold = hv;
                 RimPrisonMod.Settings.Write();
             }
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Despair hediff — applied when prisoner rejects ransom.
+       Mood -20, lasts 30 days. -->
+  <HediffDef>
+    <defName>RPR_Despair</defName>
+    <label>RimPrison.DespairHediffLabel</label>
+    <description>RimPrison.DespairHediffDesc</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.6,0.15,0.15,1)</defaultLabelColor>
+    <isBad>true</isBad>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>1800000</disappearsAfterTicks><!-- 30 days -->
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <label>RimPrison.DespairHediffStage</label>
+        <becomeVisible>true</becomeVisible>
+      </li>
+    </stages>
+  </HediffDef>
+</Defs>

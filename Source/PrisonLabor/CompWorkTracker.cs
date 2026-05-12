@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -15,28 +16,36 @@ namespace RimPrison.PrisonLabor
     public class CompWorkTracker : ThingComp
     {
         public int earnedCoupons;
-        private int workTickCounter;
+        public int lastDebtHarvestTick;
+        private float partialCoupon;
+        // workTickCounter removed — now uses fractional accumulation
+        // so per-work-type wage multipliers apply precisely.
 
         public CompProperties_WorkTracker Props => (CompProperties_WorkTracker)props;
 
-        private int TicksPerCoupon
+        public void Notify_WorkTick(string workTypeDefName)
         {
-            get
+            float wage = RimPrisonMod.Settings.GetWorkTypeWage(workTypeDefName);
+            float mult = RimPrisonMod.Settings.GlobalWageMultiplier * wage;
+            if (mult <= 0f) mult = 0.1f;
+
+            partialCoupon += mult / GenDate.TicksPerHour;
+            if (partialCoupon >= 1f)
             {
-                float rate = RimPrisonMod.Settings.CouponsPerHour;
-                if (rate <= 0f) rate = 1f;
-                int tpc = Mathf.RoundToInt(GenDate.TicksPerHour / rate);
-                return tpc < 1 ? 1 : tpc;
+                int add = Mathf.FloorToInt(partialCoupon);
+                earnedCoupons += add;
+                partialCoupon -= add;
             }
         }
 
-        public void Notify_WorkTick()
+        public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
-            workTickCounter++;
-            if (workTickCounter >= TicksPerCoupon)
+            foreach (var g in base.CompGetGizmosExtra())
+                yield return g;
+
+            if (parent is Pawn pawn && pawn.IsPrisonerOfColony)
             {
-                workTickCounter -= TicksPerCoupon;
-                earnedCoupons++;
+                yield return new Gizmo_Balance(pawn, this);
             }
         }
 
@@ -44,7 +53,8 @@ namespace RimPrison.PrisonLabor
         {
             base.PostExposeData();
             Scribe_Values.Look(ref earnedCoupons, "earnedCoupons");
-            Scribe_Values.Look(ref workTickCounter, "workTickCounter");
+            Scribe_Values.Look(ref partialCoupon, "partialCoupon");
+            Scribe_Values.Look(ref lastDebtHarvestTick, "lastDebtHarvestTick");
         }
     }
 }

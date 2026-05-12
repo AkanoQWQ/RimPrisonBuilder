@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <LetterDef>
+    <defName>RPR_RansomLetter</defName>
+    <label>ransom</label>
+    <letterClass>RimPrison.PrisonLabor.ChoiceLetter_Ransom</letterClass>
+  </LetterDef>
+</Defs>

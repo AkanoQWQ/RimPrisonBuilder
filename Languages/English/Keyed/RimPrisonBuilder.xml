@@ -19,7 +19,26 @@
   <RimPrison.NoLaborPrisoners>No labor-enabled prisoners.</RimPrison.NoLaborPrisoners>
   <RimPrison.NoGroups>No prisoner groups. Create groups and assign prisoners in the "Prisoners" tab first.</RimPrison.NoGroups>
   <RimPrison.WorkPriorityBlocked>{0} cannot be set to {1}. The prisoner is incapable of this work type.</RimPrison.WorkPriorityBlocked>
-  <RimPrison.CouponsPerHour>Coupons per hour: {0}</RimPrison.CouponsPerHour>
+  <RimPrison.GlobalWageMultiplier>Global wage multiplier: {0}</RimPrison.GlobalWageMultiplier>
+  <RimPrison.DailyFee>Bed and management fee</RimPrison.DailyFee>
+  <RimPrison.RansomAmount>Ransom amount</RimPrison.RansomAmount>
+  <RimPrison.InDebt>In debt</RimPrison.InDebt>
+  <RimPrison.SetWageTitle>{0} wage</RimPrison.SetWageTitle>
+  <RimPrison.WageBaseRate>Base wage (coupons/hr)</RimPrison.WageBaseRate>
+  <RimPrison.ConfirmWage>Confirm</RimPrison.ConfirmWage>
+  <RimPrison.RansomLetterLabel>{0} requests ransom</RimPrison.RansomLetterLabel>
+  <RimPrison.RansomLetterText>{0} has saved enough to pay the {1} coupon ransom (balance: {2} {3}).
+
+Accept and release the prisoner?</RimPrison.RansomLetterText>
+  <RimPrison.RansomAccept>Accept (release {0}, spend {1} coupons)</RimPrison.RansomAccept>
+  <RimPrison.RansomReject>Reject ({0} will fall into despair)</RimPrison.RansomReject>
+  <RimPrison.LogRansomAccepted>Ransom accepted, spent {0} coupons</RimPrison.LogRansomAccepted>
+  <RimPrison.LogRansomRejected>Ransom rejected, fell into despair</RimPrison.LogRansomRejected>
+  <RimPrison.DespairHediffLabel>Despair</RimPrison.DespairHediffLabel>
+  <RimPrison.DespairHediffDesc>Has lost all hope of freedom.</RimPrison.DespairHediffDesc>
+  <RimPrison.DespairHediffStage>Despair</RimPrison.DespairHediffStage>
+  <RimPrison.DespairThoughtLabel>Despair</RimPrison.DespairThoughtLabel>
+  <RimPrison.DespairThoughtDesc>I have given up all hope of ever being freed.</RimPrison.DespairThoughtDesc>
   <RimPrison.GrantCoupons>Grant</RimPrison.GrantCoupons>
   <RimPrison.GrantCouponsTitle>Grant coupons to {0}</RimPrison.GrantCouponsTitle>
   <RimPrison.GrantCouponsDesc>Enter the amount of {0} to grant:</RimPrison.GrantCouponsDesc>

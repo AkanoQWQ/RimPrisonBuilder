@@ -12,7 +12,7 @@ namespace RimPrison.DoorAccess
         public override void PostExposeData()
         {
             base.PostExposeData();
-            Scribe_Values.Look(ref allowPrisoners, "allowPrisoners");
+            Scribe_Values.Look(ref allowPrisoners, "allowPrisoners", false);
         }
     }
 

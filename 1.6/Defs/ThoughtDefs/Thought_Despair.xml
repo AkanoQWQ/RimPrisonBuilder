@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThoughtDef>
+    <defName>RPR_Despair</defName>
+    <workerClass>RimPrison.PrisonLabor.ThoughtWorker_Despair</workerClass>
+    <stages>
+      <li>
+        <label>RimPrison.DespairThoughtLabel</label>
+        <description>RimPrison.DespairThoughtDesc</description>
+        <baseMoodEffect>-20</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>

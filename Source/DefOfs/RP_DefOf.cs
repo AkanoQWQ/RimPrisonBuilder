@@ -25,4 +25,26 @@ namespace RimPrison.DefOfs
             DefOfHelper.EnsureInitializedInCtor(typeof(RP_JobDefOf));
         }
     }
+
+    [DefOf]
+    public static class RP_HediffDefOf
+    {
+        public static HediffDef RPR_Despair;
+
+        static RP_HediffDefOf()
+        {
+            DefOfHelper.EnsureInitializedInCtor(typeof(RP_HediffDefOf));
+        }
+    }
+
+    [DefOf]
+    public static class RP_LetterDefOf
+    {
+        public static LetterDef RPR_RansomLetter;
+
+        static RP_LetterDefOf()
+        {
+            DefOfHelper.EnsureInitializedInCtor(typeof(RP_LetterDefOf));
+        }
+    }
 }
