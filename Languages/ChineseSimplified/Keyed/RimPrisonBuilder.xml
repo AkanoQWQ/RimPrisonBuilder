@@ -20,7 +20,7 @@
   <RimPrison.NoGroups>没有囚犯分组。请先在"囚犯管理"标签页中创建分组并分配囚犯。</RimPrison.NoGroups>
   <RimPrison.WorkPriorityBlocked>{0}无法被设置为{1}。该囚犯不具备此工作能力。</RimPrison.WorkPriorityBlocked>
   <RimPrison.CouponsPerHour>每小时获得粮票数量: {0}</RimPrison.CouponsPerHour>
-  <RimPrison.GrantCoupons>发放</RimPrison.GrantCoupons>
+  <RimPrison.GrantCoupons>发放粮票</RimPrison.GrantCoupons>
   <RimPrison.GrantCouponsTitle>发放粮票给 {0}</RimPrison.GrantCouponsTitle>
   <RimPrison.GrantCouponsDesc>请输入要发放的{0}数量：</RimPrison.GrantCouponsDesc>
   <RimPrison.ConfirmGrant>确认发放</RimPrison.ConfirmGrant>
@@ -39,24 +39,39 @@
   <RimPrison.ChildCount>儿童: {0}</RimPrison.ChildCount>
   <RimPrison.BabyCount>婴儿: {0}</RimPrison.BabyCount>
   <RimPrison.Suppression>压制度</RimPrison.Suppression>
-  <RimPrison.SuppressionPlaceholder>压制度系统尚未实现。\n将显示压制度弧形图、越狱风险等。</RimPrison.SuppressionPlaceholder>
-  <RimPrison.SchedulePreview>日程预览（第一组）</RimPrison.SchedulePreview>
-  <RimPrison.ActivityLog>活动日志</RimPrison.ActivityLog>
-  <RimPrison.ActivityLogPlaceholder>活动日志尚未实现。\n将显示囚犯近期事件记录。</RimPrison.ActivityLogPlaceholder>
-  <!-- Food tab -->
-  <RimPrison.FoodTab>食物</RimPrison.FoodTab>
+  <RimPrison.SuppressionValue>压制度: {0}%</RimPrison.SuppressionValue>
+  <RimPrison.SuppFactorBase>基础: {0}%</RimPrison.SuppFactorBase>
+  <RimPrison.SuppFactorTurrets>炮塔: {0}%</RimPrison.SuppFactorTurrets>
+  <RimPrison.SuppFactorColonists>守卫: {0}%</RimPrison.SuppFactorColonists>
+  <RimPrison.SuppFactorPrisoners>囚犯: {0}%</RimPrison.SuppFactorPrisoners>
+  <RimPrison.SuppFactorRegime>制度: {0}</RimPrison.SuppFactorRegime>
+  <RimPrison.SuppFactorMood>心情: {0}%</RimPrison.SuppFactorMood>
+  <RimPrison.SuppFactorHealth>健康: {0}%</RimPrison.SuppFactorHealth>
+  <RimPrison.SuppFactorDifficulty>难度: {0}%</RimPrison.SuppFactorDifficulty>
+  <RimPrison.SuppBreakAllowed>精神崩溃: 可能</RimPrison.SuppBreakAllowed>
+  <RimPrison.SuppBreakBlocked>精神崩溃: 已阻止</RimPrison.SuppBreakBlocked>
+  <RimPrison.SuppPrisonBreakAllowed>越狱: 可能</RimPrison.SuppPrisonBreakAllowed>
+  <RimPrison.SuppPrisonBreakBlocked>越狱: 已阻止</RimPrison.SuppPrisonBreakBlocked>
+  <RimPrison.RestrictColonistWorkInPrisonArea>限制殖民者在监狱区域内工作</RimPrison.RestrictColonistWorkInPrisonArea>
+  <RimPrison.DoorAccessEnabled>启用囚犯门禁控制</RimPrison.DoorAccessEnabled>
+  <RimPrison.DoorAccessAllowed>允许</RimPrison.DoorAccessAllowed>
+  <RimPrison.DoorAccessBlocked>禁止</RimPrison.DoorAccessBlocked>
   <RimPrison.FoodManagement>食物管理</RimPrison.FoodManagement>
-  <RimPrison.FoodPlaceholder>食物管理系统尚未实现。\n将允许配置四档餐标（福利/婴儿/标准/精致），每档可设置食物白名单和价格。</RimPrison.FoodPlaceholder>
   <!-- Settings tab -->
   <RimPrison.SettingsTab>设置</RimPrison.SettingsTab>
   <RimPrison.Settings>设置</RimPrison.Settings>
   <RimPrison.CurrencyName>货币名称</RimPrison.CurrencyName>
-  <RimPrison.RansomPrice>赎身价格</RimPrison.RansomPrice>
-  <RimPrison.PayrollMode>工资发放模式</RimPrison.PayrollMode>
-  <RimPrison.DebtHarvest>器官抵债</RimPrison.DebtHarvest>
   <RimPrison.GlobalStatus>全局状态</RimPrison.GlobalStatus>
   <RimPrison.TotalPrisoners>囚犯总数: {0}</RimPrison.TotalPrisoners>
   <RimPrison.LaborEnabledCount>劳动启用: {0}</RimPrison.LaborEnabledCount>
   <RimPrison.GroupCount>分组数量: {0}</RimPrison.GroupCount>
-  <RimPrison.TodoNoLogic>[TODO] 尚未实现</RimPrison.TodoNoLogic>
+  <!-- Door Access -->
+  <RimPrison.DoorAccess>门禁</RimPrison.DoorAccess>
+  <RimPrison.PrisonArea>监狱区域</RimPrison.PrisonArea>
+  <RimPrison.CreatePrisonArea>创建监狱区域</RimPrison.CreatePrisonArea>
+  <!-- Activity Log -->
+  <RimPrison.ActivityLog>活动日志</RimPrison.ActivityLog>
+  <RimPrison.ActivityLogEmpty>暂无活动记录。</RimPrison.ActivityLogEmpty>
+  <RimPrison.LogAssignedToGroup>被分配到分组 {0}</RimPrison.LogAssignedToGroup>
+  <RimPrison.LogOutfitChanged>服装策略已变更</RimPrison.LogOutfitChanged>
 </LanguageData>

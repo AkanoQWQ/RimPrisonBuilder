@@ -20,10 +20,10 @@ namespace RimPrison.UI
         private Vector2 workScrollPos;
         private Vector2 schedScrollPos;
         private Vector2 prisonerScrollPos;
+        private Vector2 overviewScrollPos;
 
         // Cached filtered work types (no Warden, no Hunting)
         private static List<WorkTypeDef> cachedWorkTypes;
-        private static int cachedWorkTypesGameTick = -1;
 
         private const float TabVisualHeight = 35f;
         private const float WorkCellSize = 25f;
@@ -210,107 +210,93 @@ namespace RimPrison.UI
                 return;
             }
 
-            // Dynamic column width to fit the widest label
-            float maxLabelW = 0f;
-            Text.Font = GameFont.Tiny;
-            for (int w = 0; w < workTypes.Count; w++)
-            {
-                float lw = Text.CalcSize(workTypes[w].labelShort.CapitalizeFirst()).x;
-                if (lw > maxLabelW) maxLabelW = lw;
-            }
-            Text.Font = GameFont.Small;
-            float colWidth = Mathf.Max(WorkCellSize, maxLabelW + WorkColPadding);
-
-            float totalWidth = WorkLabelWidth + workTypes.Count * colWidth;
-            float totalHeight = WorkHeaderHeight + groups.Count * WorkCellSize;
-
-            Rect viewRect = new Rect(0f, 0f, totalWidth - 16f, totalHeight);
+            float rowHeaderW = 140f;
+            float colWidth = 64f;
+            float headerH = 42f;
+            float rowH = 28f;
+            float canvasW = Math.Max(rect.width - 16f, rowHeaderW + workTypes.Count * colWidth);
+            float canvasH = Math.Max(rect.height, headerH + groups.Count * rowH);
+            Rect viewRect = new Rect(0f, 0f, canvasW, canvasH);
             Widgets.BeginScrollView(rect, ref workScrollPos, viewRect);
 
-            // Column headers — horizontal text, centered
-            Text.Font = GameFont.Tiny;
+            // Column headers
             for (int w = 0; w < workTypes.Count; w++)
             {
-                Rect headerRect = new Rect(
-                    WorkLabelWidth + w * colWidth, 0f, colWidth, WorkHeaderHeight);
+                Rect hdr = new Rect(rowHeaderW + w * colWidth, 0f, colWidth - 1f, headerH);
+                Widgets.DrawBoxSolid(hdr, new Color(0.16f, 0.16f, 0.18f, 0.92f));
+                Text.Font = GameFont.Tiny;
                 Text.Anchor = TextAnchor.MiddleCenter;
-                Widgets.Label(headerRect, workTypes[w].labelShort.CapitalizeFirst());
+                Widgets.Label(new Rect(hdr.x, hdr.y + 2f, hdr.width, 20f),
+                    workTypes[w].labelShort.CapitalizeFirst());
+                Widgets.DrawBoxSolid(new Rect(hdr.x + 6f, hdr.y + 22f, hdr.width - 12f, 1f),
+                    new Color(1f, 1f, 1f, 0.12f));
+                Text.Font = GameFont.Small;
+                Text.Anchor = TextAnchor.UpperLeft;
             }
-            // Vertical divider line after headers
-            GUI.color = new Color(1f, 1f, 1f, 0.3f);
-            Widgets.DrawLineHorizontal(0f, WorkHeaderHeight, totalWidth);
-            GUI.color = Color.white;
-            Text.Anchor = TextAnchor.UpperLeft;
-            Text.Font = GameFont.Small;
 
             // Group rows
             for (int g = 0; g < groups.Count; g++)
             {
                 var group = groups[g];
-                float y = WorkHeaderHeight + g * WorkCellSize;
+                float y = headerH + g * rowH;
+                Widgets.DrawBoxSolid(new Rect(0f, y, canvasW, rowH - 1f),
+                    g % 2 == 0 ? new Color(1f, 1f, 1f, 0.02f) : new Color(0f, 0f, 0f, 0.06f));
 
-                // Group label
-                Rect labelRect = new Rect(0f, y, WorkLabelWidth, WorkCellSize);
+                Rect labelRect = new Rect(4f, y + 2f, rowHeaderW - 8f, rowH - 4f);
                 Widgets.Label(labelRect, group.name);
 
-                // Priority cells
                 for (int w = 0; w < workTypes.Count; w++)
                 {
-                    Rect cellRect = new Rect(
-                        WorkLabelWidth + w * colWidth, y, colWidth, WorkCellSize);
-                    DrawWorkCell(cellRect, group, workTypes[w]);
+                    Rect cell = new Rect(rowHeaderW + w * colWidth + 2f, y + 2f,
+                        colWidth - 4f, rowH - 4f);
+                    DrawWorkCell(cell, group, workTypes[w]);
                 }
             }
-
             Widgets.EndScrollView();
         }
+
+        private static readonly Color[] PriorityColors = {
+            new Color(0.22f, 0.22f, 0.24f, 0.6f),  // unused
+            new Color(0.2f, 0.45f, 0.28f, 0.78f),   // 1 - high
+            new Color(0.25f, 0.38f, 0.52f, 0.78f),   // 2
+            new Color(0.35f, 0.31f, 0.22f, 0.78f),   // 3
+            new Color(0.42f, 0.2f, 0.2f, 0.72f),     // 4 - low
+        };
 
         private void DrawWorkCell(Rect rect, PrisonerGroup group, WorkTypeDef wt)
         {
             int priority = group.GetPriority(wt);
-            // Center the box within the column (match header text center axis)
-            float boxX = rect.x + (rect.width - WorkCellSize) / 2f;
-            Rect boxRect = new Rect(boxX, rect.y, WorkCellSize, WorkCellSize);
+            Color bg = priority >= 0 && priority < PriorityColors.Length
+                ? PriorityColors[priority]
+                : new Color(0.22f, 0.22f, 0.24f, 0.6f);
 
-            if (priority > 0)
-            {
-                Widgets.DrawBoxSolid(boxRect, new Color(0.25f, 0.25f, 0.25f));
-                Text.Anchor = TextAnchor.MiddleCenter;
-                Text.Font = GameFont.Tiny;
-                Widgets.Label(boxRect.ContractedBy(-2f), priority.ToString());
-                Text.Font = GameFont.Small;
-                Text.Anchor = TextAnchor.UpperLeft;
-            }
-            else
-            {
-                Widgets.DrawBox(boxRect);
-            }
+            Widgets.DrawBoxSolid(rect, priority > 0 ? bg : new Color(1f, 1f, 1f, 0.04f));
+            Text.Anchor = TextAnchor.MiddleCenter;
+            Text.Font = GameFont.Tiny;
+            Widgets.Label(rect, priority > 0 ? priority.ToString() : "-");
+            Text.Font = GameFont.Small;
+            Text.Anchor = TextAnchor.UpperLeft;
 
-            if (!Mouse.IsOver(boxRect))
+            if (!Mouse.IsOver(rect) || Event.current.type != EventType.MouseDown)
                 return;
 
-            if (Event.current.type == EventType.MouseDown)
+            if (Event.current.button == 0)
             {
-                if (Event.current.button == 0)
-                {
-                    // Left click: decrease number (higher priority, vanilla behaviour)
-                    int next = priority - 1;
-                    if (next < 0) next = 4;
-                    group.SetPriority(wt, next);
-                    groupManager.SyncWorkPriority(group, wt, next);
-                    SoundDefOf.DragSlider.PlayOneShotOnCamera();
-                    Event.current.Use();
-                }
-                else if (Event.current.button == 1)
-                {
-                    // Right click: increase number (lower priority)
-                    int prev = priority + 1;
-                    if (prev > 4) prev = 0;
-                    group.SetPriority(wt, prev);
-                    groupManager.SyncWorkPriority(group, wt, prev);
-                    SoundDefOf.DragSlider.PlayOneShotOnCamera();
-                    Event.current.Use();
-                }
+                int next = priority - 1;
+                if (next < 0) next = 4;
+                group.SetPriority(wt, next);
+                groupManager.SyncWorkPriority(group, wt, next);
+                SoundDefOf.DragSlider.PlayOneShotOnCamera();
+                Event.current.Use();
+            }
+            else if (Event.current.button == 1)
+            {
+                int prev = priority + 1;
+                if (prev > 4) prev = 0;
+                group.SetPriority(wt, prev);
+                groupManager.SyncWorkPriority(group, wt, prev);
+                SoundDefOf.DragSlider.PlayOneShotOnCamera();
+                Event.current.Use();
             }
         }
 
@@ -640,16 +626,76 @@ namespace RimPrison.UI
             Widgets.Label(new Rect(popInner.x, popInner.y + 96f, popInner.width, 22f), "RimPrison.ChildCount".Translate(childCount.ToString()));
             Widgets.Label(new Rect(popInner.x, popInner.y + 122f, popInner.width, 22f), "RimPrison.BabyCount".Translate(babyCount.ToString()));
 
-            // Suppression placeholder
+            // Suppression card: ring on left, factors on right
             Rect suppRect = new Rect(rect.x + colW + gap, rect.y, colW, rowH);
             RPR_UiStyle.DrawSubPanel(suppRect);
             var suppInner = suppRect.ContractedBy(10f);
             RPR_UiStyle.DrawSectionTitle(new Rect(suppInner.x, suppInner.y, suppInner.width, 22f), "RimPrison.Suppression".Translate());
-            // [TODO] NO LOGIC — suppression formula and snapshot not implemented yet
+
+            var suppComp = map?.GetComponent<GameComponent_Suppression>();
+            float colonySupp = suppComp?.colonySuppression ?? 50f;
+            float ringSize = 110f;
+            float ringX = suppInner.x + 8f;
+            Rect ringRect = new Rect(ringX, suppInner.y + 28f, ringSize, ringSize);
+            RPR_UiStyle.DrawSuppressionRing(ringRect, colonySupp / 100f);
+
             Text.Font = GameFont.Small;
             Text.Anchor = TextAnchor.MiddleCenter;
-            RPR_UiStyle.DrawMutedLabel(new Rect(suppInner.x, suppInner.y + 40f, suppInner.width, 80f), "RimPrison.SuppressionPlaceholder".Translate());
+            Widgets.Label(new Rect(ringX, suppInner.y + ringSize + 28f, ringSize, 22f),
+                "RimPrison.SuppressionValue".Translate(colonySupp.ToString("F0")));
             Text.Anchor = TextAnchor.UpperLeft;
+
+            // Factor contributions on the right
+            float factorX = ringX + ringSize + 16f;
+            float factorW = suppInner.xMax - factorX;
+            Text.Font = GameFont.Tiny;
+            float factorY = suppInner.y + 28f;
+            int turrets = SuppressionCalculator.CountTurretsInPrisonArea(map);
+            int colonists = map.mapPawns.FreeColonistsSpawnedCount;
+            float effective = SuppressionCalculator.CalculateEffectivePrisonerCount(map);
+            float diffVal = Find.Storyteller?.difficulty?.threatScale ?? 1f;
+            float avgMood = 0f, avgHealth = 0f;
+            int count = 0;
+            foreach (var p in map.mapPawns.PrisonersOfColony)
+            {
+                if (!p.IsLaborEnabled()) continue;
+                avgMood += p.needs?.mood?.CurLevelPercentage ?? 0.5f;
+                avgHealth += p.health?.summaryHealth?.SummaryHealthPercent ?? 1f;
+                count++;
+            }
+            if (count > 0) { avgMood /= count; avgHealth /= count; }
+            else { avgMood = 0.5f; avgHealth = 1f; }
+
+            // Calculate each factor separately
+            float guardF = 0f; // [TODO] NO LOGIC
+            float turretF = Mathf.Min(turrets * 2f, 20f);
+            float prisonerF = Mathf.Min(effective * 1.5f, 25f);
+            float moodF = (avgMood * avgMood * 12f - 3f) * 1.25f;
+            float healthF = (0.5f - avgHealth) * 8f;
+            float regimeF = 0f;
+            float diffF = (1f - diffVal) * 8f;
+
+            DrawFactorLine(factorX, ref factorY, factorW, "RimPrison.SuppFactorBase", 50f);
+            DrawFactorLine(factorX, ref factorY, factorW, "RimPrison.SuppFactorTurrets", turretF);
+            DrawFactorLine(factorX, ref factorY, factorW, "RimPrison.SuppFactorColonists", guardF);
+            DrawFactorLine(factorX, ref factorY, factorW, "RimPrison.SuppFactorPrisoners", prisonerF);
+            DrawFactorLine(factorX, ref factorY, factorW, "RimPrison.SuppFactorMood", moodF);
+            DrawFactorLine(factorX, ref factorY, factorW, "RimPrison.SuppFactorHealth", healthF);
+            DrawFactorLine(factorX, ref factorY, factorW, "RimPrison.SuppFactorRegime", regimeF);
+            DrawFactorLine(factorX, ref factorY, factorW, "RimPrison.SuppFactorDifficulty", diffF);
+
+            factorY += 6f;
+            // Break status
+            bool breakAllowed = colonySupp < 50f;
+            bool pbAllowed = colonySupp < 30f;
+            GUI.color = breakAllowed ? new Color(0.8f, 0.3f, 0.3f) : new Color(0.3f, 0.8f, 0.3f);
+            Widgets.Label(new Rect(factorX, factorY, factorW, 16f),
+                breakAllowed ? "RimPrison.SuppBreakAllowed".Translate() : "RimPrison.SuppBreakBlocked".Translate());
+            factorY += 16f;
+            GUI.color = pbAllowed ? new Color(0.8f, 0.3f, 0.3f) : new Color(0.3f, 0.8f, 0.3f);
+            Widgets.Label(new Rect(factorX, factorY, factorW, 16f),
+                pbAllowed ? "RimPrison.SuppPrisonBreakAllowed".Translate() : "RimPrison.SuppPrisonBreakBlocked".Translate());
+            GUI.color = Color.white;
             Text.Font = GameFont.Small;
 
             // Activity log — full width below the top row
@@ -659,7 +705,34 @@ namespace RimPrison.UI
             RPR_UiStyle.DrawSubPanel(logRect);
             var logInner = logRect.ContractedBy(10f);
             RPR_UiStyle.DrawSectionTitle(new Rect(logInner.x, logInner.y, logInner.width, 22f), "RimPrison.ActivityLog".Translate());
-            RPR_UiStyle.DrawMutedLabel(new Rect(logInner.x, logInner.y + 32f, logInner.width, 60f), "RimPrison.ActivityLogPlaceholder".Translate());
+
+            var logComp = map?.GetComponent<GameComponent_ActivityLog>();
+            if (logComp == null || logComp.entries.Count == 0)
+            {
+                RPR_UiStyle.DrawMutedLabel(new Rect(logInner.x, logInner.y + 32f, logInner.width, 40f), "RimPrison.ActivityLogEmpty".Translate());
+            }
+            else
+            {
+                int showCount = System.Math.Min(logComp.entries.Count, 30);
+                float rowH2 = 20f;
+                float listY = logInner.y + 28f;
+                float viewH = showCount * rowH2;
+                Rect listRect = new Rect(logInner.x, listY, logInner.width, logInner.height - 28f);
+                Rect viewRect2 = new Rect(0f, 0f, listRect.width - 16f, viewH);
+                Widgets.BeginScrollView(listRect, ref overviewScrollPos, viewRect2);
+                Text.Font = GameFont.Tiny;
+                int startIdx = logComp.entries.Count - showCount;
+                for (int i = 0; i < showCount; i++)
+                {
+                    var entry = logComp.entries[startIdx + i];
+                    Rect rowRect = new Rect(0f, i * rowH2, viewRect2.width, rowH2);
+                    if (i % 2 == 0)
+                        Widgets.DrawLightHighlight(rowRect);
+                    Widgets.Label(rowRect, entry.Format());
+                }
+                Text.Font = GameFont.Small;
+                Widgets.EndScrollView();
+            }
         }
 
         // ======== Settings tab ========
@@ -685,16 +758,6 @@ namespace RimPrison.UI
             }
 
             y += 30f;
-            // [TODO] NO LOGIC — ransom price
-            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrison.RansomPrice".Translate());
-            RPR_UiStyle.DrawMutedLabel(new Rect(inner.x + 144f, y, 200f, 24f), "RimPrison.TodoNoLogic".Translate());
-
-            y += 30f;
-            // [TODO] NO LOGIC — payroll delivery mode
-            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrison.PayrollMode".Translate());
-            RPR_UiStyle.DrawMutedLabel(new Rect(inner.x + 144f, y, 200f, 24f), "RimPrison.TodoNoLogic".Translate());
-
-            y += 30f;
             // Daily allowance (already implemented)
             Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrison.DailyAllowance".Translate());
             string buf = RimPrisonMod.Settings.DailyAllowance.ToString();
@@ -704,12 +767,6 @@ namespace RimPrison.UI
                 RimPrisonMod.Settings.DailyAllowance = val;
                 RimPrisonMod.Settings.Write();
             }
-
-            y += 36f;
-            // [TODO] NO LOGIC — debt harvest config
-            RPR_UiStyle.DrawSectionTitle(new Rect(inner.x, y, inner.width, 24f), "RimPrison.DebtHarvest".Translate());
-            y += 28f;
-            RPR_UiStyle.DrawMutedLabel(new Rect(inner.x, y, inner.width, 20f), "RimPrison.TodoNoLogic".Translate());
 
             // Right column — global status summary
             float rightCol = inner.x + colW + 12f;
@@ -732,18 +789,24 @@ namespace RimPrison.UI
             Widgets.Label(new Rect(rightCol, rightY, colW, 22f), "RimPrison.GroupCount".Translate(groupManager.groups.Count.ToString()));
         }
 
+        private static void DrawFactorLine(float x, ref float y, float width, string labelKey, float value)
+        {
+            string sign = value >= 0f ? "+" : "";
+            string text = labelKey.Translate(sign + value.ToString("F1") + "%");
+            Widgets.Label(new Rect(x, y, width, 16f), text);
+            y += 16f;
+        }
+
         // ======== Helpers ========
 
         private static List<WorkTypeDef> GetFilteredWorkTypes()
         {
-            int tick = Find.TickManager?.TicksGame ?? 0;
-            if (cachedWorkTypes != null && cachedWorkTypesGameTick == tick)
-                return cachedWorkTypes;
-
-            cachedWorkTypes = DefDatabase<WorkTypeDef>.AllDefsListForReading
-                .Where(wt => wt.defName != "Warden" && wt.defName != "Hunting")
-                .ToList();
-            cachedWorkTypesGameTick = tick;
+            if (cachedWorkTypes == null)
+            {
+                cachedWorkTypes = DefDatabase<WorkTypeDef>.AllDefsListForReading
+                    .Where(wt => wt.defName != "Warden" && wt.defName != "Hunting")
+                    .ToList();
+            }
             return cachedWorkTypes;
         }
 

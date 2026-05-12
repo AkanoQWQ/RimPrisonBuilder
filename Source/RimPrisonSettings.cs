@@ -8,6 +8,8 @@ namespace RimPrison
         public string WorkCouponName = "WorkCoupon";
         public float CouponsPerHour = 1f;
         public int DailyAllowance = 0;
+        public bool DoorAccessEnabled;
+        public bool RestrictColonistWorkInPrisonArea;
 
         public override void ExposeData()
         {
@@ -15,6 +17,8 @@ namespace RimPrison
             Scribe_Values.Look(ref WorkCouponName, "WorkCouponName", "WorkCoupon");
             Scribe_Values.Look(ref CouponsPerHour, "CouponsPerHour", 1f);
             Scribe_Values.Look(ref DailyAllowance, "DailyAllowance", 0);
+            Scribe_Values.Look(ref DoorAccessEnabled, "DoorAccessEnabled");
+            Scribe_Values.Look(ref RestrictColonistWorkInPrisonArea, "RestrictColonistWorkInPrisonArea");
         }
 
         public void DoSettingsWindowContents(Rect inRect)
@@ -37,6 +41,14 @@ namespace RimPrison
             string result = listing.TextEntry(buf);
             if (int.TryParse(result, out int val) && val >= 0 && val <= 9999)
                 DailyAllowance = val;
+
+            listing.Gap(12f);
+
+            listing.CheckboxLabeled("RimPrison.DoorAccessEnabled".Translate(), ref DoorAccessEnabled);
+
+            listing.Gap(12f);
+
+            listing.CheckboxLabeled("RimPrison.RestrictColonistWorkInPrisonArea".Translate(), ref RestrictColonistWorkInPrisonArea);
 
             listing.End();
         }

@@ -32,6 +32,7 @@ namespace RimPrison.PrisonLabor
             {
                 group.AddPawn(pawn);
                 ApplyGroupSettings(pawn, group);
+                GetLog()?.Log(pawn, "RimPrison.LogAssignedToGroup".Translate(group.name));
             }
         }
 
@@ -141,6 +142,8 @@ namespace RimPrison.PrisonLabor
             return null;
         }
 
+        private GameComponent_ActivityLog GetLog() => map?.GetComponent<GameComponent_ActivityLog>();
+
         public void SyncOutfitPolicy(PrisonerGroup group)
         {
             Map map = this.map;
@@ -151,6 +154,7 @@ namespace RimPrison.PrisonLabor
                 if (pawn?.outfits != null && group.apparelPolicy != null)
                     pawn.outfits.CurrentApparelPolicy = group.apparelPolicy;
             }
+            GetLog()?.Log(group.name, "RimPrison.LogOutfitChanged".Translate());
         }
 
         public void SyncDrugPolicy(PrisonerGroup group)

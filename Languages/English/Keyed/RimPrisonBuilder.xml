@@ -39,24 +39,39 @@
   <RimPrison.ChildCount>Child: {0}</RimPrison.ChildCount>
   <RimPrison.BabyCount>Baby: {0}</RimPrison.BabyCount>
   <RimPrison.Suppression>Suppression</RimPrison.Suppression>
-  <RimPrison.SuppressionPlaceholder>Suppression system not yet implemented.\nWill show suppression arc chart, break risk, etc.</RimPrison.SuppressionPlaceholder>
-  <RimPrison.SchedulePreview>Schedule Preview (Group 1)</RimPrison.SchedulePreview>
-  <RimPrison.ActivityLog>Activity Log</RimPrison.ActivityLog>
-  <RimPrison.ActivityLogPlaceholder>Activity log not yet implemented.\nWill show recent prisoner events here.</RimPrison.ActivityLogPlaceholder>
-  <!-- Food tab -->
-  <RimPrison.FoodTab>Food</RimPrison.FoodTab>
+  <RimPrison.SuppressionValue>Suppression: {0}%</RimPrison.SuppressionValue>
+  <RimPrison.SuppFactorBase>Base: {0}%</RimPrison.SuppFactorBase>
+  <RimPrison.SuppFactorTurrets>Turrets: {0}%</RimPrison.SuppFactorTurrets>
+  <RimPrison.SuppFactorColonists>Guards: {0}%</RimPrison.SuppFactorColonists>
+  <RimPrison.SuppFactorPrisoners>Prisoners: {0}%</RimPrison.SuppFactorPrisoners>
+  <RimPrison.SuppFactorRegime>Regime: {0}</RimPrison.SuppFactorRegime>
+  <RimPrison.SuppFactorMood>Mood: {0}%</RimPrison.SuppFactorMood>
+  <RimPrison.SuppFactorHealth>Health: {0}%</RimPrison.SuppFactorHealth>
+  <RimPrison.SuppFactorDifficulty>Difficulty: {0}%</RimPrison.SuppFactorDifficulty>
+  <RimPrison.SuppBreakAllowed>Mental breaks: POSSIBLE</RimPrison.SuppBreakAllowed>
+  <RimPrison.SuppBreakBlocked>Mental breaks: BLOCKED</RimPrison.SuppBreakBlocked>
+  <RimPrison.SuppPrisonBreakAllowed>Prison breaks: POSSIBLE</RimPrison.SuppPrisonBreakAllowed>
+  <RimPrison.SuppPrisonBreakBlocked>Prison breaks: BLOCKED</RimPrison.SuppPrisonBreakBlocked>
+  <RimPrison.RestrictColonistWorkInPrisonArea>Restrict colonist work in prison area</RimPrison.RestrictColonistWorkInPrisonArea>
+  <RimPrison.DoorAccessEnabled>Enable door access control</RimPrison.DoorAccessEnabled>
+  <RimPrison.DoorAccessAllowed>Allowed</RimPrison.DoorAccessAllowed>
+  <RimPrison.DoorAccessBlocked>Blocked</RimPrison.DoorAccessBlocked>
   <RimPrison.FoodManagement>Food Management</RimPrison.FoodManagement>
-  <RimPrison.FoodPlaceholder>Food management not yet implemented.\nWill allow configuring 4 meal tiers (Welfare/Baby/Standard/Fine) with per-tier food whitelist and pricing.</RimPrison.FoodPlaceholder>
   <!-- Settings tab -->
   <RimPrison.SettingsTab>Settings</RimPrison.SettingsTab>
   <RimPrison.Settings>Settings</RimPrison.Settings>
   <RimPrison.CurrencyName>Currency Name</RimPrison.CurrencyName>
-  <RimPrison.RansomPrice>Ransom Price</RimPrison.RansomPrice>
-  <RimPrison.PayrollMode>Payroll Mode</RimPrison.PayrollMode>
-  <RimPrison.DebtHarvest>Debt Harvest</RimPrison.DebtHarvest>
   <RimPrison.GlobalStatus>Global Status</RimPrison.GlobalStatus>
   <RimPrison.TotalPrisoners>Total prisoners: {0}</RimPrison.TotalPrisoners>
   <RimPrison.LaborEnabledCount>Labor enabled: {0}</RimPrison.LaborEnabledCount>
   <RimPrison.GroupCount>Groups: {0}</RimPrison.GroupCount>
-  <RimPrison.TodoNoLogic>[TODO] Not implemented yet</RimPrison.TodoNoLogic>
+  <!-- Door Access -->
+  <RimPrison.DoorAccess>Door Access</RimPrison.DoorAccess>
+  <RimPrison.PrisonArea>Prison Area</RimPrison.PrisonArea>
+  <RimPrison.CreatePrisonArea>Create prison area</RimPrison.CreatePrisonArea>
+  <!-- Activity Log -->
+  <RimPrison.ActivityLog>Activity Log</RimPrison.ActivityLog>
+  <RimPrison.ActivityLogEmpty>No activity yet.</RimPrison.ActivityLogEmpty>
+  <RimPrison.LogAssignedToGroup>Assigned to group {0}</RimPrison.LogAssignedToGroup>
+  <RimPrison.LogOutfitChanged>Outfit policy changed</RimPrison.LogOutfitChanged>
 </LanguageData>
