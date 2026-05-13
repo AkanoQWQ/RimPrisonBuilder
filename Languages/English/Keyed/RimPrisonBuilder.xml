@@ -73,8 +73,7 @@ Accept and release the prisoner?</RimPrison.RansomLetterText>
   <RimPrison.SuppPrisonBreakBlocked>Prison breaks: BLOCKED</RimPrison.SuppPrisonBreakBlocked>
   <RimPrison.RestrictColonistWorkInPrisonArea>Restrict colonist work in prison area</RimPrison.RestrictColonistWorkInPrisonArea>
   <RimPrison.DoorAccessEnabled>Enable door access control</RimPrison.DoorAccessEnabled>
-  <RimPrison.DoorAccessAllowed>Allowed</RimPrison.DoorAccessAllowed>
-  <RimPrison.DoorAccessBlocked>Blocked</RimPrison.DoorAccessBlocked>
+
   <RimPrison.FoodManagement>Food Management</RimPrison.FoodManagement>
   <!-- Settings tab -->
   <RimPrison.SettingsTab>Settings</RimPrison.SettingsTab>
@@ -90,18 +89,19 @@ Accept and release the prisoner?</RimPrison.RansomLetterText>
   <RimPrison.MaxDebt>Max debt</RimPrison.MaxDebt>
   <RimPrison.MaxDebtDesc>Maximum credit allowed for prisoner purchases. 0 = no credit.</RimPrison.MaxDebtDesc>
   <RimPrison.PrisonArea>Prison Area</RimPrison.PrisonArea>
-  <RimPrison.CreatePrisonArea>Create prison area</RimPrison.CreatePrisonArea>
+
   <RimPrison.ExpandPrisonArea>Expand prison area</RimPrison.ExpandPrisonArea>
   <RimPrison.ExpandPrisonAreaDesc>Designate cells to add to the prison area.</RimPrison.ExpandPrisonAreaDesc>
   <RimPrison.ClearPrisonArea>Clear prison area</RimPrison.ClearPrisonArea>
   <RimPrison.ClearPrisonAreaDesc>Designate cells to remove from the prison area.</RimPrison.ClearPrisonAreaDesc>
-  <RimPrison.NoPrisonArea>No prison area created yet</RimPrison.NoPrisonArea>
+
   <!-- Activity Log -->
   <RimPrison.ActivityLog>Activity Log</RimPrison.ActivityLog>
   <RimPrison.ActivityLogEmpty>No activity yet.</RimPrison.ActivityLogEmpty>
   <RimPrison.LogAssignedToGroup>Assigned to group {0}</RimPrison.LogAssignedToGroup>
   <RimPrison.LogOutfitChanged>Outfit policy changed</RimPrison.LogOutfitChanged>
   <RimPrison.LogBuyItem>Bought {0} for {1} coupons</RimPrison.LogBuyItem>
+  <RimPrison.LogNoFood>Oh no, we can't even afford food!</RimPrison.LogNoFood>
   <RimPrison.HelpTab>Help</RimPrison.HelpTab>
   <RimPrison.HelpTitle>RimPrison Help</RimPrison.HelpTitle>
   <RimPrison.HelpContent>

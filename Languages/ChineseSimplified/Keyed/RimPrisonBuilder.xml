@@ -67,7 +67,6 @@
 7.其它
 你可以在RimTalk中对一个 pawn 对象使用 {{ pawn.balance }} 来获得剩余的粮票金额</RimPrison.HelpContent>
   <RimPrison.DebtHarvestThreshold>器官抵债阈值</RimPrison.DebtHarvestThreshold>
-  <RimPrison.DebtHarvestIntervalDays>器官抵债间隔（天）</RimPrison.DebtHarvestIntervalDays>
   <RimPrison.GrantCoupons>发放粮票</RimPrison.GrantCoupons>
   <RimPrison.GrantCouponsTitle>发放粮票给 {0}</RimPrison.GrantCouponsTitle>
   <RimPrison.GrantCouponsDesc>请输入要发放的{0}数量：</RimPrison.GrantCouponsDesc>
@@ -102,8 +101,7 @@
   <RimPrison.SuppPrisonBreakBlocked>越狱: 已阻止</RimPrison.SuppPrisonBreakBlocked>
   <RimPrison.RestrictColonistWorkInPrisonArea>限制殖民者在监狱区域内工作</RimPrison.RestrictColonistWorkInPrisonArea>
   <RimPrison.DoorAccessEnabled>启用囚犯门禁控制</RimPrison.DoorAccessEnabled>
-  <RimPrison.DoorAccessAllowed>允许</RimPrison.DoorAccessAllowed>
-  <RimPrison.DoorAccessBlocked>禁止</RimPrison.DoorAccessBlocked>
+
   <RimPrison.FoodManagement>食物管理</RimPrison.FoodManagement>
   <!-- Settings tab -->
   <RimPrison.SettingsTab>设置</RimPrison.SettingsTab>
@@ -119,12 +117,12 @@
   <RimPrison.MaxDebt>最大负债</RimPrison.MaxDebt>
   <RimPrison.MaxDebtDesc>囚犯可透支购买的最大额度。0=禁止透支。</RimPrison.MaxDebtDesc>
   <RimPrison.PrisonArea>监狱区域</RimPrison.PrisonArea>
-  <RimPrison.CreatePrisonArea>创建监狱区域</RimPrison.CreatePrisonArea>
+
   <RimPrison.ExpandPrisonArea>扩展监狱区域</RimPrison.ExpandPrisonArea>
   <RimPrison.ExpandPrisonAreaDesc>划定要加入监狱区域的格子。</RimPrison.ExpandPrisonAreaDesc>
   <RimPrison.ClearPrisonArea>清除监狱区域</RimPrison.ClearPrisonArea>
   <RimPrison.ClearPrisonAreaDesc>划定要从监狱区域移除的格子。</RimPrison.ClearPrisonAreaDesc>
-  <RimPrison.NoPrisonArea>请先创建监狱区域</RimPrison.NoPrisonArea>
+
   <!-- Activity Log -->
   <RimPrison.ActivityLog>活动日志</RimPrison.ActivityLog>
   <RimPrison.ActivityLogEmpty>暂无活动记录。</RimPrison.ActivityLogEmpty>

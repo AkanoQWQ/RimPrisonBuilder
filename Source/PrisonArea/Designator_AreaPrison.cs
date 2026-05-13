@@ -24,10 +24,7 @@ namespace RimPrison.PrisonArea
             if (!c.InBounds(base.Map))
                 return false;
 
-            var area = base.Map.areaManager.Get<Area_Prison>();
-            if (area == null)
-                return "RimPrison.NoPrisonArea".Translate();
-
+            var area = GetOrCreateArea();
             bool isInArea = area[c];
             if (mode == DesignateMode.Add)
                 return !isInArea;
@@ -36,9 +33,7 @@ namespace RimPrison.PrisonArea
 
         public override void DesignateSingleCell(IntVec3 c)
         {
-            var area = base.Map.areaManager.Get<Area_Prison>();
-            if (area == null) return;
-
+            var area = GetOrCreateArea();
             if (mode == DesignateMode.Add)
                 area[c] = true;
             else
@@ -48,8 +43,15 @@ namespace RimPrison.PrisonArea
         public override void SelectedUpdate()
         {
             GenUI.RenderMouseoverBracket();
+            GetOrCreateArea().MarkForDraw();
+        }
+
+        private Area_Prison GetOrCreateArea()
+        {
             var area = base.Map.areaManager.Get<Area_Prison>();
-            area?.MarkForDraw();
+            if (area == null)
+                area = Area_Prison.CreateNew(base.Map);
+            return area;
         }
     }
 }
