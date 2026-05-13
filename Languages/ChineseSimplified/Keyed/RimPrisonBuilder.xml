@@ -99,7 +99,8 @@
   <RimPrison.SuppBreakBlocked>精神崩溃: 已阻止</RimPrison.SuppBreakBlocked>
   <RimPrison.SuppPrisonBreakAllowed>越狱: 可能</RimPrison.SuppPrisonBreakAllowed>
   <RimPrison.SuppPrisonBreakBlocked>越狱: 已阻止</RimPrison.SuppPrisonBreakBlocked>
-  <RimPrison.ManagePrisonAreaWork>管理监狱区工作限制（勾选 = 禁止，不勾选 = 允许）</RimPrison.ManagePrisonAreaWork>
+  <RimPrison.ManagePrisonAreaWork>管理监狱区工作限制</RimPrison.ManagePrisonAreaWork>
+  <RimPrison.ManagePrisonAreaWorkTitle>管理监狱区工作限制（勾选 = 禁止，不勾选 = 允许）</RimPrison.ManagePrisonAreaWorkTitle>
   <RimPrison.DoorAccessEnabled>启用囚犯门禁控制</RimPrison.DoorAccessEnabled>
 
   <RimPrison.FoodManagement>食物管理</RimPrison.FoodManagement>

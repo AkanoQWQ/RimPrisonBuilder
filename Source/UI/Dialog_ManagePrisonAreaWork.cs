@@ -23,7 +23,7 @@ namespace RimPrison.UI
             draggable = true;
             absorbInputAroundWindow = true;
             layer = WindowLayer.Dialog;
-            optionalTitle = "RimPrison.ManagePrisonAreaWork".Translate();
+            optionalTitle = "RimPrison.ManagePrisonAreaWorkTitle".Translate();
 
             disabled = RimPrisonMod.Settings.DisabledWorkInPrisonArea;
 
