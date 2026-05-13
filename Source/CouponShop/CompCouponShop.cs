@@ -32,7 +32,7 @@ namespace RimPrison.CouponShop
             base.Initialize(props);
             pricePerItem = Props.defaultPrice;
             storageSettings = new StorageSettings();
-            storageSettings.filter.SetAllowAll(null);
+            // Default: disallow everything. Feedback from users.
         }
 
         public bool Allows(Thing t)
