@@ -102,6 +102,14 @@ Accept and release the prisoner?</RimPrison.RansomLetterText>
   <RimPrison.LogOutfitChanged>Outfit policy changed</RimPrison.LogOutfitChanged>
   <RimPrison.LogBuyItem>Bought {0} for {1} coupons</RimPrison.LogBuyItem>
   <RimPrison.LogNoFood>Oh no, we can't even afford food!</RimPrison.LogNoFood>
+  <!-- Mod Removal -->
+  <RimPrison.RemoveModButton>Remove Mod From Save</RimPrison.RemoveModButton>
+  <RimPrison.RemoveModConfirm>Confirm removal of RimPrison from this save?
+This will clear all prison management data, prison area, coupon shops and work assignments.
+Correct procedure: Pause (required), remove mod content, save and exit to main menu immediately (do not let time flow), disable the mod, then load the save.
+Save and restart immediately after this operation.</RimPrison.RemoveModConfirm>
+  <RimPrison.ConfirmRemove>Confirm Removal</RimPrison.ConfirmRemove>
+  <RimPrison.RemovalComplete>RimPrison data cleared. Save and restart to complete removal.</RimPrison.RemovalComplete>
   <RimPrison.HelpTab>Help</RimPrison.HelpTab>
   <RimPrison.HelpTitle>RimPrison Help</RimPrison.HelpTitle>
   <RimPrison.HelpContent>

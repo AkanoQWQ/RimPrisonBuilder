@@ -9,7 +9,7 @@ namespace RimPrison.PrisonArea
         public override string Label => "RimPrison.PrisonArea".Translate();
         public override Color Color => new Color(0.6f, 0.1f, 0.1f, 0.7f);
         public override int ListPriority => 900;
-        public override bool Mutable => false;
+        public override bool Mutable => true;
 
         private string labelCache;
         public override string RenamableLabel

@@ -138,6 +138,16 @@ namespace RimPrison
 
             listing.CheckboxLabeled("RimPrison.RestrictColonistWorkInPrisonArea".Translate(), ref RestrictColonistWorkInPrisonArea);
 
+            listing.Gap(24f);
+            if (listing.ButtonText("RimPrison.RemoveModButton".Translate()))
+            {
+                Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(
+                    "RimPrison.RemoveModConfirm".Translate(),
+                    () => RimPrisonRemovalUtility.RemoveModFromAllMaps(),
+                    true,
+                    "RimPrison.ConfirmRemove".Translate()));
+            }
+
             listing.End();
         }
     }

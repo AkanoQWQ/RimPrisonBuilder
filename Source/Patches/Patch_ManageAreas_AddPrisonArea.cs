@@ -7,9 +7,9 @@ using Verse;
 namespace RimPrison.Patches
 {
     // [UNREVIWED]
-    // Show prison area row in Dialog_ManageAreas with expand/clear/rename/delete.
-    // Area_Prison is auto-created by Patch_AreaManager_AddStartingAreas,
-    // matching vanilla Home Area behavior (no manual "create" needed).
+    // Add expand/clear buttons for Area_Prison in Dialog_ManageAreas.
+    // Rename/delete are handled by the standard dialog (Mutable=true).
+    // Area_Prison is auto-created by Patch_AreaManager_AddStartingAreas.
     // For existing saves, auto-created on first open of this dialog.
     [HarmonyPatch(typeof(Dialog_ManageAreas), nameof(Dialog_ManageAreas.DoWindowContents))]
     internal static class Patch_ManageAreas_AddPrisonArea
@@ -62,14 +62,6 @@ namespace RimPrison.Patches
                     }
                 }
                 Find.WindowStack.TryRemove(__instance);
-            }
-            if (widgetRow.ButtonIcon(TexButton.Rename, null, GenUI.SubtleMouseoverColor))
-            {
-                Find.WindowStack.Add(new Dialog_RenameArea(area));
-            }
-            if (widgetRow.ButtonIcon(TexButton.Delete, null, GenUI.SubtleMouseoverColor))
-            {
-                area.Delete();
             }
             Widgets.EndGroup();
         }

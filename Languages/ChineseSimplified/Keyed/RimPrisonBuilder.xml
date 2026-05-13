@@ -129,4 +129,13 @@
   <RimPrison.LogAssignedToGroup>被分配到分组 {0}</RimPrison.LogAssignedToGroup>
   <RimPrison.LogOutfitChanged>服装策略已变更</RimPrison.LogOutfitChanged>
   <RimPrison.LogBuyItem>购买了 {0}，花费 {1} 粮票</RimPrison.LogBuyItem>
+  <!-- Mod Removal -->
+  <RimPrison.RemoveModButton>从存档移除本Mod</RimPrison.RemoveModButton>
+  <RimPrison.RemoveModConfirm>确认从存档移除本Mod？
+  这将清除所有囚犯管理数据、监狱区域、粮票商店和工作分配。
+  正确操作：暂停（必须暂停），移除本Mod内容，立刻保存并退出到主菜单（不要让时间流动），移除Mod后进入存档。
+  这将清除所有囚犯管理数据、监狱区域、粮票商店和工作分配。
+  建议在操作后立即保存并重启游戏。</RimPrison.RemoveModConfirm>
+  <RimPrison.ConfirmRemove>确认移除</RimPrison.ConfirmRemove>
+  <RimPrison.RemovalComplete>RimPrison数据已清除，请保存后重启游戏。</RimPrison.RemovalComplete>
 </LanguageData>
