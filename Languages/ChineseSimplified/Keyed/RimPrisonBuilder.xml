@@ -116,6 +116,9 @@
   <RimPrison.DoorAccessDesc>允许或禁止囚犯通过此门。启用后，囚犯只能通过标记为"允许"的门。</RimPrison.DoorAccessDesc>
   <RimPrison.MaxDebt>最大负债</RimPrison.MaxDebt>
   <RimPrison.MaxDebtDesc>囚犯可透支购买的最大额度。0=禁止透支。</RimPrison.MaxDebtDesc>
+  <RimPrison.GroupBaby>婴儿</RimPrison.GroupBaby>
+  <RimPrison.GroupChild>儿童</RimPrison.GroupChild>
+  <RimPrison.GroupAdult>成人</RimPrison.GroupAdult>
   <RimPrison.PrisonArea>监狱区域</RimPrison.PrisonArea>
 
   <RimPrison.ExpandPrisonArea>扩展监狱区域</RimPrison.ExpandPrisonArea>

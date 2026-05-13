@@ -88,6 +88,9 @@ Accept and release the prisoner?</RimPrison.RansomLetterText>
   <RimPrison.DoorAccessDesc>Allow or block prisoners from passing through this door.</RimPrison.DoorAccessDesc>
   <RimPrison.MaxDebt>Max debt</RimPrison.MaxDebt>
   <RimPrison.MaxDebtDesc>Maximum credit allowed for prisoner purchases. 0 = no credit.</RimPrison.MaxDebtDesc>
+  <RimPrison.GroupBaby>Baby</RimPrison.GroupBaby>
+  <RimPrison.GroupChild>Child</RimPrison.GroupChild>
+  <RimPrison.GroupAdult>Adult</RimPrison.GroupAdult>
   <RimPrison.PrisonArea>Prison Area</RimPrison.PrisonArea>
 
   <RimPrison.ExpandPrisonArea>Expand prison area</RimPrison.ExpandPrisonArea>

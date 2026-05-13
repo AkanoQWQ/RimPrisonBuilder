@@ -59,6 +59,36 @@ namespace RimPrison.UI
             base.PostOpen();
             BuildTabs();
             groupManager = Find.CurrentMap.GetComponent<PrisonerGroupManager>();
+            AutoAssignAgeGroups();
+        }
+
+        // Yeah...auto assign group here. Not sure if it's elegant
+        void AutoAssignAgeGroups()
+        {
+            if (groupManager == null) return;
+
+            foreach (var pawn in Find.CurrentMap.mapPawns.PrisonersOfColony)
+            {
+                if (!pawn.IsLaborEnabled()) continue;
+                if (groupManager.GetGroupFor(pawn) != null) continue;
+
+                string groupName = pawn.DevelopmentalStage switch
+                {
+                    var s when s.Baby()  => "RimPrison.GroupBaby".Translate(),
+                    var s when s.Child() => "RimPrison.GroupChild".Translate(),
+                    _                     => "RimPrison.GroupAdult".Translate()
+                };
+
+                var group = groupManager.groups.Find(g => g.name == groupName);
+                if (group == null)
+                {
+                    group = new PrisonerGroup { name = groupName };
+                    group.InitDefaults();
+                    groupManager.groups.Add(group);
+                }
+
+                groupManager.SetGroup(pawn, group);
+            }
         }
 
         public override void DoWindowContents(Rect inRect)
