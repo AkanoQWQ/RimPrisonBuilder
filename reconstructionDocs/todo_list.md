@@ -106,39 +106,27 @@
 ✅ RimPrisonFinanceApi
 ✅ RimPrisonStateApi
 
-## 12.其它
+## 12.婴儿相关
 
-🔴 婴儿喂食 — 保育员喂食 + 乳房/奶瓶/特殊食物 + 安置 + 穿衣
-🔴 婴儿床管理 — 自动分配/收回监狱婴儿床
-🔴 婴儿保育路由 — 婴儿喂食/安置/穿衣 Job 路由到囚犯保育员
+✅ 囚犯婴儿喂食 + 囚犯婴儿床管理（自动或手动设置监狱婴儿床）
+✅ 婴儿保育 — 婴儿喂食由囚犯保育员完成（可选择隔离囚犯婴儿的保育）（注意，囚犯保育员无法保育殖民者婴儿——这可能是大部分人乐意看到的）
 
-## 13. 非首个发布版内容
+## 13. 新测试版即将加入的内容
 
-🗑️ Meme 支持
-🗑️ MemeDef — RPR_PrisonMeme
-🗑️ 制度 Precept（3 个）
-🗑️ 典狱长 Precept
-🗑️ 文化同步
-🗑️ 囚犯心情 ThoughtWorker（7 个）
-🗑️ PrisonerDied 心情
-🗑️ 工作类型解锁
-🗑️ 每日发放（先抵债再入账——首发版即时入账）
-🗑️ 窗口布局工具
-🗑️ 守卫/典狱长（后续版本快速加入）
-🗑️ 批量逮捕设计器（已被其它 mod 实现，解耦）
-🗑️ 逮捕 JobDriver
-🗑️ DesignationCategoryDef — 批量逮捕
-🗑️ JobDef（逮捕）
-🗑️ 商队囚犯入监
-🗑️ 入监心情
-🗑️ 医疗关注 — 自动 Tend + 转运到床
-🗑️ ThoughtDef（27个） — 三制度 × 多事件 + 赎身 + 工资 + 福利餐
-🗑️ PreceptDef（3个） — RPR_Regime_Harsh/Deterrence/Equality + RPR_WardenSystem_Enabled
-🗑️ WorkTypeDef — RPR_Guardianship
+🔴 Meme 支持（MemeDef — RPR_PrisonMeme）
+🔴 制度 Precept（3 个，RPR_Regime_Harsh/Deterrence/Equality） / 典狱长 Precept
+🔴 囚犯心情 ThoughtWorker（被割除器官）
+🔴 监狱区限制殖民者特定的工作类型
+🔴 守卫/典狱长
 
-## 14. 与新机制不符，删掉的内容
+## 14. 删除的内容
 
 🗑️ 进食扣费（我们使用商店购物机制，不需要自动扣费）
 🗑️ 囚犯核心数据 — `CompPrisonerPolicy`：balance, debt, laborEnabled, workPriorities, payroll（我们已经有很多数据了，不是很清楚AI列的什么）
 🗑️ 紧急需求恢复 — 食物<5%强制进食 / 休息<5%强制睡觉（原版没有这种保底吗？我们发现需要了再加）
 🗑️ 互动锁 — 防止多个殖民者同时处理同一囚犯（需要再加，目前没发现相关bug）
+🗑️ 医疗关注 — 自动 Tend + 转运到床（不懂说的是什么）
+🗑️ 入监心情
+🗑️ 批量逮捕设计器/逮捕 JobDriver/DesignationCategoryDef — 批量逮捕/JobDef（逮捕）/商队囚犯入监（已被其它 mod 实现，解耦）
+🗑️ 每日发放（先抵债再入账—）（目前实现为直接进账/付款）
+🗑️ PrisonerDied 心情
