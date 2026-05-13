@@ -71,7 +71,7 @@ Accept and release the prisoner?</RimPrison.RansomLetterText>
   <RimPrison.SuppBreakBlocked>Mental breaks: BLOCKED</RimPrison.SuppBreakBlocked>
   <RimPrison.SuppPrisonBreakAllowed>Prison breaks: POSSIBLE</RimPrison.SuppPrisonBreakAllowed>
   <RimPrison.SuppPrisonBreakBlocked>Prison breaks: BLOCKED</RimPrison.SuppPrisonBreakBlocked>
-  <RimPrison.RestrictColonistWorkInPrisonArea>Restrict colonist work in prison area</RimPrison.RestrictColonistWorkInPrisonArea>
+  <RimPrison.ManagePrisonAreaWork>Manage Prison Area Work Restrictions (checked = disabled, unchecked = allowed)</RimPrison.ManagePrisonAreaWork>
   <RimPrison.DoorAccessEnabled>Enable door access control</RimPrison.DoorAccessEnabled>
 
   <RimPrison.FoodManagement>Food Management</RimPrison.FoodManagement>

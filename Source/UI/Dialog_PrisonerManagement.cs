@@ -856,6 +856,13 @@ namespace RimPrison.UI
                 RimPrisonMod.Settings.Write();
             }
 
+            y += 30f;
+            if (RPR_UiStyle.DrawColoredButton(new Rect(inner.x, y, 200f, 30f),
+                "RimPrison.ManagePrisonAreaWork".Translate()))
+            {
+                Find.WindowStack.Add(new Dialog_ManagePrisonAreaWork());
+            }
+
             // Right column — global status summary
             float rightCol = inner.x + colW + 12f;
             float rightY = inner.y + 32f;

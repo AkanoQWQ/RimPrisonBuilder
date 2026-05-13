@@ -23,6 +23,10 @@ namespace RimPrison
         // Default 1f — entries only stored when user changes from default.
         public Dictionary<string, float> WorkTypeWages = new Dictionary<string, float>();
 
+        // Work types disabled for colonists/mechs inside the prison area.
+        // Stored as defNames. Empty = no restrictions.
+        public HashSet<string> DisabledWorkInPrisonArea = new HashSet<string>();
+
         public float GetWorkTypeWage(string defName)
         {
             if (string.IsNullOrEmpty(defName)) return 1f;
@@ -47,6 +51,7 @@ namespace RimPrison
             Scribe_Values.Look(ref DebtHarvestThreshold, "DebtHarvestThreshold", 150);
             Scribe_Values.Look(ref DebtHarvestIntervalDays, "DebtHarvestIntervalDays", 1);
             Scribe_Values.Look(ref DoorAccessEnabled, "DoorAccessEnabled", false);
+            // Keep old key for backward compat, no longer used in UI
             Scribe_Values.Look(ref RestrictColonistWorkInPrisonArea, "RestrictColonistWorkInPrisonArea", false);
             Scribe_Values.Look(ref BabyFeedingIsolation, "BabyFeedingIsolation", true);
 
@@ -76,6 +81,24 @@ namespace RimPrison
                 int n = System.Math.Min(wageKeys.Count, wageVals.Count);
                 for (int i = 0; i < n; i++)
                     WorkTypeWages[wageKeys[i]] = wageVals[i];
+            }
+
+            // DisabledWorkInPrisonArea — HashSet as parallel lists
+            if (Scribe.mode == LoadSaveMode.Saving)
+            {
+                var disabledKeys = new List<string>(DisabledWorkInPrisonArea);
+                Scribe_Collections.Look(ref disabledKeys, "disabledWorkKeys", LookMode.Value);
+            }
+            else if (Scribe.mode == LoadSaveMode.LoadingVars)
+            {
+                var disabledKeys = new List<string>();
+                Scribe_Collections.Look(ref disabledKeys, "disabledWorkKeys", LookMode.Value);
+                DisabledWorkInPrisonArea.Clear();
+                if (disabledKeys != null)
+                {
+                    foreach (var k in disabledKeys)
+                        DisabledWorkInPrisonArea.Add(k);
+                }
             }
         }
 
@@ -135,10 +158,6 @@ namespace RimPrison
             listing.Gap(12f);
 
             listing.CheckboxLabeled("RimPrison.DoorAccessEnabled".Translate(), ref DoorAccessEnabled);
-
-            listing.Gap(12f);
-
-            listing.CheckboxLabeled("RimPrison.RestrictColonistWorkInPrisonArea".Translate(), ref RestrictColonistWorkInPrisonArea);
 
             listing.Gap(12f);
 

@@ -8,16 +8,10 @@ using RimPrison.PrisonArea;
 
 namespace RimPrison.Patches
 {
-    // [OPTIMIZE] Cache prison area! EZ opt
-    // [TODO] Disable specific jobs in the future
-    // When RestrictColonistWorkInPrisonArea is enabled, block colonists from
-    // taking jobs on things inside prison areas.
-    //
+    // Cache prison area! EZ opt (DONE)
+    // Block specific work types for colonists and colony mechs inside the prison area.
+    // Configured via Dialog_ManagePrisonAreaWork (a per-work-type checklist).
     // Patches HasJobOnThing(bool) on all WorkGiver_Scanner subclasses.
-    // The base returns bool, and every vanilla override also returns bool
-    // (there are zero `new`-hiding Job-returning variants).
-    // JobOnThing(Job) is always called through HasJobOnThing, so this
-    // single patch covers all job-creation paths.
     [HarmonyPatch]
     public static class Patch_PrisonAreaWorkRestriction
     {
@@ -36,19 +30,44 @@ namespace RimPrison.Patches
             }
         }
 
-        static void Postfix(Pawn pawn, Thing t, ref bool __result)
+        static void Postfix(WorkGiver_Scanner __instance, Pawn pawn, Thing t, ref bool __result)
         {
             if (!__result) return;
-            if (!RimPrisonMod.Settings.RestrictColonistWorkInPrisonArea) return;
             if (pawn == null || t == null) return;
-            if (!pawn.IsColonist) return;
+            // Include ColonyMech here!
+            if (!pawn.IsColonist && !pawn.IsColonyMech) return;
 
-            var area = pawn.Map?.areaManager?.AllAreas?
-                .Find(a => a is Area_Prison) as Area_Prison;
+            var disabled = RimPrisonMod.Settings.DisabledWorkInPrisonArea;
+            if (disabled.Count == 0) return;
+
+            WorkTypeDef workType = __instance.def.workType;
+            if (workType == null) return;
+            if (!disabled.Contains(workType.defName)) return;
+
+            var area = CachedPrisonArea(pawn.Map);
             if (area == null) return;
             if (!area[t.Position]) return;
 
             __result = false;
+        }
+
+        // Throttled cache: HasJobOnThing fires hundreds of times per frame.
+        // Refresh every 5000 ticks (~83s at 1x speed) per map.
+        private static Area_Prison cachedArea;
+        private static Map cachedMap;
+        private static int cacheRefreshTick;
+
+        static Area_Prison CachedPrisonArea(Map map)
+        {
+            if (map == null) return null;
+            int now = Find.TickManager.TicksGame;
+            if (map != cachedMap || now >= cacheRefreshTick)
+            {
+                cachedMap = map;
+                cachedArea = map.areaManager.Get<Area_Prison>();
+                cacheRefreshTick = now + 5000;
+            }
+            return cachedArea;
         }
     }
 }
