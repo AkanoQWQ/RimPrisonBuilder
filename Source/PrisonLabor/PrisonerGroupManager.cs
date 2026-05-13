@@ -46,32 +46,47 @@ namespace RimPrison.PrisonLabor
             }
         }
 
-        // Apply group work priorities and schedule to a single pawn.
+        // Apply group settings to a single pawn.
+        // NOTE: The early return for missing workSettings/timetable was
+        // preventing apparel/drug/food policies from being applied to
+        // babies and children who lack work/timetable components.
+        // Work and schedule guards are now per-section. Don't re-merge them.
         // [OPTIMIZE] O(blocks * members * workType)
+        // I am not sure if it's OK to create with pawn.setting==null here
         public void ApplyGroupSettings(Pawn pawn, PrisonerGroup group)
         {
-            if (pawn.workSettings == null || pawn.timetable == null)
-                return;
             if (group.workPriorities == null)
                 group.InitDefaults();
 
+            // Work priorities — create workSettings if missing
+            pawn.workSettings ??= new Pawn_WorkSettings(pawn);
             foreach (var wt in DefDatabase<WorkTypeDef>.AllDefsListForReading)
             {
                 if (!pawn.WorkTypeIsDisabled(wt))
                     pawn.workSettings.SetPriority(wt, group.GetPriority(wt));
             }
 
+            // Schedule — create timetable if missing
+            pawn.timetable ??= new Pawn_TimetableTracker(pawn);
             for (int h = 0; h < 24; h++)
-            {
                 pawn.timetable.SetAssignment(h, group.GetAssignment(h));
-            }
 
-            if (group.apparelPolicy != null && pawn.outfits != null)
+            // Apparel / drug / food policies — create trackers if needed
+            if (group.apparelPolicy != null)
+            {
+                pawn.outfits ??= new Pawn_OutfitTracker(pawn);
                 pawn.outfits.CurrentApparelPolicy = group.apparelPolicy;
-            if (group.drugPolicy != null && pawn.drugs != null)
+            }
+            if (group.drugPolicy != null)
+            {
+                pawn.drugs ??= new Pawn_DrugPolicyTracker(pawn);
                 pawn.drugs.CurrentPolicy = group.drugPolicy;
-            if (group.foodRestriction != null && pawn.foodRestriction != null)
+            }
+            if (group.foodRestriction != null)
+            {
+                pawn.foodRestriction ??= new Pawn_FoodRestrictionTracker(pawn);
                 pawn.foodRestriction.CurrentFoodPolicy = group.foodRestriction;
+            }
         }
 
         // Sync a single work priority from group to all members.
@@ -90,16 +105,14 @@ namespace RimPrison.PrisonLabor
                     group.pawnThingIds.RemoveAt(i); // Clean up stale ID
                     continue;
                 }
-                if (pawn.workSettings != null)
+                pawn.workSettings ??= new Pawn_WorkSettings(pawn);
+                if (!pawn.WorkTypeIsDisabled(wt))
                 {
-                    if (!pawn.WorkTypeIsDisabled(wt))
-                    {
-                        pawn.workSettings.SetPriority(wt, priority);
-                    }
-                    else
-                    {
-                        blockedPawnNames.Add(pawn.LabelShortCap);
-                    }
+                    pawn.workSettings.SetPriority(wt, priority);
+                }
+                else
+                {
+                    blockedPawnNames.Add(pawn.LabelShortCap);
                 }
             }
             if (blockedPawnNames.Count > 0)
@@ -151,8 +164,11 @@ namespace RimPrison.PrisonLabor
             for (int i = group.pawnThingIds.Count - 1; i >= 0; i--)
             {
                 Pawn pawn = FindPawnById(map, group.pawnThingIds[i]);
-                if (pawn?.outfits != null && group.apparelPolicy != null)
+                if (pawn != null && group.apparelPolicy != null)
+                {
+                    pawn.outfits ??= new Pawn_OutfitTracker(pawn);
                     pawn.outfits.CurrentApparelPolicy = group.apparelPolicy;
+                }
             }
             GetLog()?.Log(group.name, "RimPrison.LogOutfitChanged".Translate());
         }
@@ -164,8 +180,11 @@ namespace RimPrison.PrisonLabor
             for (int i = group.pawnThingIds.Count - 1; i >= 0; i--)
             {
                 Pawn pawn = FindPawnById(map, group.pawnThingIds[i]);
-                if (pawn?.drugs != null && group.drugPolicy != null)
+                if (pawn != null && group.drugPolicy != null)
+                {
+                    pawn.drugs ??= new Pawn_DrugPolicyTracker(pawn);
                     pawn.drugs.CurrentPolicy = group.drugPolicy;
+                }
             }
         }
 
@@ -176,8 +195,11 @@ namespace RimPrison.PrisonLabor
             for (int i = group.pawnThingIds.Count - 1; i >= 0; i--)
             {
                 Pawn pawn = FindPawnById(map, group.pawnThingIds[i]);
-                if (pawn?.foodRestriction != null && group.foodRestriction != null)
+                if (pawn != null && group.foodRestriction != null)
+                {
+                    pawn.foodRestriction ??= new Pawn_FoodRestrictionTracker(pawn);
                     pawn.foodRestriction.CurrentFoodPolicy = group.foodRestriction;
+                }
             }
         }
 
