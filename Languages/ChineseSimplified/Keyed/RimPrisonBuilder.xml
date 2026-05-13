@@ -123,6 +123,7 @@
   <RimPrison.ClearPrisonArea>清除监狱区域</RimPrison.ClearPrisonArea>
   <RimPrison.ClearPrisonAreaDesc>划定要从监狱区域移除的格子。</RimPrison.ClearPrisonAreaDesc>
   <RimPrison.BabyBedMustBeInPrisonCell>囚犯婴儿床只能在囚室里</RimPrison.BabyBedMustBeInPrisonCell>
+  <RimPrison.BabyFeedingIsolation>隔离殖民者喂养囚犯婴儿</RimPrison.BabyFeedingIsolation>
 
   <!-- Activity Log -->
   <RimPrison.ActivityLog>活动日志</RimPrison.ActivityLog>

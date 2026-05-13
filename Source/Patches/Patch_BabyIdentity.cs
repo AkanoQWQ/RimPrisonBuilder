@@ -13,14 +13,24 @@ namespace RimPrison.Patches
         {
             if (!__result) return;
             if (motherOrEgg is not Pawn mother) return;
-            if (!mother.IsPrisonerOfColony) return;
             if (!pawn.RaceProps.Humanlike) return;
             if (!pawn.DevelopmentalStage.Baby()) return;
 
-            pawn.guest?.SetGuestStatus(Faction.OfPlayer, GuestStatus.Prisoner);
-
-            pawn.guest?.ToggleNonExclusiveInteraction(
-                DefOfs.RP_DefOf.RimPrison_AllowLabor, true);
+            if (mother.IsPrisonerOfColony)
+            {
+                pawn.guest?.SetGuestStatus(Faction.OfPlayer, GuestStatus.Prisoner);
+                pawn.guest?.ToggleNonExclusiveInteraction(
+                    DefOfs.RP_DefOf.RimPrison_AllowLabor, true);
+            }
+            else if (mother.IsSlaveOfColony)
+            {
+                pawn.guest?.SetGuestStatus(Faction.OfPlayer, GuestStatus.Slave);
+            }
+            else
+            {
+                return;
+            }
+            // AI tried to EnableLabor here...
         }
     }
 }

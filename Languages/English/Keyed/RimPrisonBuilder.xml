@@ -95,6 +95,7 @@ Accept and release the prisoner?</RimPrison.RansomLetterText>
   <RimPrison.ClearPrisonArea>Clear prison area</RimPrison.ClearPrisonArea>
   <RimPrison.ClearPrisonAreaDesc>Designate cells to remove from the prison area.</RimPrison.ClearPrisonAreaDesc>
   <RimPrison.BabyBedMustBeInPrisonCell>Prisoner baby beds must be placed in a prison cell.</RimPrison.BabyBedMustBeInPrisonCell>
+  <RimPrison.BabyFeedingIsolation>Isolate colonists from feeding prisoner babies</RimPrison.BabyFeedingIsolation>
 
   <!-- Activity Log -->
   <RimPrison.ActivityLog>Activity Log</RimPrison.ActivityLog>
