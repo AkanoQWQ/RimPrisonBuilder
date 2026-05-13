@@ -19,6 +19,11 @@ namespace RimPrison
             foreach (var map in Find.Maps)
                 RemoveFromMap(map);
 
+            // World pawns (caravans, etc.) may have RimPrison_AllowLabor enabled.
+            // Pawn_GuestTracker saves interaction modes by defName, which fails
+            // after mod removal if the def no longer exists.
+            CleanWorldPawns();
+
             CleanArchive();
 
             Messages.Message("RimPrison.RemovalComplete".Translate(),
@@ -47,16 +52,45 @@ namespace RimPrison
             // Delete prison area
             map.areaManager.Get<Area_Prison>()?.Delete();
 
-            // Reset prisoner labor flag and remove despair hediffs
-            foreach (var pawn in map.mapPawns.PrisonersOfColony)
+            // Reset AllowLabor on ALL map pawns (prisoners, slaves, anyone)
+            // and remove despair hediffs
+            foreach (var pawn in map.mapPawns.AllPawnsSpawned)
             {
-                if (pawn.guest.IsInteractionEnabled(RP_DefOf.RimPrison_AllowLabor))
-                    pawn.guest.ToggleNonExclusiveInteraction(RP_DefOf.RimPrison_AllowLabor, false);
-
-                var despair = pawn.health?.hediffSet?.GetFirstHediffOfDef(RP_HediffDefOf.RPR_Despair);
-                if (despair != null)
-                    pawn.health.RemoveHediff(despair);
+                CleanPawn(pawn);
+                // Interrupt any active job so custom JobDefs aren't serialized
+                pawn.jobs?.StopAll();
             }
+        }
+
+        static void CleanWorldPawns()
+        {
+            // Alive + mothballed (caravans, off-map pawns)
+            var alives = Find.WorldPawns?.AllPawnsAlive;
+            if (alives != null)
+            {
+                foreach (var pawn in alives)
+                    CleanPawn(pawn);
+            }
+
+            // Dead world pawns are also Deep-serialized
+            var deads = Find.WorldPawns?.AllPawnsDead;
+            if (deads != null)
+            {
+                foreach (var pawn in deads)
+                    CleanPawn(pawn);
+            }
+        }
+
+        static void CleanPawn(Pawn pawn)
+        {
+            pawn.jobs?.StopAll();
+
+            if (pawn.guest?.IsInteractionEnabled(RP_DefOf.RimPrison_AllowLabor) == true)
+                pawn.guest.ToggleNonExclusiveInteraction(RP_DefOf.RimPrison_AllowLabor, false);
+
+            var despair = pawn.health?.hediffSet?.GetFirstHediffOfDef(RP_HediffDefOf.RPR_Despair);
+            if (despair != null)
+                pawn.health.RemoveHediff(despair);
         }
 
         static void CleanArchive()
