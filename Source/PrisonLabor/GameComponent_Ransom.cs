@@ -34,6 +34,7 @@ namespace RimPrison.PrisonLabor
             foreach (Pawn pawn in PawnsFinder.AllMaps_PrisonersOfColony)
             {
                 if (offeredPrisoners.Contains(pawn.thingIDNumber)) continue;
+                if (pawn.health?.hediffSet?.HasHediff(RP_HediffDefOf.RPR_Despair) == true) continue;
 
                 var comp = pawn.TryGetComp<CompWorkTracker>();
                 if (comp == null) continue;
