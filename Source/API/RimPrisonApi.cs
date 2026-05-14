@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using RimWorld;
 using Verse;
 using Verse.AI;
+using Verse.Noise;
 
 namespace RimPrison.API
 {
@@ -65,7 +67,7 @@ namespace RimPrison.API
         public bool Handled => Decision != RimPrisonApiRuleDecision.Unhandled;
     }
 
-    public readonly struct PrisonSuppressionSnapshot
+    public struct PrisonSuppressionSnapshot
     {
         public float suppression;
         public int prisonerCount;
@@ -236,7 +238,7 @@ namespace RimPrison.API
         private static readonly ConditionalWeakTable<Job, AnnotatedLaborWorkTypeHolder> AnnotatedLaborWorkTypeByJob =
             new();
 
-        // [TODO] Set by labor search loop before enumerating WorkGivers.
+        // [NOTE] Set by labor search loop before enumerating WorkGivers.
         // Extensions read this to bypass age-based work restrictions for young prisoners.
         public static LaborSearchContext CurrentLaborSearchContext { get; internal set; }
 
@@ -508,10 +510,13 @@ namespace RimPrison.API
 
     public static class RimPrisonWorkApi
     {
-        // [TODO] Need internal port — work eligibility checking per-pawn
+        // WIRED — reads group.workPriorities (priority > 0 = allowed)
         public static bool IsWorkTypeAllowed(Pawn pawn, WorkTypeDef workType)
         {
-            return false;
+            if (pawn?.MapHeld == null || workType == null) return false;
+            var mgr = pawn.MapHeld.GetComponent<PrisonLabor.PrisonerGroupManager>();
+            var group = mgr?.GetGroupFor(pawn);
+            return group?.workPriorities?[workType] > 0;
         }
 
         // [TODO] Need internal port — per-map work type age band config storage
@@ -538,10 +543,20 @@ namespace RimPrison.API
         public static string PeekAnnotatedLaborJobWorkType(Job job)
             => RimPrisonExtensionApi.PeekAnnotatedLaborJobWorkType(job);
 
-        // [TODO] Need internal port — per-pawn work type configuration ignoring age band
+        // WIRED — returns all WorkTypeDefs with priority > 0 for the pawn's group
         public static IReadOnlyList<WorkTypeDef> GetConfiguredWorkTypesIgnoringAgeBand(Pawn pawn)
         {
-            return Array.Empty<WorkTypeDef>();
+            var result = new List<WorkTypeDef>();
+            if (pawn?.MapHeld == null) return result;
+            var mgr = pawn.MapHeld.GetComponent<PrisonLabor.PrisonerGroupManager>();
+            var group = mgr?.GetGroupFor(pawn);
+            if (group?.workPriorities == null) return result;
+            foreach (var wt in DefDatabase<WorkTypeDef>.AllDefsListForReading)
+            {
+                if (group.workPriorities[wt] > 0)
+                    result.Add(wt);
+            }
+            return result;
         }
 
         public static float ResolveWorkEfficiencyFactor(Pawn pawn, WorkTypeDef workType, float fallbackFactor = 1f)
@@ -554,16 +569,21 @@ namespace RimPrison.API
 
     public static class RimPrisonFoodApi
     {
-        // [TODO] Need internal port — food policy checking for managed babies
+        // WIRED — checks group.foodRestriction, same logic as IsFoodAllowed
         public static bool IsBabyFoodAllowed(Pawn baby, ThingDef food)
         {
-            return true;
+            return IsFoodAllowed(baby, food);
         }
 
-        // [TODO] Need internal port — food policy checking for managed pawns
+        // WIRED — checks group foodRestriction (FoodPolicy), falls back to vanilla
         public static bool IsFoodAllowed(Pawn pawn, ThingDef food)
         {
-            return true;
+            if (pawn?.MapHeld == null || food == null) return true;
+            var mgr = pawn.MapHeld.GetComponent<PrisonLabor.PrisonerGroupManager>();
+            var group = mgr?.GetGroupFor(pawn);
+            if (group?.foodRestriction != null)
+                return group.foodRestriction.Allows(food);
+            return pawn.foodRestriction?.CurrentFoodPolicy?.Allows(food) ?? true;
         }
 
         public static bool RegisterBabyFoodRule(string id, IRimPrisonBabyFoodRule rule)
@@ -591,21 +611,19 @@ namespace RimPrison.API
 
     public static class RimPrisonCultureApi
     {
-        // [TODO] Need internal port — regime / warden system state per map
+        // [TODO] regime / warden system state per map — partially wired (HasPrisonMeme works)
         public static RimPrisonCultureSnapshot GetCultureSnapshot(Map map)
         {
+            var meme = DefDatabase<MemeDef>.GetNamedSilentFail("RPR_PrisonMeme");
             return new RimPrisonCultureSnapshot(
                 PrisonCultureRegime.Deterrence,
                 false,
                 false,
-                Faction.OfPlayer?.ideos?.PrimaryIdeo?.HasMeme(RPR_DefOf_Meme) == true,
+                Faction.OfPlayer?.ideos?.PrimaryIdeo?.HasMeme(meme) == true,
                 false);
         }
 
-        // [TODO] Meme/Precept DefOfs not yet defined — placeholder check
-        private static readonly string RPR_DefOf_Meme = "RPR_PrisonMeme";
-
-        // [TODO] Need internal port — precept evaluation pipeline
+        // WIRED — checks PrimaryIdeo + runs extension interpreters as fallback
         public static bool PlayerIdeologyHasPrecept(PreceptDef precept)
         {
             return precept != null
@@ -647,10 +665,17 @@ namespace RimPrison.API
             return pawn.GetComp<PrisonLabor.CompWorkTracker>()?.earnedCoupons ?? 0;
         }
 
-        // [TODO] Need internal port — charge / add-debt pipeline (shopping system)
+        // WIRED — return final cost
+        // ... AI failed to write such simple function
         public static float ChargeBalanceOrAddDebt(Pawn pawn, float amount)
         {
-            return 0f;
+            if (pawn == null) return 0f;
+            var tracker = pawn.GetComp<PrisonLabor.CompWorkTracker>();
+            if (tracker == null) return 0f;
+            var oldBalance = tracker.earnedCoupons;
+            tracker.earnedCoupons = (int)(tracker.earnedCoupons - amount);
+            tracker.earnedCoupons = Math.Max(tracker.earnedCoupons,-RimPrisonMod.Settings.MaxDebt);
+            return tracker.earnedCoupons - oldBalance;
         }
 
         public static void AddBalance(Pawn pawn, float amount)
@@ -658,7 +683,7 @@ namespace RimPrison.API
             if (pawn == null || amount <= 0f) return;
             var tracker = pawn.GetComp<PrisonLabor.CompWorkTracker>();
             if (tracker != null)
-                tracker.earnedCoupons += Mathf.FloorToInt(amount);
+                tracker.earnedCoupons += (int)Math.Floor(amount);
         }
 
         public static string GetCurrencyName()
@@ -673,46 +698,142 @@ namespace RimPrison.API
 
     public static class RimPrisonStateApi
     {
+        // [TODO] WTF AI implement an INDEPENDENT CACULATOR HERE
+        // ?????????? OF COURSE NOT OK! CHANGE IN THE FUTURE!
+        // WIRED — fills suppression snapshot from GameComponent_Suppression + map data
         public static RimPrisonStateSnapshot GetStateSnapshot(Map map)
         {
             if (map == null)
                 return default;
 
             var comp = map.GetComponent<PrisonLabor.GameComponent_Suppression>();
-            var logComp = map.GetComponent<PrisonLabor.GameComponent_ActivityLog>();
             var hasComponent = comp != null;
+
+            var prisoners = map.mapPawns.PrisonersOfColony;
+            int adultCount = 0, childCount = 0, babyCount = 0;
+            float totalMood = 0f, totalHealth = 0f;
+            foreach (var p in prisoners)
+            {
+                if (p.DevelopmentalStage.Baby()) babyCount++;
+                else if (p.DevelopmentalStage.Child()) childCount++;
+                else adultCount++;
+                totalMood += p.needs?.mood?.CurLevelPercentage ?? 0.5f;
+                totalHealth += p.health?.summaryHealth?.SummaryHealthPercent ?? 1f;
+            }
+            int prisonerCount = prisoners.Count;
+            float avgMood = prisonerCount > 0 ? totalMood / prisonerCount : 0.5f;
+            float avgHealth = prisonerCount > 0 ? totalHealth / prisonerCount : 1f;
+            int turretCount = PrisonLabor.SuppressionCalculator.CountTurretsInPrisonArea(map);
+            int guardCount = 0; // [TODO] warden system not implemented
+            int colonistCount = map.mapPawns.FreeColonistsSpawnedCount;
+            float difficultyValue = Find.Storyteller?.difficulty?.threatScale ?? 1f;
+
+            var regime = PrisonLabor.SuppressionCalculator.CurrentRegime;
+            float effectivePrisoners = PrisonLabor.SuppressionCalculator.CalculateEffectivePrisonerCount(map);
+            float guardFactor = (guardCount * 2f + colonistCount) / Math.Max(1f, effectivePrisoners) * 5f;
+            float turretFactor = Math.Min(turretCount * 2f, 20f);
+            float prisonerFactor = Math.Min(effectivePrisoners * 1.5f, 25f);
+            float moodFactor = (avgMood * avgMood * 12f - 3f) * 1.25f;
+            float healthFactor = (0.5f - avgHealth) * 8f;
+            float regimeModifier = regime switch
+            {
+                PrisonLabor.SuppressionCalculator.Regime.Harsh => 10f,
+                PrisonLabor.SuppressionCalculator.Regime.Deterrence => 3f,
+                PrisonLabor.SuppressionCalculator.Regime.Equality => -5f,
+                _ => 0f
+            };
+            float difficultyModifier = (1f - difficultyValue) * 8f;
+
+            var thresholds = new PrisonSuppressionThresholds
+            {
+                mentalBreakThreshold = regime switch
+                {
+                    PrisonLabor.SuppressionCalculator.Regime.Harsh => 55f,
+                    PrisonLabor.SuppressionCalculator.Regime.Equality => 40f,
+                    _ => 50f
+                },
+                prisonBreakThreshold = regime switch
+                {
+                    PrisonLabor.SuppressionCalculator.Regime.Harsh => 35f,
+                    PrisonLabor.SuppressionCalculator.Regime.Equality => 20f,
+                    _ => 30f
+                }
+            };
 
             var snapshot = new PrisonSuppressionSnapshot
             {
                 suppression = comp?.colonySuppression ?? 50f,
-                // [TODO] Need internal port — detailed suppression breakdown
+                prisonerCount = prisonerCount,
+                adultCount = adultCount,
+                childCount = childCount,
+                babyCount = babyCount,
+                averageMood = avgMood,
+                averageHealth = avgHealth,
+                guardFactor = guardFactor,
+                turretFactor = turretFactor,
+                prisonerFactor = prisonerFactor,
+                moodFactor = moodFactor,
+                healthFactor = healthFactor,
+                regimeModifier = regimeModifier,
+                difficultyModifier = difficultyModifier,
+                guardCount = guardCount,
+                turretCount = turretCount,
+                thresholds = thresholds
             };
 
+            // [NOTE] GetCurrentAssignmentForPawn requires a specific pawn.
+            // Snapshot-level assignment is set to Anything as a safe default.
             return new RimPrisonStateSnapshot(
                 hasComponent,
-                // [TODO] Need internal port — current time assignment
                 PrisonTimeAssignment.Anything,
                 snapshot,
-                // [TODO] Need internal port — warden system
-                false);
+                false); // [TODO] warden system not implemented
         }
 
-        // [TODO] Need internal port — per-pawn schedule assignment
+        // WIRED — reads pawn.timetable, maps TimeAssignmentDef to PrisonTimeAssignment
         public static PrisonTimeAssignment GetCurrentAssignmentForPawn(Pawn pawn)
         {
-            return PrisonTimeAssignment.Anything;
+            if (pawn?.timetable?.CurrentAssignment == null) return PrisonTimeAssignment.Anything;
+            return TimeAssignmentDefToEnum(pawn.timetable.CurrentAssignment);
         }
 
-        // [TODO] Need internal port — per-pawn schedule axis (main/child/baby)
+        // WIRED — returns axis based on developmental stage
         public static PrisonScheduleAxisKind GetScheduleAxisForPawn(Pawn pawn)
         {
+            if (pawn == null) return PrisonScheduleAxisKind.Main;
+            if (pawn.DevelopmentalStage.Baby()) return PrisonScheduleAxisKind.Baby;
+            if (pawn.DevelopmentalStage.Child()) return PrisonScheduleAxisKind.Child;
             return PrisonScheduleAxisKind.Main;
         }
 
-        // [TODO] Need internal port — per-pawn 24-hour schedule data
+        // WIRED — reads pawn.timetable.times (24 entries), maps to int 0-3
         public static IReadOnlyList<int> GetScheduleForPawn(Pawn pawn)
         {
-            return Array.Empty<int>();
+            var result = new List<int>(24);
+            if (pawn?.timetable?.times == null)
+            {
+                for (int i = 0; i < 24; i++) result.Add(3); // default Anything
+                return result;
+            }
+            for (int h = 0; h < 24; h++)
+                result.Add(TimeAssignmentDefToInt(pawn.timetable.times[h]));
+            return result;
+        }
+
+        private static PrisonTimeAssignment TimeAssignmentDefToEnum(TimeAssignmentDef def)
+        {
+            if (def == TimeAssignmentDefOf.Sleep) return PrisonTimeAssignment.Sleep;
+            if (def == TimeAssignmentDefOf.Work) return PrisonTimeAssignment.Labor;
+            if (def == TimeAssignmentDefOf.Joy) return PrisonTimeAssignment.Recreation;
+            return PrisonTimeAssignment.Anything;
+        }
+
+        private static int TimeAssignmentDefToInt(TimeAssignmentDef def)
+        {
+            if (def == TimeAssignmentDefOf.Sleep) return 0;
+            if (def == TimeAssignmentDefOf.Work) return 2;
+            if (def == TimeAssignmentDefOf.Joy) return 1;
+            return 3;
         }
 
         // WIRED — reads Area_Prison
@@ -819,7 +940,7 @@ namespace RimPrison.API
         public static float GetEffectiveBalance(Pawn pawn)
             => RimPrisonFinanceApi.GetEffectiveBalance(pawn);
 
-        // [TODO] Need internal port
+        // WIRED
         public static float ChargeBalanceOrAddDebt(Pawn pawn, float amount)
             => RimPrisonFinanceApi.ChargeBalanceOrAddDebt(pawn, amount);
 
