@@ -264,6 +264,10 @@ namespace RimPrison.PrisonLabor
 
         private static Job MakeShoppingJob(Pawn pawn, Building_CouponShop shop)
         {
+            // Pre-check: another prisoner may have reserved the shop already.
+            // stackCount=-1 reserves the whole building, so maxPawns can't help.
+            if (!pawn.CanReserve(shop))
+                return null;
             return JobMaker.MakeJob(DefOfs.RP_JobDefOf.RimPrison_BuyFromCouponShop, shop);
         }
     }
