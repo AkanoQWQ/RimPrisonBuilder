@@ -15,8 +15,8 @@ namespace RimPrison.CouponShop
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            // All vanilla job use stackCount=-1 here, which means reserve the whole building
-            return pawn.Reserve(Shop, job, 1, -1, null, errorOnFailed);
+            // Don't pass errorOnFailed to Reserve — multiple prisoners may compete
+            return pawn.Reserve(Shop, job, 1, -1, null, false);
         }
 
         protected override IEnumerable<Toil> MakeNewToils()
