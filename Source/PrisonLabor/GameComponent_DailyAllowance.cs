@@ -28,6 +28,8 @@ namespace RimPrison.PrisonLabor
                 if (comp == null) continue;
                 comp.earnedCoupons += allowance;
                 comp.earnedCoupons -= fee;
+
+                pawn.TryGetComp<CompPrisonPawn>()?.SettleDailyIncome();
             }
         }
 

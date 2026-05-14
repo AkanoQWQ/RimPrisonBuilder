@@ -53,13 +53,19 @@ namespace RimPrison.PrisonLabor
             int balance = GetBalance(pawn);
             int maxDebt = RimPrisonMod.Settings.MaxDebt;
 
+            var thoughts = pawn.TryGetComp<CompPrisonPawn>();
+
             // 0. No food at all in any shop — log and bail
-            // AI said "&& balance <= -maxDebt" but I think it unnecessary
             if (!data.hasAnyFood)
             {
                 ThrottleNoFoodLog(pawn);
+                thoughts?.RecordThought("RimPrison.ThoughtNoFood".Translate());
                 return null;
             }
+            // Complain if income can't cover food cost
+            float smoothedIncome = thoughts?.smoothedDailyIncome ?? 0f;
+            if (smoothedIncome > 0f && smoothedIncome < dailyCost * 0.7f)
+                thoughts?.RecordThought("RimPrison.ThoughtIncomeTooLow".Translate());
 
             // 1. Basic food: backpack nutrition < 2-day need
             if (invNutrition < twoDayNeed)
@@ -75,7 +81,7 @@ namespace RimPrison.PrisonLabor
                 {
                     return MakeShoppingJob(pawn, staple.Value.shop);
                 }
-                    
+                
                 return null;
             }
 
@@ -83,9 +89,11 @@ namespace RimPrison.PrisonLabor
             if (balance > dailyCost * 3)
             {
                 var premium = FindBestPremiumFood(data, pawn);
-                // Of cource not run into debt in this case!
                 if (premium.HasValue && premium.Value.price <= balance)
+                {
+                    thoughts?.RecordThought("RimPrison.ThoughtPremiumFood".Translate(premium.Value.itemDef.label));
                     return MakeShoppingJob(pawn, premium.Value.shop);
+                }
             }
 
             // 3. Drugs: money > dailyCost × 5
@@ -94,7 +102,10 @@ namespace RimPrison.PrisonLabor
                 var drug = FindRandomAllowedDrug(data, pawn);
                 // Of cource not run into debt in this case!
                 if (drug.HasValue && drug.Value.price <= balance)
+                {
+                    thoughts?.RecordThought("RimPrison.ThoughtBuyDrug".Translate(drug.Value.itemDef.label));
                     return MakeShoppingJob(pawn, drug.Value.shop);
+                }
             }
 
             return null;

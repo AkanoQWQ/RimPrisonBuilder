@@ -144,6 +144,11 @@
   建议在操作后立即保存并重启游戏。</RimPrison.RemoveModConfirm>
   <RimPrison.ConfirmRemove>确认移除</RimPrison.ConfirmRemove>
   <RimPrison.RemovalComplete>RimPrison数据已清除，请保存后重启游戏。</RimPrison.RemovalComplete>
+  <!-- Prisoner thoughts -->
+  <RimPrison.ThoughtNoFood>这个破监狱根本没有食物！他们要饿死我们！</RimPrison.ThoughtNoFood>
+  <RimPrison.ThoughtIncomeTooLow>我的工资根本支撑不了餐费...我的生活太难了！</RimPrison.ThoughtIncomeTooLow>
+  <RimPrison.ThoughtPremiumFood>太好了！我的工资甚至可以让我买一些好吃的食物！我要吃{0}！</RimPrison.ThoughtPremiumFood>
+  <RimPrison.ThoughtBuyDrug>作为一个囚犯我居然能买到{0}！这简直是奢华享受！</RimPrison.ThoughtBuyDrug>
   <!-- Prisoner detail panel -->
   <RimPrison.SelectPrisoner>请在左侧选择一个囚犯查看详细信息。</RimPrison.SelectPrisoner>
   <RimPrison.BalanceLabel>余额: {0}</RimPrison.BalanceLabel>

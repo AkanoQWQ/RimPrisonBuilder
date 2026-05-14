@@ -118,6 +118,11 @@ Save and restart immediately after this operation.</RimPrison.RemoveModConfirm>
   <RimPrison.RemovalComplete>RimPrison data cleared. Save and restart to complete removal.</RimPrison.RemovalComplete>
   <RimPrison.HelpTab>Help</RimPrison.HelpTab>
   <RimPrison.HelpTitle>RimPrison Help</RimPrison.HelpTitle>
+  <!-- Prisoner thoughts -->
+  <RimPrison.ThoughtNoFood>There's no food in this damn prison! They're going to starve us!</RimPrison.ThoughtNoFood>
+  <RimPrison.ThoughtIncomeTooLow>My wages can't even cover the meal costs... life is too hard!</RimPrison.ThoughtIncomeTooLow>
+  <RimPrison.ThoughtPremiumFood>Great! My wages even allow me to buy some good food! I want {0}!</RimPrison.ThoughtPremiumFood>
+  <RimPrison.ThoughtBuyDrug>As a prisoner I can actually buy {0}! This is pure luxury!</RimPrison.ThoughtBuyDrug>
   <!-- Prisoner detail panel -->
   <RimPrison.SelectPrisoner>Select a prisoner on the left to view details.</RimPrison.SelectPrisoner>
   <RimPrison.BalanceLabel>Balance: {0}</RimPrison.BalanceLabel>
