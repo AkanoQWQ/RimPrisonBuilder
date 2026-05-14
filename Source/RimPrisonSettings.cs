@@ -104,56 +104,14 @@ namespace RimPrison
 
         public void DoSettingsWindowContents(Rect inRect)
         {
+            // Most settings now live in the in-game Prisoner Management
+            // window (Settings tab). Only keep items that don't fit there.
+
             Listing_Standard listing = new Listing_Standard();
             listing.Begin(inRect);
 
-            listing.Label("RimPrison.WorkCouponName".Translate());
-            WorkCouponName = listing.TextEntry(WorkCouponName);
-
-            listing.Gap(12f);
-
             listing.Label("RimPrison.GlobalWageMultiplier".Translate(GlobalWageMultiplier.ToString("F1")));
             GlobalWageMultiplier = listing.Slider(GlobalWageMultiplier, 0.1f, 10f);
-
-            listing.Gap(12f);
-
-            listing.Label("RimPrison.DailyAllowance".Translate());
-            string buf = DailyAllowance.ToString();
-            string result = listing.TextEntry(buf);
-            if (int.TryParse(result, out int val) && val >= 0 && val <= 9999)
-                DailyAllowance = val;
-
-            listing.Gap(12f);
-
-            listing.Label("RimPrison.DailyFee".Translate());
-            string feeBuf = DailyFee.ToString();
-            feeBuf = listing.TextEntry(feeBuf);
-            if (int.TryParse(feeBuf, out int f) && f >= 0 && f <= 9999)
-                DailyFee = f;
-
-            listing.Gap(12f);
-
-            listing.Label("RimPrison.MaxDebt".Translate());
-            string debtBuf = MaxDebt.ToString();
-            debtBuf = listing.TextEntry(debtBuf);
-            if (int.TryParse(debtBuf, out int d) && d >= 0 && d <= 99999)
-                MaxDebt = d;
-
-            listing.Gap(12f);
-
-            listing.Label("RimPrison.RansomAmount".Translate());
-            string ransomBuf = RansomAmount.ToString();
-            ransomBuf = listing.TextEntry(ransomBuf);
-            if (int.TryParse(ransomBuf, out int r) && r >= 0 && r <= 99999)
-                RansomAmount = r;
-
-            listing.Gap(12f);
-
-            listing.Label("RimPrison.DebtHarvestThreshold".Translate());
-            string harvestBuf = DebtHarvestThreshold.ToString();
-            harvestBuf = listing.TextEntry(harvestBuf);
-            if (int.TryParse(harvestBuf, out int h) && h >= 0 && h <= 99999)
-                DebtHarvestThreshold = h;
 
             listing.Gap(12f);
 
