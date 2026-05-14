@@ -846,6 +846,27 @@ namespace RimPrison.UI
             }
 
             y += 30f;
+            // Regime dropdown
+            Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrison.RegimeLabel".Translate());
+            string regimeLabel = SuppressionCalculator.CurrentRegime switch
+            {
+                SuppressionCalculator.Regime.Harsh => "RimPrison.RegimeHarshLabel".Translate(),
+                SuppressionCalculator.Regime.Deterrence => "RimPrison.RegimeDeterrenceLabel".Translate(),
+                SuppressionCalculator.Regime.Equality => "RimPrison.RegimeEqualityLabel".Translate(),
+                _ => "?"
+            };
+            if (RPR_UiStyle.DrawColoredButton(new Rect(inner.x + 144f, y, 100f, 24f), regimeLabel))
+            {
+                var options = new List<FloatMenuOption>
+                {
+                    new FloatMenuOption("RimPrison.RegimeHarshLabel".Translate(), () => SetRegime(SuppressionCalculator.Regime.Harsh)),
+                    new FloatMenuOption("RimPrison.RegimeDeterrenceLabel".Translate(), () => SetRegime(SuppressionCalculator.Regime.Deterrence)),
+                    new FloatMenuOption("RimPrison.RegimeEqualityLabel".Translate(), () => SetRegime(SuppressionCalculator.Regime.Equality))
+                };
+                Find.WindowStack.Add(new FloatMenu(options));
+            }
+
+            y += 30f;
             // Debt harvest threshold
             Widgets.Label(new Rect(inner.x, y, 140f, 24f), "RimPrison.DebtHarvestThreshold".Translate());
             string harvestBuf = RimPrisonMod.Settings.DebtHarvestThreshold.ToString();
@@ -925,6 +946,17 @@ namespace RimPrison.UI
                     delegate { Find.WindowStack.Add(new Dialog_RimPrisonHelp()); },
                     () => false)
             };
+        }
+
+        private static void SetRegime(SuppressionCalculator.Regime regime)
+        {
+            var prev = SuppressionCalculator.CurrentRegime;
+            SuppressionCalculator.CurrentRegime = regime;
+            if (Find.CurrentMap?.GetComponent<GameComponent_Regime>() is { } comp)
+            {
+                comp.ApplyToAllPrisoners();
+            }
+            RimPrisonMod.Settings.Write();
         }
     }
 }

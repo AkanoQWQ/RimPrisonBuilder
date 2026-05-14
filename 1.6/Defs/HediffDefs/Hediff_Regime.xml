@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Regime hediffs — one per prisoner. Applied/removed when colony regime changes.
+       Translated via DefInjected, not Keyed keys in the label attributes. -->
+
+  <HediffDef>
+    <defName>RPR_RegimeHarsh</defName>
+    <label>harshly oppressed</label>
+    <description>The colonists are oppressing us...</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.7,0.1,0.1,1)</defaultLabelColor>
+    <isBad>true</isBad>
+    <stages>
+      <li>
+        <label>oppressed</label>
+        <becomeVisible>true</becomeVisible>
+        <statFactors>
+          <WorkSpeedGlobal>1.20</WorkSpeedGlobal>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>RPR_RegimeDeterrence</defName>
+    <label>deterred by high suppression</label>
+    <description>The guards are intimidating... I dare not act out...</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.6,0.3,0.1,1)</defaultLabelColor>
+    <isBad>true</isBad>
+    <stages>
+      <li>
+        <label>deterred</label>
+        <becomeVisible>true</becomeVisible>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>RPR_RegimeEquality</defName>
+    <label>treated equally</label>
+    <description>As a prisoner, I am actually treated equally!</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.1,0.6,0.2,1)</defaultLabelColor>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <label>treated equally</label>
+        <becomeVisible>true</becomeVisible>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- Situational thoughts triggered by regime hediffs -->
+  <ThoughtDef>
+    <defName>RPR_RegimeHarshThought</defName>
+    <workerClass>RimPrison.PrisonLabor.ThoughtWorker_RegimeHarsh</workerClass>
+    <stages>
+      <li>
+        <label>harshly oppressed</label>
+        <description>My god! Those colonists are oppressing us...</description>
+        <baseMoodEffect>-8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>RPR_RegimeDeterrenceThought</defName>
+    <workerClass>RimPrison.PrisonLabor.ThoughtWorker_RegimeDeterrence</workerClass>
+    <stages>
+      <li>
+        <label>deterred by guards</label>
+        <description>Oh! Those wardens are terrifying... I dare not take any action...</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>RPR_RegimeEqualityThought</defName>
+    <workerClass>RimPrison.PrisonLabor.ThoughtWorker_RegimeEquality</workerClass>
+    <stages>
+      <li>
+        <label>treated equally</label>
+        <description>My god, as a prisoner I am actually treated equally!</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>

@@ -30,6 +30,9 @@ namespace RimPrison.DefOfs
     public static class RP_HediffDefOf
     {
         public static HediffDef RPR_Despair;
+        public static HediffDef RPR_RegimeHarsh;
+        public static HediffDef RPR_RegimeDeterrence;
+        public static HediffDef RPR_RegimeEquality;
 
         static RP_HediffDefOf()
         {

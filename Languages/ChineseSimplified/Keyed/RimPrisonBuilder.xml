@@ -144,4 +144,9 @@
   建议在操作后立即保存并重启游戏。</RimPrison.RemoveModConfirm>
   <RimPrison.ConfirmRemove>确认移除</RimPrison.ConfirmRemove>
   <RimPrison.RemovalComplete>RimPrison数据已清除，请保存后重启游戏。</RimPrison.RemovalComplete>
+  <!-- Regime -->
+  <RimPrison.RegimeLabel>监狱制度</RimPrison.RegimeLabel>
+  <RimPrison.RegimeHarshLabel>严酷</RimPrison.RegimeHarshLabel>
+  <RimPrison.RegimeDeterrenceLabel>威慑</RimPrison.RegimeDeterrenceLabel>
+  <RimPrison.RegimeEqualityLabel>平等</RimPrison.RegimeEqualityLabel>
 </LanguageData>

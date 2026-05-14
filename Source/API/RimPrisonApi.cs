@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using RimPrison.PrisonLabor;
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -611,13 +612,19 @@ namespace RimPrison.API
 
     public static class RimPrisonCultureApi
     {
-        // [TODO] regime / warden system state per map — partially wired (HasPrisonMeme works)
+        // WIRED — reads SuppressionCalculator.CurrentRegime + meme check
         public static RimPrisonCultureSnapshot GetCultureSnapshot(Map map)
         {
             var meme = DefDatabase<MemeDef>.GetNamedSilentFail("RPR_PrisonMeme");
+            var regime = SuppressionCalculator.CurrentRegime switch
+            {
+                SuppressionCalculator.Regime.Harsh => PrisonCultureRegime.Harsh,
+                SuppressionCalculator.Regime.Equality => PrisonCultureRegime.Equality,
+                _ => PrisonCultureRegime.Deterrence
+            };
             return new RimPrisonCultureSnapshot(
-                PrisonCultureRegime.Deterrence,
-                false,
+                regime,
+                true, // cultureEffectsEnabled — now wired
                 false,
                 Faction.OfPlayer?.ideos?.PrimaryIdeo?.HasMeme(meme) == true,
                 false);

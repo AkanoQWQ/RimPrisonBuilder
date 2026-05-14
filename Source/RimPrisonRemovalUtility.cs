@@ -88,9 +88,20 @@ namespace RimPrison
             if (pawn.guest?.IsInteractionEnabled(RP_DefOf.RimPrison_AllowLabor) == true)
                 pawn.guest.ToggleNonExclusiveInteraction(RP_DefOf.RimPrison_AllowLabor, false);
 
-            var despair = pawn.health?.hediffSet?.GetFirstHediffOfDef(RP_HediffDefOf.RPR_Despair);
-            if (despair != null)
-                pawn.health.RemoveHediff(despair);
+            if (pawn.health?.hediffSet != null)
+            {
+                var despair = pawn.health.hediffSet.GetFirstHediffOfDef(RP_HediffDefOf.RPR_Despair);
+                if (despair != null) pawn.health.RemoveHediff(despair);
+
+                var harsh = pawn.health.hediffSet.GetFirstHediffOfDef(RP_HediffDefOf.RPR_RegimeHarsh);
+                if (harsh != null) pawn.health.RemoveHediff(harsh);
+
+                var deter = pawn.health.hediffSet.GetFirstHediffOfDef(RP_HediffDefOf.RPR_RegimeDeterrence);
+                if (deter != null) pawn.health.RemoveHediff(deter);
+
+                var equal = pawn.health.hediffSet.GetFirstHediffOfDef(RP_HediffDefOf.RPR_RegimeEquality);
+                if (equal != null) pawn.health.RemoveHediff(equal);
+            }
         }
 
         static void CleanArchive()

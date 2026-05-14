@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <RPR_RegimeHarshThought.stages.0.label>被严酷压迫</RPR_RegimeHarshThought.stages.0.label>
+  <RPR_RegimeHarshThought.stages.0.description>天哪！那些殖民者在压迫我们...</RPR_RegimeHarshThought.stages.0.description>
+
+  <RPR_RegimeDeterrenceThought.stages.0.label>被高压威慑</RPR_RegimeDeterrenceThought.stages.0.label>
+  <RPR_RegimeDeterrenceThought.stages.0.description>哦！那些狱卒真是吓人...我不敢有任何行动...</RPR_RegimeDeterrenceThought.stages.0.description>
+
+  <RPR_RegimeEqualityThought.stages.0.label>被平等对待</RPR_RegimeEqualityThought.stages.0.label>
+  <RPR_RegimeEqualityThought.stages.0.description>天哪，作为一个囚犯我居然被平等对待了！</RPR_RegimeEqualityThought.stages.0.description>
+</LanguageData>

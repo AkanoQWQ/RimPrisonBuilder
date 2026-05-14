@@ -118,6 +118,11 @@ Save and restart immediately after this operation.</RimPrison.RemoveModConfirm>
   <RimPrison.RemovalComplete>RimPrison data cleared. Save and restart to complete removal.</RimPrison.RemovalComplete>
   <RimPrison.HelpTab>Help</RimPrison.HelpTab>
   <RimPrison.HelpTitle>RimPrison Help</RimPrison.HelpTitle>
+  <!-- Regime -->
+  <RimPrison.RegimeLabel>Prison regime</RimPrison.RegimeLabel>
+  <RimPrison.RegimeHarshLabel>Harsh</RimPrison.RegimeHarshLabel>
+  <RimPrison.RegimeDeterrenceLabel>Deterrence</RimPrison.RegimeDeterrenceLabel>
+  <RimPrison.RegimeEqualityLabel>Equality</RimPrison.RegimeEqualityLabel>
   <RimPrison.HelpContent>
 0. Prisoner UI Panel
 The tab bar can be dragged. The bottom-right corner of the UI panel can be resized.

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <RPR_RegimeHarsh.label>Harshly oppressed</RPR_RegimeHarsh.label>
+  <RPR_RegimeHarsh.description>The colonists are oppressing us...</RPR_RegimeHarsh.description>
+  <RPR_RegimeHarsh.stages.0.label>Oppressed</RPR_RegimeHarsh.stages.0.label>
+
+  <RPR_RegimeDeterrence.label>Deterred by high suppression</RPR_RegimeDeterrence.label>
+  <RPR_RegimeDeterrence.description>The guards are intimidating... I dare not act out...</RPR_RegimeDeterrence.description>
+  <RPR_RegimeDeterrence.stages.0.label>Deterred</RPR_RegimeDeterrence.stages.0.label>
+
+  <RPR_RegimeEquality.label>Treated equally</RPR_RegimeEquality.label>
+  <RPR_RegimeEquality.description>As a prisoner, I am actually treated equally!</RPR_RegimeEquality.description>
+  <RPR_RegimeEquality.stages.0.label>Treated equally</RPR_RegimeEquality.stages.0.label>
+</LanguageData>
