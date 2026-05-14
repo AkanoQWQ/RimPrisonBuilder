@@ -37,6 +37,15 @@
   <RimPrison.DespairHediffStage>绝望</RimPrison.DespairHediffStage>
   <RimPrison.DespairThoughtLabel>绝望</RimPrison.DespairThoughtLabel>
   <RimPrison.DespairThoughtDesc>我对获得自由已经绝望了。</RimPrison.DespairThoughtDesc>
+  <!-- Prisoner life thoughts -->
+  <RimPrison.ThoughtPremiumFoodLabel>购买高档食物</RimPrison.ThoughtPremiumFoodLabel>
+  <RimPrison.ThoughtPremiumFoodDesc>我购买了高档食物！</RimPrison.ThoughtPremiumFoodDesc>
+  <RimPrison.ThoughtDrugLabel>购买成瘾品</RimPrison.ThoughtDrugLabel>
+  <RimPrison.ThoughtDrugDesc>我购买了成瘾品！</RimPrison.ThoughtDrugDesc>
+  <RimPrison.ThoughtAllowanceGoodLabel>津贴足够</RimPrison.ThoughtAllowanceGoodLabel>
+  <RimPrison.ThoughtAllowanceGoodDesc>我们的津贴真是太足啦！</RimPrison.ThoughtAllowanceGoodDesc>
+  <RimPrison.ThoughtFeeExploitLabel>管理费过重</RimPrison.ThoughtFeeExploitLabel>
+  <RimPrison.ThoughtFeeExploitDesc>可恶的管理者......</RimPrison.ThoughtFeeExploitDesc>
   <RimPrison.LogNoFood>天哪，我们连吃的都买不到！</RimPrison.LogNoFood>
   <RimPrison.LogDebtHarvest>{0} 被摘除以抵债 {1} 粮票</RimPrison.LogDebtHarvest>
   <RimPrison.HelpTab>提示</RimPrison.HelpTab>

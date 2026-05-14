@@ -37,9 +37,15 @@ namespace RimPrison.PrisonLabor
                 {
                     var thoughts = pawn.TryGetComp<CompPrisonPawn>();
                     if (allowance - fee > dailyCost)
+                    {
                         thoughts?.RecordThought("RimPrison.ThoughtAllowanceGood".Translate());
+                        pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(DefOfs.RP_ThoughtDefOf.RPR_AllowanceGood);
+                    }
                     else if (fee - allowance > dailyCost)
+                    {
                         thoughts?.RecordThought("RimPrison.ThoughtAllowanceBad".Translate());
+                        pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(DefOfs.RP_ThoughtDefOf.RPR_FeeExploitation);
+                    }
                 }
             }
         }

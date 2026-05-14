@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Memory thoughts — TryGainMemory refreshes duration, does not stack. -->
+
+  <ThoughtDef>
+    <defName>RPR_BoughtPremiumFood</defName>
+    <durationDays>1</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>RimPrison.ThoughtPremiumFoodLabel</label>
+        <description>RimPrison.ThoughtPremiumFoodDesc</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>RPR_BoughtDrug</defName>
+    <durationDays>3</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>RimPrison.ThoughtDrugLabel</label>
+        <description>RimPrison.ThoughtDrugDesc</description>
+        <baseMoodEffect>5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>RPR_AllowanceGood</defName>
+    <durationDays>1</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>RimPrison.ThoughtAllowanceGoodLabel</label>
+        <description>RimPrison.ThoughtAllowanceGoodDesc</description>
+        <baseMoodEffect>5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>RPR_FeeExploitation</defName>
+    <durationDays>1</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>RimPrison.ThoughtFeeExploitLabel</label>
+        <description>RimPrison.ThoughtFeeExploitDesc</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>

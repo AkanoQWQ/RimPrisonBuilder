@@ -92,6 +92,7 @@ namespace RimPrison.PrisonLabor
                 if (premium.HasValue && premium.Value.price <= balance)
                 {
                     thoughts?.RecordThought("RimPrison.ThoughtPremiumFood".Translate(premium.Value.itemDef.label));
+                    pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(DefOfs.RP_ThoughtDefOf.RPR_BoughtPremiumFood);
                     return MakeShoppingJob(pawn, premium.Value.shop);
                 }
             }
@@ -104,6 +105,7 @@ namespace RimPrison.PrisonLabor
                 if (drug.HasValue && drug.Value.price <= balance)
                 {
                     thoughts?.RecordThought("RimPrison.ThoughtBuyDrug".Translate(drug.Value.itemDef.label));
+                    pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(DefOfs.RP_ThoughtDefOf.RPR_BoughtDrug);
                     return MakeShoppingJob(pawn, drug.Value.shop);
                 }
             }

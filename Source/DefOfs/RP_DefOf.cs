@@ -50,4 +50,18 @@ namespace RimPrison.DefOfs
             DefOfHelper.EnsureInitializedInCtor(typeof(RP_LetterDefOf));
         }
     }
+
+    [DefOf]
+    public static class RP_ThoughtDefOf
+    {
+        public static ThoughtDef RPR_BoughtPremiumFood;
+        public static ThoughtDef RPR_BoughtDrug;
+        public static ThoughtDef RPR_AllowanceGood;
+        public static ThoughtDef RPR_FeeExploitation;
+
+        static RP_ThoughtDefOf()
+        {
+            DefOfHelper.EnsureInitializedInCtor(typeof(RP_ThoughtDefOf));
+        }
+    }
 }
