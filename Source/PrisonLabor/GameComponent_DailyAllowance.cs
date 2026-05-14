@@ -30,6 +30,17 @@ namespace RimPrison.PrisonLabor
                 comp.earnedCoupons -= fee;
 
                 pawn.TryGetComp<CompPrisonPawn>()?.SettleDailyIncome();
+
+                // Allowance vs meal cost thoughts
+                float dailyCost = PrisonerShoppingService.GetDailyMealCost(pawn);
+                if (dailyCost < float.MaxValue)
+                {
+                    var thoughts = pawn.TryGetComp<CompPrisonPawn>();
+                    if (allowance - fee > dailyCost)
+                        thoughts?.RecordThought("RimPrison.ThoughtAllowanceGood".Translate());
+                    else if (fee - allowance > dailyCost)
+                        thoughts?.RecordThought("RimPrison.ThoughtAllowanceBad".Translate());
+                }
             }
         }
 

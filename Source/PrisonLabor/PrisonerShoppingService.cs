@@ -194,6 +194,16 @@ namespace RimPrison.PrisonLabor
             return GetDailyNutritionNeed(pawn) / data.baselineRatio;
         }
 
+        // Public wrapper for external use (DailyAllowance thoughts).
+        // Returns float.MaxValue if no shops or no food on the map.
+        public static float GetDailyMealCost(Pawn pawn)
+        {
+            if (pawn.Map == null) return float.MaxValue;
+            var data = RefreshCache(pawn.Map);
+            if (data.baselineRatio <= 0f) return float.MaxValue;
+            return GetDailyNutritionNeed(pawn) / data.baselineRatio;
+        }
+
         private static int GetBalance(Pawn pawn)
         {
             return pawn.TryGetComp<CompWorkTracker>()?.earnedCoupons ?? 0;

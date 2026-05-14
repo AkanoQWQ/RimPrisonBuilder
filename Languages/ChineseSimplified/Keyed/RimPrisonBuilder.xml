@@ -149,6 +149,8 @@
   <RimPrison.ThoughtIncomeTooLow>我的工资根本支撑不了餐费...我的生活太难了！</RimPrison.ThoughtIncomeTooLow>
   <RimPrison.ThoughtPremiumFood>太好了！我的工资甚至可以让我买一些好吃的食物！我要吃{0}！</RimPrison.ThoughtPremiumFood>
   <RimPrison.ThoughtBuyDrug>作为一个囚犯我居然能买到{0}！这简直是奢华享受！</RimPrison.ThoughtBuyDrug>
+  <RimPrison.ThoughtAllowanceGood>我们的津贴太好了，完全可以覆盖我们的餐费！</RimPrison.ThoughtAllowanceGood>
+  <RimPrison.ThoughtAllowanceBad>天哪，这里的殖民者居然想用管理和床位费剥削我们，太可恶了！</RimPrison.ThoughtAllowanceBad>
   <!-- Prisoner detail panel -->
   <RimPrison.SelectPrisoner>请在左侧选择一个囚犯查看详细信息。</RimPrison.SelectPrisoner>
   <RimPrison.BalanceLabel>余额: {0}</RimPrison.BalanceLabel>

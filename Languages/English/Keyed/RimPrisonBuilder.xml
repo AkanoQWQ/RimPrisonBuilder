@@ -123,6 +123,8 @@ Save and restart immediately after this operation.</RimPrison.RemoveModConfirm>
   <RimPrison.ThoughtIncomeTooLow>My wages can't even cover the meal costs... life is too hard!</RimPrison.ThoughtIncomeTooLow>
   <RimPrison.ThoughtPremiumFood>Great! My wages even allow me to buy some good food! I want {0}!</RimPrison.ThoughtPremiumFood>
   <RimPrison.ThoughtBuyDrug>As a prisoner I can actually buy {0}! This is pure luxury!</RimPrison.ThoughtBuyDrug>
+  <RimPrison.ThoughtAllowanceGood>Our allowance is so generous, it fully covers our meals!</RimPrison.ThoughtAllowanceGood>
+  <RimPrison.ThoughtAllowanceBad>My god, the colonists are exploiting us with management and bed fees!</RimPrison.ThoughtAllowanceBad>
   <!-- Prisoner detail panel -->
   <RimPrison.SelectPrisoner>Select a prisoner on the left to view details.</RimPrison.SelectPrisoner>
   <RimPrison.BalanceLabel>Balance: {0}</RimPrison.BalanceLabel>
