@@ -48,6 +48,16 @@ namespace RimPrison.Patches
                 return false;
             }
 
+            // Childcare WorkGivers (PlayWithBaby et al.) have a vanilla race:
+            // HasJobOnThing→BabyPlayGiver.CanDo→true, but JobOnThing re-rolls
+            // InRandomOrder and TryGiveJob→null, producing a log error.
+            // Let vanilla PawnCanUseWorkGiver block these for now; prisoner
+            // childcare will use dedicated JobGivers, not the vanilla WorkGivers.
+            // SO ONLY MOM COULD FEED CHILDREN
+            // Maybe it's a problem!
+            if (giver.def.workType == WorkTypeDefOf.Childcare)
+                return true;
+
             // All other checks passed so prisoner can use this WorkGiver
             __result = true;
             return false;
