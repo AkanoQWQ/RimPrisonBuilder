@@ -45,7 +45,6 @@ namespace RimPrison.PrisonLabor
             if (pawn.Map == null) return null;
 
             var data = RefreshCache(pawn.Map);
-            if (data.items.Count == 0) return null;
 
             float dailyCost = CalculateDailyMealCost(pawn, data);
             float invNutrition = GetInventoryNutrition(pawn);
@@ -55,7 +54,8 @@ namespace RimPrison.PrisonLabor
 
             var thoughts = pawn.TryGetComp<CompPrisonPawn>();
 
-            // 0. No food at all in any shop — log and bail
+            // 0. No food at all (no shops, or no food items in any shop). Must be
+            //    before data.items.Count==0 so we catch the "no shops on map" case.
             if (!data.hasAnyFood)
             {
                 ThrottleNoFoodLog(pawn);
