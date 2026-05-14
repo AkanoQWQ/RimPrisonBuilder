@@ -8,8 +8,8 @@
     <stackLimit>1</stackLimit>
     <stages>
       <li>
-        <label>RimPrison.ThoughtPremiumFoodLabel</label>
-        <description>RimPrison.ThoughtPremiumFoodDesc</description>
+        <label>purchased premium food</label>
+        <description>I purchased premium food!</description>
         <baseMoodEffect>2</baseMoodEffect>
       </li>
     </stages>
@@ -21,8 +21,8 @@
     <stackLimit>1</stackLimit>
     <stages>
       <li>
-        <label>RimPrison.ThoughtDrugLabel</label>
-        <description>RimPrison.ThoughtDrugDesc</description>
+        <label>purchased drug</label>
+        <description>I purchased a drug!</description>
         <baseMoodEffect>5</baseMoodEffect>
       </li>
     </stages>
@@ -34,8 +34,8 @@
     <stackLimit>1</stackLimit>
     <stages>
       <li>
-        <label>RimPrison.ThoughtAllowanceGoodLabel</label>
-        <description>RimPrison.ThoughtAllowanceGoodDesc</description>
+        <label>allowance sufficient</label>
+        <description>Our allowance is really generous!</description>
         <baseMoodEffect>5</baseMoodEffect>
       </li>
     </stages>
@@ -47,8 +47,8 @@
     <stackLimit>1</stackLimit>
     <stages>
       <li>
-        <label>RimPrison.ThoughtFeeExploitLabel</label>
-        <description>RimPrison.ThoughtFeeExploitDesc</description>
+        <label>fee exploitation</label>
+        <description>Damn those managers......</description>
         <baseMoodEffect>-5</baseMoodEffect>
       </li>
     </stages>

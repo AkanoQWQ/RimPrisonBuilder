@@ -34,20 +34,6 @@ Accept and release the prisoner?</RimPrison.RansomLetterText>
   <RimPrison.RansomReject>Reject ({0} will fall into despair)</RimPrison.RansomReject>
   <RimPrison.LogRansomAccepted>Ransom accepted, spent {0} coupons</RimPrison.LogRansomAccepted>
   <RimPrison.LogRansomRejected>Ransom rejected, fell into despair</RimPrison.LogRansomRejected>
-  <RimPrison.DespairHediffLabel>Despair</RimPrison.DespairHediffLabel>
-  <RimPrison.DespairHediffDesc>Has lost all hope of freedom.</RimPrison.DespairHediffDesc>
-  <RimPrison.DespairHediffStage>Despair</RimPrison.DespairHediffStage>
-  <RimPrison.DespairThoughtLabel>Despair</RimPrison.DespairThoughtLabel>
-  <RimPrison.DespairThoughtDesc>I have given up all hope of ever being freed.</RimPrison.DespairThoughtDesc>
-  <!-- Prisoner life thoughts -->
-  <RimPrison.ThoughtPremiumFoodLabel>Purchased premium food</RimPrison.ThoughtPremiumFoodLabel>
-  <RimPrison.ThoughtPremiumFoodDesc>I purchased premium food!</RimPrison.ThoughtPremiumFoodDesc>
-  <RimPrison.ThoughtDrugLabel>Purchased drug</RimPrison.ThoughtDrugLabel>
-  <RimPrison.ThoughtDrugDesc>I purchased a drug!</RimPrison.ThoughtDrugDesc>
-  <RimPrison.ThoughtAllowanceGoodLabel>Allowance sufficient</RimPrison.ThoughtAllowanceGoodLabel>
-  <RimPrison.ThoughtAllowanceGoodDesc>Our allowance is really generous!</RimPrison.ThoughtAllowanceGoodDesc>
-  <RimPrison.ThoughtFeeExploitLabel>Fee exploitation</RimPrison.ThoughtFeeExploitLabel>
-  <RimPrison.ThoughtFeeExploitDesc>Damn those managers......</RimPrison.ThoughtFeeExploitDesc>
   <RimPrison.GrantCoupons>Grant</RimPrison.GrantCoupons>
   <RimPrison.GrantCouponsTitle>Grant coupons to {0}</RimPrison.GrantCouponsTitle>
   <RimPrison.GrantCouponsDesc>Enter the amount of {0} to grant:</RimPrison.GrantCouponsDesc>

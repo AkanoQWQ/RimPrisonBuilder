@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <RPR_BoughtPremiumFood.stages.0.label>Purchased premium food</RPR_BoughtPremiumFood.stages.0.label>
+  <RPR_BoughtPremiumFood.stages.0.description>I purchased premium food!</RPR_BoughtPremiumFood.stages.0.description>
+
+  <RPR_BoughtDrug.stages.0.label>Purchased drug</RPR_BoughtDrug.stages.0.label>
+  <RPR_BoughtDrug.stages.0.description>I purchased a drug!</RPR_BoughtDrug.stages.0.description>
+
+  <RPR_AllowanceGood.stages.0.label>Allowance sufficient</RPR_AllowanceGood.stages.0.label>
+  <RPR_AllowanceGood.stages.0.description>Our allowance is really generous!</RPR_AllowanceGood.stages.0.description>
+
+  <RPR_FeeExploitation.stages.0.label>Fee exploitation</RPR_FeeExploitation.stages.0.label>
+  <RPR_FeeExploitation.stages.0.description>Damn those managers......</RPR_FeeExploitation.stages.0.description>
+</LanguageData>

@@ -4,8 +4,8 @@
        Mood -20, lasts 30 days. -->
   <HediffDef>
     <defName>RPR_Despair</defName>
-    <label>RimPrison.DespairHediffLabel</label>
-    <description>RimPrison.DespairHediffDesc</description>
+    <label>despair</label>
+    <description>Has lost all hope of freedom.</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(0.6,0.15,0.15,1)</defaultLabelColor>
     <isBad>true</isBad>
@@ -16,7 +16,7 @@
     </comps>
     <stages>
       <li>
-        <label>RimPrison.DespairHediffStage</label>
+        <label>despair</label>
         <becomeVisible>true</becomeVisible>
       </li>
     </stages>

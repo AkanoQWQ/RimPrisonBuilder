@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <RPR_BoughtPremiumFood.stages.0.label>购买高档食物</RPR_BoughtPremiumFood.stages.0.label>
+  <RPR_BoughtPremiumFood.stages.0.description>我购买了高档食物！</RPR_BoughtPremiumFood.stages.0.description>
+
+  <RPR_BoughtDrug.stages.0.label>购买成瘾品</RPR_BoughtDrug.stages.0.label>
+  <RPR_BoughtDrug.stages.0.description>我购买了成瘾品！</RPR_BoughtDrug.stages.0.description>
+
+  <RPR_AllowanceGood.stages.0.label>津贴足够</RPR_AllowanceGood.stages.0.label>
+  <RPR_AllowanceGood.stages.0.description>我们的津贴真是太足啦！</RPR_AllowanceGood.stages.0.description>
+
+  <RPR_FeeExploitation.stages.0.label>管理费过重</RPR_FeeExploitation.stages.0.label>
+  <RPR_FeeExploitation.stages.0.description>可恶的管理者......</RPR_FeeExploitation.stages.0.description>
+</LanguageData>

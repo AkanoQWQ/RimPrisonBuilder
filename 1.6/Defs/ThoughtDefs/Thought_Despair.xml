@@ -5,8 +5,8 @@
     <workerClass>RimPrison.PrisonLabor.ThoughtWorker_Despair</workerClass>
     <stages>
       <li>
-        <label>RimPrison.DespairThoughtLabel</label>
-        <description>RimPrison.DespairThoughtDesc</description>
+        <label>despair</label>
+        <description>I have given up all hope of ever being freed.</description>
         <baseMoodEffect>-20</baseMoodEffect>
       </li>
     </stages>
