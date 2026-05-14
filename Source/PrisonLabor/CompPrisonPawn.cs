@@ -31,6 +31,8 @@ namespace RimPrison.PrisonLabor
                 return;
             lastThoughtTick = now;
 
+            // Dedup: remove then re-add so it moves to the front (newest slot).
+            thoughts.Remove(thought);
             if (thoughts.Count >= MaxThoughts)
                 thoughts.RemoveAt(0);
             thoughts.Add(thought);
