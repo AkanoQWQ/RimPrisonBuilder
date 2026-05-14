@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using HarmonyLib;
 using RimWorld;
 using Verse;
 
@@ -7,6 +8,9 @@ namespace RimPrison.PrisonLabor
     // Inherited from MapComponent, it will auto-load with map
     public class PrisonerGroupManager : MapComponent
     {
+        private static readonly AccessTools.FieldRef<Pawn_WorkSettings, DefMap<WorkTypeDef, int>>
+            PrioritiesField = AccessTools.FieldRefAccess<Pawn_WorkSettings, DefMap<WorkTypeDef, int>>("priorities");
+
         public List<PrisonerGroup> groups = new List<PrisonerGroup>();
 
         public PrisonerGroupManager(Map map) : base(map) { }
@@ -106,6 +110,7 @@ namespace RimPrison.PrisonLabor
                     continue;
                 }
                 pawn.workSettings ??= new Pawn_WorkSettings(pawn);
+                PrioritiesField(pawn.workSettings) ??= new DefMap<WorkTypeDef, int>();
                 if (!pawn.WorkTypeIsDisabled(wt))
                 {
                     pawn.workSettings.SetPriority(wt, priority);
