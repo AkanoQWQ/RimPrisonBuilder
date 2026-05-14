@@ -118,6 +118,14 @@ Save and restart immediately after this operation.</RimPrison.RemoveModConfirm>
   <RimPrison.RemovalComplete>RimPrison data cleared. Save and restart to complete removal.</RimPrison.RemovalComplete>
   <RimPrison.HelpTab>Help</RimPrison.HelpTab>
   <RimPrison.HelpTitle>RimPrison Help</RimPrison.HelpTitle>
+  <!-- Prisoner detail panel -->
+  <RimPrison.SelectPrisoner>Select a prisoner on the left to view details.</RimPrison.SelectPrisoner>
+  <RimPrison.BalanceLabel>Balance: {0}</RimPrison.BalanceLabel>
+  <RimPrison.GroupLabel>Group: {0}</RimPrison.GroupLabel>
+  <RimPrison.ThoughtsTitle>Thoughts</RimPrison.ThoughtsTitle>
+  <RimPrison.ThoughtsEmpty>No thoughts recorded yet.</RimPrison.ThoughtsEmpty>
+  <RimPrison.ActivitySleeping>Sleeping</RimPrison.ActivitySleeping>
+  <RimPrison.ActivityIdle>Idle</RimPrison.ActivityIdle>
   <!-- Regime -->
   <RimPrison.RegimeLabel>Prison regime</RimPrison.RegimeLabel>
   <RimPrison.RegimeHarshLabel>Harsh</RimPrison.RegimeHarshLabel>

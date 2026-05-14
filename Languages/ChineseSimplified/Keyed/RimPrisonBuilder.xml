@@ -144,6 +144,14 @@
   建议在操作后立即保存并重启游戏。</RimPrison.RemoveModConfirm>
   <RimPrison.ConfirmRemove>确认移除</RimPrison.ConfirmRemove>
   <RimPrison.RemovalComplete>RimPrison数据已清除，请保存后重启游戏。</RimPrison.RemovalComplete>
+  <!-- Prisoner detail panel -->
+  <RimPrison.SelectPrisoner>请在左侧选择一个囚犯查看详细信息。</RimPrison.SelectPrisoner>
+  <RimPrison.BalanceLabel>余额: {0}</RimPrison.BalanceLabel>
+  <RimPrison.GroupLabel>分组: {0}</RimPrison.GroupLabel>
+  <RimPrison.ThoughtsTitle>想法</RimPrison.ThoughtsTitle>
+  <RimPrison.ThoughtsEmpty>暂无想法记录。</RimPrison.ThoughtsEmpty>
+  <RimPrison.ActivitySleeping>正在睡觉</RimPrison.ActivitySleeping>
+  <RimPrison.ActivityIdle>空闲</RimPrison.ActivityIdle>
   <!-- Regime -->
   <RimPrison.RegimeLabel>监狱制度</RimPrison.RegimeLabel>
   <RimPrison.RegimeHarshLabel>严酷</RimPrison.RegimeHarshLabel>

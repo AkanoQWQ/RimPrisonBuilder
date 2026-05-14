@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- Attach CompPrisonPawn to all humanlike pawns -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[@Name="BasePawn"]/comps</xpath>
+    <value>
+      <li Class="RimPrison.PrisonLabor.CompProperties_PrisonPawn" />
+    </value>
+  </Operation>
+</Patch>

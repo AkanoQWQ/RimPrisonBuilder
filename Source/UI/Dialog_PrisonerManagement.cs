@@ -20,7 +20,10 @@ namespace RimPrison.UI
         private Vector2 workScrollPos;
         private Vector2 schedScrollPos;
         private Vector2 prisonerScrollPos;
+        private Vector2 detailScrollPos;
         private Vector2 overviewScrollPos;
+
+        private string selectedPawnThingId;
 
         // Cached filtered work types (no Warden, no Hunting)
         private static List<WorkTypeDef> cachedWorkTypes;
@@ -355,24 +358,49 @@ namespace RimPrison.UI
                 return;
             }
 
+            float listWidth = 440f;
+            float gap = 12f;
+            float detailWidth = rect.width - listWidth - gap;
+
+            // Left: prisoner list
+            Rect listRect = new Rect(rect.x, rect.y, listWidth, rect.height);
             float viewHeight = pawns.Count * PrisonerRowHeight;
-            Rect viewRect = new Rect(0f, 0f, rect.width - 16f, viewHeight);
-            Widgets.BeginScrollView(rect, ref prisonerScrollPos, viewRect);
+            Rect viewRect = new Rect(0f, 0f, listRect.width - 16f, viewHeight);
+            Widgets.BeginScrollView(listRect, ref prisonerScrollPos, viewRect);
 
             float y = 0f;
             for (int i = 0; i < pawns.Count; i++)
             {
                 Rect rowRect = new Rect(0f, y, viewRect.width, PrisonerRowHeight);
-                if (i % 2 == 1)
+                bool selected = pawns[i].ThingID == selectedPawnThingId;
+                if (selected)
+                    Widgets.DrawHighlight(rowRect);
+                else if (i % 2 == 1)
                     Widgets.DrawLightHighlight(rowRect);
-                DrawPrisonerRow(rowRect, pawns[i]);
+
+                bool clicked;
+                DrawPrisonerRow(rowRect, pawns[i], out clicked);
+                if (clicked)
+                    selectedPawnThingId = pawns[i].ThingID;
                 y += PrisonerRowHeight;
             }
 
             Widgets.EndScrollView();
+
+            // Right: detail panel
+            Rect detailRect = new Rect(listRect.xMax + gap, rect.y, detailWidth, rect.height);
+            var selectedPawn = pawns.FirstOrDefault(p => p.ThingID == selectedPawnThingId);
+            if (selectedPawn != null)
+                DrawPrisonerDetailPanel(detailRect, selectedPawn);
+            else
+            {
+                Text.Anchor = TextAnchor.MiddleCenter;
+                Widgets.Label(detailRect, "RimPrison.SelectPrisoner".Translate());
+                Text.Anchor = TextAnchor.UpperLeft;
+            }
         }
 
-        private void DrawPrisonerRow(Rect rect, Pawn pawn)
+        private void DrawPrisonerRow(Rect rect, Pawn pawn, out bool clicked)
         {
             float gap = 8f;
             float midY = rect.y + (rect.height - PortraitSize) / 2f;
@@ -382,45 +410,107 @@ namespace RimPrison.UI
             var portrait = PortraitsCache.Get(pawn, new Vector2(PortraitSize, PortraitSize), Rot4.South);
             GUI.DrawTexture(portraitRect, portrait);
 
-            // Name next to portrait
-            float nameX = portraitRect.xMax + 8f;
-            float nameWidth = 160f;
+            // Name
+            float nameX = portraitRect.xMax + 6f;
+            float nameWidth = 110f;
             float nameY = rect.y + 4f;
             Widgets.Label(new Rect(nameX, nameY, nameWidth, 20f), pawn.LabelShortCap);
 
-            // Age / life stage below name
+            // Age / stage
             Text.Font = GameFont.Tiny;
-            string stageLabel;
-            if (pawn.DevelopmentalStage.Baby())
-                stageLabel = "Baby";
-            else if (pawn.DevelopmentalStage.Child())
-                stageLabel = "Child";
-            else
-                stageLabel = "Adult";
+            string stageLabel = pawn.DevelopmentalStage.Baby() ? "Baby"
+                : pawn.DevelopmentalStage.Child() ? "Child" : "Adult";
             Widgets.Label(new Rect(nameX, nameY + 20f, nameWidth, 16f),
                 pawn.ageTracker.AgeBiologicalYears + " · " + stageLabel);
             Text.Font = GameFont.Small;
 
-            // Group button
-            float groupX = nameX + nameWidth + gap;
-            Rect groupRect = new Rect(groupX, rect.y + (rect.height - 28f) / 2f,
-                GroupButtonWidth, 28f);
-            DrawGroupButton(groupRect, pawn);
-
-            // Coupon count
+            // Balance
             var comp = pawn.TryGetComp<CompWorkTracker>();
             int coupons = comp?.earnedCoupons ?? 0;
-            float couponX = groupX + GroupButtonWidth + gap;
-            Rect couponRect = new Rect(couponX, rect.y + (rect.height - 22f) / 2f, 200f, 22f);
-            Widgets.Label(couponRect, RimPrisonMod.Settings.WorkCouponName + ": " + coupons);
+            float balX = nameX + nameWidth + gap;
+            Widgets.Label(new Rect(balX, midY + 2f, 80f, 22f),
+                RimPrisonMod.Settings.WorkCouponName + ":" + coupons);
 
             // Grant button
-            float grantBtnW = 60f;
-            Rect grantRect = new Rect(couponX + 200f + gap, rect.y + (rect.height - 28f) / 2f,
-                grantBtnW, 28f);
-            if (RPR_UiStyle.DrawColoredButton(grantRect, "RimPrison.GrantCoupons".Translate()))
+            float grantBtnW = 50f;
+            Rect grantRect = new Rect(balX + 80f + 4f, rect.y + (rect.height - 22f) / 2f, grantBtnW, 22f);
+            if (RPR_UiStyle.DrawColoredButton(grantRect, "+"))
             {
                 Find.WindowStack.Add(new Dialog_GrantCoupons(pawn));
+            }
+
+            clicked = Widgets.ButtonInvisible(rect);
+        }
+
+        private void DrawPrisonerDetailPanel(Rect rect, Pawn pawn)
+        {
+            RPR_UiStyle.DrawSubPanel(rect);
+            var inner = rect.ContractedBy(12f);
+            float detailPortraitSize = 96f;
+
+            // Portrait
+            Rect portraitRect = new Rect(inner.x, inner.y, detailPortraitSize, detailPortraitSize);
+            var portrait = PortraitsCache.Get(pawn, new Vector2(detailPortraitSize, detailPortraitSize), Rot4.South);
+            GUI.DrawTexture(portraitRect, portrait);
+
+            // Info line
+            float infoX = portraitRect.xMax + 12f;
+            float infoWidth = inner.width - detailPortraitSize - 12f;
+            string currentActivity;
+            if (pawn.CurJob?.def?.reportString != null)
+                currentActivity = pawn.CurJob.def.reportString.Formatted(pawn.Named("PAWN")).Resolve();
+            else if (pawn.jobs?.curDriver?.asleep == true)
+                currentActivity = "RimPrison.ActivitySleeping".Translate();
+            else
+                currentActivity = "RimPrison.ActivityIdle".Translate();
+
+            string race = pawn.def?.label ?? "?";
+            string infoLine = $"{pawn.LabelShortCap} / {race} / {pawn.ageTracker.AgeBiologicalYears} / {currentActivity}";
+            Widgets.Label(new Rect(infoX, inner.y, infoWidth, 20f), infoLine);
+
+            // Balance
+            var tracker = pawn.TryGetComp<CompWorkTracker>();
+            int balance = tracker?.earnedCoupons ?? 0;
+            Widgets.Label(new Rect(infoX, inner.y + 24f, infoWidth, 20f),
+                "RimPrison.BalanceLabel".Translate(balance));
+
+            // Group
+            if (groupManager == null) groupManager = Find.CurrentMap.GetComponent<PrisonerGroupManager>();
+            var group = groupManager?.GetGroupFor(pawn);
+            string groupLabel = group != null ? group.name : "RimPrison.NoGroup".Translate();
+            Widgets.Label(new Rect(infoX, inner.y + 48f, infoWidth, 20f),
+                "RimPrison.GroupLabel".Translate(groupLabel));
+
+            // Thoughts section
+            float thoughtsY = portraitRect.yMax + 16f;
+            RPR_UiStyle.DrawSectionTitle(new Rect(inner.x, thoughtsY, inner.width, 20f), "RimPrison.ThoughtsTitle".Translate());
+
+            var prisonComp = pawn.TryGetComp<CompPrisonPawn>();
+            var thoughts = prisonComp?.thoughts;
+            float thoughtsListY = thoughtsY + 24f;
+            float thoughtsHeight = inner.yMax - thoughtsListY;
+
+            if (thoughts == null || thoughts.Count == 0)
+            {
+                Widgets.Label(new Rect(inner.x, thoughtsListY, inner.width, 20f), "RimPrison.ThoughtsEmpty".Translate());
+            }
+            else
+            {
+                var thoughtLines = new List<string>(thoughts);
+                thoughtLines.Reverse(); // newest at top
+                float lineHeight = 22f;
+                float totalThoughtsHeight = thoughtLines.Count * lineHeight;
+                Rect thoughtsViewRect = new Rect(0f, 0f, inner.width - 16f, totalThoughtsHeight);
+                Widgets.BeginScrollView(new Rect(inner.x, thoughtsListY, inner.width, thoughtsHeight), ref detailScrollPos, thoughtsViewRect);
+                float ty = 0f;
+                Text.Font = GameFont.Tiny;
+                for (int i = 0; i < thoughtLines.Count; i++)
+                {
+                    Widgets.Label(new Rect(0f, ty, thoughtsViewRect.width, lineHeight), "· " + thoughtLines[i]);
+                    ty += lineHeight;
+                }
+                Text.Font = GameFont.Small;
+                Widgets.EndScrollView();
             }
         }
 
