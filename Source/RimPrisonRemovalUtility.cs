@@ -102,6 +102,16 @@ namespace RimPrison
                 var equal = pawn.health.hediffSet.GetFirstHediffOfDef(RP_HediffDefOf.RPR_RegimeEquality);
                 if (equal != null) pawn.health.RemoveHediff(equal);
             }
+
+            // Remove memory thoughts added by prisoner shopping / allowance
+            pawn.needs?.mood?.thoughts?.memories?.RemoveMemoriesOfDef(
+                RP_ThoughtDefOf.RPR_BoughtPremiumFood);
+            pawn.needs?.mood?.thoughts?.memories?.RemoveMemoriesOfDef(
+                RP_ThoughtDefOf.RPR_BoughtDrug);
+            pawn.needs?.mood?.thoughts?.memories?.RemoveMemoriesOfDef(
+                RP_ThoughtDefOf.RPR_AllowanceGood);
+            pawn.needs?.mood?.thoughts?.memories?.RemoveMemoriesOfDef(
+                RP_ThoughtDefOf.RPR_FeeExploitation);
         }
 
         static void CleanArchive()
