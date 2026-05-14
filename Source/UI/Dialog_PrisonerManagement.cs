@@ -402,7 +402,6 @@ namespace RimPrison.UI
 
         private void DrawPrisonerRow(Rect rect, Pawn pawn, out bool clicked)
         {
-            float gap = 8f;
             float midY = rect.y + (rect.height - PortraitSize) / 2f;
 
             // Portrait
@@ -424,16 +423,21 @@ namespace RimPrison.UI
                 pawn.ageTracker.AgeBiologicalYears + " · " + stageLabel);
             Text.Font = GameFont.Small;
 
-            // Balance
+            // Group dropdown
+            float groupX = nameX + nameWidth + 4f;
+            float groupW = 100f;
+            Rect groupRect = new Rect(groupX, rect.y + (rect.height - 22f) / 2f, groupW, 22f);
+            DrawGroupButton(groupRect, pawn);
+
+            // Balance + grant
             var comp = pawn.TryGetComp<CompWorkTracker>();
             int coupons = comp?.earnedCoupons ?? 0;
-            float balX = nameX + nameWidth + gap;
+            float balX = groupX + groupW + 6f;
             Widgets.Label(new Rect(balX, midY + 2f, 80f, 22f),
                 RimPrisonMod.Settings.WorkCouponName + ":" + coupons);
 
-            // Grant button
-            float grantBtnW = 50f;
-            Rect grantRect = new Rect(balX + 80f + 4f, rect.y + (rect.height - 22f) / 2f, grantBtnW, 22f);
+            float grantBtnW = 40f;
+            Rect grantRect = new Rect(balX + 80f, rect.y + (rect.height - 22f) / 2f, grantBtnW, 22f);
             if (RPR_UiStyle.DrawColoredButton(grantRect, "+"))
             {
                 Find.WindowStack.Add(new Dialog_GrantCoupons(pawn));
