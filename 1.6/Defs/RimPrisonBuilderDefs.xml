@@ -28,6 +28,7 @@
             <li Class="JobGiver_SatisfyChemicalNeed" />
             <li Class="JobGiver_TakeDrugsForDrugPolicy" />
             <li Class="RimPrison.PrisonLabor.JobGiver_CouponShopBuy" />
+            <li Class="RimPrison.PrisonLabor.ThinkNodes.JobGiver_BabySpecialFood" />
             <li Class="JobGiver_Work" />
             <li Class="ThinkNode_Priority_GetJoy">
               <subNodes>
