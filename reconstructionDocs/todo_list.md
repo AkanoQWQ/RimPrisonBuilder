@@ -113,10 +113,10 @@
 
 ## 13. 新测试版即将加入的内容
 
-🔴 Meme 支持（MemeDef — RPR_PrisonMeme）
-🔴 制度 Precept（3 个，RPR_Regime_Harsh/Deterrence/Equality） / 典狱长 Precept
+✅ 监狱区限制殖民者（与机械族）特定的工作类型
+🔴 制度设置（3 个，RPR_Regime_Harsh/Deterrence/Equality）
 🔴 囚犯心情 ThoughtWorker（被割除器官）
-🔴 监狱区限制殖民者特定的工作类型
+🔴 文化相关（典狱长 Precept/Meme 支持）
 🔴 守卫/典狱长
 
 ## 14. 删除的内容
