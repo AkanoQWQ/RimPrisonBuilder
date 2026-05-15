@@ -2,7 +2,9 @@ RimPrison · Rebuilt
 
 Notice: This mod was created with AI assistance. Most code has been carefully reviewed by the developer(In EA version,some // [UNREVIEWED] comment was left in UI component and will be removed soon). This mod is open-sourced under the MIT license—everyone is welcome to review the code quality.
 
-Early Release 1.0.3, supports backward compatibility with most features now complete. The current version is fully playable. However, it is still strongly recommended to save your game before using it. Compatible with the new "self-reliance" expansion.
+Early Release 1.0.4, supports backward compatibility with most features now complete. The current version is fully playable. However, it is still strongly recommended to save your game before using it. Compatible with the new "self-reliance" expansion.
+
+Not compatible with the original RimPrison (Reset) mod — a fresh save is required. "RimPrison.Reset" is the namespace used by the original RimPrison mod. Any log messages containing "RimPrison.Reset" are caused by leftover data from the old version. Simply remove the old RimPrison first (or start a brand new save), and the new version will work fine.
 
 ----------
 
@@ -12,7 +14,7 @@ Main Features
 · Full Work Compatibility: Prisoners can perform most types of work, including work added by other mods, with manually adjustable wages.
 · Complete Dynamic Economy: A built-in economic system that dynamically adjusts based on prices and wages, covering prisoner labor, welfare, shopping, spending, and recreation.
 · Prisoner Thought System: Prisoners dynamically make shopping decisions based on current prices / income / subsidies / management fees / shopping conditions and generate "thoughts"—observing your prisoners' thoughts helps you better understand how the economy is working.
-· Debt Deduction via Organs: When wages cannot sustain a prisoner's living costs, organ deduction will automatically occur. The system prioritizes non-lethal, minor body parts first, allowing up to 31 deductions—no need to worry about rapid death.
+· Debt Deduction via Organs: When wages cannot sustain a prisoner's living costs, organ deduction will automatically occur.
 · Self-Ransom System: Once a prisoner's Edge Coins reach the set threshold, they can actively apply for self-ransom. Upon approval, they immediately become a guest and leave the map.
 · Custom Currency Name: Freely name the currency for easy retrieval by tools like Rimtalk.
 
@@ -38,8 +40,16 @@ Thank you for your support and understanding!
 
 ----------
 
+Early Access Changelog:
+
+ea1.0.1: Removed redundant translation keys and added a safe removal feature.
+ea1.0.2: Added work-based colonist work restrictions in prison zones, prisoner childcare, automatic prisoner grouping by age, enhanced mid-game mod removal tools, bug fixes, and gameplay optimizations.
+ea1.0.3: Added management styles (Harsh / Deterrence / Egalitarian), prisoner detail panel, prisoner thought system, vanilla prisoner thoughts, completed most API interfaces (compatible with the "Fend for Themselves" expansion), removed all prisoner work restrictions, added infant prisoner compatibility, fixed numerous bugs, and improved gameplay experience.
+ea1.0.4: Bug fixes and optimizations.
+
+----------
+
 Special Thanks
 
-Sincere thanks to @不搞抽象 for the technical support and tooling assistance throughout the entire process!
-
 Sincere thanks to @乐织终 for the original idea and trust. The foundational framework and core concept of this mod come from him, and this rebuild is built upon his work.
+Sincere thanks to @不搞抽象 for the technical support and tooling assistance throughout the entire process!
