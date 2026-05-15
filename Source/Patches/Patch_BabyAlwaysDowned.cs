@@ -23,6 +23,14 @@ namespace RimPrison.Patches
     }
 
     // 2. ShouldBeDowned forces the baby into PawnHealthState.Down regardless of Moving.
+    // [TODO] Unconditionally overriding __result = false means INJURED labor babies
+    // (pain shock, low consciousness) are also forced mobile, bypassing rescue/medical rest.
+    // Vanilla ShouldBeDowned returns true for two reasons: (a) alwaysDowned life stage,
+    // (b) actual health conditions (!InPainShock && CanBeAwake fails).
+    // Fix: only override case (a). Add health checks before the override:
+    //   if (!___pawn.health.InPainShock && ___pawn.health.capacities.CanBeAwake)
+    //       __result = false;
+    // This way healthy babies can move/work, but injured babies stay properly downed.
     [HarmonyPatch(typeof(Pawn_HealthTracker), "ShouldBeDowned")]
     internal static class Patch_BabyShouldBeDowned
     {
