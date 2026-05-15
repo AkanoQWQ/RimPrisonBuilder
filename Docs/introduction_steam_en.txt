@@ -1,0 +1,45 @@
+RimPrison · Rebuilt
+
+Notice: This mod was created with AI assistance. Most code has been carefully reviewed by the developer(In EA version,some // [UNREVIEWED] comment was left in UI component and will be removed soon). This mod is open-sourced under the MIT license—everyone is welcome to review the code quality.
+
+Early Release 1.0.3, supports backward compatibility with most features now complete. The current version is fully playable. However, it is still strongly recommended to save your game before using it. Compatible with the new "self-reliance" expansion.
+
+----------
+
+Main Features
+
+💰 Dynamic Economy, Prisoner Thought System & Work System
+· Full Work Compatibility: Prisoners can perform most types of work, including work added by other mods, with manually adjustable wages.
+· Complete Dynamic Economy: A built-in economic system that dynamically adjusts based on prices and wages, covering prisoner labor, welfare, shopping, spending, and recreation.
+· Prisoner Thought System: Prisoners dynamically make shopping decisions based on current prices / income / subsidies / management fees / shopping conditions and generate "thoughts"—observing your prisoners' thoughts helps you better understand how the economy is working.
+· Debt Deduction via Organs: When wages cannot sustain a prisoner's living costs, organ deduction will automatically occur. The system prioritizes non-lethal, minor body parts first, allowing up to 31 deductions—no need to worry about rapid death.
+· Self-Ransom System: Once a prisoner's Edge Coins reach the set threshold, they can actively apply for self-ransom. Upon approval, they immediately become a guest and leave the map.
+· Custom Currency Name: Freely name the currency for easy retrieval by tools like Rimtalk.
+
+📋 Management & Interface
+
+· Group Prisoner Management: Manage prisoner work / schedules / drugs / clothing / meals all in one place—no need to manage them individually.
+· Detailed Logs: View clear logs of every prisoner's actions and all economic income and expenditure.
+· Unique Suppression System: When properly managed and prisoners are in good condition, they will not trigger prison breaks or aggressive mental breaks.
+· Selectable Management Styles: Different management approaches lead to different moods, event thoughts, and suppression effects.
+
+🏠 Zone & Facility Recognition
+
+· Prison Zones: Manually assign prison zones and prevent colonists from competing with prisoners for specific work within them.
+· Simple Door Access: Provides a lightweight prisoner door access system, allowing prisoners to pass through areas they need without embedding an overly heavy system into the mod.
+
+----------
+
+This mod can theoretically be added or removed mid-game. However, it is strongly recommended to save to a differently named file before adding this mod, and mid-game removal is not advised.
+
+This mod is open-sourced under the MIT license: [url=https://github.com/AkanoQWQ/RimPrison]Source Code[/url]
+
+Thank you for your support and understanding!
+
+----------
+
+Special Thanks
+
+Sincere thanks to @不搞抽象 for the technical support and tooling assistance throughout the entire process!
+
+Sincere thanks to @乐织终 for the original idea and trust. The foundational framework and core concept of this mod come from him, and this rebuild is built upon his work.
