@@ -98,7 +98,8 @@ namespace RimPrison.PrisonLabor
             }
 
             // 3. Drugs: money > dailyCost × 5
-            if (balance > dailyCost * 5)
+            // Don't buy if already hoarding — they can't consume them fast enough.
+            if (balance > dailyCost * 5 && CountDrugsInInventory(pawn) < 5)
             {
                 var drug = FindRandomAllowedDrug(data, pawn);
                 // Of cource not run into debt in this case!
@@ -188,6 +189,17 @@ namespace RimPrison.PrisonLabor
                     total += thing.def.ingestible.CachedNutrition * thing.stackCount;
             }
             return total;
+        }
+
+        private static int CountDrugsInInventory(Pawn pawn)
+        {
+            int count = 0;
+            foreach (var thing in pawn.inventory.innerContainer)
+            {
+                if (thing.def.IsDrug)
+                    count += thing.stackCount;
+            }
+            return count;
         }
 
         private static float CalculateDailyMealCost(Pawn pawn, CachedShopData data)
