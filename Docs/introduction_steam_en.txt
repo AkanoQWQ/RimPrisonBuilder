@@ -6,6 +6,8 @@ Early Release 1.0.4, supports backward compatibility with most features now comp
 
 Not compatible with the original RimPrison (Reset) mod — a fresh save is required. "RimPrison.Reset" is the namespace used by the original RimPrison mod. Any log messages containing "RimPrison.Reset" are caused by leftover data from the old version. Simply remove the old RimPrison first (or start a brand new save), and the new version will work fine.
 
+NOTICE: The "Door Access" feature is disabled by default in the mod settings. This means prisoners CANNOT pass through doors you have marked as "prisoner-allowed." Please enable it manually in the settings. This is a known issue and will be fixed in the next EA release.
+
 ----------
 
 Main Features
