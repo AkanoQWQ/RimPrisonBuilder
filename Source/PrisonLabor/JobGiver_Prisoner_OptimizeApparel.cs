@@ -29,6 +29,10 @@ namespace RimPrison.PrisonLabor
                 return null;
             if (pawn.IsQuestLodger())
                 return null;
+            if (pawn.Downed)
+                return null;
+            if (!pawn.health.capacities.CapableOf(PawnCapacityDefOf.Moving))
+                return null;
             if (Find.TickManager.TicksGame < pawn.mindState.nextApparelOptimizeTick)
                 return null;
 
