@@ -86,8 +86,9 @@ namespace RimPrison.PrisonLabor
                 Scribe_Collections.Look(ref ticks, "logTicks", LookMode.Value);
                 Scribe_Collections.Look(ref names, "logNames", LookMode.Value);
                 Scribe_Collections.Look(ref msgs, "logMsgs", LookMode.Value);
-                // [TODO] If save data is corrupted (e.g. mismatched list lengths from a broken save),
-                // ticks/names/msgs may be null here, causing NRE on .Count. Add null guards.
+                ticks ??= new List<int>();
+                names ??= new List<string>();
+                msgs ??= new List<string>();
                 entries.Clear();
                 int n = System.Math.Min(System.Math.Min(ticks.Count, names.Count), msgs.Count);
                 for (int i = 0; i < n; i++)

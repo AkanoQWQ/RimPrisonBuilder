@@ -79,7 +79,7 @@ namespace RimPrison.PrisonLabor
             {
                 var ids = new List<int>();
                 Scribe_Collections.Look(ref ids, "ransomOfferedIds", LookMode.Value);
-                offeredPrisoners = new HashSet<int>(ids);
+                offeredPrisoners = new HashSet<int>(ids ?? new List<int>());
             }
         }
     }

@@ -126,6 +126,8 @@ namespace RimPrison.PrisonLabor
                 var vals = new List<float>();
                 Scribe_Collections.Look(ref ids, "suppIds", LookMode.Value);
                 Scribe_Collections.Look(ref vals, "suppVals", LookMode.Value);
+                ids ??= new List<int>();
+                vals ??= new List<float>();
                 suppressionByPawn.Clear();
                 for (int i = 0; i < Math.Min(ids.Count, vals.Count); i++)
                     suppressionByPawn[ids[i]] = vals[i];
