@@ -50,7 +50,7 @@ namespace RimPrison
             Scribe_Values.Look(ref RansomAmount, "RansomAmount", 500);
             Scribe_Values.Look(ref DebtHarvestThreshold, "DebtHarvestThreshold", 150);
             Scribe_Values.Look(ref DebtHarvestIntervalDays, "DebtHarvestIntervalDays", 1);
-            Scribe_Values.Look(ref DoorAccessEnabled, "DoorAccessEnabled", false);
+            Scribe_Values.Look(ref DoorAccessEnabled, "DoorAccessEnabled", true);
             // Keep old key for backward compat, no longer used in UI
             Scribe_Values.Look(ref RestrictColonistWorkInPrisonArea, "RestrictColonistWorkInPrisonArea", false);
             Scribe_Values.Look(ref BabyFeedingIsolation, "BabyFeedingIsolation", true);
