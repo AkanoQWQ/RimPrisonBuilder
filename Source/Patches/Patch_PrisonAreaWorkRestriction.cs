@@ -51,23 +51,22 @@ namespace RimPrison.Patches
             __result = false;
         }
 
-        // Throttled cache: HasJobOnThing fires hundreds of times per frame.
-        // Refresh every 5000 ticks (~83s at 1x speed) per map.
-        private static Area_Prison cachedArea;
-        private static Map cachedMap;
-        private static int cacheRefreshTick;
+        // Per-map throttled cache: HasJobOnThing fires hundreds of times per frame.
+        // Refresh every 5000 ticks (~83s at 1x speed). Dictionary-based so multiple
+        // maps (e.g. Set Up Camp) each get their own independent cache entry.
+        private static readonly Dictionary<Map, (int refreshTick, Area_Prison area)> s_areaCache = new();
 
         static Area_Prison CachedPrisonArea(Map map)
         {
             if (map == null) return null;
             int now = Find.TickManager.TicksGame;
-            if (map != cachedMap || now >= cacheRefreshTick)
+            if (!s_areaCache.TryGetValue(map, out var entry) || now >= entry.refreshTick)
             {
-                cachedMap = map;
-                cachedArea = map.areaManager.Get<Area_Prison>();
-                cacheRefreshTick = now + 5000;
+                var area = map.areaManager.Get<Area_Prison>();
+                s_areaCache[map] = (now + 5000, area);
+                return area;
             }
-            return cachedArea;
+            return entry.area;
         }
     }
 }
