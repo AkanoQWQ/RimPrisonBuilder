@@ -19,7 +19,7 @@ namespace RimPrison.PrisonLabor
             if (tracker == null || tracker.earnedCoupons <= -maxDebt)
                 return 0f;
 
-            return 7f;
+            return 10f;
         }
 
         protected override Job TryGiveJob(Pawn pawn)
