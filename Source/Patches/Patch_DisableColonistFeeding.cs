@@ -33,10 +33,9 @@ namespace RimPrison.Patches
         [HarmonyPrefix]
         static bool Prefix_Deliver(Pawn pawn, Thing t, bool forced, ref Job __result)
         {
-            // Never deliver even if LaborEnabled prisoner is down
-            if (t is Pawn prisoner 
-                && prisoner.IsPrisonerOfColony 
-                && prisoner.IsLaborEnabled())
+            // Never deliver food to any prisoner — defeats the economic system.
+            // And leads problem for hauling.
+            if (t is Pawn prisoner && prisoner.IsPrisonerOfColony)
             {
                 __result = null;
                 return false;
