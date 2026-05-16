@@ -85,8 +85,8 @@ namespace RimPrison.PrisonLabor
                 return null;
             }
 
-            // 2. Premium food: nutrition met, money > dailyCost × 3
-            if (balance > dailyCost * 3)
+            // 2. Premium food: nutrition met, money > dailyCost × 3, max 3 in inventory
+            if (balance > dailyCost * 3 && CountPremiumFoodInInventory(pawn) < 3)
             {
                 var premium = FindBestPremiumFood(data, pawn);
                 if (premium.HasValue && premium.Value.price <= balance)
@@ -189,6 +189,19 @@ namespace RimPrison.PrisonLabor
                     total += thing.def.ingestible.CachedNutrition * thing.stackCount;
             }
             return total;
+        }
+
+        private static int CountPremiumFoodInInventory(Pawn pawn)
+        {
+            int count = 0;
+            foreach (var thing in pawn.inventory.innerContainer)
+            {
+                if (thing.def.IsNutritionGivingIngestible
+                    && thing.def.ingestible.preferability >= FoodPreferability.MealFine
+                    && pawn.WillEat(thing.def))
+                    count += thing.stackCount;
+            }
+            return count;
         }
 
         private static int CountDrugsInInventory(Pawn pawn)
