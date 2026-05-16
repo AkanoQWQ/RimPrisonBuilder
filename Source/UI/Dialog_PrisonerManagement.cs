@@ -788,8 +788,8 @@ namespace RimPrison.UI
             float statusW = suppInner.xMax - statusX;
             Text.Font = GameFont.Tiny;
             float factorY = suppInner.y + 28f;
-            int turrets = SuppressionCalculator.CountTurretsInPrisonArea(map);
             int colonists = map.mapPawns.FreeColonistsSpawnedCount;
+            int turrets = SuppressionCalculator.CountTurretsInPrisonArea(map);
             float effective = SuppressionCalculator.CalculateEffectivePrisonerCount(map);
             float diffVal = Find.Storyteller?.difficulty?.threatScale ?? 1f;
             float avgMood = 0f, avgHealth = 0f;
@@ -804,23 +804,18 @@ namespace RimPrison.UI
             if (count > 0) { avgMood /= count; avgHealth /= count; }
             else { avgMood = 0.5f; avgHealth = 1f; }
 
-            // Calculate each factor separately
-            float guardF = 0f; // [TODO] NO LOGIC
-            float turretF = Mathf.Min(turrets * 2f, 20f);
-            float prisonerF = Mathf.Min(effective * 1.5f, 25f);
-            float moodF = (avgMood * avgMood * 12f - 3f) * 1.25f;
-            float healthF = (0.5f - avgHealth) * 8f;
-            float regimeF = 0f;
-            float diffF = (1f - diffVal) * 8f;
+            var bd = SuppressionCalculator.CalculateSuppression(
+                effective, guardCount: 0, colonists, turrets,
+                avgMood, avgHealth, SuppressionCalculator.CurrentRegime, diffVal);
 
             DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorBase", 50f);
-            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorTurrets", turretF);
-            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorColonists", guardF);
-            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorPrisoners", prisonerF);
-            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorMood", moodF);
-            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorHealth", healthF);
-            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorRegime", regimeF);
-            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorDifficulty", diffF);
+            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorTurrets", bd.turretFactor);
+            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorColonists", bd.guardFactor);
+            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorPrisoners", bd.prisonerFactor);
+            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorMood", bd.moodFactor);
+            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorHealth", bd.healthFactor);
+            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorRegime", bd.regimeMod);
+            DrawFactorLine(factorX, ref factorY, factorColW, "RimPrison.SuppFactorDifficulty", bd.difficultyMod);
 
             // Break status on the right side of factors
             float statusY = suppInner.y + 28f;

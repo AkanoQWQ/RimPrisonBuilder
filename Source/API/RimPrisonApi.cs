@@ -737,19 +737,9 @@ namespace RimPrison.API
 
             var regime = PrisonLabor.SuppressionCalculator.CurrentRegime;
             float effectivePrisoners = PrisonLabor.SuppressionCalculator.CalculateEffectivePrisonerCount(map);
-            float guardFactor = (guardCount * 2f + colonistCount) / Math.Max(1f, effectivePrisoners) * 5f;
-            float turretFactor = Math.Min(turretCount * 2f, 20f);
-            float prisonerFactor = Math.Min(effectivePrisoners * 1.5f, 25f);
-            float moodFactor = (avgMood * avgMood * 12f - 3f) * 1.25f;
-            float healthFactor = (0.5f - avgHealth) * 8f;
-            float regimeModifier = regime switch
-            {
-                PrisonLabor.SuppressionCalculator.Regime.Harsh => 10f,
-                PrisonLabor.SuppressionCalculator.Regime.Deterrence => 3f,
-                PrisonLabor.SuppressionCalculator.Regime.Equality => -5f,
-                _ => 0f
-            };
-            float difficultyModifier = (1f - difficultyValue) * 8f;
+            var bd = PrisonLabor.SuppressionCalculator.CalculateSuppression(
+                effectivePrisoners, guardCount, colonistCount, turretCount,
+                avgMood, avgHealth, regime, difficultyValue);
 
             var thresholds = new PrisonSuppressionThresholds
             {
@@ -776,13 +766,13 @@ namespace RimPrison.API
                 babyCount = babyCount,
                 averageMood = avgMood,
                 averageHealth = avgHealth,
-                guardFactor = guardFactor,
-                turretFactor = turretFactor,
-                prisonerFactor = prisonerFactor,
-                moodFactor = moodFactor,
-                healthFactor = healthFactor,
-                regimeModifier = regimeModifier,
-                difficultyModifier = difficultyModifier,
+                guardFactor = bd.guardFactor,
+                turretFactor = bd.turretFactor,
+                prisonerFactor = bd.prisonerFactor,
+                moodFactor = bd.moodFactor,
+                healthFactor = bd.healthFactor,
+                regimeModifier = bd.regimeMod,
+                difficultyModifier = bd.difficultyMod,
                 guardCount = guardCount,
                 turretCount = turretCount,
                 thresholds = thresholds

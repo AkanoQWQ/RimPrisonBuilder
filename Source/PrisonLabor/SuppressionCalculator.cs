@@ -6,6 +6,32 @@ using RimPrison.PrisonArea;
 
 namespace RimPrison.PrisonLabor
 {
+    public readonly struct SuppressionBreakdown
+    {
+        public readonly float suppression;
+        public readonly float guardFactor;
+        public readonly float turretFactor;
+        public readonly float prisonerFactor;
+        public readonly float moodFactor;
+        public readonly float healthFactor;
+        public readonly float regimeMod;
+        public readonly float difficultyMod;
+
+        public SuppressionBreakdown(float suppression, float guardFactor, float turretFactor,
+            float prisonerFactor, float moodFactor, float healthFactor,
+            float regimeMod, float difficultyMod)
+        {
+            this.suppression = suppression;
+            this.guardFactor = guardFactor;
+            this.turretFactor = turretFactor;
+            this.prisonerFactor = prisonerFactor;
+            this.moodFactor = moodFactor;
+            this.healthFactor = healthFactor;
+            this.regimeMod = regimeMod;
+            this.difficultyMod = difficultyMod;
+        }
+    }
+
     public static class SuppressionCalculator
     {
         private const float MaxEffectivePrisoners = 20f;
@@ -43,16 +69,24 @@ namespace RimPrison.PrisonLabor
             return count;
         }
 
-        public static float CalculateSuppression(float effectivePrisoners, int guardCount,
+        public static SuppressionBreakdown CalculateSuppression(float effectivePrisoners, int guardCount,
             int colonistCount, int turretCount, float avgMood, float avgHealth,
             Regime regime, float difficultyValue)
         {
             if (effectivePrisoners <= 0f)
-                return 50f;
+                return new SuppressionBreakdown(50f, 0f, 0f, 0f, 0f, 0f, 0f, 0f);
 
-            float guardFactor = (guardCount * 2f + colonistCount) / effectivePrisoners * 5f;
+            // k = prisoners / (colonists + guards×2). More prisoners per caretaker → lower suppression.
+            float k = effectivePrisoners / Math.Max(colonistCount + guardCount * 2f, 1f);
+            float guardFactor;
+            if (k > 1f)
+                guardFactor = -Math.Min((float)Math.Pow(2f, k - 1f) - 1f, 15f);
+            else if (k < 1f)
+                guardFactor = (float)Math.Pow(4f, 2f - k) - 4f;
+            else
+                guardFactor = 0f;
             float turretFactor = Math.Min(turretCount * 2f, 20f);
-            float prisonerFactor = Math.Min(effectivePrisoners * 1.5f, 25f);
+            float prisonerFactor = -Math.Min(effectivePrisoners, 15f);
             float moodFactor = (avgMood * avgMood * 12f - 3f) * 1.25f;
             float healthFactor = (0.5f - avgHealth) * 8f;
             float regimeMod = regime switch
@@ -64,10 +98,13 @@ namespace RimPrison.PrisonLabor
             };
             float difficultyMod = (1f - difficultyValue) * 8f;
 
-            return Mathf.Clamp(
+            float suppression = Mathf.Clamp(
                 50f + guardFactor + turretFactor + prisonerFactor
                 + moodFactor + healthFactor + regimeMod + difficultyMod,
                 0f, 100f);
+
+            return new SuppressionBreakdown(suppression, guardFactor, turretFactor,
+                prisonerFactor, moodFactor, healthFactor, regimeMod, difficultyMod);
         }
 
         public static bool AllowsPrisonBreak(float suppression, Regime regime)

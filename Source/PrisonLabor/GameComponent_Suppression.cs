@@ -88,12 +88,12 @@ namespace RimPrison.PrisonLabor
                 float mood = pawn.needs?.mood?.CurLevelPercentage ?? 0.5f;
                 float health = pawn.health?.summaryHealth?.SummaryHealthPercent ?? 1f;
 
-                float supp = SuppressionCalculator.CalculateSuppression(
+                var bd = SuppressionCalculator.CalculateSuppression(
                     effectiveCount, guardCount, colonistCount, turrets,
                     mood, health, regime, difficultyValue);
 
-                suppressionByPawn[pawn.thingIDNumber] = supp;
-                totalSuppression += supp;
+                suppressionByPawn[pawn.thingIDNumber] = bd.suppression;
+                totalSuppression += bd.suppression;
             }
 
             colonySuppression = managedCount > 0
