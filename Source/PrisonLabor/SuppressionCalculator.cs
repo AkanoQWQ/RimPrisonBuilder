@@ -2,6 +2,7 @@ using System;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using RimPrison.PrisonArea;
 
 namespace RimPrison.PrisonLabor
 {
@@ -30,11 +31,13 @@ namespace RimPrison.PrisonLabor
         public static int CountTurretsInPrisonArea(Map map)
         {
             if (map == null) return 0;
+            var area = map.areaManager.Get<Area_Prison>();
+            if (area == null) return 0;
             int count = 0;
             var turrets = map.listerBuildings.AllBuildingsColonistOfClass<Building_Turret>();
             foreach (var t in turrets)
             {
-                if (t.GetRoom()?.IsPrisonCell == true)
+                if (area[t.Position])
                     count++;
             }
             return count;
