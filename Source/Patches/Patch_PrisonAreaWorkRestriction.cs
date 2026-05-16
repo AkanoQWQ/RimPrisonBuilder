@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
@@ -48,15 +49,22 @@ namespace RimPrison.Patches
     {
         public static IEnumerable<MethodBase> TargetMethods()
         {
-            foreach (var type in typeof(WorkGiver_Scanner).Assembly.GetTypes())
+            foreach (var ass in AppDomain.CurrentDomain.GetAssemblies())
             {
-                if (!type.IsClass || type.IsAbstract || !type.IsSubclassOf(typeof(WorkGiver_Scanner)))
-                    continue;
+                Type[] types;
+                try { types = ass.GetTypes(); }
+                catch (ReflectionTypeLoadException) { Log.Warning($"[RimPrison] Failed to scan types in assembly {ass.GetName().Name}"); continue; }
 
-                var method = type.GetMethod("HasJobOnThing",
-                    BindingFlags.Public | BindingFlags.Instance);
-                if (method != null && method.ReturnType == typeof(bool))
-                    yield return method;
+                foreach (var type in types)
+                {
+                    if (!type.IsClass || type.IsAbstract || !type.IsSubclassOf(typeof(WorkGiver_Scanner)))
+                        continue;
+
+                    var method = type.GetMethod("HasJobOnThing",
+                        BindingFlags.Public | BindingFlags.Instance);
+                    if (method != null && method.ReturnType == typeof(bool))
+                        yield return method;
+                }
             }
         }
 
@@ -80,15 +88,22 @@ namespace RimPrison.Patches
     {
         public static IEnumerable<MethodBase> TargetMethods()
         {
-            foreach (var type in typeof(WorkGiver_Scanner).Assembly.GetTypes())
+            foreach (var ass in AppDomain.CurrentDomain.GetAssemblies())
             {
-                if (!type.IsClass || type.IsAbstract || !type.IsSubclassOf(typeof(WorkGiver_Scanner)))
-                    continue;
+                Type[] types;
+                try { types = ass.GetTypes(); }
+                catch (ReflectionTypeLoadException) { Log.Warning($"[RimPrison] Failed to scan types in assembly {ass.GetName().Name}"); continue; }
 
-                var method = type.GetMethod("HasJobOnCell",
-                    BindingFlags.Public | BindingFlags.Instance);
-                if (method != null && method.ReturnType == typeof(bool))
-                    yield return method;
+                foreach (var type in types)
+                {
+                    if (!type.IsClass || type.IsAbstract || !type.IsSubclassOf(typeof(WorkGiver_Scanner)))
+                        continue;
+
+                    var method = type.GetMethod("HasJobOnCell",
+                        BindingFlags.Public | BindingFlags.Instance);
+                    if (method != null && method.ReturnType == typeof(bool))
+                        yield return method;
+                }
             }
         }
 

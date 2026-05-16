@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -23,21 +24,29 @@ namespace RimPrison.Patches
 
         public static IEnumerable<MethodBase> TargetMethods()
         {
-            // All WorkGiver_Scanner subclass overrides of key scanning methods
-            foreach (var type in typeof(WorkGiver_Scanner).Assembly.GetTypes())
+            // All WorkGiver_Scanner subclass overrides of key scanning methods,
+            // across ALL loaded assemblies (vanilla + mod DLLs).
+            foreach (var ass in AppDomain.CurrentDomain.GetAssemblies())
             {
-                if (!type.IsClass || type.IsAbstract || !type.IsSubclassOf(typeof(WorkGiver_Scanner)))
-                    continue;
+                Type[] types;
+                try { types = ass.GetTypes(); }
+                catch (ReflectionTypeLoadException) { Log.Warning($"[RimPrison] Failed to scan types in assembly {ass.GetName().Name}"); continue; }
 
-                foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+                foreach (var type in types)
                 {
-                    if (method.Name == "PotentialWorkThingsGlobal" ||
-                        method.Name == "HasJobOnThing" ||
-                        method.Name == "ShouldSkip" ||
-                        method.Name == "JobOnThing" ||
-                        method.Name == "JobOnCell")
+                    if (!type.IsClass || type.IsAbstract || !type.IsSubclassOf(typeof(WorkGiver_Scanner)))
+                        continue;
+
+                    foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
                     {
-                        yield return method;
+                        if (method.Name == "PotentialWorkThingsGlobal" ||
+                            method.Name == "HasJobOnThing" ||
+                            method.Name == "ShouldSkip" ||
+                            method.Name == "JobOnThing" ||
+                            method.Name == "JobOnCell")
+                        {
+                            yield return method;
+                        }
                     }
                 }
             }
