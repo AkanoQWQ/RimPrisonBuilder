@@ -15,16 +15,28 @@ namespace RimPrison.Patches
             if (pawn == null) return;
             if (!PrisonLaborUtility.IsLaborEnabled(pawn)) return;
 
-            // Filter job like "Rest/GetFood"
-            // Of course you can't get paid for eating!
             var workGiverDef = pawn.CurJob?.workGiverDef;
-            if (workGiverDef == null) return;
 
-            var comp = pawn.TryGetComp<CompWorkTracker>();
-            if (comp == null) return;
+            // Fallback: some mods create work jobs outside JobGiver_Work,
+            // leaving workGiverDef null. Check the compat map.
+            if (workGiverDef == null)
+            {
+                string jobDefName = pawn.CurJob?.def.defName;
+                if (jobDefName == null || !Compat.JobToWorkTypeMapper.Map.TryGetValue(jobDefName, out var mapped))
+                    return;
+                var comp = pawn.TryGetComp<CompWorkTracker>();
+                if (comp == null) return;
+                comp.Notify_WorkTick(mapped);
+                return;
+            }
 
-            string wtName = workGiverDef.workType?.defName;
-            comp.Notify_WorkTick(wtName);
+            // Normal path: job from JobGiver_Work has workGiverDef set.
+            {
+                var comp = pawn.TryGetComp<CompWorkTracker>();
+                if (comp == null) return;
+                string wtName = workGiverDef.workType?.defName;
+                comp.Notify_WorkTick(wtName);
+            }
         }
     }
 }
