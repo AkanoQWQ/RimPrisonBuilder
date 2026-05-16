@@ -45,7 +45,7 @@
   <!-- Prisoner management tab -->
   <MainButtonDef>
     <defName>RimPrison_Prisoners</defName>
-    <label>Prisoners</label>
+    <label>RimPrison</label>
     <tabWindowClass>RimPrison.UI.MainTabWindow_Prisoners</tabWindowClass>
     <order>45</order>
   </MainButtonDef>
