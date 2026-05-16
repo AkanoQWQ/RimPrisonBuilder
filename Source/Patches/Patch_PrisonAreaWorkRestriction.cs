@@ -8,14 +8,44 @@ using RimPrison.PrisonArea;
 
 namespace RimPrison.Patches
 {
-    // Cache prison area! EZ opt (DONE)
-    // Block specific work types for colonists and colony mechs inside the prison area.
-    // Configured via Dialog_ManagePrisonAreaWork (a per-work-type checklist).
-    // Patches HasJobOnThing(bool) on all WorkGiver_Scanner subclasses.
-    [HarmonyPatch]
-    public static class Patch_PrisonAreaWorkRestriction
+    // Shared cache and helper for prison area work restriction patches.
+    // Both HasJobOnThing (thing-based) and HasJobOnCell (cell-based) scans
+    // need to check whether the target position is inside the prison area.
+    internal static class PrisonAreaWorkRestrictionHelper
     {
-        // Only execute when starting game. Almost no cost
+        // Per-map throttled cache: HasJobOnThing/HasJobOnCell fire hundreds of
+        // times per frame. Refresh every 3000 ticks (~83s at 1x speed).
+        // Dictionary-based so multiple maps (e.g. Set Up Camp) each get their
+        // own independent cache entry.
+        private static readonly Dictionary<Map, (int refreshTick, Area_Prison area)> s_areaCache = new();
+
+        public static Area_Prison CachedPrisonArea(Map map)
+        {
+            if (map == null) return null;
+            int now = Find.TickManager.TicksGame;
+            if (!s_areaCache.TryGetValue(map, out var entry) || now >= entry.refreshTick)
+            {
+                var area = map.areaManager.Get<Area_Prison>();
+                s_areaCache[map] = (now + 3000, area);
+                return area;
+            }
+            return entry.area;
+        }
+
+        public static bool ShouldBlock(Pawn pawn, WorkTypeDef workType)
+        {
+            if (!pawn.IsColonist && !pawn.IsColonyMech) return false;
+            var disabled = RimPrisonMod.Settings.DisabledWorkInPrisonArea;
+            // [TODO] maybe null guard here
+            if (disabled.Count == 0) return false;
+            if (workType == null) return false;
+            return disabled.Contains(workType.defName);
+        }
+    }
+
+    [HarmonyPatch]
+    public static class Patch_PrisonAreaWorkRestriction_Thing
+    {
         public static IEnumerable<MethodBase> TargetMethods()
         {
             foreach (var type in typeof(WorkGiver_Scanner).Assembly.GetTypes())
@@ -34,39 +64,46 @@ namespace RimPrison.Patches
         {
             if (!__result) return;
             if (pawn == null || t == null) return;
-            // Include ColonyMech here!
-            if (!pawn.IsColonist && !pawn.IsColonyMech) return;
+            if (!PrisonAreaWorkRestrictionHelper.ShouldBlock(pawn, __instance.def.workType))
+                return;
 
-            var disabled = RimPrisonMod.Settings.DisabledWorkInPrisonArea;
-            if (disabled.Count == 0) return;
-
-            WorkTypeDef workType = __instance.def.workType;
-            if (workType == null) return;
-            if (!disabled.Contains(workType.defName)) return;
-
-            var area = CachedPrisonArea(pawn.Map);
+            var area = PrisonAreaWorkRestrictionHelper.CachedPrisonArea(pawn.Map);
             if (area == null) return;
             if (!area[t.Position]) return;
 
             __result = false;
         }
+    }
 
-        // Per-map throttled cache: HasJobOnThing fires hundreds of times per frame.
-        // Refresh every 5000 ticks (~83s at 1x speed). Dictionary-based so multiple
-        // maps (e.g. Set Up Camp) each get their own independent cache entry.
-        private static readonly Dictionary<Map, (int refreshTick, Area_Prison area)> s_areaCache = new();
-
-        static Area_Prison CachedPrisonArea(Map map)
+    [HarmonyPatch]
+    public static class Patch_PrisonAreaWorkRestriction_Cell
+    {
+        public static IEnumerable<MethodBase> TargetMethods()
         {
-            if (map == null) return null;
-            int now = Find.TickManager.TicksGame;
-            if (!s_areaCache.TryGetValue(map, out var entry) || now >= entry.refreshTick)
+            foreach (var type in typeof(WorkGiver_Scanner).Assembly.GetTypes())
             {
-                var area = map.areaManager.Get<Area_Prison>();
-                s_areaCache[map] = (now + 5000, area);
-                return area;
+                if (!type.IsClass || type.IsAbstract || !type.IsSubclassOf(typeof(WorkGiver_Scanner)))
+                    continue;
+
+                var method = type.GetMethod("HasJobOnCell",
+                    BindingFlags.Public | BindingFlags.Instance);
+                if (method != null && method.ReturnType == typeof(bool))
+                    yield return method;
             }
-            return entry.area;
+        }
+
+        static void Postfix(WorkGiver_Scanner __instance, Pawn pawn, IntVec3 c, ref bool __result)
+        {
+            if (!__result) return;
+            if (pawn == null) return;
+            if (!PrisonAreaWorkRestrictionHelper.ShouldBlock(pawn, __instance.def.workType))
+                return;
+
+            var area = PrisonAreaWorkRestrictionHelper.CachedPrisonArea(pawn.Map);
+            if (area == null) return;
+            if (!area[c]) return;
+
+            __result = false;
         }
     }
 }
