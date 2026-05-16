@@ -18,45 +18,51 @@ namespace RimPrison.PrisonLabor
         // Pawns can path through dangerous areas to reach the item (safe for non-player pawns).
         public override Danger MaxPathDanger(Pawn pawn) => Danger.Deadly;
 
-        public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
+        // Map-level cache: shops with space + allowed defs. Shared across all pawns,
+        // refreshed every 2000 ticks (~33s at 1x).
+        private static readonly Dictionary<int, (int refreshTick, List<Building_CouponShop> shops, HashSet<ThingDef> allowedDefs)> s_mapCache = new();
+
+        private static (List<Building_CouponShop> shops, HashSet<ThingDef> allowedDefs) GetCachedData(Map map)
         {
-            var shops = GetShopsWithSpace(pawn.Map);
-            if (shops.Count == 0)
+            int id = map.uniqueID;
+            int now = Find.TickManager.TicksGame;
+            if (s_mapCache.TryGetValue(id, out var entry) && now < entry.refreshTick)
+                return (entry.shops, entry.allowedDefs);
+
+            var shops = new List<Building_CouponShop>();
+            foreach (var b in map.listerBuildings.AllBuildingsColonistOfClass<Building_CouponShop>())
             {
-                yield break;
+                if (b.HasSpace)
+                    shops.Add(b);
             }
 
-            // [OPTIMIZE]
             var allowedDefs = new HashSet<ThingDef>();
             foreach (var shop in shops)
             {
                 var filter = shop.CouponComp?.Filter;
                 if (filter == null) continue;
                 foreach (var def in filter.AllowedThingDefs)
-                {
                     allowedDefs.Add(def);
-                }
             }
 
-            if (allowedDefs.Count == 0)
-            {
+            s_mapCache[id] = (now + 2000, shops, allowedDefs);
+            return (shops, allowedDefs);
+        }
+
+        public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
+        {
+            var (shops, allowedDefs) = GetCachedData(pawn.Map);
+            if (shops.Count == 0 || allowedDefs.Count == 0)
                 yield break;
-            }
 
             foreach (var thing in pawn.Map.listerHaulables.ThingsPotentiallyNeedingHauling())
             {
                 if (thing.IsForbidden(pawn))
-                {
                     continue;
-                }
                 if (pawn.carryTracker.AvailableStackSpace(thing.def) == 0)
-                {
                     continue;
-                }
                 if (allowedDefs.Contains(thing.def))
-                {
                     yield return thing;
-                }
             }
         }
 
@@ -84,11 +90,11 @@ namespace RimPrison.PrisonLabor
 
             var comp = shop.CouponComp;
             int shopSpace = comp != null ? comp.Capacity - comp.stockCount : 1;
+            if (shopSpace <= 0)
+                return null;
             int canCarry = pawn.carryTracker.AvailableStackSpace(t.def);
             if (canCarry <= 0)
-            {
                 return null;
-            }
             Job job = JobMaker.MakeJob(RP_JobDefOf.RimPrison_TakeToCouponShop, t, shop);
             job.count = Mathf.Min(shopSpace, canCarry, t.stackCount);
             job.haulOpportunisticDuplicates = false;
@@ -96,32 +102,15 @@ namespace RimPrison.PrisonLabor
             return job;
         }
 
-        private static List<Building_CouponShop> GetShopsWithSpace(Map map)
-        {
-            var result = new List<Building_CouponShop>();
-            var candidates = map.listerBuildings.AllBuildingsColonistOfClass<Building_CouponShop>();
-            foreach (var shop in candidates)
-            {
-                if (shop.HasSpace)
-                {
-                    result.Add(shop);
-                }
-            }
-            return result;
-        }
-
         private static Building_CouponShop FindShopFor(Pawn pawn, Thing item)
         {
-            var shops = GetShopsWithSpace(pawn.Map);
+            var (shops, _) = GetCachedData(pawn.Map);
             Building_CouponShop best = null;
             float bestDist = 0f;
-            // Find the closest shop now
             foreach (var shop in shops)
             {
-                if (!shop.Accepts(item) || !pawn.CanReserve(shop))
-                {
+                if (!shop.HasSpace || !shop.Accepts(item) || !pawn.CanReserve(shop))
                     continue;
-                }
                 float dist = shop.Position.DistanceToSquared(item.Position);
                 if (best == null || dist < bestDist)
                 {
