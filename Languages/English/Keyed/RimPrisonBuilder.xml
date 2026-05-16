@@ -144,18 +144,35 @@ Manage your prisoner groups' schedules just like vanilla schedule management.
 Set work priorities per group — disable/prioritize, same logic as vanilla. The number below each work type is its hourly wage. Click the work name and wage box to set the hourly wage for that work type.
 
 3. Prisoners
-Manage prisoner groups (all settings are per-group), view their balances, and manually grant coupons. The right panel shows the selected prisoner's basic info and thoughts. You can better understand how the economy is running by reading prisoner thoughts — they express their feelings about prices, allowance, management fees, drugs, and more.
+Manage prisoner groups (all settings are per-group), view their balances, and manually grant coupons. The right panel shows the selected prisoner's basic info and thoughts. You can better understand how the economy is running by reading prisoner thoughts — they express their feelings about prices, allowance, management fees, drugs, and more. Note: only prisoners with "Enable Labor" turned on in the vanilla prisoner panel will appear here and be managed by the mod (auto-enabled). It is not recommended to manually disable "Enable Labor" for any prisoner.
 
 4. Policies
-Manage apparel, drug, and food policies for prisoners. Prisoners strictly follow your policies. They will not buy forbidden drugs or food.
+Manage apparel, drug, and food policies for prisoners. Prisoners strictly follow your policies. They will not actively buy forbidden drugs or food.
 
 5. Overview
 Colony status and activity log. Suppression depends on prison management and treatment of prisoners. High suppression prevents prison breaks and mental breakdowns.
 
 6. Settings
 Configure the following —
-Currency name, Max debt (prisoners cannot owe more than this), Daily allowance (coupons granted daily), Daily fee (bed and management fee — yes, you can exploit prisoners too...), Ransom amount (when a prisoner reaches this balance, they will request release — but the final decision is yours...), Debt harvest threshold (when debt exceeds this value, organs are automatically harvested. Set very high to disable), Prison regime (Harsh — boosts work efficiency but lowers mood; Deterrence — increases suppression but lowers mood; Equality — boosts mood).
+Currency name, Max debt (prisoners cannot owe more than this), Daily allowance (coupons granted daily), Daily bed and management fee (yes, you can exploit prisoners too...), Ransom amount (when a prisoner reaches this balance, they will request release — but the final decision is yours...), Debt harvest threshold (when debt exceeds this value, organs are automatically harvested. Set very high to disable), Prison regime (Harsh — boosts work efficiency but lowers mood; Deterrence — increases suppression but lowers mood; Equality — boosts mood).
 
-7. Other
-In RimTalk, use {{ pawn.balance }} on a pawn object to get their current coupon balance.</RimPrison.HelpContent>
+7. Tutorial
+Economy System:
+First, you need to build a "Coupon Shop" (found under Furniture) in an area accessible to prisoners. Set what type of goods the store carries (one store can only provide one type of product) and their price. Prisoners will then automatically purchase items when needed — provided the store is stocked (restocked by colonists or prisoners themselves). Prisoners will try to buy items first before eating, but be careful — they may also steal food from your storage areas! It's best not to let them access your food freezer or drug stockpile.
+Your prices, wages, allowance, and management fees all affect the economy. Observe prisoner complaints and praise to fine-tune your prison management. If prices are too high, prisoners may complain about being unable to afford things. On the other hand, allowing them to buy high-end food or drugs can boost their mood — if you're willing to treat them that well and invest the resources!
+Prison Regime:
+Harsh — boosts work efficiency but lowers mood / Deterrence — increases suppression but lowers mood / Equality — boosts mood. Additionally, a more equal regime lowers the suppression threshold required to prevent mental breaks and prison breaks, meaning prisoners will be more obedient.
+Suppression System:
+Suppression measures your control over prisoners. The higher it is, the less likely prison breaks and mental breaks will occur. Factors that affect suppression:
+Number of prisoners — more prisoners means harder management, lowering suppression.
+Colonists and guards — the more colonists present, the higher the ratio to prisoners, and the stronger your control.
+Turrets — turrets within the prison zone intimidate prisoners.
+Prisoner mood — happy prisoners are more obedient; miserable ones are more likely to resist.
+Prisoner health — injured prisoners are less capable of resistance, which actually increases suppression.
+Prison regime — Deterrence slightly boosts suppression; Equality slightly lowers it.
+Difficulty — suppression is slightly reduced on higher difficulty settings.
+
+8. Other
+In RimTalk, use {{ pawn.balance }} on a pawn object to get their current coupon balance.
+</RimPrison.HelpContent>
 </LanguageData>
