@@ -6,15 +6,19 @@ using Verse.AI;
 
 namespace RimPrison.Patches
 {
-    // Colonists should not feed labor-enabled prisoners – prisoners buy their own food.
-    // Block both HasJobOnThing and JobOnThing for warden-feeding work givers.
+    // Colonists should not feed labor-enabled prisoners that can walk — prisoners buy
+    // their own food. Downed or immobile prisoners still get fed
     internal static class Patch_DisableColonistFeeding_Feed
     {
         [HarmonyPatch(typeof(WorkGiver_Warden_Feed), nameof(WorkGiver_Warden_Feed.JobOnThing))]
         [HarmonyPrefix]
         static bool Prefix_Feed(Pawn pawn, Thing t, bool forced, ref Job __result)
         {
-            if (t is Pawn prisoner && prisoner.IsPrisonerOfColony && prisoner.IsLaborEnabled())
+            if (t is Pawn prisoner 
+                && prisoner.IsPrisonerOfColony 
+                && prisoner.IsLaborEnabled()
+                && !prisoner.Downed
+                && prisoner.health.capacities.CapableOf(PawnCapacityDefOf.Moving))
             {
                 __result = null;
                 return false;
@@ -29,7 +33,10 @@ namespace RimPrison.Patches
         [HarmonyPrefix]
         static bool Prefix_Deliver(Pawn pawn, Thing t, bool forced, ref Job __result)
         {
-            if (t is Pawn prisoner && prisoner.IsPrisonerOfColony && prisoner.IsLaborEnabled())
+            // Never deliver even if LaborEnabled prisoner is down
+            if (t is Pawn prisoner 
+                && prisoner.IsPrisonerOfColony 
+                && prisoner.IsLaborEnabled())
             {
                 __result = null;
                 return false;
