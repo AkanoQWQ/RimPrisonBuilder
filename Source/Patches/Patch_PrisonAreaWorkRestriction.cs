@@ -53,7 +53,7 @@ namespace RimPrison.Patches
             {
                 Type[] types;
                 try { types = ass.GetTypes(); }
-                catch (ReflectionTypeLoadException) { Log.Warning($"[RimPrison] Failed to scan types in assembly {ass.GetName().Name}"); continue; }
+                catch (Exception) { Log.Warning($"[RimPrison] Failed to scan types in assembly {ass.GetName().Name}"); continue; }
 
                 foreach (var type in types)
                 {
@@ -92,7 +92,7 @@ namespace RimPrison.Patches
             {
                 Type[] types;
                 try { types = ass.GetTypes(); }
-                catch (ReflectionTypeLoadException) { Log.Warning($"[RimPrison] Failed to scan types in assembly {ass.GetName().Name}"); continue; }
+                catch (Exception) { Log.Warning($"[RimPrison] Failed to scan types in assembly {ass.GetName().Name}"); continue; }
 
                 foreach (var type in types)
                 {
